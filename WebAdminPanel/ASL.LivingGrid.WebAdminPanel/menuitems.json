@@ -8,4 +8,5 @@
   { "Key": "Navigation.UIAudit", "Url": "uiaudit", "Icon": "oi oi-eye" },
   { "Key": "Navigation.Notifications", "Url": "notifications", "Icon": "oi oi-bell" },
   { "Key": "Navigation.Plugins", "Url": "plugins", "Icon": "oi oi-puzzle-piece" }
+
 ]

@@ -47,5 +47,6 @@ public class NavigationService : INavigationService
         new NavigationItem { Key = "Navigation.UIAudit", Url = "uiaudit", Icon = "oi oi-eye" },
         new NavigationItem { Key = "Navigation.Notifications", Url = "notifications", Icon = "oi oi-bell" },
         new NavigationItem { Key = "Navigation.Plugins", Url = "plugins", Icon = "oi oi-puzzle-piece" }
+
     };
 }

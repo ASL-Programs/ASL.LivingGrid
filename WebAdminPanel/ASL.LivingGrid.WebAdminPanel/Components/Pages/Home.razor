@@ -4,6 +4,7 @@
 @attribute [Authorize]
 @inject IConfigurationService ConfigurationService
 @inject ILocalizationService LocalizationService
+@inject IJSRuntime JS
 
 &lt;PageTitle&gt;Dashboard - ASL LivingGrid&lt;/PageTitle&gt;
 
@@ -178,6 +179,14 @@
             new() { Action = "Configuration Updated", UserName = "admin@asl.az", EntityType = "Config", Timestamp = DateTime.Now.AddMinutes(-15) },
             new() { Action = "Company Created", UserName = "admin@asl.az", EntityType = "Company", Timestamp = DateTime.Now.AddHours(-1) }
         };
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("toast.show", localizedStrings["Common.Welcome"]);
+        }
     }
 
     public class SystemStats

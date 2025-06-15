@@ -7,8 +7,9 @@ Bu sənəd WebAdminPanel modulunun yerləşdirilməsi üçün addımları və re
 - **WebServer (IIS/Apache/Nginx)** – Ənənəvi hostinq, Kestrel reverse proxy ilə və ya IIS in-process.
 
 ### Konfiqurasiya
-`appsettings.json` faylında `Hosting:Mode` dəyərini dəyişərək rejim seçilir. 
+`appsettings.json` faylında `Hosting:Mode` dəyərini dəyişərək rejim seçilir.
 Əlavə olaraq `BackupBeforeSwitch` və `AutoMigrate` parametrləri mövcuddur.
+Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməklə rejim dərhal dəyişdirilə bilər.
 
 ### Rejim dəyişdikdə
 1. Cari rejim `hosting_mode.txt` faylında saxlanılır.
@@ -33,6 +34,12 @@ Bu sənəd WebAdminPanel modulunun yerləşdirilməsi üçün addımları və re
 
 ### Backup və Bərpa
 `MigrationService` vasitəsilə `CreateBackupAsync` və `RestoreBackupAsync` metodları mövcuddur. Deployment və rejim dəyişikliyi zamanı bu metodlardan istifadə etmək tövsiyə olunur.
+
+### Multi-instance Sinxronizasiya
+`SyncService` periodik olaraq `sync_nodes.json` faylında göstərilən digər instansiyalara `/api/sync/ping` göndərir. Bu mexanizm konfiqurasiya və dil dəyişikliklərini bütün nodelar arasında bölüşməyə imkan verir.
+
+### Kənar və Bulud Yayımı
+`SyncService` həm on-prem, həm də bulud və edge instansiyalarını dəstəkləyir. Docker image və ya klassik hostinq istifadə edilə bilər. Fərqli mühitlər arasında avtomatik backup və sinxronizasiya təmin edilir.
 
 ### Gələcək inkişaf
 - Avtomatik multi-instance sinxronizasiya
