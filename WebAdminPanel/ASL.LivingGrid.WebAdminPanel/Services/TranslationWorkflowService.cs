@@ -69,6 +69,17 @@ public class TranslationWorkflowService : ITranslationWorkflowService
         await _audit.LogAsync("Approve", nameof(TranslationRequest), id.ToString(), approvedBy, approvedBy, null, req);
     }
 
+    public async Task UpdateStatusAsync(Guid id, TranslationRequestStatus status, string updatedBy)
+    {
+        var req = await _context.TranslationRequests.FindAsync(id);
+        if (req == null) return;
+
+        req.Status = status;
+        await _context.SaveChangesAsync();
+
+        await _audit.LogAsync("StatusUpdate", nameof(TranslationRequest), id.ToString(), updatedBy, updatedBy, null, req);
+    }
+
     public async Task<string?> SuggestAsync(string text, string sourceCulture, string targetCulture)
     {
         var provider = _configuration.GetValue<string>("Translation:Provider") ?? "OpenAI";

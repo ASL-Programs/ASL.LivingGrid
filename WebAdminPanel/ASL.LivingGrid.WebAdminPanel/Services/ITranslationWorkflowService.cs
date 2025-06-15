@@ -8,4 +8,5 @@ public interface ITranslationWorkflowService
     Task ApproveRequestAsync(Guid id, string approvedBy, bool apply);
     Task<string?> SuggestAsync(string text, string sourceCulture, string targetCulture);
     Task<IEnumerable<TranslationRequest>> GetPendingRequestsAsync();
+    Task UpdateStatusAsync(Guid id, TranslationRequestStatus status, string updatedBy);
 }
