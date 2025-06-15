@@ -39,6 +39,11 @@ public class SearchService : ISearchService
                 .Select(p => new SearchResultItem(p.Id.ToString(), p.Name, "Modules"))
                 .ToListAsync();
 
+            var docResults = await _context.Documentations
+                .Where(d => EF.Functions.Like(d.Title, $"%{query}%") || EF.Functions.Like(d.Content ?? string.Empty, $"%{query}%"))
+                .Select(d => new SearchResultItem(d.Id.ToString(), d.Title, "Documentation"))
+                .ToListAsync();
+
             var logResults = await _context.AuditLogs
                 .Where(a => EF.Functions.Like(a.Action, $"%{query}%") || EF.Functions.Like(a.UserName ?? string.Empty, $"%{query}%"))
                 .OrderByDescending(a => a.Timestamp)
@@ -51,6 +56,7 @@ public class SearchService : ISearchService
                 { "Configurations", configResults },
                 { "Users", userResults },
                 { "Modules", moduleResults },
+                { "Documentation", docResults },
                 { "Logs", logResults }
             };
         }

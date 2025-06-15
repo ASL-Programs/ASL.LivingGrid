@@ -31,10 +31,10 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
   - "Tema Bazarı" səhifəsində mövcud şablonları siyahı şəklində görmək və bir düymə ilə tətbiq etmək mümkündür. Seçilən tema `/api/themes/import/{id}` endpointi vasitəsilə yüklənir və `ThemeService` ilə aktiv edilir.
 
 ### Axtarış
-- Yuxarı paneldəki **SearchBox** komponentinə sorğu yazın.
-- Nəticələr konfiqurasiya açarları, istifadəçi adları, modullar və audit jurnalları üzrə qruplanır.
-- Axtarış sorğuları `SearchService` tərəfindən bu dörd kateqoriyaya uyğun indeksləndiyi üçün nəticələr tək sorğu ilə gəlir.
-- Sorğunu sildikdə açılan nəticə siyahısı gizlənəcək.
+- İndi həm yuxarı paneldə, həm də sol menyuda **SearchBox** mövcuddur.
+- Sorğu yazdıqca təkliflər ani olaraq açılır və nəticələr konfiqurasiya açarları, istifadəçilər, modullar və sənədlər üzrə qruplanır.
+- `SearchService` bu kateqoriyaların hər birini indekslədiyi üçün nəticələr bir sorğu ilə yüklənir.
+- Sorğunu təmizlədikdə siyahı gizlənir.
 
 ### Dashboard Dizayner
 - Menyudan **"Dashboard Designer"** səhifəsinə daxil olun.
