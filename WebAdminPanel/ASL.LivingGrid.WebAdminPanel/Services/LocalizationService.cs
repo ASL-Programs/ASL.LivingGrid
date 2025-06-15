@@ -3,6 +3,7 @@ using ASL.LivingGrid.WebAdminPanel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
 
@@ -269,6 +270,62 @@ public class LocalizationService : ILocalizationService
             .ToListAsync();
 
         return defaultKeys.Except(targetKeys);
+    }
+
+    public async Task<IEnumerable<string>> ValidatePlaceholdersAsync(string culture)
+    {
+        try
+        {
+            const string defaultCulture = "az";
+            var source = await GetAllStringsAsync(defaultCulture);
+            var target = await GetAllStringsAsync(culture);
+            var issues = new List<string>();
+            foreach (var kv in target)
+            {
+                if (!source.TryGetValue(kv.Key, out var srcValue))
+                    continue;
+
+                var srcPh = ExtractPlaceholders(srcValue);
+                var tgtPh = ExtractPlaceholders(kv.Value);
+                if (!srcPh.SequenceEqual(tgtPh))
+                    issues.Add(kv.Key);
+            }
+            return issues;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error validating placeholders for culture {Culture}", culture);
+            return Enumerable.Empty<string>();
+        }
+    }
+
+    public async Task<Dictionary<string, int>> GetOverflowStringsAsync(string culture, int maxLength = 60)
+    {
+        try
+        {
+            var strings = await GetAllStringsAsync(culture);
+            var result = new Dictionary<string, int>();
+            foreach (var kv in strings)
+            {
+                if (kv.Value != null && kv.Value.Length > maxLength)
+                    result[kv.Key] = kv.Value.Length;
+            }
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error checking overflow strings for culture {Culture}", culture);
+            return new Dictionary<string, int>();
+        }
+    }
+
+    private static IEnumerable<string> ExtractPlaceholders(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return Array.Empty<string>();
+
+        var matches = System.Text.RegularExpressions.Regex.Matches(text, "{[^}]+}");
+        return matches.Cast<System.Text.RegularExpressions.Match>().Select(m => m.Value);
     }
 
     public async Task BulkSetAsync(IEnumerable<LocalizationResource> resources)

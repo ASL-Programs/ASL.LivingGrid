@@ -19,6 +19,16 @@ public interface ILocalizationService
     Task ApproveAsync(Guid resourceId, string approvedBy);
 
     /// <summary>
+    /// Validate placeholder usage against the default culture and return keys with issues.
+    /// </summary>
+    Task<IEnumerable<string>> ValidatePlaceholdersAsync(string culture);
+
+    /// <summary>
+    /// Returns keys whose translated values exceed the specified maximum length.
+    /// </summary>
+    Task<Dictionary<string, int>> GetOverflowStringsAsync(string culture, int maxLength = 60);
+
+    /// <summary>
     /// Event raised when a translation is missing for the requested culture.
     /// </summary>
     event Action<string, string>? MissingTranslation;

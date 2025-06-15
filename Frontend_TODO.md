@@ -131,8 +131,8 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Coverage dashboard (% complete, missing keys, per-module coverage)
     - [x] Live alert for untranslated/missing/incomplete/invalid placeholders
     - [x] Context preview: see translation in UI before publish - 2025-06-17 - AI
-    - [ ] Consistency checker: identical terms across modules, placeholder validation
-    - [ ] Length/overflow check (UI fit)
+    - [x] Consistency checker: identical terms across modules, placeholder validation - 2025-06-17 - AI
+    - [x] Length/overflow check (UI fit) - 2025-06-17 - AI
 - [ ] **Localization Customization**
     - [ ] RTL/LTR, per-language font/size, icon/text direction, culture customization
     - [ ] Custom localized templates per company/tenant/sector/module
