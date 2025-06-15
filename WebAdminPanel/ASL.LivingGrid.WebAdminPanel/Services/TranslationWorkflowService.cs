@@ -59,10 +59,4 @@ public class TranslationWorkflowService : ITranslationWorkflowService
             .OrderBy(r => r.CreatedAt)
             .ToListAsync();
     }
-
-    public Task<string?> SuggestAsync(string text, string targetCulture, CancellationToken cancellationToken = default)
-    {
-        // Placeholder suggestion logic – simply return the original text.
-        return Task.FromResult<string?>(text);
-    }
 }

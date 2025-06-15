@@ -7,6 +7,6 @@
   { "Key": "Navigation.Audit", "Url": "audit", "Icon": "oi oi-clipboard" },
   { "Key": "Navigation.UIAudit", "Url": "uiaudit", "Icon": "oi oi-eye" },
   { "Key": "Navigation.Notifications", "Url": "notifications", "Icon": "oi oi-bell" },
-  { "Key": "Navigation.Plugins", "Url": "plugins", "Icon": "oi oi-puzzle-piece" },
-  { "Key": "Navigation.DashboardDesigner", "Url": "dashboard-designer", "Icon": "oi oi-wrench" }
+  { "Key": "Navigation.Plugins", "Url": "plugins", "Icon": "oi oi-puzzle-piece" }
+
 ]

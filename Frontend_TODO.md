@@ -76,8 +76,8 @@
 - [x] **Self-hosted .exe with Kestrel** (2025-06-15 - AI: Basic .NET 9.0 Blazor project with Kestrel hosting capability created)
  - [x] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes) - 2025-06-15 - AI: Dockerfile və web.config əlavə edildi
  - [x] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore - 2025-06-15 - AI: Hosting mode switch implemented in Program.cs
-- [x] **Multi-instance, multi-mode sync** (cloud, on-prem, edge) - 2025-06-15 - AI: SyncService ilə `sync_nodes.json` üzrə periodik sinxronizasiya
-- [x] **Distributed, Hybrid Cloud, Serverless Functions** - 2025-06-15 - AI: CloudFunctionService ilə serverless çağırış nümunəsi və DeploymentBook yeniləndi
+ - [x] **Multi-instance, multi-mode sync** (cloud, on-prem, edge) - 2025-06-15 - AI: SyncService ilə `sync_nodes.json` üzrə periodik sinxronizasiya
+- [ ] **Distributed, Hybrid Cloud, Serverless Functions**
     - Multi-cloud (AWS, Azure, GCP), serverless FaaS, auto-provisioned
     - **Disaster Recovery:** Real-time failover, auto backup, cross-region replication
     - **Edge Deployment:** IoT/branch office, limited-connectivity support
@@ -91,8 +91,8 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Modern, minimal, per-tenant branding & theming
  - [x] Adaptive light/dark, high-contrast, WCAG/ADA
  - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
- - [x] Micro-interactions, onboarding, live hints, self-personalize - 2025-06-15 - AI: Toast notification on first visit, onboarding wizard
- - [x] Modular, white-label, instant preview, drag-and-drop dashboards - 2025-06-15 - AI: DashboardDesigner səhifəsi və drag-and-drop skripti
+- [ ] Micro-interactions, onboarding, live hints, self-personalize
+- [ ] Modular, white-label, instant preview, drag-and-drop dashboards
 - [ ] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
 - [ ] Smart global search (every setting, user, module, log, doc, etc.)

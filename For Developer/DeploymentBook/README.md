@@ -41,9 +41,6 @@ Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməkl
 ### Kənar və Bulud Yayımı
 `SyncService` həm on-prem, həm də bulud və edge instansiyalarını dəstəkləyir. Docker image və ya klassik hostinq istifadə edilə bilər. Fərqli mühitlər arasında avtomatik backup və sinxronizasiya təmin edilir.
 
-### Serverless Funksiyalar
-`CloudFunctionService` vasitəsilə `cloudFunctions.json` faylında göstərilən HTTP ünvanlara sorğu göndərərək AWS Lambda, Azure Functions və ya digər FaaS platformalarını çağırmaq mümkündür. Bu, modul miqyaslı funksiyaları server saxlamadan icra etməyə şərait yaradır.
-
 ### Gələcək inkişaf
 - Avtomatik multi-instance sinxronizasiya
 - Bulud və kənar (edge) yerləşdirmə dəstəyi

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.IO;
 using System.Security.Claims;
-using System.Text.Json;
+
 
 namespace ASL.LivingGrid.WebAdminPanel;
 
@@ -129,10 +129,6 @@ public class Program
         services.AddScoped<IWireframePageBuilderService, WireframePageBuilderService>();
         services.AddScoped<IThemeService, ThemeService>();
         services.AddScoped<INavigationService, NavigationService>();
-        services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
-        services.AddScoped<ICloudFunctionService, CloudFunctionService>();
-
-        services.AddHostedService<SyncService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
@@ -248,20 +244,6 @@ public class Program
         {
             await svc.ApproveRequestAsync(id, user.Identity?.Name ?? "system", apply: true);
             return Results.Ok();
-        });
-        trGroup.MapPost("/suggest", async (TranslationRequest req, ITranslationWorkflowService svc) =>
-        {
-            var result = await svc.SuggestAsync(req.ProposedValue ?? req.Key, req.Culture);
-            return result is null ? Results.NoContent() : Results.Text(result, "text/plain");
-        });
-
-        app.MapPost("/api/cloudfunction/{name}", async (string name, HttpRequest req, ICloudFunctionService svc) =>
-        {
-            using var reader = new StreamReader(req.Body);
-            var payloadJson = await reader.ReadToEndAsync();
-            var payload = string.IsNullOrWhiteSpace(payloadJson) ? null : JsonSerializer.Deserialize<object>(payloadJson);
-            var result = await svc.InvokeAsync(name, payload);
-            return result is null ? Results.NotFound() : Results.Text(result, "application/json");
         });
 
         app.MapPost("/api/sync/ping", () => Results.Ok(new { Status = "Ok" }));
