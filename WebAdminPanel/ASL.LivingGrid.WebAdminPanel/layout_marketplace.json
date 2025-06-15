@@ -1,0 +1,16 @@
+[
+  {
+    "Id": "standard",
+    "Name": "Standard",
+    "Description": "Default layout with sidebar",
+    "DownloadUrl": "https://example.com/layouts/standard.json",
+    "PreviewImage": "https://via.placeholder.com/150x100.png?text=Standard"
+  },
+  {
+    "Id": "minimal",
+    "Name": "Minimal",
+    "Description": "Minimal top-navigation layout",
+    "DownloadUrl": "https://example.com/layouts/minimal.json",
+    "PreviewImage": "https://via.placeholder.com/150x100.png?text=Minimal"
+  }
+]

@@ -1,0 +1,43 @@
+@page "/layout-marketplace"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<h3>Layout Marketplace</h3>
+
+@if (layouts == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var layout in layouts)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <img class="card-img-top" src="@layout.PreviewImage" alt="@layout.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@layout.Name</h5>
+                        <p class="card-text">@layout.Description</p>
+                        <button class="btn btn-primary" @onclick="() => ApplyLayout(layout.Id)">Apply</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<MarketplaceLayout>? layouts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        layouts = await Http.GetFromJsonAsync<List<MarketplaceLayout>>("/api/layouts");
+    }
+
+    private async Task ApplyLayout(string id)
+    {
+        await Http.PostAsync($"/api/layouts/import/{id}", null);
+    }
+}

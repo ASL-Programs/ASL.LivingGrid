@@ -131,6 +131,11 @@ public class Program
         services.AddScoped<INavigationService, NavigationService>();
         services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
         services.AddScoped<IThemeMarketplaceService, ThemeMarketplaceService>();
+        services.AddScoped<ILayoutMarketplaceService, LayoutMarketplaceService>();
+        services.AddScoped<IRoleBasedUiService, RoleBasedUiService>();
+        services.AddScoped<IModuleCustomizationService, ModuleCustomizationService>();
+        services.AddScoped<IFeedbackService, FeedbackService>();
+        services.AddScoped<ISessionPersistenceService, SessionPersistenceService>();
         services.AddScoped<ISearchService, SearchService>();
 
         // Add HTTP Client for external API calls
@@ -138,6 +143,8 @@ public class Program
 
         // Add memory cache
         services.AddMemoryCache();
+
+        services.AddHttpContextAccessor();
 
         // Add session support
         services.AddSession(options =>
@@ -279,10 +286,29 @@ public class Program
             return string.IsNullOrEmpty(css) ? Results.NotFound() : Results.Text(css, "text/css");
         });
 
+        var layoutGroup = app.MapGroup("/api/layouts");
+        layoutGroup.MapGet("/", async (ILayoutMarketplaceService svc) => Results.Ok(await svc.ListAvailableLayoutsAsync()));
+        layoutGroup.MapPost("/import/{id}", async (string id, ILayoutMarketplaceService svc) =>
+        {
+            var layout = await svc.ImportLayoutAsync(id);
+            return layout is not null ? Results.Ok(layout) : Results.NotFound();
+        });
+        layoutGroup.MapGet("/export/{id}", async (string id, ILayoutMarketplaceService svc) =>
+        {
+            var json = await svc.ExportLayoutAsync(id);
+            return string.IsNullOrEmpty(json) ? Results.NotFound() : Results.Text(json, "application/json");
+        });
+
         app.MapGet("/api/search", async (string q, ISearchService svc) =>
         {
             var result = await svc.SearchAsync(q);
             return Results.Ok(result);
+        });
+
+        app.MapPost("/api/feedback", async (FeedbackItem item, IFeedbackService svc) =>
+        {
+            await svc.SubmitAsync(item.Page, item.Rating, item.Comments);
+            return Results.Ok();
         });
 
         app.MapPost("/api/sync/ping", () => Results.Ok(new { Status = "Ok" }));
