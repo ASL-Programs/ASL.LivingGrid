@@ -244,9 +244,9 @@ public class Program
             return Results.Ok();
         });
 
-        locGroup.MapGet("/customization/{culture}", async (string culture, ILocalizationCustomizationService svc) =>
+        locGroup.MapGet("/customization/{culture}", async (string culture, ILocalizationCustomizationService svc, Guid? companyId, Guid? tenantId, string? module) =>
         {
-            var result = await svc.GetAsync(culture);
+            var result = await svc.GetAsync(culture, companyId, tenantId, module);
             return result is null ? Results.NotFound() : Results.Ok(result);
         });
 
@@ -254,6 +254,36 @@ public class Program
         {
             model.Culture = culture;
             await svc.SetAsync(model);
+            return Results.Ok();
+        });
+
+        var custGroup = locGroup.MapGroup("/customization");
+        custGroup.MapGet("/templates/{culture}/{module}", async (string culture, string module, Guid? companyId, Guid? tenantId, ILocalizationCustomizationService svc) =>
+        {
+            var result = await svc.GetTemplateAsync(culture, module, companyId, tenantId);
+            return result is null ? Results.NotFound() : Results.Ok(result);
+        });
+
+        custGroup.MapPost("/templates/{culture}/{module}", async (string culture, string module, TemplateOverride tpl, ILocalizationCustomizationService svc) =>
+        {
+            tpl.Culture = culture;
+            tpl.Module = module;
+            await svc.SetTemplateAsync(tpl);
+            return Results.Ok();
+        });
+
+        custGroup.MapGet("/terminology/{culture}/{module}/{key}", async (string culture, string module, string key, Guid? companyId, Guid? tenantId, ILocalizationCustomizationService svc) =>
+        {
+            var result = await svc.GetTerminologyAsync(key, culture, module, companyId, tenantId);
+            return result is null ? Results.NotFound() : Results.Ok(result);
+        });
+
+        custGroup.MapPost("/terminology/{culture}/{module}/{key}", async (string culture, string module, string key, TerminologyOverride term, ILocalizationCustomizationService svc) =>
+        {
+            term.Culture = culture;
+            term.Module = module;
+            term.Key = key;
+            await svc.SetTerminologyAsync(term);
             return Results.Ok();
         });
 

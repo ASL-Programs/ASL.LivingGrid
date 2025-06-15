@@ -1,0 +1,56 @@
+@page "/terminology-overrides"
+@inject ILocalizationCustomizationService CustomService
+@inject ILocalizationService LocalizationService
+
+<PageTitle>Terminology Overrides</PageTitle>
+
+<h3>Terminology Overrides</h3>
+
+<div class="mb-3">
+    <label class="form-label">Culture</label>
+    <select class="form-select" @bind="culture">
+        @foreach (var c in cultures)
+        {
+            <option value="@c">@c</option>
+        }
+    </select>
+</div>
+<div class="mb-3">
+    <label class="form-label">Module</label>
+    <input class="form-control" @bind="module" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Key</label>
+    <input class="form-control" @bind="key" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Value</label>
+    <input class="form-control" @bind="value" />
+</div>
+<button class="btn btn-primary" @onclick="Save">Save</button>
+
+@code {
+    private string culture = "az";
+    private string module = "General";
+    private string key = string.Empty;
+    private string value = string.Empty;
+    private List<string> cultures = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        cultures = (await LocalizationService.GetSupportedCulturesAsync()).ToList();
+        if (cultures.Any()) culture = cultures.First();
+    }
+
+    private async Task Save()
+    {
+        var term = new TerminologyOverride
+        {
+            Culture = culture,
+            Module = module,
+            Key = key,
+            Value = value
+        };
+        await CustomService.SetTerminologyAsync(term);
+    }
+}
