@@ -131,6 +131,7 @@ public class Program
         services.AddScoped<INavigationService, NavigationService>();
         services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
         services.AddScoped<IThemeMarketplaceService, ThemeMarketplaceService>();
+        services.AddScoped<ISearchService, SearchService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
@@ -276,6 +277,12 @@ public class Program
         {
             var css = await svc.ExportThemeAsync(id);
             return string.IsNullOrEmpty(css) ? Results.NotFound() : Results.Text(css, "text/css");
+        });
+
+        app.MapGet("/api/search", async (string q, ISearchService svc) =>
+        {
+            var result = await svc.SearchAsync(q);
+            return Results.Ok(result);
         });
 
         app.MapPost("/api/sync/ping", () => Results.Ok(new { Status = "Ok" }));
