@@ -1,0 +1,37 @@
+@page "/translationpreview"
+@inject NavigationManager Nav
+@inject ILocalizationService LocalizationService
+
+<h3>Translation Preview</h3>
+
+@if (string.IsNullOrWhiteSpace(Key))
+{
+    <p class="text-warning">No key specified.</p>
+}
+else
+{
+    <p><strong>Key:</strong> @Key</p>
+    <p><strong>Culture:</strong> @Culture</p>
+    <div class="border rounded p-3 my-3">
+        @previewValue
+    </div>
+}
+
+@code {
+    private string? previewValue;
+    [Parameter] public string? Key { get; set; }
+    [Parameter] public string Culture { get; set; } = "az";
+    [Parameter] public string? ProposedValue { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(ProposedValue))
+        {
+            previewValue = ProposedValue;
+        }
+        else if (!string.IsNullOrWhiteSpace(Key))
+        {
+            previewValue = await LocalizationService.GetStringAsync(Key!, Culture);
+        }
+    }
+}

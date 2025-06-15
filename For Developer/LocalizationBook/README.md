@@ -42,5 +42,9 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 10. Moderatorlar üçün `/pendingreviews` Blazor səhifəsi mövcuddur. Bu səhifə
     gözləyən sorğuların siyahısını göstərir və hər sorğu üçün **Approve** və
     **Reject** düymələri vasitəsilə yuxarıdakı API-lərə sorğu göndərir.
+11. Hər bir sorğu üçün **Preview** düyməsi mövcuddur. Bu düymə təklif edilən
+    tərcüməni `/translationpreview` səhifəsində seçilmiş dil və açarla birlikdə
+    real vaxtda göstərir. İstifadəçi tərcüməni yayımlamadan əvvəl necə
+    göründüyünü sınaqdan keçirə bilir.
 
 Bu sənəd daim yenilənəcək.
