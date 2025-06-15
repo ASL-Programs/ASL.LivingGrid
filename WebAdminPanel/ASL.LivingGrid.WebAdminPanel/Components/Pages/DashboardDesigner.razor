@@ -1,0 +1,22 @@
+@page "/dashboard-designer"
+@inject IJSRuntime JS
+
+<h3>Dashboard Designer</h3>
+<div id="widget-list" class="row">
+    <div class="col-3" draggable="true">Widget A</div>
+    <div class="col-3" draggable="true">Widget B</div>
+    <div class="col-3" draggable="true">Widget C</div>
+</div>
+<div id="canvas" class="border mt-3 p-3" style="min-height:200px;">
+    Drop widgets here
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("dashboardDesigner.init");
+        }
+    }
+}
