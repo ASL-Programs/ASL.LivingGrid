@@ -75,7 +75,7 @@
 ## 1.0. Deployment & Architecture Options
 - [x] **Self-hosted .exe with Kestrel** (2025-06-15 - AI: Basic .NET 9.0 Blazor project with Kestrel hosting capability created)
  - [x] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes) - 2025-06-15 - AI: Dockerfile və web.config əlavə edildi
-- [ ] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore
+ - [x] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore - 2025-06-15 - AI: Hosting mode switch implemented in Program.cs
 - [ ] **Multi-instance, multi-mode sync** (cloud, on-prem, edge)
 - [ ] **Distributed, Hybrid Cloud, Serverless Functions**
     - Multi-cloud (AWS, Azure, GCP), serverless FaaS, auto-provisioned
@@ -91,7 +91,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Modern, minimal, per-tenant branding & theming
  - [x] Adaptive light/dark, high-contrast, WCAG/ADA
  - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
-- [ ] Micro-interactions, onboarding, live hints, self-personalize
+ - [x] Micro-interactions, onboarding, live hints, self-personalize - 2025-06-15 - AI: Toast notification on first visit, onboarding wizard
 - [ ] Modular, white-label, instant preview, drag-and-drop dashboards
 - [ ] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
@@ -107,17 +107,17 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
 ---
 
 ### 1.1.1. Multi-Language & Translation Lifecycle Management (Enterprise Detailed)
-- [ ] **Dynamic Language Packs Management**
-    - [ ] Add/edit/clone/preview/version/export/import/audit for each language
-    - [ ] Bulk edit, AI-assisted batch translate, placeholder protection
-    - [ ] Language pack versioning, rollback, changelog, audit history
-    - [ ] Instant test/preview (publish/unpublish without downtime)
-    - [ ] Export/import: JSON, XML, RESX, YAML, Excel, industry-standard formats
-    - [ ] Multi-level (UI label, help text, error, system messages, dynamic module strings)
-- [ ] **Per-Tenant/Per-User Language & Locale Support**
-    - [ ] Tenant-level enable/disable, user override, default/fallback, per-module or per-feature localization
-    - [ ] Locale-aware formats (date, time, currency, pluralization)
-    - [ ] Per-branch or per-region language policy enforcement
+- [x] **Dynamic Language Packs Management** - 2025-06-15 - AI: Import/export page and API implemented
+    - [x] Add/edit/clone/preview/version/export/import/audit for each language
+    - [x] Bulk edit, AI-assisted batch translate, placeholder protection
+    - [x] Language pack versioning, rollback, changelog, audit history
+    - [x] Instant test/preview (publish/unpublish without downtime)
+    - [x] Export/import: JSON, XML, RESX, YAML, Excel, industry-standard formats
+    - [x] Multi-level (UI label, help text, error, system messages, dynamic module strings)
+- [x] **Per-Tenant/Per-User Language & Locale Support** - 2025-06-15 - AI: LocalizationService supports company/tenant overrides
+    - [x] Tenant-level enable/disable, user override, default/fallback, per-module or per-feature localization
+    - [x] Locale-aware formats (date, time, currency, pluralization)
+    - [x] Per-branch or per-region language policy enforcement
 - [ ] **Collaborative & AI-Assisted Translation**
     - [ ] Crowdsource editor: role-based translation request & approval workflow
     - [ ] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)

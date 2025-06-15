@@ -7,8 +7,9 @@ Bu sənəd WebAdminPanel modulunun yerləşdirilməsi üçün addımları və re
 - **WebServer (IIS/Apache/Nginx)** – Ənənəvi hostinq, Kestrel reverse proxy ilə və ya IIS in-process.
 
 ### Konfiqurasiya
-`appsettings.json` faylında `Hosting:Mode` dəyərini dəyişərək rejim seçilir. 
+`appsettings.json` faylında `Hosting:Mode` dəyərini dəyişərək rejim seçilir.
 Əlavə olaraq `BackupBeforeSwitch` və `AutoMigrate` parametrləri mövcuddur.
+Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməklə rejim dərhal dəyişdirilə bilər.
 
 ### Rejim dəyişdikdə
 1. Cari rejim `hosting_mode.txt` faylında saxlanılır.
