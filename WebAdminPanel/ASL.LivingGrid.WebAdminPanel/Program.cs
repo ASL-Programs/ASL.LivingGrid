@@ -251,6 +251,11 @@ public class Program
             await svc.ApproveRequestAsync(id, user.Identity?.Name ?? "system", apply: true);
             return Results.Ok();
         });
+        trGroup.MapPost("/status/{id}", async (Guid id, TranslationRequestStatus status, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
+        {
+            await svc.UpdateStatusAsync(id, status, user.Identity?.Name ?? "system");
+            return Results.Ok();
+        });
 
         app.MapPost("/api/sync/ping", () => Results.Ok(new { Status = "Ok" }));
     }

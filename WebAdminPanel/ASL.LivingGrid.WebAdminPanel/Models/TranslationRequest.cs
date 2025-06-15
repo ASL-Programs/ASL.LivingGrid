@@ -27,7 +27,8 @@ public class TranslationRequest : BaseEntity
 
 public enum TranslationRequestStatus
 {
+    Machine,
+    Human,
     Pending,
-    Approved,
-    Rejected
+    Approved
 }
