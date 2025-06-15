@@ -4,31 +4,31 @@
 @inject IJSRuntime JSRuntime
 @using ASL.LivingGrid.WebAdminPanel.Components.Search
 
-&lt;div class="page"&gt;
-    &lt;div id="sidebarMenu" class="sidebar collapse show"&gt;
-        &lt;NavMenu /&gt;
-    &lt;/div&gt;
+<div class="page">
+    <div id="sidebarMenu" class="sidebar collapse show">
+        <NavMenu />
+    </div>
 
-    &lt;main&gt;
-        &lt;div class="top-row px-4 d-flex justify-content-between align-items-center"&gt;
-            &lt;ThemeToggle /&gt;
-            &lt;SearchBox /&gt;
-            &lt;UserInfo /&gt;
-        &lt;/div&gt;
+    <main>
+        <div class="top-row px-4 d-flex justify-content-between align-items-center">
+            <ThemeToggle />
+            <SearchBox />
+            <UserInfo />
+        </div>
 
-        &lt;article class="content px-4"&gt;
+        <article class="content px-4">
             @Body
-        &lt;/article&gt;
-    &lt;/main&gt;
-&lt;/div&gt;
+        </article>
+    </main>
+</div>
 
-&lt;div id="blazor-error-ui"&gt;
-    &lt;environment include="Staging,Production"&gt;
+<div id="blazor-error-ui">
+    <environment include="Staging,Production">
         An error has occurred. This application may no longer respond until reloaded.
-    &lt;/environment&gt;
-    &lt;environment include="Development"&gt;
+    </environment>
+    <environment include="Development">
         An unhandled exception has occurred. See browser dev tools for details.
-    &lt;/environment&gt;
-    &lt;a href="" class="reload"&gt;Reload&lt;/a&gt;
-    &lt;a class="dismiss"&gt;🗙&lt;/a&gt;
-&lt;/div&gt;
+    </environment>
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>

@@ -42,6 +42,6 @@ public class Company : BaseEntity
     public string? Settings { get; set; } // JSON configuration
     
     // Navigation properties
-    public virtual ICollection&lt;Tenant&gt; Tenants { get; set; } = new List&lt;Tenant&gt;();
-    public virtual ICollection&lt;AppUser&gt; Users { get; set; } = new List&lt;AppUser&gt;();
+    public virtual ICollection<Tenant> Tenants { get; set; } = new List<Tenant>();
+    public virtual ICollection<AppUser> Users { get; set; } = new List<AppUser>();
 }

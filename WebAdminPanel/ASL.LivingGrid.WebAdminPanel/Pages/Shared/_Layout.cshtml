@@ -1,35 +1,35 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="utf-8" /&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-    &lt;title&gt;ASL LivingGrid - Web Admin Panel&lt;/title&gt;
-    &lt;base href="~/" /&gt;
-    &lt;link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" /&gt;
-    &lt;link href="css/site.css" rel="stylesheet" /&gt;
-    &lt;link href="ASL.LivingGrid.WebAdminPanel.styles.css" rel="stylesheet" /&gt;
-    &lt;link id="theme-link" href="themes/light/theme.css" rel="stylesheet" /&gt;
-    &lt;link rel="icon" type="image/png" href="favicon.png"/&gt;
-    &lt;component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" /&gt;
-    &lt;script src="js/theme.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASL LivingGrid - Web Admin Panel</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="ASL.LivingGrid.WebAdminPanel.styles.css" rel="stylesheet" />
+    <link id="theme-link" href="themes/light/theme.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <script src="js/theme.js"></script>
+</head>
+<body>
     @RenderBody()
 
-    &lt;div id="blazor-error-ui"&gt;
-        &lt;environment include="Staging,Production"&gt;
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
             An error has occurred. This application may no longer respond until reloaded.
-        &lt;/environment&gt;
-        &lt;environment include="Development"&gt;
+        </environment>
+        <environment include="Development">
             An unhandled exception has occurred. See browser dev tools for details.
-        &lt;/environment&gt;
-        &lt;a href="" class="reload"&gt;Reload&lt;/a&gt;
-        &lt;a class="dismiss"&gt;🗙&lt;/a&gt;
-    &lt;/div&gt;
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
 
-    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-z9WtwE9q3YJPHytAOxT3OYaL6VZr5EKeosFVJeFt3PcTJS3BM4tiTqcKoy0eZZ+j" crossorigin="anonymous"&gt;&lt;/script&gt;
-    &lt;script src="js/uiAudit.js"&gt;&lt;/script&gt;
-    &lt;script src="js/toast.js"&gt;&lt;/script&gt;
-    &lt;script src="_framework/blazor.server.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-z9WtwE9q3YJPHytAOxT3OYaL6VZr5EKeosFVJeFt3PcTJS3BM4tiTqcKoy0eZZ+j" crossorigin="anonymous"></script>
+    <script src="js/uiAudit.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>
