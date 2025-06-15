@@ -254,6 +254,11 @@ public class Program
             await svc.ApproveRequestAsync(id, user.Identity?.Name ?? "system", apply: true);
             return Results.Ok();
         });
+        trGroup.MapPost("/review/{id}", async (Guid id, TranslationReviewRequest review, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
+        {
+            await svc.ReviewRequestAsync(id, review.Accept, user.Identity?.Name ?? "system", review.Comments, review.Escalate);
+            return Results.Ok();
+        });
         trGroup.MapPost("/status/{id}", async (Guid id, TranslationRequestStatus status, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
             await svc.UpdateStatusAsync(id, status, user.Identity?.Name ?? "system");

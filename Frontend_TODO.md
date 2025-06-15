@@ -125,7 +125,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
     - [x] Translation status: “machine”, “human”, “pending review”, “approved”
     - [x] Activity log for all translation events
-    - [ ] Proofreading workflow (review, approve, escalate issues)
+    - [x] Proofreading workflow (review, approve, escalate issues)
 - [ ] **Coverage & Quality Assurance**
     - [ ] Coverage dashboard (% complete, missing keys, per-module coverage)
     - [ ] Live alert for untranslated/missing/incomplete/invalid placeholders
