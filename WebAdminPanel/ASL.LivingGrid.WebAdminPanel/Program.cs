@@ -5,6 +5,8 @@ using ASL.LivingGrid.WebAdminPanel.Services;
 using Serilog;
 using System.Reflection;
 using Microsoft.Extensions.Hosting.WindowsServices;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.IO;
 
 namespace ASL.LivingGrid.WebAdminPanel;
 
@@ -23,10 +25,15 @@ public class Program
             Log.Information("Starting ASL.LivingGrid Web Admin Panel");
             
             var builder = WebApplication.CreateBuilder(args);
+            builder.WebHost.UseIISIntegration();
 
-            // Detect hosting mode
-            var isStandaloneExe = Environment.GetCommandLineArgs().Contains("--standalone") || 
-                                  !builder.Environment.IsDevelopment();
+            // Detect hosting mode from configuration or command line
+            var cfgMode = builder.Configuration.GetValue<string>("Hosting:Mode") ?? "Standalone";
+            if (Environment.GetCommandLineArgs().Contains("--standalone"))
+                cfgMode = "Standalone";
+            if (Environment.GetCommandLineArgs().Contains("--hosted"))
+                cfgMode = "WebServer";
+            var isStandaloneExe = string.Equals(cfgMode, "Standalone", StringComparison.OrdinalIgnoreCase);
             
             // Configure logging
             builder.Host.UseSerilog();
@@ -44,6 +51,9 @@ public class Program
 
             // Configure the HTTP request pipeline.
             ConfigurePipeline(app, isStandaloneExe);
+
+            // Handle hosting mode switch
+            await HandleHostingModeSwitchAsync(app, cfgMode);
 
             // Initialize database
             await InitializeDatabaseAsync(app);
@@ -129,6 +139,12 @@ public class Program
             options.Cookie.IsEssential = true;
         });
 
+        services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                                       ForwardedHeaders.XForwardedProto;
+        });
+
         // Add tray icon service (only on Windows and in standalone mode)
         if (OperatingSystem.IsWindows() && isStandaloneExe)
         {
@@ -153,10 +169,13 @@ public class Program
             app.UseHsts();
         }
 
+
         if (!isStandaloneExe || app.Configuration.GetValue<bool>("ForceHttps"))
         {
             app.UseHttpsRedirection();
         }
+
+        app.UseForwardedHeaders();
 
         app.UseStaticFiles();
         app.UseRouting();
@@ -192,6 +211,40 @@ public class Program
         {
             Log.Error(ex, "Error initializing database");
             throw;
+        }
+    }
+
+    private static async Task HandleHostingModeSwitchAsync(WebApplication app, string currentMode)
+    {
+        try
+        {
+            var file = Path.Combine(AppContext.BaseDirectory, "hosting_mode.txt");
+            var previousMode = File.Exists(file) ? await File.ReadAllTextAsync(file) : null;
+
+            if (!string.IsNullOrWhiteSpace(previousMode) && !string.Equals(previousMode, currentMode, StringComparison.OrdinalIgnoreCase))
+            {
+                var migration = app.Services.GetRequiredService<IMigrationService>();
+
+                if (app.Configuration.GetValue<bool>("Hosting:BackupBeforeSwitch", true))
+                {
+                    var backupPath = Path.Combine(app.Configuration.GetValue<string>("BackupDirectory", "backups"),
+                        $"mode_switch_{DateTime.UtcNow:yyyyMMdd_HHmmss}.json");
+                    await migration.CreateBackupAsync(backupPath);
+                }
+
+                if (app.Configuration.GetValue<bool>("Hosting:AutoMigrate", true))
+                {
+                    using var scope = app.Services.CreateScope();
+                    var ctx = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    await ctx.Database.MigrateAsync();
+                }
+            }
+
+            await File.WriteAllTextAsync(file, currentMode);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Error handling hosting mode switch");
         }
     }
 }
