@@ -43,6 +43,7 @@ public class TranslationWorkflowService : ITranslationWorkflowService
             Culture = culture,
             ProposedValue = proposedValue,
             RequestedBy = requestedBy,
+            Status = TranslationRequestStatus.PendingReview,
             CreatedAt = DateTime.UtcNow
         };
         _context.TranslationRequests.Add(req);
@@ -187,7 +188,15 @@ public class TranslationWorkflowService : ITranslationWorkflowService
     public async Task<IEnumerable<TranslationRequest>> GetPendingRequestsAsync()
     {
         return await _context.TranslationRequests
-            .Where(r => r.Status == TranslationRequestStatus.Pending)
+            .Where(r => r.Status == TranslationRequestStatus.PendingReview)
+            .OrderBy(r => r.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<TranslationRequest>> GetRequestsByStatusAsync(TranslationRequestStatus status)
+    {
+        return await _context.TranslationRequests
+            .Where(r => r.Status == status)
             .OrderBy(r => r.CreatedAt)
             .ToListAsync();
     }

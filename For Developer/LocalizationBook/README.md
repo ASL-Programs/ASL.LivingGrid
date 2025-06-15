@@ -8,6 +8,7 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 - JSON formatında import və export
 - REST API vasitəsilə dil paketlərinin idarəsi
 - AI tərcümə təklifləri üçün `TranslationWorkflowService.SuggestAsync` metodu
+- Tərcümə sorğularının vəziyyətləri: **Machine**, **Human**, **PendingReview**, **Approved**
 
 ## İstifadə Qaydası
 1. `/languagepacks` səhifəsinə keçid edərək mövcud dillərin siyahısını görün.

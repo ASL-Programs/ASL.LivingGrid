@@ -123,7 +123,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Crowdsource editor: role-based translation request & approval workflow
 
     - [x] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
-    - [ ] Translation status: “machine”, “human”, “pending review”, “approved”
+    - [x] Translation status: “machine”, “human”, “pending review”, “approved”
     - [x] Activity log for all translation events
     - [ ] Proofreading workflow (review, approve, escalate issues)
 - [ ] **Coverage & Quality Assurance**
