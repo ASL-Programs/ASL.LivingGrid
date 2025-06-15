@@ -64,6 +64,26 @@ POST /api/localization/customization/{culture}
 Bu məlumatlar `CultureCustomizations` cədvəlində saxlanılır və öncəliklə
 `LocalizationService` tərəfindən oxunur.
 
+## TemplateOverride və TerminologyOverride
+
+`TemplateOverride` hər tenant və modul üçün şablon mətnlərini dəyişməyə imkan
+verir. `TerminologyOverride` servisi isə terminləri eyni üsulla
+fərdiləşdirməyə kömək edir. Bu mexanizm portalın müxtəlif hissələrinin
+müxtəlif müştərilər və modullar üçün uyğun termin və şablonlarla işləməsinə
+imkan yaradır.
+
+REST API nümunələri:
+
+```
+GET /api/localization/customization/templates/{culture}/{module}
+POST /api/localization/customization/templates/{culture}/{module}
+GET /api/localization/customization/terminology/{culture}/{module}/{key}
+POST /api/localization/customization/terminology/{culture}/{module}/{key}
+```
+
+Məlumatlar `TemplateOverrides` və `TerminologyOverrides` cədvəllərində
+saxlanılır və `LocalizationService` tərəfindən oxunur.
+
 ## Örtük Ölçümləri və Keyfiyyət Alətləri
 
 `LocalizationCoverage.razor` səhifəsi hər modul üzrə tərcümə faizini göstərir.
