@@ -1,4 +1,5 @@
 @using System.IO
+@using System.Text
 @page "/languagepacks"
 @inject IJSRuntime JS
 @inject ILocalizationService LocalizationService
@@ -52,8 +53,9 @@
     private async Task ExportPack()
     {
         var json = await LocalizationService.ExportAsync(selectedCulture);
-        await using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json));
-        await JS.InvokeVoidAsync("BlazorDownloadFile", $"lang_{selectedCulture}.json", stream.ToArray());
+        var bytes = Encoding.UTF8.GetBytes(json);
+        var base64 = Convert.ToBase64String(bytes);
+        await JS.InvokeVoidAsync("blazorDownloadFile", $"lang_{selectedCulture}.json", "application/json", base64);
     }
 
     private async Task ImportPack(ChangeEventArgs e)
