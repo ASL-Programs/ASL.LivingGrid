@@ -48,10 +48,39 @@ ASL.LivingGrid/
 
 ## Getting Started
 
-1. **Prerequisites**: .NET 9.0 SDK, Visual Studio 2022 17.8+
-2. **Clone**: `git clone [repository-url]`
-3. **Build**: Open `ASL.LivingGrid.sln` in Visual Studio
-4. **Run**: Each module can be run independently from its own solution
+### 1. Prerequisites
+
+- .NET **9.0** SDK (see installation steps below)
+- Visual Studio 2022 17.8+
+
+### 2. Clone the Repository
+
+```bash
+git clone [repository-url]
+cd ASL.LivingGrid
+```
+
+### 3. Install the .NET 9.0 SDK
+
+If `dotnet --list-sdks` does not show a 9.0 SDK, use the official install script:
+
+```bash
+curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
+chmod +x dotnet-install.sh
+./dotnet-install.sh --channel 9.0
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$PATH:$DOTNET_ROOT"
+```
+
+### 4. Build
+
+```bash
+dotnet build ASL.LivingGrid.sln
+```
+
+### 5. Run
+
+Each module can be run independently from its own solution.
 
 ## Development Workflow
 
