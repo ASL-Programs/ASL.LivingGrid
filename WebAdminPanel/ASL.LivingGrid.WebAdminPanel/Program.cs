@@ -129,6 +129,7 @@ public class Program
         services.AddScoped<IWireframePageBuilderService, WireframePageBuilderService>();
         services.AddScoped<IThemeService, ThemeService>();
         services.AddScoped<INavigationService, NavigationService>();
+        services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
@@ -239,6 +240,11 @@ public class Program
         {
             var created = await svc.SubmitRequestAsync(req.Key, req.Culture, req.ProposedValue ?? string.Empty, user.Identity?.Name ?? "anon");
             return Results.Ok(created);
+        });
+        trGroup.MapPost("/suggest", async (TranslationSuggestionRequest req, ITranslationWorkflowService svc) =>
+        {
+            var result = await svc.SuggestAsync(req.Text, req.SourceCulture, req.TargetCulture);
+            return Results.Ok(new { suggestion = result });
         });
         trGroup.MapPost("/approve/{id}", async (Guid id, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
