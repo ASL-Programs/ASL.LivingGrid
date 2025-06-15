@@ -127,7 +127,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Activity log for all translation events
     - [x] Proofreading workflow (review, approve, escalate issues) - 2025-06-18 - AI: Proofreading page & approval API
 
-- [ ] **Coverage & Quality Assurance**
+ - [x] **Coverage & Quality Assurance**
     - [x] Coverage dashboard (% complete, missing keys, per-module coverage)
     - [x] Live alert for untranslated/missing/incomplete/invalid placeholders
     - [x] Context preview: see translation in UI before publish - 2025-06-17 - AI
