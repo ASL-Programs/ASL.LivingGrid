@@ -35,7 +35,7 @@ public class TranslationWorkflowService : ITranslationWorkflowService
         _logger = logger;
     }
 
-    public async Task<TranslationRequest> SubmitRequestAsync(string key, string culture, string proposedValue, string requestedBy, TranslationRequestStatus status = TranslationRequestStatus.PendingReview)
+    public async Task<TranslationRequest> SubmitRequestAsync(string key, string culture, string proposedValue, string requestedBy, TranslationRequestStatus status = TranslationRequestStatus.Machine)
     {
         var req = new TranslationRequest
         {
@@ -58,7 +58,12 @@ public class TranslationWorkflowService : ITranslationWorkflowService
         var req = await _context.TranslationRequests.FindAsync(id);
         if (req == null) return;
 
-        req.Status = TranslationRequestStatus.Approved;
+        if (req.Status == TranslationRequestStatus.Machine)
+            req.Status = TranslationRequestStatus.MachineApproved;
+        else if (req.Status == TranslationRequestStatus.Human)
+            req.Status = TranslationRequestStatus.HumanApproved;
+        else
+            req.Status = TranslationRequestStatus.Approved;
         req.ApprovedBy = approvedBy;
         req.ApprovedAt = DateTime.UtcNow;
         req.RejectedBy = null;
@@ -94,7 +99,12 @@ public class TranslationWorkflowService : ITranslationWorkflowService
 
         if (accept)
         {
-            req.Status = TranslationRequestStatus.Approved;
+            if (req.Status == TranslationRequestStatus.Machine)
+                req.Status = TranslationRequestStatus.MachineApproved;
+            else if (req.Status == TranslationRequestStatus.Human)
+                req.Status = TranslationRequestStatus.HumanApproved;
+            else
+                req.Status = TranslationRequestStatus.Approved;
             req.ApprovedBy = reviewer;
             req.ApprovedAt = DateTime.UtcNow;
             req.RejectedBy = null;
@@ -287,7 +297,7 @@ public class TranslationWorkflowService : ITranslationWorkflowService
     public async Task<IEnumerable<TranslationRequest>> GetPendingRequestsAsync()
     {
         return await _context.TranslationRequests
-            .Where(r => r.Status == TranslationRequestStatus.PendingReview)
+            .Where(r => r.Status == TranslationRequestStatus.Machine || r.Status == TranslationRequestStatus.Human || r.Status == TranslationRequestStatus.PendingReview)
             .OrderBy(r => r.CreatedAt)
             .ToListAsync();
     }
@@ -298,5 +308,10 @@ public class TranslationWorkflowService : ITranslationWorkflowService
             .Where(r => r.Status == status)
             .OrderBy(r => r.CreatedAt)
             .ToListAsync();
+    }
+
+    public async Task<TranslationRequest?> GetRequestAsync(Guid id)
+    {
+        return await _context.TranslationRequests.FindAsync(id);
     }
 }

@@ -279,6 +279,11 @@ public class Program
             var result = await svc.SuggestAsync(req.Text, req.SourceCulture, req.TargetCulture);
             return Results.Ok(new { suggestion = result });
         });
+        trGroup.MapGet("/{id}", async (Guid id, ITranslationWorkflowService svc) =>
+        {
+            var req = await svc.GetRequestAsync(id);
+            return req is not null ? Results.Ok(req) : Results.NotFound();
+        });
         trGroup.MapPost("/approve/{id}", async (Guid id, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
             await svc.ApproveRequestAsync(id, user.Identity?.Name ?? "system", apply: true);

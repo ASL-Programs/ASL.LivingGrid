@@ -1,0 +1,62 @@
+@page "/proofread/{Id:guid}"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject ITranslationWorkflowService WorkflowService
+@inject HttpClient Http
+
+<PageTitle>Proofread Translation</PageTitle>
+
+@if (request == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="mb-3">
+        <label class="form-label">Key</label>
+        <input class="form-control" value="@request.Key" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Culture</label>
+        <input class="form-control" value="@request.Culture" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Translation</label>
+        <textarea class="form-control" @bind="edited" rows="4"></textarea>
+    </div>
+    <button class="btn btn-success me-2" @onclick="Approve">Approve</button>
+    <button class="btn btn-danger" @onclick="Reject">Reject</button>
+}
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    private TranslationRequest? request;
+    private string? edited;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        request = await WorkflowService.GetRequestAsync(Id);
+        if (request != null)
+        {
+            edited = request.ProposedValue;
+        }
+    }
+
+    private async Task Approve()
+    {
+        if (request == null) return;
+        request.ProposedValue = edited;
+        await Http.PostAsync($"/api/translationrequests/approve/{Id}", null);
+        Nav.NavigateTo("/pendingreviews");
+    }
+
+    private async Task Reject()
+    {
+        var payload = new TranslationReviewRequest { Accept = false };
+        await Http.PostAsJsonAsync($"/api/translationrequests/reject/{Id}", payload);
+        Nav.NavigateTo("/pendingreviews");
+    }
+
+    [Inject]
+    private NavigationManager Nav { get; set; } = default!;
+}

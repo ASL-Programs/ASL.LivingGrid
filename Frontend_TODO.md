@@ -123,9 +123,9 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
     - [x] Crowdsource editor: role-based translation request & approval workflow
     - [x] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
-    - [x] Translation status: “machine”, “human”, “pending review”, “approved”
+    - [x] Translation status: “machine”, “human”, “pending review”, "machine approved", "human approved", “approved” - 2025-06-18 - AI
     - [x] Activity log for all translation events
-    - [x] Proofreading workflow (review, approve, escalate issues)
+    - [x] Proofreading workflow (review, approve, escalate issues) - 2025-06-18 - AI: Proofreading page & approval API
 
 - [ ] **Coverage & Quality Assurance**
     - [x] Coverage dashboard (% complete, missing keys, per-module coverage)
