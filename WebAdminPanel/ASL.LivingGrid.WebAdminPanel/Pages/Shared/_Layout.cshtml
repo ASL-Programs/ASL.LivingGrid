@@ -1,0 +1,30 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;ASL LivingGrid - Web Admin Panel&lt;/title&gt;
+    &lt;base href="~/" /&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" /&gt;
+    &lt;link href="css/site.css" rel="stylesheet" /&gt;
+    &lt;link href="ASL.LivingGrid.WebAdminPanel.styles.css" rel="stylesheet" /&gt;
+    &lt;link rel="icon" type="image/png" href="favicon.png"/&gt;
+    &lt;component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    @RenderBody()
+
+    &lt;div id="blazor-error-ui"&gt;
+        &lt;environment include="Staging,Production"&gt;
+            An error has occurred. This application may no longer respond until reloaded.
+        &lt;/environment&gt;
+        &lt;environment include="Development"&gt;
+            An unhandled exception has occurred. See browser dev tools for details.
+        &lt;/environment&gt;
+        &lt;a href="" class="reload"&gt;Reload&lt;/a&gt;
+        &lt;a class="dismiss"&gt;🗙&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;script src="_framework/blazor.server.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

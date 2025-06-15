@@ -1,0 +1,63 @@
+@inherits LayoutView
+@namespace ASL.LivingGrid.WebAdminPanel.Components.Layout
+
+&lt;div class="login-layout"&gt;
+    &lt;div class="login-container"&gt;
+        &lt;div class="login-header"&gt;
+            &lt;img src="images/logo.png" alt="ASL LivingGrid" class="logo" /&gt;
+            &lt;h1&gt;ASL LivingGrid&lt;/h1&gt;
+            &lt;p&gt;Web Admin Panel&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="login-content"&gt;
+            @Body
+        &lt;/div&gt;
+        
+        &lt;div class="login-footer"&gt;
+            &lt;p&gt;© 2025 ASL, Məstaliyev Vüsal Azer oğlu. All rights reserved.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    .login-layout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .login-header h1 {
+        color: #333;
+        margin: 1rem 0;
+    }
+
+    .login-header p {
+        color: #666;
+        margin-bottom: 2rem;
+    }
+
+    .logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1rem;
+    }
+
+    .login-footer {
+        margin-top: 2rem;
+        font-size: 0.8rem;
+        color: #666;
+    }
+&lt;/style&gt;

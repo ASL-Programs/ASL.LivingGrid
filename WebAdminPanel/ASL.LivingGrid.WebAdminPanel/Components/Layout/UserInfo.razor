@@ -1,0 +1,44 @@
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+@inject SignInManager&lt;IdentityUser&gt; SignInManager
+
+&lt;div class="user-info"&gt;
+    &lt;AuthorizeView&gt;
+        &lt;Authorized&gt;
+            &lt;div class="dropdown"&gt;
+                &lt;button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"&gt;
+                    &lt;span class="oi oi-person"&gt;&lt;/span&gt; @context.User.Identity?.Name
+                &lt;/button&gt;
+                &lt;ul class="dropdown-menu"&gt;
+                    &lt;li&gt;&lt;a class="dropdown-item" href="/Account/Manage"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;hr class="dropdown-divider"&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;button class="dropdown-item" @onclick="LogoutAsync"&gt;Logout&lt;/button&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/Authorized&gt;
+        &lt;NotAuthorized&gt;
+            &lt;a href="/Account/Login" class="btn btn-outline-light"&gt;
+                &lt;span class="oi oi-account-login"&gt;&lt;/span&gt; Login
+            &lt;/a&gt;
+        &lt;/NotAuthorized&gt;
+    &lt;/AuthorizeView&gt;
+&lt;/div&gt;
+
+@code {
+    private async Task LogoutAsync()
+    {
+        await SignInManager.SignOutAsync();
+        Navigation.NavigateTo("/", true);
+    }
+}
+
+&lt;style&gt;
+    .user-info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0.5rem 0;
+    }
+&lt;/style&gt;

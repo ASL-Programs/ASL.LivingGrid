@@ -1,0 +1,16 @@
+{
+  "name": "ASL LivingGrid Web Admin Panel",
+  "short_name": "ASL Admin",
+  "description": "Enterprise management and analytics platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}

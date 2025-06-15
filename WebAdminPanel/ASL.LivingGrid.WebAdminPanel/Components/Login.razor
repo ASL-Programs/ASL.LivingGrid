@@ -1,0 +1,164 @@
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
+@using System.ComponentModel.DataAnnotations
+@inject SignInManager&lt;IdentityUser&gt; SignInManager
+@inject UserManager&lt;IdentityUser&gt; UserManager
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+&lt;div class="login-form"&gt;
+    &lt;EditForm Model="loginModel" OnValidSubmit="HandleLoginAsync" FormName="login"&gt;
+        &lt;DataAnnotationsValidator /&gt;
+        &lt;ValidationSummary class="text-danger" role="alert" /&gt;
+        
+        &lt;div class="form-group mb-3"&gt;
+            &lt;label for="email" class="form-label"&gt;Email&lt;/label&gt;
+            &lt;InputText @bind-Value="loginModel.Email" class="form-control" id="email" autocomplete="username" placeholder="admin@asl.az" /&gt;
+            &lt;ValidationMessage For="() =&gt; loginModel.Email" class="text-danger" /&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="form-group mb-3"&gt;
+            &lt;label for="password" class="form-label"&gt;Password&lt;/label&gt;
+            &lt;InputText type="password" @bind-Value="loginModel.Password" class="form-control" id="password" autocomplete="current-password" placeholder="••••••••" /&gt;
+            &lt;ValidationMessage For="() =&gt; loginModel.Password" class="text-danger" /&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="form-check mb-3"&gt;
+            &lt;InputCheckbox @bind-Value="loginModel.RememberMe" class="form-check-input" id="remember" /&gt;
+            &lt;label class="form-check-label" for="remember"&gt;Remember me&lt;/label&gt;
+        &lt;/div&gt;
+        
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            &lt;div class="alert alert-danger" role="alert"&gt;
+                @errorMessage
+            &lt;/div&gt;
+        }
+        
+        &lt;button type="submit" class="btn btn-primary w-100" disabled="@isLoggingIn"&gt;
+            @if (isLoggingIn)
+            {
+                &lt;span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"&gt;&lt;/span&gt;
+                &lt;text&gt;Logging in...&lt;/text&gt;
+            }
+            else
+            {
+                &lt;text&gt;Login&lt;/text&gt;
+            }
+        &lt;/button&gt;
+    &lt;/EditForm&gt;
+    
+    &lt;hr class="my-4" /&gt;
+    
+    &lt;div class="text-center"&gt;
+        &lt;small class="text-muted"&gt;
+            Default admin: admin@asl.az / admin123
+        &lt;/small&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+@code {
+    private LoginModel loginModel = new() { Email = "admin@asl.az" };
+    private string? errorMessage;
+    private bool isLoggingIn = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Create default admin user if not exists
+        await EnsureDefaultAdminUserAsync();
+    }
+
+    private async Task HandleLoginAsync()
+    {
+        isLoggingIn = true;
+        errorMessage = null;
+        
+        try
+        {
+            var result = await SignInManager.PasswordSignInAsync(
+                loginModel.Email, 
+                loginModel.Password, 
+                loginModel.RememberMe, 
+                lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                Navigation.NavigateTo("/", true);
+            }
+            else
+            {
+                errorMessage = "Invalid email or password.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "An error occurred during login. Please try again.";
+        }
+        finally
+        {
+            isLoggingIn = false;
+        }
+    }
+
+    private async Task EnsureDefaultAdminUserAsync()
+    {
+        try
+        {
+            var adminUser = await UserManager.FindByEmailAsync("admin@asl.az");
+            if (adminUser == null)
+            {
+                adminUser = new IdentityUser
+                {
+                    UserName = "admin@asl.az",
+                    Email = "admin@asl.az",
+                    EmailConfirmed = true
+                };
+
+                var result = await UserManager.CreateAsync(adminUser, "admin123");
+                if (!result.Succeeded)
+                {
+                    // Log errors if needed
+                }
+            }
+        }
+        catch
+        {
+            // Silently handle errors during user creation
+        }
+    }
+
+    public class LoginModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = "";
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; } = "";
+
+        public bool RememberMe { get; set; }
+    }
+}
+
+&lt;style&gt;
+    .login-form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+
+    .btn-primary {
+        background-color: #667eea;
+        border-color: #667eea;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a6fd8;
+        border-color: #5a6fd8;
+    }
+&lt;/style&gt;

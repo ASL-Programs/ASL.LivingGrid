@@ -1,0 +1,31 @@
+@inherits LayoutView
+@using Microsoft.AspNetCore.Components.Web
+@namespace ASL.LivingGrid.WebAdminPanel.Components.Layout
+@inject IJSRuntime JSRuntime
+
+&lt;div class="page"&gt;
+    &lt;div class="sidebar"&gt;
+        &lt;NavMenu /&gt;
+    &lt;/div&gt;
+
+    &lt;main&gt;
+        &lt;div class="top-row px-4"&gt;
+            &lt;UserInfo /&gt;
+        &lt;/div&gt;
+
+        &lt;article class="content px-4"&gt;
+            @Body
+        &lt;/article&gt;
+    &lt;/main&gt;
+&lt;/div&gt;
+
+&lt;div id="blazor-error-ui"&gt;
+    &lt;environment include="Staging,Production"&gt;
+        An error has occurred. This application may no longer respond until reloaded.
+    &lt;/environment&gt;
+    &lt;environment include="Development"&gt;
+        An unhandled exception has occurred. See browser dev tools for details.
+    &lt;/environment&gt;
+    &lt;a href="" class="reload"&gt;Reload&lt;/a&gt;
+    &lt;a class="dismiss"&gt;🗙&lt;/a&gt;
+&lt;/div&gt;

@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-WebAdminPanel", "01-WebAdminPanel", "{A1B2C3D4-E5F6-7890-ABCD-123456789ABC}"
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-ManagerPanel", "02-ManagerPanel", "{B2C3D4E5-F6G7-8901-BCDE-234567890BCD}"
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-SmartCustomerApp", "03-SmartCustomerApp", "{C3D4E5F6-G7H8-9012-CDEF-345678901CDE}"
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-ReportingDesktop", "04-ReportingDesktop", "{D4E5F6G7-H8I9-0123-DEFG-456789012DEF}"
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-ReportingMobile", "05-ReportingMobile", "{E5F6G7H8-I9J0-1234-EFGH-567890123EFG}"
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{F6G7H8I9-J0K1-2345-FGHI-678901234FGH}"
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{G7H8I9J0-K1L2-3456-GHIJ-789012345GHI}"
+	ProjectSection(SolutionItems) = preProject
+		Read before you start working.md = Read before you start working.md
+		CoreRules_TODO.md = CoreRules_TODO.md
+		Frontend_TODO.md = Frontend_TODO.md
+		Backend_TODO.md = Backend_TODO.md
+		Testing_TODO.md = Testing_TODO.md
+	EndProjectSection
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{H8I9J0K1-L2M3-4567-HIJK-890123456HIJ}"
+EndProject
+
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12345678-1234-5678-9ABC-123456789ABC}
+	EndGlobalSection
+EndGlobal
