@@ -24,6 +24,11 @@ public class TranslationRequest : BaseEntity
 
     public DateTime? ApprovedAt { get; set; }
 
+    [StringLength(100)]
+    public string? RejectedBy { get; set; }
+
+    public DateTime? RejectedAt { get; set; }
+
     [StringLength(500)]
     public string? ReviewerComments { get; set; }
 
@@ -39,5 +44,7 @@ public enum TranslationRequestStatus
     /// <summary>Translation requires proofreading before approval.</summary>
     PendingReview,
     /// <summary>Translation approved and applied.</summary>
-    Approved
+    Approved,
+    /// <summary>Translation was reviewed and rejected.</summary>
+    Rejected
 }
