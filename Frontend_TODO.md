@@ -76,7 +76,7 @@
 - [x] **Self-hosted .exe with Kestrel** (2025-06-15 - AI: Basic .NET 9.0 Blazor project with Kestrel hosting capability created)
  - [x] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes) - 2025-06-15 - AI: Dockerfile və web.config əlavə edildi
  - [x] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore - 2025-06-15 - AI: Hosting mode switch implemented in Program.cs
-- [ ] **Multi-instance, multi-mode sync** (cloud, on-prem, edge)
+ - [x] **Multi-instance, multi-mode sync** (cloud, on-prem, edge) - 2025-06-15 - AI: SyncService ilə `sync_nodes.json` üzrə periodik sinxronizasiya
 - [ ] **Distributed, Hybrid Cloud, Serverless Functions**
     - Multi-cloud (AWS, Azure, GCP), serverless FaaS, auto-provisioned
     - **Disaster Recovery:** Real-time failover, auto backup, cross-region replication
@@ -118,11 +118,13 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Tenant-level enable/disable, user override, default/fallback, per-module or per-feature localization
     - [x] Locale-aware formats (date, time, currency, pluralization)
     - [x] Per-branch or per-region language policy enforcement
-- [ ] **Collaborative & AI-Assisted Translation**
-    - [ ] Crowdsource editor: role-based translation request & approval workflow
+
+ - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
+    - [x] Crowdsource editor: role-based translation request & approval workflow
+
     - [ ] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
     - [ ] Translation status: “machine”, “human”, “pending review”, “approved”
-    - [ ] Activity log for all translation events
+    - [x] Activity log for all translation events
     - [ ] Proofreading workflow (review, approve, escalate issues)
 - [ ] **Coverage & Quality Assurance**
     - [ ] Coverage dashboard (% complete, missing keys, per-module coverage)
