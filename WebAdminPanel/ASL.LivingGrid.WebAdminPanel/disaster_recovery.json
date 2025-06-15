@@ -1,0 +1,7 @@
+{
+  "BackupPath": "backups",
+  "FailoverNodes": [
+    "https://failover1.example.com",
+    "https://failover2.example.com"
+  ]
+}

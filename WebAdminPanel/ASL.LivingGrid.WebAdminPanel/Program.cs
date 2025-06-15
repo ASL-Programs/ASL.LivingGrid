@@ -136,6 +136,7 @@ public class Program
         services.AddScoped<IFeedbackService, FeedbackService>();
         services.AddScoped<ISessionPersistenceService, SessionPersistenceService>();
         services.AddScoped<ISearchService, SearchService>();
+        services.AddHostedService<DisasterRecoveryService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
