@@ -202,6 +202,64 @@ public class TranslationWorkflowService : ITranslationWorkflowService
                 var result = doc.RootElement.GetProperty("data").GetProperty("translations")[0].GetProperty("translatedText").GetString();
                 return WebUtility.HtmlDecode(result ?? string.Empty).Trim();
             }
+            else if (string.Equals(provider, "Azure", StringComparison.OrdinalIgnoreCase))
+            {
+                var endpoint = _configuration.GetValue<string>("Translation:Endpoint") ?? "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0";
+                var apiKey = _configuration.GetValue<string>("Translation:ApiKey");
+                var region = _configuration.GetValue<string>("Translation:Region");
+
+                var url = $"{endpoint}&from={sourceCulture}&to={targetCulture}";
+                using var request = new HttpRequestMessage(HttpMethod.Post, url);
+                request.Headers.Add("Ocp-Apim-Subscription-Key", apiKey);
+                if (!string.IsNullOrEmpty(region))
+                    request.Headers.Add("Ocp-Apim-Subscription-Region", region);
+                request.Content = new StringContent(JsonSerializer.Serialize(new[] { new { Text = text } }), Encoding.UTF8, "application/json");
+
+                using var response = await client.SendAsync(request);
+                if (!response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == (System.Net.HttpStatusCode)429)
+                        _logger.LogWarning("Translation provider rate limited");
+                    else
+                        _logger.LogError("Translation provider error: {StatusCode}", response.StatusCode);
+                    return null;
+                }
+                var json = await response.Content.ReadAsStringAsync();
+                using var doc = JsonDocument.Parse(json);
+                var result = doc.RootElement[0].GetProperty("translations")[0].GetProperty("text").GetString();
+                return result?.Trim();
+            }
+            else if (string.Equals(provider, "Custom", StringComparison.OrdinalIgnoreCase))
+            {
+                var endpoint = _configuration.GetValue<string>("Translation:Endpoint");
+                if (string.IsNullOrEmpty(endpoint))
+                {
+                    _logger.LogWarning("Custom translation provider endpoint not configured");
+                    return null;
+                }
+
+                using var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
+                var payload = new { text, sourceCulture, targetCulture };
+                var apiKey = _configuration.GetValue<string>("Translation:ApiKey");
+                if (!string.IsNullOrEmpty(apiKey))
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+                request.Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+
+                using var response = await client.SendAsync(request);
+                if (!response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == (System.Net.HttpStatusCode)429)
+                        _logger.LogWarning("Translation provider rate limited");
+                    else
+                        _logger.LogError("Translation provider error: {StatusCode}", response.StatusCode);
+                    return null;
+                }
+                var json = await response.Content.ReadAsStringAsync();
+                using var doc = JsonDocument.Parse(json);
+                if (doc.RootElement.TryGetProperty("translation", out var node))
+                    return node.GetString()?.Trim();
+                return null;
+            }
 
             _logger.LogWarning("Unknown translation provider: {Provider}", provider);
             return null;
