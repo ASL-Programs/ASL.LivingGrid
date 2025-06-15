@@ -3,8 +3,6 @@
 @using ASL.LivingGrid.WebAdminPanel.Models
 @inject ILocalizationService LocalizationService
 @inject INavigationService NavService
-@inject IRoleBasedUiService RoleUi
-@inject AuthenticationStateProvider AuthProvider
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 
@@ -13,6 +11,7 @@
         <a class="navbar-brand" href="/">ASL LivingGrid</a>
     </div>
 </div>
+
 
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenuContent" aria-controls="sidebarMenuContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

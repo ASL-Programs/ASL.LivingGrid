@@ -17,7 +17,6 @@ public class TranslationRequest : BaseEntity
     [StringLength(100)]
     public string RequestedBy { get; set; } = string.Empty;
 
-
     public TranslationRequestStatus Status { get; set; } = TranslationRequestStatus.PendingReview;
 
     [StringLength(100)]

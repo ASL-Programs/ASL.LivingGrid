@@ -1,0 +1,4 @@
+body[data-theme="dark"] {
+    --primary-color: #1cc88a;
+    --background-color: #343a40;
+}

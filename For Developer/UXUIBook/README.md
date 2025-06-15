@@ -38,3 +38,4 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 - Tam WCAG 2.1 uyğunluğunun avtomatik yoxlanılması üçün genişlənmiş audit modulu.
 - Fərdi şirkətlər üçün rəng palitrası və loqo yükləmə imkanları.
 - Drag-and-drop əsaslı tərtibat redaktoru və canlı önizləmə.
+- Tema Marketplace səhifəsi ilə mövcud temaları siyahıdan seçmək, yeni tema yükləmək və mövcud temaları ixrac etmək mümkündür.
