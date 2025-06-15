@@ -76,7 +76,7 @@
 - [x] **Self-hosted .exe with Kestrel** (2025-06-15 - AI: Basic .NET 9.0 Blazor project with Kestrel hosting capability created)
  - [x] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes) - 2025-06-15 - AI: Dockerfile və web.config əlavə edildi
  - [x] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore - 2025-06-15 - AI: Hosting mode switch implemented in Program.cs
- - [x] **Multi-instance, multi-mode sync** (cloud, on-prem, edge) - 2025-06-15 - AI: SyncService ilə `sync_nodes.json` üzrə periodik sinxronizasiya
+ - [x] **Marketplace for themes/layouts, instant import/export** - 2025-06-15 - AI: ThemeMarketplace page and ThemeService import/export added
 - [ ] **Distributed, Hybrid Cloud, Serverless Functions**
     - Multi-cloud (AWS, Azure, GCP), serverless FaaS, auto-provisioned
     - **Disaster Recovery:** Real-time failover, auto backup, cross-region replication

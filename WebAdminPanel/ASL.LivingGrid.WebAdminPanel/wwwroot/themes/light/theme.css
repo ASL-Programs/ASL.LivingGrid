@@ -1,0 +1,4 @@
+body[data-theme="light"] {
+    --primary-color: #4e73df;
+    --background-color: #ffffff;
+}
