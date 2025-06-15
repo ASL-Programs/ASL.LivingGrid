@@ -172,13 +172,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Niyə yaradılıb?
+- [x] Nəyə xidmət edir?
+- [x] İstifadə qaydası və idarəetmə prinsipləri
+- [x] Texniki və biznes üstünlükləri
+- [x] Gələcək inkişaf yolları və risklər
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
 ## 1.3. UI/UX & Navigation
