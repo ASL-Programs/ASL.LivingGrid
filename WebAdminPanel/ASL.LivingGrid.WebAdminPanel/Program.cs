@@ -236,6 +236,8 @@ public class Program
 
         var trGroup = app.MapGroup("/api/translationrequests");
         trGroup.MapGet("/pending", async (ITranslationWorkflowService svc) => Results.Ok(await svc.GetPendingRequestsAsync()));
+        trGroup.MapGet("/status/{status}", async (TranslationRequestStatus status, ITranslationWorkflowService svc) =>
+            Results.Ok(await svc.GetRequestsByStatusAsync(status)));
         trGroup.MapPost("/submit", async (TranslationRequest req, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
             var created = await svc.SubmitRequestAsync(req.Key, req.Culture, req.ProposedValue ?? string.Empty, user.Identity?.Name ?? "anon");
