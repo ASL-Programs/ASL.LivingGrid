@@ -84,6 +84,7 @@
 
 **For Developer qovluğu və Book:**  
 Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir seçim əlavə olunduqda, `For Developer` qovluğunda ən müasir documentation texnologiyası (məsələn, Docusaurus və ya Docsify) ilə `DeploymentBook` yaradılmalı və ya yenilənməlidir. Burada **bütün addımlar, seçim səbəbləri, risk və üstünlüklər, istifadə və idarəetmə qaydaları, gələcək inkişaf variantları** yalnız Azərbaycan dilində (terminlər istisna) izah olunmalıdır.
+- [x] DeploymentBook-a hosting rejimlərinin xülasəsi əlavə olundu - 2025-06-17 - AI
 ---
 
 ## 1.1. Design & User Experience (UX/UI Principles)
@@ -104,6 +105,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
 
 **For Developer qovluğu və Book:**  
 `For Developer` qovluğunda `UXUIBook` yaradılmalı və ya mövcud olan sənəd hər dəyişiklikdə yenilənməlidir. Burada dizayn qərarlarının səbəbləri, əsas UI/UX prinsipləri, istifadəçi təcrübəsinin niyə belə seçildiyi, hər bir özəlliyin istifadə və idarəetmə qaydası, audit və gələcək inkişaf planları **ətraflı və yalnız Azərbaycan dilində** yazılmalıdır.
+- [x] UXUIBook-a Tema Marketplace istifadəsinin xülasəsi əlavə olundu - 2025-06-17 - AI
 ---
 
 ### 1.1.1. Multi-Language & Translation Lifecycle Management (Enterprise Detailed)
