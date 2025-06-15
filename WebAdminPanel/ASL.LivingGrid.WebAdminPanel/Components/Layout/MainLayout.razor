@@ -1,7 +1,10 @@
 @inherits LayoutView
 @using Microsoft.AspNetCore.Components.Web
+@using ASL.LivingGrid.WebAdminPanel.Services
 @namespace ASL.LivingGrid.WebAdminPanel.Components.Layout
 @inject IJSRuntime JSRuntime
+@inject ILocalizationService LocalizationService
+@implements IDisposable
 @using ASL.LivingGrid.WebAdminPanel.Components.Search
 
 <div class="page">
@@ -32,3 +35,20 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        LocalizationService.MissingTranslation += OnMissingTranslation;
+    }
+
+    private async void OnMissingTranslation(string key, string culture)
+    {
+        await JSRuntime.InvokeVoidAsync("toast.show", $"Missing translation: {key} ({culture})");
+    }
+
+    public void Dispose()
+    {
+        LocalizationService.MissingTranslation -= OnMissingTranslation;
+    }
+}

@@ -137,24 +137,28 @@ public class ApplicationDbContext : IdentityDbContext
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Login", Value = "Daxil ol", Culture = "az", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Logout", Value = "Çıxış", Culture = "az", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.Dashboard", Value = "İdarə paneli", Culture = "az", CreatedAt = DateTime.UtcNow },
+            new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.LocalizationCoverage", Value = "Tərcümə Örtüyü", Culture = "az", CreatedAt = DateTime.UtcNow },
             
             // English
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Welcome", Value = "Welcome", Culture = "en", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Login", Value = "Login", Culture = "en", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Logout", Value = "Logout", Culture = "en", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.Dashboard", Value = "Dashboard", Culture = "en", CreatedAt = DateTime.UtcNow },
+            new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.LocalizationCoverage", Value = "Translation Coverage", Culture = "en", CreatedAt = DateTime.UtcNow },
             
             // Turkish
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Welcome", Value = "Hoş geldiniz", Culture = "tr", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Login", Value = "Giriş", Culture = "tr", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Logout", Value = "Çıkış", Culture = "tr", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.Dashboard", Value = "Kontrol Paneli", Culture = "tr", CreatedAt = DateTime.UtcNow },
+            new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.LocalizationCoverage", Value = "Çeviri Kapsamı", Culture = "tr", CreatedAt = DateTime.UtcNow },
             
             // Russian
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Welcome", Value = "Добро пожаловать", Culture = "ru", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Login", Value = "Войти", Culture = "ru", CreatedAt = DateTime.UtcNow },
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Common.Logout", Value = "Выйти", Culture = "ru", CreatedAt = DateTime.UtcNow },
-            new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.Dashboard", Value = "Панель управления", Culture = "ru", CreatedAt = DateTime.UtcNow }
+            new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.Dashboard", Value = "Панель управления", Culture = "ru", CreatedAt = DateTime.UtcNow },
+            new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.LocalizationCoverage", Value = "Покрытие переводов", Culture = "ru", CreatedAt = DateTime.UtcNow }
         };
 
         builder.Entity<LocalizationResource>().HasData(localizationResources);

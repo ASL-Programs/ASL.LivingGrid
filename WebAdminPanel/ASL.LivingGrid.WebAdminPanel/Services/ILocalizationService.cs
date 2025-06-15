@@ -17,4 +17,19 @@ public interface ILocalizationService
     Task ImportAsync(string jsonContent, string culture, Guid? companyId = null, Guid? tenantId = null);
     Task<IEnumerable<LocalizationResourceVersion>> GetHistoryAsync(Guid resourceId);
     Task ApproveAsync(Guid resourceId, string approvedBy);
+
+    /// <summary>
+    /// Event raised when a translation is missing for the requested culture.
+    /// </summary>
+    event Action<string, string>? MissingTranslation;
+
+    /// <summary>
+    /// Returns coverage percentage per category/module for the specified culture.
+    /// </summary>
+    Task<Dictionary<string, double>> GetCoverageByCategoryAsync(string culture);
+
+    /// <summary>
+    /// Returns keys that are not translated in the specified culture compared to the default culture.
+    /// </summary>
+    Task<IEnumerable<string>> GetMissingKeysAsync(string culture);
 }

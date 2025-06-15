@@ -126,8 +126,8 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Proofreading workflow (review, approve, escalate issues)
 
 - [ ] **Coverage & Quality Assurance**
-    - [ ] Coverage dashboard (% complete, missing keys, per-module coverage)
-    - [ ] Live alert for untranslated/missing/incomplete/invalid placeholders
+    - [x] Coverage dashboard (% complete, missing keys, per-module coverage)
+    - [x] Live alert for untranslated/missing/incomplete/invalid placeholders
     - [ ] Context preview: see translation in UI before publish
     - [ ] Consistency checker: identical terms across modules, placeholder validation
     - [ ] Length/overflow check (UI fit)
@@ -144,8 +144,8 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
 - [ ] **Integration & API**
     - [ ] REST API for CRUD, version fetch, 3rd-party translation provider integration (Google, Azure, DeepL)
     - [ ] Webhook for translation update events
-- [ ] **Localization Coverage Dashboard**
-    - [ ] Per-module, per-tenant, per-user, real-time coverage stats, history, and quality metrics
+- [x] **Localization Coverage Dashboard**
+    - [x] Per-module, per-tenant, per-user, real-time coverage stats, history, and quality metrics
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
