@@ -47,6 +47,13 @@ Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməkl
 ### Kənar və Bulud Yayımı
 `SyncService` həm on-prem, həm də bulud və edge instansiyalarını dəstəkləyir. Docker image və ya klassik hostinq istifadə edilə bilər. Fərqli mühitlər arasında avtomatik backup və sinxronizasiya təmin edilir.
 
+### Dağıdılmış və Hibrid Bulud Yerləşdirməsi
+`DisasterRecoveryService` və `SyncService` birlikdə multi-cloud mühitlərdə real-time dayanıqlıq təmin edir.
+- `disaster_recovery.json` faylında `FailoverNodes` və `BackupPath` parametrləri göstərilir.
+- Servis saatda bir backup yaradır və lazım olduqda `/api/failover` sorğusu ilə nodelar arası keçid edir.
+- `sync_nodes.json` siyahısı regionlararası konfiqurasiya sinxronizasiyası üçün istifadə olunur.
+- Edge şəbəkələr üçün offline rejimdə belə sinxronizasiya imkanı mövcuddur.
+
 ### Serverless Mühit üçün Cloud Functions
 `CloudFunctionService` serverless ssenariləri üçün `cloudFunctions.json` faylından URL-ləri oxuyur. Konfiqurasiya etmək üçün:
 1. WebAdminPanel kök qovluğunda `cloudFunctions.json` yaradın.
@@ -54,6 +61,7 @@ Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməkl
 3. Müxtəlif mühitlər (dev/stage/prod) üçün ayrıca fayl saxlamaq və yerləşdirmə zamanı uyğun nüsxəni kopyalamaq tövsiyə olunur.
 4. Tətbiq işə düşərkən `CloudFunctionService` bu faylı oxuyur və `InvokeAsync` metodu ilə URL-ə JSON sorğu göndərir.
 5. Dəyişiklik etdikdən sonra tətbiqi yenidən başladaraq funksiyaların yenilənməsinə əmin olun.
+6. Multi-cloud dəstəyi: AWS Lambda, Azure Functions və GCP Cloud Functions kimi istənilən HTTP triggered endpointlər işləyir.
 
 
 ### Gələcək inkişaf
