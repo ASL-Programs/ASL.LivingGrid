@@ -128,9 +128,7 @@ public class Program
         services.AddScoped<IWireframePageBuilderService, WireframePageBuilderService>();
         services.AddScoped<IThemeService, ThemeService>();
         services.AddScoped<INavigationService, NavigationService>();
-        services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
 
-        services.AddHostedService<SyncService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
