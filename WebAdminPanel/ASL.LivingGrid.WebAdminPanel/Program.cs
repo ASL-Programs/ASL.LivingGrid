@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using System.IO;
 using System.Security.Claims;
 
+
 namespace ASL.LivingGrid.WebAdminPanel;
 
 public class Program
@@ -128,7 +129,6 @@ public class Program
         services.AddScoped<IWireframePageBuilderService, WireframePageBuilderService>();
         services.AddScoped<IThemeService, ThemeService>();
         services.AddScoped<INavigationService, NavigationService>();
-
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();

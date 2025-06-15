@@ -17,7 +17,6 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 7. **Dashboard Dizaynı:** `DashboardDesigner` səhifəsi drag-and-drop prinsipi ilə işləyir və `dashboardDesigner.js` vasitəsilə real vaxt önizləmə imkanı verir.
 8. **Tərcümə İş Axını:** `TranslationWorkflowService` istifadəçilərin tərcümə təkliflərini göndərməsi və moderatorun təsdiq etməsi üçün REST API təqdim edir. Bütün əməliyyatlar `AuditService` ilə qeyd olunur.
 
-
 ## İstifadə Qaydası
 - `ThemeToggle` komponenti vasitəsilə istifadəçi istənilən vaxt temanı dəyişə bilər.
 - UI audit funksiyası menyuda "UI Audit" bölməsi altında yerləşir və nəticələri siyahı şəklində göstərir.
