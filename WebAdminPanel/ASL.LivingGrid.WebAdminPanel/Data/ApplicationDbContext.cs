@@ -157,5 +157,7 @@ public class ApplicationDbContext : IdentityDbContext
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.Dashboard", Value = "Панель управления", Culture = "ru", CreatedAt = DateTime.UtcNow }
         };
 
+        builder.Entity<LocalizationResource>().HasData(localizationResources);
+
     }
 }
