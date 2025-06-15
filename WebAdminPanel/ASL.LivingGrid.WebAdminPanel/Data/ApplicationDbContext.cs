@@ -26,6 +26,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<LocalizationResourceVersion> LocalizationResourceVersions { get; set; }
     public DbSet<TranslationProject> TranslationProjects { get; set; }
     public DbSet<TranslationKey> TranslationKeys { get; set; }
+    public DbSet<TranslationRequest> TranslationRequests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -63,6 +64,9 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<TranslationKey>()
             .HasIndex(k => new { k.ProjectId, k.Key })
             .IsUnique();
+
+        builder.Entity<TranslationRequest>()
+            .HasIndex(r => new { r.Key, r.Culture, r.Status });
         builder.Entity<AuditLog>()
             .HasIndex(a => a.Timestamp);
 
