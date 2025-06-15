@@ -134,7 +134,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Consistency checker: identical terms across modules, placeholder validation - 2025-06-17 - AI
     - [x] Length/overflow check (UI fit) - 2025-06-17 - AI
 - [ ] **Localization Customization**
-    - [ ] RTL/LTR, per-language font/size, icon/text direction, culture customization
+    - [x] RTL/LTR, per-language font/size, icon/text direction, culture customization - 2025-06-17 - AI: Added CultureCustomization service & API
     - [ ] Custom localized templates per company/tenant/sector/module
     - [ ] Tenant-specific terminology overlay
 - [ ] **Language Pack Marketplace & Sharing**

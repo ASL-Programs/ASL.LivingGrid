@@ -47,4 +47,19 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
     real vaxtda göstərir. İstifadəçi tərcüməni yayımlamadan əvvəl necə
     göründüyünü sınaqdan keçirə bilir.
 
+## CultureCustomization servisi
+
+Yeni `CultureCustomizationService` hər dil üçün font ailəsi, ölçü miqyası və
+`TextDirection` (LTR və ya RTL) kimi parametrləri saxlamağa imkan verir.
+
+REST API nümunələri:
+
+```
+GET /api/localization/customization/{culture}
+POST /api/localization/customization/{culture}
+```
+
+Bu məlumatlar `CultureCustomizations` cədvəlində saxlanılır və öncəliklə
+`LocalizationService` tərəfindən oxunur.
+
 Bu sənəd daim yenilənəcək.
