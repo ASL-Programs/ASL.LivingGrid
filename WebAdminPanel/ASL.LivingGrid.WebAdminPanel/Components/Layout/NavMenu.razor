@@ -1,6 +1,7 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using ASL.LivingGrid.WebAdminPanel.Services
 @using ASL.LivingGrid.WebAdminPanel.Models
+@using ASL.LivingGrid.WebAdminPanel.Components.Search
 @inject ILocalizationService LocalizationService
 @inject INavigationService NavService
 @inject NavigationManager Navigation
@@ -19,6 +20,9 @@
 
 <div id="sidebarMenuContent" class="nav-scrollable collapse show">
     <nav class="flex-column">
+        <div class="nav-item p-3">
+            <SearchBox />
+        </div>
         @foreach (var item in menuItems)
         {
             <div class="nav-item px-3">

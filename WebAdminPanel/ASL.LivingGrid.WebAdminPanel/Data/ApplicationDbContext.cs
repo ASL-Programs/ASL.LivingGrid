@@ -28,6 +28,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<TranslationKey> TranslationKeys { get; set; }
     public DbSet<TranslationRequest> TranslationRequests { get; set; }
     public DbSet<CultureCustomization> CultureCustomizations { get; set; }
+    public DbSet<Documentation> Documentations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -73,6 +74,9 @@ public class ApplicationDbContext : IdentityDbContext
 
         builder.Entity<AuditLog>()
             .HasIndex(a => a.UserId);
+
+        builder.Entity<Documentation>()
+            .HasIndex(d => d.Title);
 
         // Seed initial data
         SeedInitialData(builder);
@@ -205,6 +209,29 @@ public class ApplicationDbContext : IdentityDbContext
         };
 
         builder.Entity<CultureCustomization>().HasData(customizations);
+
+        // Seed a couple of documentation pages
+        var docs = new[]
+        {
+            new Documentation
+            {
+                Id = Guid.NewGuid(),
+                Title = "Getting Started",
+                Content = "Basic usage guide",
+                Category = "General",
+                CreatedAt = DateTime.UtcNow
+            },
+            new Documentation
+            {
+                Id = Guid.NewGuid(),
+                Title = "User Roles",
+                Content = "Explanation of roles and permissions",
+                Category = "Security",
+                CreatedAt = DateTime.UtcNow
+            }
+        };
+
+        builder.Entity<Documentation>().HasData(docs);
 
     }
 }
