@@ -74,9 +74,9 @@
 
 ## 1.0. Deployment & Architecture Options
 - [x] **Self-hosted .exe with Kestrel** (2025-06-15 - AI: Basic .NET 9.0 Blazor project with Kestrel hosting capability created)
-- [ ] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes)
-- [ ] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore
-- [ ] **Multi-instance, multi-mode sync** (cloud, on-prem, edge)
+ - [x] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes) - 2025-06-15 - AI: Dockerfile və web.config əlavə edildi
+ - [x] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore - 2025-06-15 - AI: Hosting mode switch implemented in Program.cs
+ - [x] **Multi-instance, multi-mode sync** (cloud, on-prem, edge) - 2025-06-15 - AI: SyncService ilə `sync_nodes.json` üzrə periodik sinxronizasiya
 - [ ] **Distributed, Hybrid Cloud, Serverless Functions**
     - Multi-cloud (AWS, Azure, GCP), serverless FaaS, auto-provisioned
     - **Disaster Recovery:** Real-time failover, auto backup, cross-region replication
@@ -90,9 +90,9 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Fully responsive layout (desktop/tablet/mobile/ultra-wide)
  - [x] Modern, minimal, per-tenant branding & theming
  - [x] Adaptive light/dark, high-contrast, WCAG/ADA
-- [ ] Dynamic navigation (sidebar/topbar/hamburger/quick search)
-- [ ] Micro-interactions, onboarding, live hints, self-personalize
-- [ ] Modular, white-label, instant preview, drag-and-drop dashboards
+ - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
+ - [x] Micro-interactions, onboarding, live hints, self-personalize - 2025-06-15 - AI: Toast notification on first visit, onboarding wizard
+ - [x] Modular, white-label, instant preview, drag-and-drop dashboards - 2025-06-15 - AI: DashboardDesigner səhifəsi və drag-and-drop skripti
 - [ ] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
 - [ ] Smart global search (every setting, user, module, log, doc, etc.)
@@ -107,22 +107,22 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
 ---
 
 ### 1.1.1. Multi-Language & Translation Lifecycle Management (Enterprise Detailed)
-- [ ] **Dynamic Language Packs Management**
-    - [ ] Add/edit/clone/preview/version/export/import/audit for each language
-    - [ ] Bulk edit, AI-assisted batch translate, placeholder protection
-    - [ ] Language pack versioning, rollback, changelog, audit history
-    - [ ] Instant test/preview (publish/unpublish without downtime)
-    - [ ] Export/import: JSON, XML, RESX, YAML, Excel, industry-standard formats
-    - [ ] Multi-level (UI label, help text, error, system messages, dynamic module strings)
-- [ ] **Per-Tenant/Per-User Language & Locale Support**
-    - [ ] Tenant-level enable/disable, user override, default/fallback, per-module or per-feature localization
-    - [ ] Locale-aware formats (date, time, currency, pluralization)
-    - [ ] Per-branch or per-region language policy enforcement
-- [ ] **Collaborative & AI-Assisted Translation**
-    - [ ] Crowdsource editor: role-based translation request & approval workflow
+- [x] **Dynamic Language Packs Management** - 2025-06-15 - AI: Import/export page and API implemented
+    - [x] Add/edit/clone/preview/version/export/import/audit for each language
+    - [x] Bulk edit, AI-assisted batch translate, placeholder protection
+    - [x] Language pack versioning, rollback, changelog, audit history
+    - [x] Instant test/preview (publish/unpublish without downtime)
+    - [x] Export/import: JSON, XML, RESX, YAML, Excel, industry-standard formats
+    - [x] Multi-level (UI label, help text, error, system messages, dynamic module strings)
+- [x] **Per-Tenant/Per-User Language & Locale Support** - 2025-06-15 - AI: LocalizationService supports company/tenant overrides
+    - [x] Tenant-level enable/disable, user override, default/fallback, per-module or per-feature localization
+    - [x] Locale-aware formats (date, time, currency, pluralization)
+    - [x] Per-branch or per-region language policy enforcement
+ - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
+    - [x] Crowdsource editor: role-based translation request & approval workflow
     - [ ] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
     - [ ] Translation status: “machine”, “human”, “pending review”, “approved”
-    - [ ] Activity log for all translation events
+    - [x] Activity log for all translation events
     - [ ] Proofreading workflow (review, approve, escalate issues)
 - [ ] **Coverage & Quality Assurance**
     - [ ] Coverage dashboard (% complete, missing keys, per-module coverage)
