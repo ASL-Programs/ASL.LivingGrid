@@ -24,6 +24,13 @@ Bu sənəd WebAdminPanel modulunun yerləşdirilməsi üçün addımları və re
 4. Web serverdə reverse proxy qurun (IIS `web.config`, Nginx `proxy_pass`, Apache `ProxyPass`).
 5. `X-Forwarded-*` başlıqlarının ötürülməsinə əmin olun, çünki tətbiq `UseForwardedHeaders` istifadə edir.
 
+### Docker ilə yerləşdirilməsi
+1. `WebAdminPanel` qovluğunda təqdim olunan `Dockerfile` istifadə edin.
+2. `docker build -t livinggrid-admin .` əmri ilə image yaradın.
+3. `docker run -d -p 8080:8080 --name livinggrid-admin livinggrid-admin` əmrini işlədirək tətbiqi container-də başladın.
+4. `Hosting:Mode` dəyəri avtomatik `Standalone` olaraq qalır və Kestrel 8080 portunu dinləyir.
+5. İstəyə uyğun `docker-compose` və ya Kubernetes faylı hazırlamaq olar.
+
 ### Backup və Bərpa
 `MigrationService` vasitəsilə `CreateBackupAsync` və `RestoreBackupAsync` metodları mövcuddur. Deployment və rejim dəyişikliyi zamanı bu metodlardan istifadə etmək tövsiyə olunur.
 
