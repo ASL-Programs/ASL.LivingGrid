@@ -1,0 +1,69 @@
+@using System.IO
+@page "/languagepacks"
+@inject IJSRuntime JS
+@inject ILocalizationService LocalizationService
+
+<PageTitle>Language Packs</PageTitle>
+
+<h3>Language Packs</h3>
+
+<select @bind="selectedCulture" class="form-select w-auto">
+    @foreach (var c in cultures)
+    {
+        <option value="@c">@c</option>
+    }
+</select>
+<button class="btn btn-primary ms-2" @onclick="ExportPack">Export</button>
+<input type="file" @onchange="ImportPack" class="form-control mt-3" />
+
+@if (strings != null)
+{
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr><th>Key</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var kv in strings)
+            {
+                <tr><td>@kv.Key</td><td>@kv.Value</td></tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string selectedCulture = "az";
+    private List<string> cultures = new();
+    private Dictionary<string,string>? strings;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cultures = (await LocalizationService.GetSupportedCulturesAsync()).ToList();
+        if (cultures.Any())
+            selectedCulture = cultures.First();
+        await Load();
+    }
+
+    private async Task Load()
+    {
+        strings = await LocalizationService.GetAllStringsAsync(selectedCulture);
+    }
+
+    private async Task ExportPack()
+    {
+        var json = await LocalizationService.ExportAsync(selectedCulture);
+        await using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json));
+        await JS.InvokeVoidAsync("BlazorDownloadFile", $"lang_{selectedCulture}.json", stream.ToArray());
+    }
+
+    private async Task ImportPack(ChangeEventArgs e)
+    {
+        if (e.Value is Microsoft.AspNetCore.Components.Forms.IBrowserFile file)
+        {
+            using var reader = new StreamReader(file.OpenReadStream());
+            var json = await reader.ReadToEndAsync();
+            await LocalizationService.ImportAsync(json, selectedCulture);
+            await Load();
+        }
+    }
+}

@@ -6,56 +6,68 @@ namespace ASL.LivingGrid.WebAdminPanel.Data;
 
 public class ApplicationDbContext : IdentityDbContext
 {
-    public ApplicationDbContext(DbContextOptions&lt;ApplicationDbContext&gt; options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
     }
 
     // Core entities
-    public DbSet&lt;Company&gt; Companies { get; set; }
-    public DbSet&lt;Tenant&gt; Tenants { get; set; }
-    public DbSet&lt;AppUser&gt; AppUsers { get; set; }
-    public DbSet&lt;Role&gt; Roles { get; set; }
-    public DbSet&lt;Permission&gt; Permissions { get; set; }
-    public DbSet&lt;AuditLog&gt; AuditLogs { get; set; }
-    public DbSet&lt;Configuration&gt; Configurations { get; set; }
-    public DbSet&lt;LocalizationResource&gt; LocalizationResources { get; set; }
-    public DbSet&lt;Notification&gt; Notifications { get; set; }
-    public DbSet&lt;Device&gt; Devices { get; set; }
-    public DbSet&lt;Plugin&gt; Plugins { get; set; }
+    public DbSet<Company> Companies { get; set; }
+    public DbSet<Tenant> Tenants { get; set; }
+    public DbSet<AppUser> AppUsers { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<Permission> Permissions { get; set; }
+    public DbSet<AuditLog> AuditLogs { get; set; }
+    public DbSet<Configuration> Configurations { get; set; }
+    public DbSet<LocalizationResource> LocalizationResources { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
+    public DbSet<Device> Devices { get; set; }
+    public DbSet<Plugin> Plugins { get; set; }
+    public DbSet<LocalizationResourceVersion> LocalizationResourceVersions { get; set; }
+    public DbSet<TranslationProject> TranslationProjects { get; set; }
+    public DbSet<TranslationKey> TranslationKeys { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
         // Configure entity relationships and constraints
-        builder.Entity&lt;Company&gt;()
-            .HasIndex(c =&gt; c.Code)
+        builder.Entity<Company>()
+            .HasIndex(c => c.Code)
             .IsUnique();
 
-        builder.Entity&lt;Tenant&gt;()
-            .HasOne(t =&gt; t.Company)
-            .WithMany(c =&gt; c.Tenants)
-            .HasForeignKey(t =&gt; t.CompanyId);
+        builder.Entity<Tenant>()
+            .HasOne(t => t.Company)
+            .WithMany(c => c.Tenants)
+            .HasForeignKey(t => t.CompanyId);
 
-        builder.Entity&lt;AppUser&gt;()
-            .HasOne(u =&gt; u.Company)
-            .WithMany(c =&gt; c.Users)
-            .HasForeignKey(u =&gt; u.CompanyId);
+        builder.Entity<AppUser>()
+            .HasOne(u => u.Company)
+            .WithMany(c => c.Users)
+            .HasForeignKey(u => u.CompanyId);
 
-        builder.Entity&lt;Configuration&gt;()
-            .HasIndex(c =&gt; new { c.Key, c.TenantId })
+        builder.Entity<Configuration>()
+            .HasIndex(c => new { c.Key, c.TenantId })
             .IsUnique();
 
-        builder.Entity&lt;LocalizationResource&gt;()
-            .HasIndex(l =&gt; new { l.Key, l.Culture })
+        builder.Entity<LocalizationResource>()
+            .HasIndex(l => new { l.Key, l.Culture })
             .IsUnique();
 
-        builder.Entity&lt;AuditLog&gt;()
-            .HasIndex(a =&gt; a.Timestamp);
+        builder.Entity<LocalizationResourceVersion>()
+            .HasIndex(v => new { v.ResourceId, v.Version });
 
-        builder.Entity&lt;AuditLog&gt;()
-            .HasIndex(a =&gt; a.UserId);
+        builder.Entity<TranslationProject>()
+            .HasIndex(p => p.Name);
+
+        builder.Entity<TranslationKey>()
+            .HasIndex(k => new { k.ProjectId, k.Key })
+            .IsUnique();
+        builder.Entity<AuditLog>()
+            .HasIndex(a => a.Timestamp);
+
+        builder.Entity<AuditLog>()
+            .HasIndex(a => a.UserId);
 
         // Seed initial data
         SeedInitialData(builder);
@@ -65,7 +77,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
         // Seed default company
         var defaultCompanyId = Guid.NewGuid();
-        builder.Entity&lt;Company&gt;().HasData(new Company
+        builder.Entity<Company>().HasData(new Company
         {
             Id = defaultCompanyId,
             Name = "ASL LivingGrid",
@@ -111,7 +123,7 @@ public class ApplicationDbContext : IdentityDbContext
             }
         };
 
-        builder.Entity&lt;Configuration&gt;().HasData(configs);
+        builder.Entity<Configuration>().HasData(configs);
 
         // Seed basic localization resources
         var localizationResources = new[]
@@ -141,6 +153,5 @@ public class ApplicationDbContext : IdentityDbContext
             new LocalizationResource { Id = Guid.NewGuid(), Key = "Navigation.Dashboard", Value = "Панель управления", Culture = "ru", CreatedAt = DateTime.UtcNow }
         };
 
-        builder.Entity&lt;LocalizationResource&gt;().HasData(localizationResources);
     }
 }
