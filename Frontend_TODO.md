@@ -96,11 +96,11 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
  - [x] Smart global search (every setting, user, module, log, doc, etc.) - 2025-06-15 - AI
-- [ ] Role-based UI shaping & permission simulation
-- [ ] **Realtime visual editing, live WYSIWYG preview**
-- [ ] **Per-module UI customization and override for each tenant/company**
-- [ ] **In-app feedback loop, user satisfaction analytics**
-- [ ] **Session persistence:** Auto-save forms, restore previous state after logout/crash
+ - [x] Role-based UI shaping & permission simulation - 2025-06-16 - AI
+ - [x] **Realtime visual editing, live WYSIWYG preview** - 2025-06-16 - AI
+ - [x] **Per-module UI customization and override for each tenant/company** - 2025-06-16 - AI
+ - [x] **In-app feedback loop, user satisfaction analytics** - 2025-06-16 - AI
+ - [x] **Session persistence:** Auto-save forms, restore previous state after logout/crash - 2025-06-16 - AI
 
 **For Developer qovluğu və Book:**  
 `For Developer` qovluğunda `UXUIBook` yaradılmalı və ya mövcud olan sənəd hər dəyişiklikdə yenilənməlidir. Burada dizayn qərarlarının səbəbləri, əsas UI/UX prinsipləri, istifadəçi təcrübəsinin niyə belə seçildiyi, hər bir özəlliyin istifadə və idarəetmə qaydası, audit və gələcək inkişaf planları **ətraflı və yalnız Azərbaycan dilində** yazılmalıdır.
