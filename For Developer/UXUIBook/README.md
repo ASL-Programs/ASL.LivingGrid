@@ -1,6 +1,11 @@
 # UXUIBook
 
 Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsiplərini izah edir.
+### Qısa xülasə
+`Theme Marketplace` səhifəsi aktivdir və aşağıdakı imkanları təqdim edir:
+- Mövcud temaları siyahıdan seçib dərhal tətbiq etmək.
+- Yeni tema faylı yükləyib `/api/themes/import/{id}` endpointi ilə aktivləşdirmək.
+- İstənilən temanı ixrac edib başqa mühitdə istifadə etmək.
 
 ## Məqsəd
 - İstifadəçilərə bütün cihazlarda rahat görünən adaptiv interfeys təqdim etmək.

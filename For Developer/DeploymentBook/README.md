@@ -1,6 +1,12 @@
 # DeploymentBook
 
 Bu sənəd WebAdminPanel modulunun yerləşdirilməsi üçün addımları və rejimləri izah edir.
+### Qısa xülasə
+Hazırki versiyada dörd yerləşdirmə rejimi sınanmış və istifadəyə hazırdır:
+1. **Standalone** (.exe) – Kestrel prosesi kimi çalışır.
+2. **WebServer** – IIS, Apache və ya Nginx üzərindən reverse proxy.
+3. **Docker** – hazır Dockerfile ilə container kimi.
+4. **Serverless Cloud Functions** – `cloudFunctions.json` və `CloudFunctionService`-dən istifadə.
 
 ## Hosting rejimləri
 - **Standalone (.exe)** – Kestrel üzərində işləyən və Windows servis kimi işə düşə bilən rejim.
