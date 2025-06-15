@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASL.LivingGrid.WebAdminPanel", "ASL.LivingGrid.WebAdminPanel\ASL.LivingGrid.WebAdminPanel.csproj", "{B8C9E8F0-1B2A-4C3D-8E9F-A5B6C7D8E9F0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASL.LivingGrid.WebAdminPanel.Tests", "ASL.LivingGrid.WebAdminPanel.Tests\ASL.LivingGrid.WebAdminPanel.Tests.csproj", "{6905A8C9-E7DC-4B84-914E-8BB510B425CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,8 +16,12 @@ Global
 		{B8C9E8F0-1B2A-4C3D-8E9F-A5B6C7D8E9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8C9E8F0-1B2A-4C3D-8E9F-A5B6C7D8E9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8C9E8F0-1B2A-4C3D-8E9F-A5B6C7D8E9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8C9E8F0-1B2A-4C3D-8E9F-A5B6C7D8E9F0}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+                {B8C9E8F0-1B2A-4C3D-8E9F-A5B6C7D8E9F0}.Release|Any CPU.Build.0 = Release|Any CPU
+                {6905A8C9-E7DC-4B84-914E-8BB510B425CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {6905A8C9-E7DC-4B84-914E-8BB510B425CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {6905A8C9-E7DC-4B84-914E-8BB510B425CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {6905A8C9-E7DC-4B84-914E-8BB510B425CF}.Release|Any CPU.Build.0 = Release|Any CPU
+        EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
