@@ -133,7 +133,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Context preview: see translation in UI before publish - 2025-06-17 - AI
     - [x] Consistency checker: identical terms across modules, placeholder validation - 2025-06-17 - AI
     - [x] Length/overflow check (UI fit) - 2025-06-17 - AI
-- [ ] **Localization Customization**
+- [x] **Localization Customization**
     - [x] RTL/LTR, per-language font/size, icon/text direction, culture customization - 2025-06-17 - AI: Added CultureCustomization service & API
     - [x] Custom localized templates per company/tenant/sector/module - 2025-06-19 - AI
     - [x] Tenant-specific terminology overlay - 2025-06-19 - AI
