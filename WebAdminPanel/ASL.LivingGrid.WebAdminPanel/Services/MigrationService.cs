@@ -3,6 +3,7 @@ using ASL.LivingGrid.WebAdminPanel.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.IO.Compression;
+using System.Xml.Linq;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
 
@@ -92,8 +93,8 @@ public class MigrationService : IMigrationService
                     await ExportAsJsonAsync(filePath, exportData);
                     break;
                 case "xml":
-                    // TODO: Implement XML export
-                    throw new NotImplementedException("XML export not yet implemented");
+                    await ExportAsXmlAsync(filePath, exportData);
+                    break;
                 default:
                     throw new ArgumentException($"Unsupported export format: {options.Format}");
             }
@@ -308,6 +309,62 @@ public class MigrationService : IMigrationService
 
         var json = JsonSerializer.Serialize(data, options);
         await File.WriteAllTextAsync(filePath, json);
+    }
+
+    private async Task ExportAsXmlAsync(string filePath, Dictionary<string, object> data)
+    {
+        var json = JsonSerializer.Serialize(data, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
+
+        var xml = ConvertJsonToXml(json, "export");
+        await File.WriteAllTextAsync(filePath, xml);
+    }
+
+    private static string ConvertJsonToXml(string json, string rootName)
+    {
+        using var doc = JsonDocument.Parse(json);
+        var root = new XElement(rootName);
+        ConvertElement(doc.RootElement, root);
+        var xdoc = new XDocument(root);
+        return xdoc.ToString();
+    }
+
+    private static void ConvertElement(JsonElement element, XElement parent)
+    {
+        switch (element.ValueKind)
+        {
+            case JsonValueKind.Object:
+                foreach (var property in element.EnumerateObject())
+                {
+                    var child = new XElement(property.Name);
+                    ConvertElement(property.Value, child);
+                    parent.Add(child);
+                }
+                break;
+            case JsonValueKind.Array:
+                foreach (var item in element.EnumerateArray())
+                {
+                    var child = new XElement("Item");
+                    ConvertElement(item, child);
+                    parent.Add(child);
+                }
+                break;
+            case JsonValueKind.String:
+                parent.Value = element.GetString() ?? string.Empty;
+                break;
+            case JsonValueKind.Number:
+                parent.Value = element.GetRawText();
+                break;
+            case JsonValueKind.True:
+            case JsonValueKind.False:
+                parent.Value = element.GetBoolean().ToString().ToLowerInvariant();
+                break;
+            case JsonValueKind.Null:
+                parent.Value = string.Empty;
+                break;
+        }
     }
 
     private async Task<Dictionary<string, object>> ReadImportDataAsync(string filePath)

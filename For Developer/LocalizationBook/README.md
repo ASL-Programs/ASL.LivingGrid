@@ -5,7 +5,7 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 ## Əsas Funksiyalar
 - Dil resurslarının toplu redaktəsi
 - Versiya tarixi və təsdiqləmə mexanizmi
-- JSON formatında import və export
+- JSON və XML formatlarında import və export
 - REST API vasitəsilə dil paketlərinin idarəsi
 - AI tərcümə təklifləri üçün `TranslationWorkflowService.SuggestAsync` metodu
 - Tərcümə sorğularının vəziyyətləri: **Machine**, **Human**, **PendingReview**, **MachineApproved**, **HumanApproved**, **Approved**, **Rejected**
