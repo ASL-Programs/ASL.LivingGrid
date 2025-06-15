@@ -24,6 +24,15 @@ public class LocalizationResource : BaseEntity
     public Guid? CompanyId { get; set; }
     
     public Guid? TenantId { get; set; }
+
+    public bool IsApproved { get; set; } = false;
+
+    [StringLength(100)]
+    public string? ApprovedBy { get; set; }
+
+    public DateTime? ApprovedAt { get; set; }
+
+    public virtual ICollection<LocalizationResourceVersion> Versions { get; set; } = new List<LocalizationResourceVersion>();
     
     // Navigation properties
     public virtual Company? Company { get; set; }

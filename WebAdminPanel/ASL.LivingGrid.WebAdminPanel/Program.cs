@@ -190,12 +190,44 @@ public class Program
         app.MapFallbackToPage("/_Host");
 
         // Health check endpoint
-        app.MapGet("/health", () => Results.Ok(new 
-        { 
-            Status = "Healthy", 
+        app.MapGet("/health", () => Results.Ok(new
+        {
+            Status = "Healthy",
             Timestamp = DateTime.UtcNow,
             Version = Assembly.GetExecutingAssembly().GetName().Version?.ToString()
         }));
+
+        var locGroup = app.MapGroup("/api/localization");
+        locGroup.MapGet("/{culture}", async (string culture, ILocalizationService svc) =>
+        {
+            return Results.Ok(await svc.GetAllStringsAsync(culture));
+        });
+
+        locGroup.MapPost("/bulk", async (IEnumerable<LocalizationResource> items, ILocalizationService svc) =>
+        {
+            await svc.BulkSetAsync(items);
+            return Results.Ok();
+        });
+
+        locGroup.MapGet("/export/{culture}", async (string culture, ILocalizationService svc) =>
+        {
+            var json = await svc.ExportAsync(culture);
+            return Results.Text(json, "application/json");
+        });
+
+        locGroup.MapPost("/import/{culture}", async (string culture, HttpRequest req, ILocalizationService svc) =>
+        {
+            using var reader = new StreamReader(req.Body);
+            var json = await reader.ReadToEndAsync();
+            await svc.ImportAsync(json, culture);
+            return Results.Ok();
+        });
+
+        locGroup.MapPost("/approve/{id}", async (Guid id, ILocalizationService svc) =>
+        {
+            await svc.ApproveAsync(id, "system");
+            return Results.Ok();
+        });
     }
 
     private static async Task InitializeDatabaseAsync(WebApplication app)

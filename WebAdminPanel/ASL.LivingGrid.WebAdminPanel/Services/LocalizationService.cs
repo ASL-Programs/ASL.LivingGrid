@@ -8,13 +8,13 @@ namespace ASL.LivingGrid.WebAdminPanel.Services;
 public class LocalizationService : ILocalizationService
 {
     private readonly ApplicationDbContext _context;
-    private readonly ILogger&lt;LocalizationService&gt; _logger;
+    private readonly ILogger<LocalizationService> _logger;
     private readonly IMemoryCache _cache;
     private readonly TimeSpan _cacheExpiration = TimeSpan.FromMinutes(30);
 
     public LocalizationService(
         ApplicationDbContext context, 
-        ILogger&lt;LocalizationService&gt; logger,
+        ILogger<LocalizationService> logger,
         IMemoryCache cache)
     {
         _context = context;
@@ -22,7 +22,7 @@ public class LocalizationService : ILocalizationService
         _cache = cache;
     }
 
-    public async Task&lt;string&gt; GetStringAsync(string key, string culture = "az", Guid? companyId = null, Guid? tenantId = null)
+    public async Task<string> GetStringAsync(string key, string culture = "az", Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
@@ -46,54 +46,54 @@ public class LocalizationService : ILocalizationService
         }
     }
 
-    public async Task&lt;IEnumerable&lt;LocalizationResource&gt;&gt; GetAllAsync(string culture, Guid? companyId = null, Guid? tenantId = null)
+    public async Task<IEnumerable<LocalizationResource>> GetAllAsync(string culture, Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
-            var query = _context.LocalizationResources.Where(r =&gt; r.Culture == culture);
+            var query = _context.LocalizationResources.Where(r => r.Culture == culture);
             
             if (companyId.HasValue)
-                query = query.Where(r =&gt; r.CompanyId == companyId);
+                query = query.Where(r => r.CompanyId == companyId);
             else
-                query = query.Where(r =&gt; r.CompanyId == null);
+                query = query.Where(r => r.CompanyId == null);
 
             if (tenantId.HasValue)
-                query = query.Where(r =&gt; r.TenantId == tenantId);
+                query = query.Where(r => r.TenantId == tenantId);
             else
-                query = query.Where(r =&gt; r.TenantId == null);
+                query = query.Where(r => r.TenantId == null);
 
-            return await query.OrderBy(r =&gt; r.Category).ThenBy(r =&gt; r.Key).ToListAsync();
+            return await query.OrderBy(r => r.Category).ThenBy(r => r.Key).ToListAsync();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting all localization resources for culture: {Culture}", culture);
-            return Enumerable.Empty&lt;LocalizationResource&gt;();
+            return Enumerable.Empty<LocalizationResource>();
         }
     }
 
-    public async Task&lt;IEnumerable&lt;LocalizationResource&gt;&gt; GetByCategoryAsync(string category, string culture, Guid? companyId = null, Guid? tenantId = null)
+    public async Task<IEnumerable<LocalizationResource>> GetByCategoryAsync(string category, string culture, Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
             var query = _context.LocalizationResources
-                .Where(r =&gt; r.Category == category &amp;&amp; r.Culture == culture);
+                .Where(r => r.Category == category && r.Culture == culture);
             
             if (companyId.HasValue)
-                query = query.Where(r =&gt; r.CompanyId == companyId);
+                query = query.Where(r => r.CompanyId == companyId);
             else
-                query = query.Where(r =&gt; r.CompanyId == null);
+                query = query.Where(r => r.CompanyId == null);
 
             if (tenantId.HasValue)
-                query = query.Where(r =&gt; r.TenantId == tenantId);
+                query = query.Where(r => r.TenantId == tenantId);
             else
-                query = query.Where(r =&gt; r.TenantId == null);
+                query = query.Where(r => r.TenantId == null);
 
-            return await query.OrderBy(r =&gt; r.Key).ToListAsync();
+            return await query.OrderBy(r => r.Key).ToListAsync();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting localization resources by category: {Category}, culture: {Culture}", category, culture);
-            return Enumerable.Empty&lt;LocalizationResource&gt;();
+            return Enumerable.Empty<LocalizationResource>();
         }
     }
 
@@ -118,6 +118,16 @@ public class LocalizationService : ILocalizationService
             }
             else
             {
+                var version = new LocalizationResourceVersion
+                {
+                    ResourceId = resource.Id,
+                    Value = resource.Value,
+                    Version = resource.Versions.Count + 1,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedByUser = resource.UpdatedBy
+                };
+                _context.LocalizationResourceVersions.Add(version);
+
                 resource.Value = value;
                 resource.UpdatedAt = DateTime.UtcNow;
             }
@@ -144,6 +154,16 @@ public class LocalizationService : ILocalizationService
             var resource = await GetLocalizationResourceAsync(key, culture, companyId, tenantId);
             if (resource != null)
             {
+                var version = new LocalizationResourceVersion
+                {
+                    ResourceId = resource.Id,
+                    Value = resource.Value,
+                    Version = resource.Versions.Count + 1,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedByUser = resource.UpdatedBy
+                };
+                _context.LocalizationResourceVersions.Add(version);
+
                 _context.LocalizationResources.Remove(resource);
                 await _context.SaveChangesAsync();
 
@@ -161,14 +181,14 @@ public class LocalizationService : ILocalizationService
         }
     }
 
-    public async Task&lt;IEnumerable&lt;string&gt;&gt; GetSupportedCulturesAsync()
+    public async Task<IEnumerable<string>> GetSupportedCulturesAsync()
     {
         try
         {
             var cultures = await _context.LocalizationResources
-                .Select(r =&gt; r.Culture)
+                .Select(r => r.Culture)
                 .Distinct()
-                .OrderBy(c =&gt; c)
+                .OrderBy(c => c)
                 .ToListAsync();
 
             return cultures.Any() ? cultures : new[] { "az", "en", "tr", "ru" };
@@ -180,34 +200,76 @@ public class LocalizationService : ILocalizationService
         }
     }
 
-    public async Task&lt;Dictionary&lt;string, string&gt;&gt; GetAllStringsAsync(string culture, Guid? companyId = null, Guid? tenantId = null)
+    public async Task<Dictionary<string, string>> GetAllStringsAsync(string culture, Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
             var resources = await GetAllAsync(culture, companyId, tenantId);
-            return resources.ToDictionary(r =&gt; r.Key, r =&gt; r.Value);
+            return resources.ToDictionary(r => r.Key, r => r.Value);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting all strings for culture: {Culture}", culture);
-            return new Dictionary&lt;string, string&gt;();
+            return new Dictionary<string, string>();
         }
     }
 
-    private async Task&lt;LocalizationResource?&gt; GetLocalizationResourceAsync(string key, string culture, Guid? companyId, Guid? tenantId)
+    public async Task BulkSetAsync(IEnumerable<LocalizationResource> resources)
+    {
+        foreach (var r in resources)
+        {
+            await SetStringAsync(r.Key, r.Value, r.Culture, r.CompanyId, r.TenantId);
+        }
+    }
+
+    public async Task<string> ExportAsync(string culture, Guid? companyId = null, Guid? tenantId = null)
+    {
+        var strings = await GetAllStringsAsync(culture, companyId, tenantId);
+        return System.Text.Json.JsonSerializer.Serialize(strings);
+    }
+
+    public async Task ImportAsync(string jsonContent, string culture, Guid? companyId = null, Guid? tenantId = null)
+    {
+        var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(jsonContent) ?? new();
+        foreach (var kv in data)
+        {
+            await SetStringAsync(kv.Key, kv.Value, culture, companyId, tenantId);
+        }
+    }
+
+    public async Task<IEnumerable<LocalizationResourceVersion>> GetHistoryAsync(Guid resourceId)
+    {
+        return await _context.LocalizationResourceVersions
+            .Where(v => v.ResourceId == resourceId)
+            .OrderByDescending(v => v.Version)
+            .ToListAsync();
+    }
+
+    public async Task ApproveAsync(Guid resourceId, string approvedBy)
+    {
+        var resource = await _context.LocalizationResources.FindAsync(resourceId);
+        if (resource == null) return;
+
+        resource.IsApproved = true;
+        resource.ApprovedBy = approvedBy;
+        resource.ApprovedAt = DateTime.UtcNow;
+        await _context.SaveChangesAsync();
+    }
+
+    private async Task<LocalizationResource?> GetLocalizationResourceAsync(string key, string culture, Guid? companyId, Guid? tenantId)
     {
         var query = _context.LocalizationResources
-            .Where(r =&gt; r.Key == key &amp;&amp; r.Culture == culture);
+            .Where(r => r.Key == key && r.Culture == culture);
         
         if (companyId.HasValue)
-            query = query.Where(r =&gt; r.CompanyId == companyId);
+            query = query.Where(r => r.CompanyId == companyId);
         else
-            query = query.Where(r =&gt; r.CompanyId == null);
+            query = query.Where(r => r.CompanyId == null);
 
         if (tenantId.HasValue)
-            query = query.Where(r =&gt; r.TenantId == tenantId);
+            query = query.Where(r => r.TenantId == tenantId);
         else
-            query = query.Where(r =&gt; r.TenantId == null);
+            query = query.Where(r => r.TenantId == null);
 
         return await query.FirstOrDefaultAsync();
     }
