@@ -47,6 +47,7 @@ ASL.LivingGrid/
 ├── Shared/                 # Common libraries and resources
 ├── Docs/                   # Documentation and guides
 ├── Scripts/                # Build and deployment scripts
+├── For Developer/          # Module-specific developer docs
 └── ASL.LivingGrid.sln     # Master solution file
 ```
 
