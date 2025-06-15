@@ -4,12 +4,13 @@
 @inject IJSRuntime JSRuntime
 
 &lt;div class="page"&gt;
-    &lt;div class="sidebar"&gt;
+    &lt;div id="sidebarMenu" class="sidebar collapse show"&gt;
         &lt;NavMenu /&gt;
     &lt;/div&gt;
 
     &lt;main&gt;
-        &lt;div class="top-row px-4"&gt;
+        &lt;div class="top-row px-4 d-flex justify-content-between align-items-center"&gt;
+            &lt;ThemeToggle /&gt;
             &lt;UserInfo /&gt;
         &lt;/div&gt;
 

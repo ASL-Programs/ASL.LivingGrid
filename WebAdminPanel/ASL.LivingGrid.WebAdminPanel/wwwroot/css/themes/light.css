@@ -1,0 +1,9 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #212529;
+    --primary-color: #0d6efd;
+}
+body[data-theme='light'] {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}

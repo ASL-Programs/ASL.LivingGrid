@@ -1,0 +1,22 @@
+@inject IThemeService ThemeService
+@implements IDisposable
+
+<button class="btn btn-sm btn-secondary" @onclick="ToggleTheme">Toggle Theme</button>
+
+@code {
+    private string currentTheme = "light";
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentTheme = await ThemeService.GetCurrentThemeAsync();
+        await ThemeService.SetThemeAsync(currentTheme);
+    }
+
+    private async Task ToggleTheme()
+    {
+        currentTheme = currentTheme == "light" ? "dark" : "light";
+        await ThemeService.SetThemeAsync(currentTheme);
+    }
+
+    public void Dispose() { }
+}

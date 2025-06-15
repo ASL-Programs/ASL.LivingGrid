@@ -87,14 +87,14 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
 ---
 
 ## 1.1. Design & User Experience (UX/UI Principles)
-- [ ] Fully responsive layout (desktop/tablet/mobile/ultra-wide)
-- [ ] Modern, minimal, per-tenant branding & theming
-- [ ] Adaptive light/dark, high-contrast, WCAG/ADA
+ - [x] Fully responsive layout (desktop/tablet/mobile/ultra-wide)
+ - [x] Modern, minimal, per-tenant branding & theming
+ - [x] Adaptive light/dark, high-contrast, WCAG/ADA
 - [ ] Dynamic navigation (sidebar/topbar/hamburger/quick search)
 - [ ] Micro-interactions, onboarding, live hints, self-personalize
 - [ ] Modular, white-label, instant preview, drag-and-drop dashboards
 - [ ] **Marketplace for themes/layouts, instant import/export**
-- [ ] **Live UI “audit”, accessibility scanner, design error finder**
+ - [x] **Live UI “audit”, accessibility scanner, design error finder**
 - [ ] Smart global search (every setting, user, module, log, doc, etc.)
 - [ ] Role-based UI shaping & permission simulation
 - [ ] **Realtime visual editing, live WYSIWYG preview**

@@ -10,9 +10,11 @@
     &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;input type="checkbox" title="Navigation menu" class="navbar-toggler" /&gt;
+&lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"&gt;
+    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+&lt;/button&gt;
 
-&lt;div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()"&gt;
+&lt;div id="sidebarMenuContent" class="nav-scrollable collapse show"&gt;
     &lt;nav class="flex-column"&gt;
         &lt;div class="nav-item px-3"&gt;
             &lt;NavLink class="nav-link" href="" Match="NavLinkMatch.All"&gt;
@@ -49,6 +51,12 @@
                 &lt;span class="oi oi-clipboard" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Audit"]
             &lt;/NavLink&gt;
         &lt;/div&gt;
+
+        &lt;div class="nav-item px-3"&gt;
+            &lt;NavLink class="nav-link" href="uiaudit"&gt;
+                &lt;span class="oi oi-eye" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.UIAudit"]
+            &lt;/NavLink&gt;
+        &lt;/div&gt;
         
         &lt;div class="nav-item px-3"&gt;
             &lt;NavLink class="nav-link" href="notifications"&gt;
@@ -83,6 +91,7 @@
             localizedStrings.Add("Navigation.Audit", "Audit");
             localizedStrings.Add("Navigation.Notifications", "Bildirişlər");
             localizedStrings.Add("Navigation.Plugins", "Pluginlər");
+            localizedStrings.Add("Navigation.UIAudit", "UI Audit");
         }
     }
 }
