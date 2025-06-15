@@ -12,7 +12,7 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 2. **Tema Dəstəyi:** `ThemeService` vasitəsilə light/dark rejimi seçilir və istifadəçinin brauzerində yadda saxlanılır.
 3. **Brendinq:** Rəng və loqo kimi parametrlər gələcəkdə `IUICustomizationService` üzərindən genişlənə bilər.
 4. **Əlçatanlıq:** `UIAudit` səhifəsi sadə skriptlə şəkil alt mətnləri və label uyğunsuzluqlarını yoxlayır.
-5. **Dinamik Navigasiya:** `NavigationService` menyu elementlərini `menuitems.json` faylından oxuyur və `NavMenu` komponentində dinamik şəkildə göstərir. Bu, tenant və ya istifadəçi səviyyəsində fərqli menyu qurmağa imkan verir.
+5. **Dinamik Navigasiya:** `NavigationService` menyu elementlərini `menuitems.json` faylından oxuyur və `NavMenu` komponentində dinamik şəkildə göstərir. Faylı dəyişdirməklə menyu yenilənir və istənilən tenant üçün fərdi struktur qurmaq mümkündür.
 6. **Mikro İnteraksiyalar:** `toast.js` vasitəsilə istifadəçi ilk dəfə ana səhifəyə daxil olduqda xoş gəlmisiniz bildirişi göstərilir.
 
 
@@ -28,6 +28,12 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 - Yuxarı paneldəki **SearchBox** komponentinə sorğu yazın.
 - Nəticələr konfiqurasiya açarları, istifadəçi adları, modullar və audit jurnalları üzrə qruplanır.
 - Sorğunu sildikdə açılan nəticə siyahısı gizlənəcək.
+
+### Dashboard Dizayner
+- Menyudan **"Dashboard Designer"** səhifəsinə daxil olun.
+- Soldakı siyahıdan mövcud vidjetləri sürükləyib kətan bölməsinə buraxın.
+- Vidjet əlavə olunduqdan sonra yerləşdirməni dəyişmək və ya silmək üçün sadə drag-and-drop funksiyası aktivdir.
+- Hazır düzən `dashboardDesigner.js` skripti vasitəsilə brauzer yaddaşında saxlanılır və növbəti açılışda bərpa olunur.
 
 ## Gələcək İnkişaf
 - Tam WCAG 2.1 uyğunluğunun avtomatik yoxlanılması üçün genişlənmiş audit modulu.

@@ -92,7 +92,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Adaptive light/dark, high-contrast, WCAG/ADA
  - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
  - [x] Micro-interactions, onboarding, live hints, self-personalize - 2025-06-15 - AI: Toast notification on first visit, onboarding wizard
-- [ ] Modular, white-label, instant preview, drag-and-drop dashboards
+- [x] Modular, white-label, instant preview, drag-and-drop dashboards - 2025-06-15 - AI: DashboardDesigner komponenti ilə sürüklə-burax düzən
  - [x] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
  - [x] Smart global search (every setting, user, module, log, doc, etc.) - 2025-06-15 - AI
@@ -1057,7 +1057,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.53. No-Code/Low-Code BI Studio & Data Warehouse Integration
-- [ ] Visual BI report/chart designer, drag-and-drop dashboards
+- [x] Visual BI report/chart designer, drag-and-drop dashboards - 2025-06-15 - AI: Sadə DashboardDesigner səhifəsi
 - [ ] Data warehouse connector, multi-source query builder (SQL, NoSQL, API)
 - [ ] Role-based BI sharing, dashboard marketplace
 
