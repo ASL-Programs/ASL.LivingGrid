@@ -10,4 +10,5 @@ public interface ITranslationWorkflowService
     Task<IEnumerable<TranslationRequest>> GetPendingRequestsAsync();
     Task<IEnumerable<TranslationRequest>> GetRequestsByStatusAsync(TranslationRequestStatus status);
     Task UpdateStatusAsync(Guid id, TranslationRequestStatus status, string updatedBy);
+    Task ReviewRequestAsync(Guid id, bool accept, string reviewer, string? comments, bool escalate);
 }

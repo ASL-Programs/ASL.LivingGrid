@@ -23,6 +23,11 @@ public class TranslationRequest : BaseEntity
     public string? ApprovedBy { get; set; }
 
     public DateTime? ApprovedAt { get; set; }
+
+    [StringLength(500)]
+    public string? ReviewerComments { get; set; }
+
+    public bool Escalate { get; set; }
 }
 
 public enum TranslationRequestStatus
