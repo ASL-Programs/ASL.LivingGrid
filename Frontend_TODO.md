@@ -95,7 +95,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
 - [ ] Modular, white-label, instant preview, drag-and-drop dashboards
  - [x] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
-- [ ] Smart global search (every setting, user, module, log, doc, etc.)
+ - [x] Smart global search (every setting, user, module, log, doc, etc.) - 2025-06-15 - AI
 - [ ] Role-based UI shaping & permission simulation
 - [ ] **Realtime visual editing, live WYSIWYG preview**
 - [ ] **Per-module UI customization and override for each tenant/company**

@@ -22,7 +22,12 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
   1. Səhifəni açdıqdan sonra **"Run Audit"** düyməsini sıxın.
   2. Skript bütün `img` və `input` elementlərini yoxlayaraq alt mətn və label əlaqələrini analiz edəcək.
   3. Tapılan uyğunsuzluqlar siyahıda göstəriləcək və heç bir problem yoxdursa "No issues found" mesajı görünəcək.
-- "Tema Bazarı" səhifəsində mövcud şablonları siyahı şəklində görmək və bir düymə ilə tətbiq etmək mümkündür. Seçilən tema `/api/themes/import/{id}` endpointi vasitəsilə yüklənir və `ThemeService` ilə aktiv edilir.
+  - "Tema Bazarı" səhifəsində mövcud şablonları siyahı şəklində görmək və bir düymə ilə tətbiq etmək mümkündür. Seçilən tema `/api/themes/import/{id}` endpointi vasitəsilə yüklənir və `ThemeService` ilə aktiv edilir.
+
+### Axtarış
+- Yuxarı paneldəki **SearchBox** komponentinə sorğu yazın.
+- Nəticələr konfiqurasiya açarları, istifadəçi adları, modullar və audit jurnalları üzrə qruplanır.
+- Sorğunu sildikdə açılan nəticə siyahısı gizlənəcək.
 
 ## Gələcək İnkişaf
 - Tam WCAG 2.1 uyğunluğunun avtomatik yoxlanılması üçün genişlənmiş audit modulu.
