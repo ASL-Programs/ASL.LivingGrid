@@ -11,6 +11,7 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 - Tərcümə sorğularının vəziyyətləri: **Machine**, **Human**, **PendingReview**, **Approved**
 - `TranslationRequest` modelinə `ReviewerComments` və `Escalate` sahələri əlavə olunub
 
+
 ## İstifadə Qaydası
 1. `/languagepacks` səhifəsinə keçid edərək mövcud dillərin siyahısını görün.
 2. Dil seçib "Export" düyməsi ilə mövcud tərcümələri JSON fayl kimi yükləyin.

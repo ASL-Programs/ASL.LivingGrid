@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 using System.IO;
 using System.Security.Claims;
 
-
 namespace ASL.LivingGrid.WebAdminPanel;
 
 public class Program

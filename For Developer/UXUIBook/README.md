@@ -15,7 +15,6 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 5. **Dinamik Navigasiya:** `NavigationService` menyu elementlərini `menuitems.json` faylından oxuyur və `NavMenu` komponentində dinamik şəkildə göstərir. Faylı dəyişdirməklə menyu yenilənir və istənilən tenant üçün fərdi struktur qurmaq mümkündür.
 6. **Mikro İnteraksiyalar:** `toast.js` vasitəsilə istifadəçi ilk dəfə ana səhifəyə daxil olduqda xoş gəlmisiniz bildirişi göstərilir.
 
-
 ## İstifadə Qaydası
 - `ThemeToggle` komponenti vasitəsilə istifadəçi istənilən vaxt temanı dəyişə bilər.
 - UI audit funksiyası menyuda **"UI Audit"** bölməsi altında yerləşir.

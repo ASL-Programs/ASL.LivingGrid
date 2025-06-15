@@ -49,6 +49,7 @@ Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməkl
 4. Tətbiq işə düşərkən `CloudFunctionService` bu faylı oxuyur və `InvokeAsync` metodu ilə URL-ə JSON sorğu göndərir.
 5. Dəyişiklik etdikdən sonra tətbiqi yenidən başladaraq funksiyaların yenilənməsinə əmin olun.
 
+
 ### Gələcək inkişaf
 - Avtomatik multi-instance sinxronizasiya
 - Bulud və kənar (edge) yerləşdirmə dəstəyi

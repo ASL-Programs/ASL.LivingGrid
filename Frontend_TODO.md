@@ -92,7 +92,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Adaptive light/dark, high-contrast, WCAG/ADA
  - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
  - [x] Micro-interactions, onboarding, live hints, self-personalize - 2025-06-15 - AI: Toast notification on first visit, onboarding wizard
-- [x] Modular, white-label, instant preview, drag-and-drop dashboards - 2025-06-15 - AI: DashboardDesigner komponenti ilə sürüklə-burax düzən
+ - [x] Modular, white-label, instant preview, drag-and-drop dashboards - 2025-06-15 - AI: DashboardDesigner komponenti ilə sürüklə-burax düzən
  - [x] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
  - [x] Smart global search (every setting, user, module, log, doc, etc.) - 2025-06-15 - AI
@@ -118,14 +118,13 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Tenant-level enable/disable, user override, default/fallback, per-module or per-feature localization
     - [x] Locale-aware formats (date, time, currency, pluralization)
     - [x] Per-branch or per-region language policy enforcement
-
- - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
+    - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
     - [x] Crowdsource editor: role-based translation request & approval workflow
-
     - [x] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
     - [x] Translation status: “machine”, “human”, “pending review”, “approved”
     - [x] Activity log for all translation events
     - [x] Proofreading workflow (review, approve, escalate issues)
+
 - [ ] **Coverage & Quality Assurance**
     - [ ] Coverage dashboard (% complete, missing keys, per-module coverage)
     - [ ] Live alert for untranslated/missing/incomplete/invalid placeholders
