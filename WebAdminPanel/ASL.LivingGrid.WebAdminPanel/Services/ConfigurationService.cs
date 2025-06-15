@@ -8,15 +8,15 @@ namespace ASL.LivingGrid.WebAdminPanel.Services;
 public class ConfigurationService : IConfigurationService
 {
     private readonly ApplicationDbContext _context;
-    private readonly ILogger&lt;ConfigurationService&gt; _logger;
+    private readonly ILogger<ConfigurationService> _logger;
 
-    public ConfigurationService(ApplicationDbContext context, ILogger&lt;ConfigurationService&gt; logger)
+    public ConfigurationService(ApplicationDbContext context, ILogger<ConfigurationService> logger)
     {
         _context = context;
         _logger = logger;
     }
 
-    public async Task&lt;string?&gt; GetValueAsync(string key, Guid? companyId = null, Guid? tenantId = null)
+    public async Task<string?> GetValueAsync(string key, Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
@@ -30,7 +30,7 @@ public class ConfigurationService : IConfigurationService
         }
     }
 
-    public async Task&lt;T?&gt; GetValueAsync&lt;T&gt;(string key, Guid? companyId = null, Guid? tenantId = null)
+    public async Task<T?> GetValueAsync<T>(string key, Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
@@ -51,7 +51,7 @@ public class ConfigurationService : IConfigurationService
                 return (T)(object)decimal.Parse(value);
 
             // Try to deserialize as JSON for complex types
-            return JsonSerializer.Deserialize&lt;T&gt;(value);
+            return JsonSerializer.Deserialize<T>(value);
         }
         catch (Exception ex)
         {
@@ -94,53 +94,53 @@ public class ConfigurationService : IConfigurationService
         }
     }
 
-    public async Task&lt;IEnumerable&lt;Configuration&gt;&gt; GetAllAsync(Guid? companyId = null, Guid? tenantId = null)
+    public async Task<IEnumerable<Configuration>> GetAllAsync(Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
             var query = _context.Configurations.AsQueryable();
             
             if (companyId.HasValue)
-                query = query.Where(c =&gt; c.CompanyId == companyId);
+                query = query.Where(c => c.CompanyId == companyId);
             else
-                query = query.Where(c =&gt; c.CompanyId == null);
+                query = query.Where(c => c.CompanyId == null);
 
             if (tenantId.HasValue)
-                query = query.Where(c =&gt; c.TenantId == tenantId);
+                query = query.Where(c => c.TenantId == tenantId);
             else
-                query = query.Where(c =&gt; c.TenantId == null);
+                query = query.Where(c => c.TenantId == null);
 
-            return await query.OrderBy(c =&gt; c.Category).ThenBy(c =&gt; c.Key).ToListAsync();
+            return await query.OrderBy(c => c.Category).ThenBy(c => c.Key).ToListAsync();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting all configurations");
-            return Enumerable.Empty&lt;Configuration&gt;();
+            return Enumerable.Empty<Configuration>();
         }
     }
 
-    public async Task&lt;IEnumerable&lt;Configuration&gt;&gt; GetByCategoryAsync(string category, Guid? companyId = null, Guid? tenantId = null)
+    public async Task<IEnumerable<Configuration>> GetByCategoryAsync(string category, Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
-            var query = _context.Configurations.Where(c =&gt; c.Category == category);
+            var query = _context.Configurations.Where(c => c.Category == category);
             
             if (companyId.HasValue)
-                query = query.Where(c =&gt; c.CompanyId == companyId);
+                query = query.Where(c => c.CompanyId == companyId);
             else
-                query = query.Where(c =&gt; c.CompanyId == null);
+                query = query.Where(c => c.CompanyId == null);
 
             if (tenantId.HasValue)
-                query = query.Where(c =&gt; c.TenantId == tenantId);
+                query = query.Where(c => c.TenantId == tenantId);
             else
-                query = query.Where(c =&gt; c.TenantId == null);
+                query = query.Where(c => c.TenantId == null);
 
-            return await query.OrderBy(c =&gt; c.Key).ToListAsync();
+            return await query.OrderBy(c => c.Key).ToListAsync();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting configurations by category: {Category}", category);
-            return Enumerable.Empty&lt;Configuration&gt;();
+            return Enumerable.Empty<Configuration>();
         }
     }
 
@@ -163,7 +163,7 @@ public class ConfigurationService : IConfigurationService
         }
     }
 
-    public async Task&lt;bool&gt; ExistsAsync(string key, Guid? companyId = null, Guid? tenantId = null)
+    public async Task<bool> ExistsAsync(string key, Guid? companyId = null, Guid? tenantId = null)
     {
         try
         {
@@ -177,19 +177,19 @@ public class ConfigurationService : IConfigurationService
         }
     }
 
-    private async Task&lt;Configuration?&gt; GetConfigurationAsync(string key, Guid? companyId, Guid? tenantId)
+    private async Task<Configuration?> GetConfigurationAsync(string key, Guid? companyId, Guid? tenantId)
     {
-        var query = _context.Configurations.Where(c =&gt; c.Key == key);
+        var query = _context.Configurations.Where(c => c.Key == key);
         
         if (companyId.HasValue)
-            query = query.Where(c =&gt; c.CompanyId == companyId);
+            query = query.Where(c => c.CompanyId == companyId);
         else
-            query = query.Where(c =&gt; c.CompanyId == null);
+            query = query.Where(c => c.CompanyId == null);
 
         if (tenantId.HasValue)
-            query = query.Where(c =&gt; c.TenantId == tenantId);
+            query = query.Where(c => c.TenantId == tenantId);
         else
-            query = query.Where(c =&gt; c.TenantId == null);
+            query = query.Where(c => c.TenantId == null);
 
         return await query.FirstOrDefaultAsync();
     }

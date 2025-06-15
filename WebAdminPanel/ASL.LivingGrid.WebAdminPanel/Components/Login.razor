@@ -1,61 +1,61 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Identity
 @using System.ComponentModel.DataAnnotations
-@inject SignInManager&lt;IdentityUser&gt; SignInManager
-@inject UserManager&lt;IdentityUser&gt; UserManager
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 
-&lt;div class="login-form"&gt;
-    &lt;EditForm Model="loginModel" OnValidSubmit="HandleLoginAsync" FormName="login"&gt;
-        &lt;DataAnnotationsValidator /&gt;
-        &lt;ValidationSummary class="text-danger" role="alert" /&gt;
+<div class="login-form">
+    <EditForm Model="loginModel" OnValidSubmit="HandleLoginAsync" FormName="login">
+        <DataAnnotationsValidator />
+        <ValidationSummary class="text-danger" role="alert" />
         
-        &lt;div class="form-group mb-3"&gt;
-            &lt;label for="email" class="form-label"&gt;Email&lt;/label&gt;
-            &lt;InputText @bind-Value="loginModel.Email" class="form-control" id="email" autocomplete="username" placeholder="admin@asl.az" /&gt;
-            &lt;ValidationMessage For="() =&gt; loginModel.Email" class="text-danger" /&gt;
-        &lt;/div&gt;
+        <div class="form-group mb-3">
+            <label for="email" class="form-label">Email</label>
+            <InputText @bind-Value="loginModel.Email" class="form-control" id="email" autocomplete="username" placeholder="admin@asl.az" />
+            <ValidationMessage For="() => loginModel.Email" class="text-danger" />
+        </div>
         
-        &lt;div class="form-group mb-3"&gt;
-            &lt;label for="password" class="form-label"&gt;Password&lt;/label&gt;
-            &lt;InputText type="password" @bind-Value="loginModel.Password" class="form-control" id="password" autocomplete="current-password" placeholder="••••••••" /&gt;
-            &lt;ValidationMessage For="() =&gt; loginModel.Password" class="text-danger" /&gt;
-        &lt;/div&gt;
+        <div class="form-group mb-3">
+            <label for="password" class="form-label">Password</label>
+            <InputText type="password" @bind-Value="loginModel.Password" class="form-control" id="password" autocomplete="current-password" placeholder="••••••••" />
+            <ValidationMessage For="() => loginModel.Password" class="text-danger" />
+        </div>
         
-        &lt;div class="form-check mb-3"&gt;
-            &lt;InputCheckbox @bind-Value="loginModel.RememberMe" class="form-check-input" id="remember" /&gt;
-            &lt;label class="form-check-label" for="remember"&gt;Remember me&lt;/label&gt;
-        &lt;/div&gt;
+        <div class="form-check mb-3">
+            <InputCheckbox @bind-Value="loginModel.RememberMe" class="form-check-input" id="remember" />
+            <label class="form-check-label" for="remember">Remember me</label>
+        </div>
         
         @if (!string.IsNullOrEmpty(errorMessage))
         {
-            &lt;div class="alert alert-danger" role="alert"&gt;
+            <div class="alert alert-danger" role="alert">
                 @errorMessage
-            &lt;/div&gt;
+            </div>
         }
         
-        &lt;button type="submit" class="btn btn-primary w-100" disabled="@isLoggingIn"&gt;
+        <button type="submit" class="btn btn-primary w-100" disabled="@isLoggingIn">
             @if (isLoggingIn)
             {
-                &lt;span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"&gt;&lt;/span&gt;
-                &lt;text&gt;Logging in...&lt;/text&gt;
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <text>Logging in...</text>
             }
             else
             {
-                &lt;text&gt;Login&lt;/text&gt;
+                <text>Login</text>
             }
-        &lt;/button&gt;
-    &lt;/EditForm&gt;
+        </button>
+    </EditForm>
     
-    &lt;hr class="my-4" /&gt;
+    <hr class="my-4" />
     
-    &lt;div class="text-center"&gt;
-        &lt;small class="text-muted"&gt;
+    <div class="text-center">
+        <small class="text-muted">
             Default admin: admin@asl.az / admin123
-        &lt;/small&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+        </small>
+    </div>
+</div>
 
 @code {
     private LoginModel loginModel = new() { Email = "admin@asl.az" };
@@ -141,7 +141,7 @@
     }
 }
 
-&lt;style&gt;
+<style>
     .login-form {
         max-width: 400px;
         margin: 0 auto;
@@ -161,4 +161,4 @@
         background-color: #5a6fd8;
         border-color: #5a6fd8;
     }
-&lt;/style&gt;
+</style>

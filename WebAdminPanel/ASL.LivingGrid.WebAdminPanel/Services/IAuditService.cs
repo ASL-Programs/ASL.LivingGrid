@@ -9,15 +9,15 @@ public interface IAuditService
         object? newValues = null, Guid? companyId = null, Guid? tenantId = null,
         string? ipAddress = null, string? userAgent = null);
     
-    Task&lt;IEnumerable&lt;AuditLog&gt;&gt; GetLogsAsync(int skip = 0, int take = 50, 
+    Task<IEnumerable<AuditLog>> GetLogsAsync(int skip = 0, int take = 50, 
         string? userId = null, string? entityType = null, DateTime? fromDate = null, 
         DateTime? toDate = null, Guid? companyId = null, Guid? tenantId = null);
     
-    Task&lt;int&gt; GetLogsCountAsync(string? userId = null, string? entityType = null, 
+    Task<int> GetLogsCountAsync(string? userId = null, string? entityType = null, 
         DateTime? fromDate = null, DateTime? toDate = null, Guid? companyId = null, 
         Guid? tenantId = null);
     
-    Task&lt;AuditLog?&gt; GetLogAsync(Guid id);
+    Task<AuditLog?> GetLogAsync(Guid id);
     Task DeleteOldLogsAsync(DateTime cutoffDate);
-    Task&lt;IEnumerable&lt;AuditLog&gt;&gt; GetUserActivityAsync(string userId, int days = 30);
+    Task<IEnumerable<AuditLog>> GetUserActivityAsync(string userId, int days = 30);
 }
