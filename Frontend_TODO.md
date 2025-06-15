@@ -91,7 +91,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Modern, minimal, per-tenant branding & theming
  - [x] Adaptive light/dark, high-contrast, WCAG/ADA
  - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
-- [ ] Micro-interactions, onboarding, live hints, self-personalize
+ - [x] Micro-interactions, onboarding, live hints, self-personalize - 2025-06-15 - AI: Toast notification on first visit, onboarding wizard
 - [ ] Modular, white-label, instant preview, drag-and-drop dashboards
 - [ ] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
@@ -118,8 +118,10 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Tenant-level enable/disable, user override, default/fallback, per-module or per-feature localization
     - [x] Locale-aware formats (date, time, currency, pluralization)
     - [x] Per-branch or per-region language policy enforcement
+
  - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
     - [x] Crowdsource editor: role-based translation request & approval workflow
+
     - [ ] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
     - [ ] Translation status: “machine”, “human”, “pending review”, “approved”
     - [x] Activity log for all translation events
