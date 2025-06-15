@@ -132,12 +132,15 @@ public class Program
         services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
         services.AddScoped<IThemeMarketplaceService, ThemeMarketplaceService>();
         services.AddScoped<ILayoutMarketplaceService, LayoutMarketplaceService>();
+        services.AddScoped<ILanguagePackMarketplaceService, LanguagePackMarketplaceService>();
         services.AddScoped<IModuleCustomizationService, ModuleCustomizationService>();
         services.AddScoped<IFeedbackService, FeedbackService>();
         services.AddScoped<ISessionPersistenceService, SessionPersistenceService>();
         services.AddScoped<ISearchService, SearchService>();
+        services.AddScoped<ITranslationProviderService, TranslationProviderService>();
         services.AddScoped<ILocalizationCustomizationService, LocalizationCustomizationService>();
         services.AddHostedService<DisasterRecoveryService>();
+        services.AddHostedService<LocalizationUpdateService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
@@ -359,6 +362,42 @@ public class Program
         {
             var json = await svc.ExportLayoutAsync(id);
             return string.IsNullOrEmpty(json) ? Results.NotFound() : Results.Text(json, "application/json");
+        });
+
+        var lpGroup = app.MapGroup("/api/languagepacks");
+        lpGroup.MapGet("/", async (ILanguagePackMarketplaceService svc) => Results.Ok(await svc.ListAsync()));
+        lpGroup.MapGet("/import/{id}", async (string id, ILanguagePackMarketplaceService svc) =>
+        {
+            var data = await svc.ImportAsync(id);
+            return Results.Ok(data);
+        });
+        lpGroup.MapGet("/export/{culture}", async (string culture, ILanguagePackMarketplaceService svc) =>
+        {
+            var json = await svc.ExportAsync(culture);
+            return string.IsNullOrEmpty(json) ? Results.NotFound() : Results.Text(json, "application/json");
+        });
+        lpGroup.MapPost("/rate/{id}", async (string id, RatingModel model, ILanguagePackMarketplaceService svc) =>
+        {
+            await svc.RateAsync(id, model.Rating);
+            return Results.Ok();
+        });
+
+        var tpGroup = app.MapGroup("/api/translationproviders");
+        tpGroup.MapGet("/", async (ITranslationProviderService svc) => Results.Ok(await svc.GetProvidersAsync()));
+        tpGroup.MapPost("/", async (TranslationProvider provider, ITranslationProviderService svc) =>
+        {
+            await svc.AddAsync(provider);
+            return Results.Ok();
+        });
+        tpGroup.MapDelete("/{id}", async (string id, ITranslationProviderService svc) =>
+        {
+            await svc.DeleteAsync(id);
+            return Results.Ok();
+        });
+        tpGroup.MapPost("/webhook/{id}", async (string id, object payload, ITranslationProviderService svc) =>
+        {
+            await svc.TriggerWebhookAsync(id, payload);
+            return Results.Ok();
         });
 
         app.MapGet("/api/search", async (string q, ISearchService svc) =>

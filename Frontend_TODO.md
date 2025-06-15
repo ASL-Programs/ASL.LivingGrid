@@ -137,15 +137,15 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] RTL/LTR, per-language font/size, icon/text direction, culture customization - 2025-06-17 - AI: Added CultureCustomization service & API
     - [x] Custom localized templates per company/tenant/sector/module - 2025-06-19 - AI
     - [x] Tenant-specific terminology overlay - 2025-06-19 - AI
-- [ ] **Language Pack Marketplace & Sharing**
-    - [ ] Public/private packs, rate/usage stats, history/changelog, share/import/export with one click
-    - [ ] Community-contributed packs and tenant-only private packs
-- [ ] **Automated Update, Notification & Rollback**
-    - [ ] Notify on update, approve before apply, staged rollout, instant rollback
-    - [ ] Full audit trail (who/when/what changed)
-- [ ] **Integration & API**
-    - [ ] REST API for CRUD, version fetch, 3rd-party translation provider integration (Google, Azure, DeepL)
-    - [ ] Webhook for translation update events
+- [x] **Language Pack Marketplace & Sharing** - 2025-06-20 - AI
+    - [x] Public/private packs, rate/usage stats, history/changelog, share/import/export with one click
+    - [x] Community-contributed packs and tenant-only private packs
+- [x] **Automated Update, Notification & Rollback** - 2025-06-20 - AI
+    - [x] Notify on update, approve before apply, staged rollout, instant rollback
+    - [x] Full audit trail (who/when/what changed)
+- [x] **Integration & API** - 2025-06-20 - AI
+    - [x] REST API for CRUD, version fetch, 3rd-party translation provider integration (Google, Azure, DeepL)
+    - [x] Webhook for translation update events
 - [x] **Localization Coverage Dashboard**
     - [x] Per-module, per-tenant, per-user, real-time coverage stats, history, and quality metrics
 

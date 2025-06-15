@@ -75,3 +75,29 @@ hadisəsi tərcümə tapılmadıqda real vaxt xəbərdarlığı yaradır. Bu al�
 səhvləri aşkarlayaraq yayımdan əvvəl düzəltməyə kömək edir.
 
 Bu sənəd daim yenilənəcək.
+
+## Dil Paketi Marketplace-i
+Dil paketlərini paylaşmaq və reytinq vermək üçün `/marketplace/languagepacks` səhifəsi yaradılıb. Bu səhifədə pack-ları siyahı şəklində görmək, reytinq qoymaq və bir kliklə import/export etmək mümkündür. Məlumatlar `LanguagePackMarketplaceService` vasitəsilə `languagepacks_marketplace.json` faylından və ya konfiqurasiyada göstərilən URL-dən yüklənir.
+
+REST API:
+```
+GET /api/languagepacks            # mövcud pack-ların siyahısı
+GET /api/languagepacks/import/{id}# seçilmiş pack-ı JSON şəklində almaq
+GET /api/languagepacks/export/{culture}
+POST /api/languagepacks/rate/{id}
+```
+
+## Yeniləmələr və Rollback
+`LocalizationUpdateService` fon xidməti `pending_languagepack_updates.json` faylını oxuyaraq yeni dil paketlərini mərhələli şəkildə tətbiq edir. Hər yeniləmə `AuditService` vasitəsilə jurnal olunur və `NotificationService` istifadəçilərə bildiriş göndərir. Faylda `Applied` sahəsi yenilənməmiş qeydləri işarələməyə imkan verir.
+
+Rollback üçün əvvəlki dil paketlərini `Export` əməliyyatı ilə saxlayıb istənilən vaxt `Import` edə bilərsiniz.
+
+## Tərcümə Provayderləri üçün API
+Üçüncü tərəf provayderləri inteqrasiya etmək məqsədilə `TranslationProviderService` əlavə olunub. Endpoint-lər:
+```
+GET /api/translationproviders
+POST /api/translationproviders       # yeni provayder əlavə et
+DELETE /api/translationproviders/{id}
+POST /api/translationproviders/webhook/{id}
+```
+`Webhook` endpoint-i provayderdən gələn yeniləmələri qəbul etmək üçün nəzərdə tutulub.

@@ -1,0 +1,66 @@
+@page "/marketplace/languagepacks"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject ILocalizationService LocalizationService
+@inject IJSRuntime JS
+
+<h3>Language Pack Marketplace</h3>
+
+@if (packs == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var p in packs)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@p.Name (@p.Culture)</h5>
+                        <p class="card-text">@p.Description</p>
+                        <p class="card-text"><small>Rating: @p.Rating.ToString("0.0") ( @p.RatingsCount )</small></p>
+                        <button class="btn btn-primary" @onclick="() => Import(p.Id)">Import</button>
+                        <button class="btn btn-outline-primary ms-2" @onclick="() => Export(p.Culture)">Export</button>
+                        <button class="btn btn-sm btn-secondary ms-2" @onclick="() => Rate(p.Id, 5)">👍</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<MarketplaceLanguagePack>? packs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        packs = await Http.GetFromJsonAsync<List<MarketplaceLanguagePack>>("/api/languagepacks");
+    }
+
+    private async Task Import(string id)
+    {
+        var data = await Http.GetFromJsonAsync<Dictionary<string,string>>($"/api/languagepacks/import/{id}");
+        if (data != null)
+        {
+            var json = System.Text.Json.JsonSerializer.Serialize(data);
+            await LocalizationService.ImportAsync(json, data.Keys.First().Split(':')[0]);
+        }
+    }
+
+    private async Task Export(string culture)
+    {
+        var json = await Http.GetStringAsync($"/api/languagepacks/export/{culture}");
+        var bytes = System.Text.Encoding.UTF8.GetBytes(json);
+        var base64 = Convert.ToBase64String(bytes);
+        await JS.InvokeVoidAsync("blazorDownloadFile", $"lang_{culture}.json", "application/json", base64);
+    }
+
+    private async Task Rate(string id, int rating)
+    {
+        await Http.PostAsJsonAsync($"/api/languagepacks/rate/{id}", new { rating });
+        packs = await Http.GetFromJsonAsync<List<MarketplaceLanguagePack>>("/api/languagepacks");
+    }
+}
