@@ -12,12 +12,18 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 2. **Tema Dəstəyi:** `ThemeService` vasitəsilə light/dark rejimi seçilir və istifadəçinin brauzerində yadda saxlanılır.
 3. **Brendinq:** Rəng və loqo kimi parametrlər gələcəkdə `IUICustomizationService` üzərindən genişlənə bilər.
 4. **Əlçatanlıq:** `UIAudit` səhifəsi sadə skriptlə şəkil alt mətnləri və label uyğunsuzluqlarını yoxlayır.
+5. **Dinamik Navigasiya:** `NavigationService` menyu elementlərini `menuitems.json` faylından oxuyur və `NavMenu` komponentində dinamik şəkildə göstərir. Bu, tenant və ya istifadəçi səviyyəsində fərqli menyu qurmağa imkan verir.
+6. **Mikro İnteraksiyalar:** `toast.js` vasitəsilə istifadəçi ilk dəfə ana səhifəyə daxil olduqda xoş gəlmisiniz bildirişi göstərilir.
+7. **Dashboard Dizaynı:** `DashboardDesigner` səhifəsi drag-and-drop prinsipi ilə işləyir və `dashboardDesigner.js` vasitəsilə real vaxt önizləmə imkanı verir.
+8. **Tərcümə İş Axını:** `TranslationWorkflowService` istifadəçilərin tərcümə təkliflərini göndərməsi və moderatorun təsdiq etməsi üçün REST API təqdim edir. Bütün əməliyyatlar `AuditService` ilə qeyd olunur.
 
 ## İstifadə Qaydası
 - `ThemeToggle` komponenti vasitəsilə istifadəçi istənilən vaxt temanı dəyişə bilər.
+- `Theme Marketplace` səhifəsində mövcud temalar siyahılanır, yeni tema faylı yüklənir və mövcud tema ixrac edilə bilir.
 - UI audit funksiyası menyuda "UI Audit" bölməsi altında yerləşir və nəticələri siyahı şəklində göstərir.
 
 ## Gələcək İnkişaf
 - Tam WCAG 2.1 uyğunluğunun avtomatik yoxlanılması üçün genişlənmiş audit modulu.
 - Fərdi şirkətlər üçün rəng palitrası və loqo yükləmə imkanları.
 - Drag-and-drop əsaslı tərtibat redaktoru və canlı önizləmə.
+- Tema Marketplace səhifəsi ilə mövcud temaları siyahıdan seçmək, yeni tema yükləmək və mövcud temaları ixrac etmək mümkündür.
