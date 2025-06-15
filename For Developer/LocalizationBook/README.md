@@ -64,22 +64,14 @@ POST /api/localization/customization/{culture}
 Bu məlumatlar `CultureCustomizations` cədvəlində saxlanılır və öncəliklə
 `LocalizationService` tərəfindən oxunur.
 
-## Şablon və Termin Override-ları
+## Örtük Ölçümləri və Keyfiyyət Alətləri
 
-`TemplateOverride` və `TerminologyOverride` modelləri şirkət, tenant və modul
-səviyyəsində xüsusi şablon və terminlərin tətbiqinə imkan verir.
-
-REST API nümunələri:
-
-```
-GET /api/localization/customization/templates/{culture}/{module}?companyId=&tenantId=
-POST /api/localization/customization/templates/{culture}/{module}
-
-GET /api/localization/customization/terminology/{culture}/{module}/{key}?companyId=&tenantId=
-POST /api/localization/customization/terminology/{culture}/{module}/{key}
-```
-
-Blazor panelində **Template Overrides** və **Terminology Overrides** səhifələri
-vasitəsilə fayl yükləmək və ya terminləri yeniləmək mümkündür.
+`LocalizationCoverage.razor` səhifəsi hər modul üzrə tərcümə faizini göstərir.
+`LocalizationService.GetCoverageByCategoryAsync` metodu əsas dil ilə
+müqayisədə tərcümə olunmuş açarların nisbətini hesablayır. Keyfiyyətə nəzarət
+üçün `GetMissingKeysAsync`, `ValidatePlaceholdersAsync` və
+`GetOverflowStringsAsync` metodları istifadə olunur. `MissingTranslation`
+hadisəsi tərcümə tapılmadıqda real vaxt xəbərdarlığı yaradır. Bu alətlər
+səhvləri aşkarlayaraq yayımdan əvvəl düzəltməyə kömək edir.
 
 Bu sənəd daim yenilənəcək.
