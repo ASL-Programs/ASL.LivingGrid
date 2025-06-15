@@ -135,8 +135,8 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Length/overflow check (UI fit) - 2025-06-17 - AI
 - [ ] **Localization Customization**
     - [x] RTL/LTR, per-language font/size, icon/text direction, culture customization - 2025-06-17 - AI: Added CultureCustomization service & API
-    - [ ] Custom localized templates per company/tenant/sector/module
-    - [ ] Tenant-specific terminology overlay
+    - [x] Custom localized templates per company/tenant/sector/module - 2025-06-19 - AI
+    - [x] Tenant-specific terminology overlay - 2025-06-19 - AI
 - [ ] **Language Pack Marketplace & Sharing**
     - [ ] Public/private packs, rate/usage stats, history/changelog, share/import/export with one click
     - [ ] Community-contributed packs and tenant-only private packs

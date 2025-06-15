@@ -28,6 +28,8 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<TranslationKey> TranslationKeys { get; set; }
     public DbSet<TranslationRequest> TranslationRequests { get; set; }
     public DbSet<CultureCustomization> CultureCustomizations { get; set; }
+    public DbSet<TemplateOverride> TemplateOverrides { get; set; }
+    public DbSet<TerminologyOverride> TerminologyOverrides { get; set; }
     public DbSet<Documentation> Documentations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -77,6 +79,12 @@ public class ApplicationDbContext : IdentityDbContext
 
         builder.Entity<Documentation>()
             .HasIndex(d => d.Title);
+
+        builder.Entity<TemplateOverride>()
+            .HasIndex(t => new { t.Culture, t.Module, t.CompanyId, t.TenantId });
+
+        builder.Entity<TerminologyOverride>()
+            .HasIndex(t => new { t.Key, t.Culture, t.Module, t.CompanyId, t.TenantId });
 
         // Seed initial data
         SeedInitialData(builder);
