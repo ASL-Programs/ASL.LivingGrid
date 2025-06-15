@@ -20,6 +20,10 @@ ASL.LivingGrid is a comprehensive enterprise platform consisting of 5 independen
 - **Plugin System**: Extensible architecture with plugin support
 - **UI-Driven Configuration**: All settings managed through user interface
 - **Cross-Platform**: Desktop (Windows), Web, Mobile (iOS/Android)
+- **Theme Marketplace**: WebAdminPanel includes a page to list available themes,
+  import new ones, or export existing styles. Themes reside in `wwwroot/themes`
+  and custom themes can be added by placing a folder there or using the import
+  option.
 
 ## Technology Stack
 
