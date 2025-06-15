@@ -27,6 +27,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<TranslationProject> TranslationProjects { get; set; }
     public DbSet<TranslationKey> TranslationKeys { get; set; }
     public DbSet<TranslationRequest> TranslationRequests { get; set; }
+    public DbSet<CultureCustomization> CultureCustomizations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -162,6 +163,48 @@ public class ApplicationDbContext : IdentityDbContext
         };
 
         builder.Entity<LocalizationResource>().HasData(localizationResources);
+
+        var customizations = new[]
+        {
+            new CultureCustomization
+            {
+                Id = Guid.NewGuid(),
+                Culture = "az",
+                TextDirection = "ltr",
+                FontFamily = "Arial",
+                FontScale = 1.0,
+                CreatedAt = DateTime.UtcNow
+            },
+            new CultureCustomization
+            {
+                Id = Guid.NewGuid(),
+                Culture = "en",
+                TextDirection = "ltr",
+                FontFamily = "Helvetica",
+                FontScale = 1.0,
+                CreatedAt = DateTime.UtcNow
+            },
+            new CultureCustomization
+            {
+                Id = Guid.NewGuid(),
+                Culture = "tr",
+                TextDirection = "ltr",
+                FontFamily = "Arial",
+                FontScale = 1.0,
+                CreatedAt = DateTime.UtcNow
+            },
+            new CultureCustomization
+            {
+                Id = Guid.NewGuid(),
+                Culture = "ru",
+                TextDirection = "ltr",
+                FontFamily = "Tahoma",
+                FontScale = 1.0,
+                CreatedAt = DateTime.UtcNow
+            }
+        };
+
+        builder.Entity<CultureCustomization>().HasData(customizations);
 
     }
 }

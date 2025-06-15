@@ -136,6 +136,7 @@ public class Program
         services.AddScoped<IFeedbackService, FeedbackService>();
         services.AddScoped<ISessionPersistenceService, SessionPersistenceService>();
         services.AddScoped<ISearchService, SearchService>();
+        services.AddScoped<ILocalizationCustomizationService, LocalizationCustomizationService>();
         services.AddHostedService<DisasterRecoveryService>();
 
         // Add HTTP Client for external API calls
@@ -240,6 +241,19 @@ public class Program
         locGroup.MapPost("/approve/{id}", async (Guid id, ILocalizationService svc) =>
         {
             await svc.ApproveAsync(id, "system");
+            return Results.Ok();
+        });
+
+        locGroup.MapGet("/customization/{culture}", async (string culture, ILocalizationCustomizationService svc) =>
+        {
+            var result = await svc.GetAsync(culture);
+            return result is null ? Results.NotFound() : Results.Ok(result);
+        });
+
+        locGroup.MapPost("/customization/{culture}", async (string culture, CultureCustomization model, ILocalizationCustomizationService svc) =>
+        {
+            model.Culture = culture;
+            await svc.SetAsync(model);
             return Results.Ok();
         });
 
