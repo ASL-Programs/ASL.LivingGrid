@@ -8,14 +8,15 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 - JSON formatında import və export
 - REST API vasitəsilə dil paketlərinin idarəsi
 - AI tərcümə təklifləri üçün `TranslationWorkflowService.SuggestAsync` metodu
-- Tərcümə sorğularının vəziyyətləri: **Machine**, **Human**, **PendingReview**, **Approved**
+- Tərcümə sorğularının vəziyyətləri: **Machine**, **Human**, **PendingReview**, **Approved**, **Rejected**
 
 ## Statusların mənası
 - **Machine** – maşın tərcüməsi, ilkin dəyər kimi əlavə edilir və yoxlamaya göndərilir.
 - **Human** – insan tərəfindən daxil edilən tərcümə, moderasiya tələb edir.
 - **PendingReview** – tərcümə redaktorun təsdiqini gözləyir.
 - **Approved** – təsdiqlənmiş tərcümə və dil paketində aktivdir.
-- `TranslationRequest` modelinə `ReviewerComments` və `Escalate` sahələri əlavə olunub
+- **Rejected** – moderator tərəfindən rədd edilmiş və tətbiq olunmayan tərcümə.
+- `TranslationRequest` modelinə `ReviewerComments`, `Escalate`, `RejectedBy` və `RejectedAt` sahələri əlavə olunub
 
 
 ## İstifadə Qaydası
@@ -37,5 +38,9 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
    model və region dəyərlərini doldurmağı unutmayın. `Custom` rejimində endpoint
    sizin daxili servisinizə yönəldilir və lazım olduqda `ApiKey` başlıqda `Bearer`
    kimi ötürülür.
+
+10. Moderatorlar üçün `/pendingreviews` Blazor səhifəsi mövcuddur. Bu səhifə
+    gözləyən sorğuların siyahısını göstərir və hər sorğu üçün **Approve** və
+    **Reject** düymələri vasitəsilə yuxarıdakı API-lərə sorğu göndərir.
 
 Bu sənəd daim yenilənəcək.

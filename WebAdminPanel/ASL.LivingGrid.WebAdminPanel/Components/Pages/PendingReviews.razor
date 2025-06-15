@@ -1,5 +1,8 @@
 @page "/pendingreviews"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@using System.Net.Http.Json
 @inject ITranslationWorkflowService WorkflowService
+@inject HttpClient Http
 
 <PageTitle>Pending Reviews</PageTitle>
 
@@ -22,6 +25,7 @@ else
                 <th>Proposed</th>
                 <th>Culture</th>
                 <th>Requested By</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +36,10 @@ else
                     <td>@r.ProposedValue</td>
                     <td>@r.Culture</td>
                     <td>@r.RequestedBy</td>
+                    <td>
+                        <button class="btn btn-sm btn-success me-2" @onclick="() => Approve(r.Id)">Approve</button>
+                        <button class="btn btn-sm btn-danger" @onclick="() => Reject(r.Id)">Reject</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -44,6 +52,21 @@ else
     protected override async Task OnInitializedAsync()
     {
         requests = (await WorkflowService.GetPendingRequestsAsync()).ToList();
+    }
+
+    private async Task Approve(Guid id)
+    {
+        await Http.PostAsync($"/api/translationrequests/approve/{id}", null);
+        if (requests is not null)
+            requests.RemoveAll(r => r.Id == id);
+    }
+
+    private async Task Reject(Guid id)
+    {
+        var payload = new TranslationReviewRequest { Accept = false };
+        await Http.PostAsJsonAsync($"/api/translationrequests/reject/{id}", payload);
+        if (requests is not null)
+            requests.RemoveAll(r => r.Id == id);
     }
 }
 

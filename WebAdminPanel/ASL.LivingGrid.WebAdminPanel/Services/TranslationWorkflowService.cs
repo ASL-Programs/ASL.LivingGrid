@@ -61,6 +61,8 @@ public class TranslationWorkflowService : ITranslationWorkflowService
         req.Status = TranslationRequestStatus.Approved;
         req.ApprovedBy = approvedBy;
         req.ApprovedAt = DateTime.UtcNow;
+        req.RejectedBy = null;
+        req.RejectedAt = null;
         await _context.SaveChangesAsync();
 
         if (apply && req.ProposedValue != null)
@@ -95,6 +97,8 @@ public class TranslationWorkflowService : ITranslationWorkflowService
             req.Status = TranslationRequestStatus.Approved;
             req.ApprovedBy = reviewer;
             req.ApprovedAt = DateTime.UtcNow;
+            req.RejectedBy = null;
+            req.RejectedAt = null;
 
             if (req.ProposedValue is not null)
             {
@@ -103,7 +107,11 @@ public class TranslationWorkflowService : ITranslationWorkflowService
         }
         else
         {
-            req.Status = TranslationRequestStatus.Human;
+            req.Status = TranslationRequestStatus.Rejected;
+            req.RejectedBy = reviewer;
+            req.RejectedAt = DateTime.UtcNow;
+            req.ApprovedBy = null;
+            req.ApprovedAt = null;
         }
 
         await _context.SaveChangesAsync();
