@@ -1,0 +1,49 @@
+@page "/pendingreviews"
+@inject ITranslationWorkflowService WorkflowService
+
+<PageTitle>Pending Reviews</PageTitle>
+
+<h3>Pending Translation Reviews</h3>
+
+@if (requests == null)
+{
+    <p>Loading...</p>
+}
+else if (!requests.Any())
+{
+    <p>No pending requests.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Proposed</th>
+                <th>Culture</th>
+                <th>Requested By</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in requests)
+            {
+                <tr>
+                    <td>@r.Key</td>
+                    <td>@r.ProposedValue</td>
+                    <td>@r.Culture</td>
+                    <td>@r.RequestedBy</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<TranslationRequest>? requests;
+
+    protected override async Task OnInitializedAsync()
+    {
+        requests = (await WorkflowService.GetPendingRequestsAsync()).ToList();
+    }
+}
+

@@ -17,17 +17,23 @@ public class TranslationRequest : BaseEntity
     [StringLength(100)]
     public string RequestedBy { get; set; } = string.Empty;
 
-    public TranslationRequestStatus Status { get; set; } = TranslationRequestStatus.Pending;
+    public TranslationRequestStatus Status { get; set; } = TranslationRequestStatus.PendingReview;
 
     [StringLength(100)]
     public string? ApprovedBy { get; set; }
 
     public DateTime? ApprovedAt { get; set; }
+
+    [StringLength(500)]
+    public string? ReviewerComments { get; set; }
+
+    public bool Escalate { get; set; }
 }
 
 public enum TranslationRequestStatus
 {
-    Pending,
-    Approved,
-    Rejected
+    Machine,
+    Human,
+    PendingReview,
+    Approved
 }

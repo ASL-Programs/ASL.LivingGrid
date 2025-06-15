@@ -6,6 +6,9 @@ public interface ITranslationWorkflowService
 {
     Task<TranslationRequest> SubmitRequestAsync(string key, string culture, string proposedValue, string requestedBy);
     Task ApproveRequestAsync(Guid id, string approvedBy, bool apply);
+    Task<string?> SuggestAsync(string text, string sourceCulture, string targetCulture);
     Task<IEnumerable<TranslationRequest>> GetPendingRequestsAsync();
-    Task<string?> SuggestAsync(string text, string targetCulture, CancellationToken cancellationToken = default);
+    Task<IEnumerable<TranslationRequest>> GetRequestsByStatusAsync(TranslationRequestStatus status);
+    Task UpdateStatusAsync(Guid id, TranslationRequestStatus status, string updatedBy);
+    Task ReviewRequestAsync(Guid id, bool accept, string reviewer, string? comments, bool escalate);
 }

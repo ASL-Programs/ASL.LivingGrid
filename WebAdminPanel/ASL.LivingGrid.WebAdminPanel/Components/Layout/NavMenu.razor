@@ -12,7 +12,8 @@
     </div>
 </div>
 
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenuContent" aria-controls="sidebarMenuContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 </button>
 
@@ -26,12 +27,21 @@
                 </NavLink>
             </div>
         }
+        <div class="nav-item p-3">
+            <select class="form-select" @onchange="SimulateRole">
+                <option value="">@("-- " + (simulationRole ?? "Real") + " --")</option>
+                <option value="Admin">Admin</option>
+                <option value="Manager">Manager</option>
+                <option value="Designer">Designer</option>
+            </select>
+        </div>
     </nav>
 </div>
 
 @code {
     private Dictionary<string, string> localizedStrings = new();
     private IEnumerable<NavigationItem> menuItems = Enumerable.Empty<NavigationItem>();
+    private string? simulationRole;
 
     protected override async Task OnInitializedAsync()
     {
@@ -47,9 +57,31 @@
             localizedStrings["Navigation.Notifications"] = "Bildirişlər";
             localizedStrings["Navigation.Plugins"] = "Pluginlər";
             localizedStrings["Navigation.UIAudit"] = "UI Audit";
-            localizedStrings["Navigation.DashboardDesigner"] = "Panel Dizaynı";
+            localizedStrings["Navigation.ThemeMarketplace"] = "Tema Bazarı";
+            localizedStrings["Navigation.LayoutMarketplace"] = "Düzən Bazarı";
+            localizedStrings["Navigation.VisualEditor"] = "Vizual Redaktor";
+            localizedStrings["Navigation.PendingReviews"] = "Tərcümə Baxışı";
         }
 
-        menuItems = await NavService.GetMenuItemsAsync();
+        var allItems = await NavService.GetMenuItemsAsync();
+        var authState = await AuthProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var list = new List<NavigationItem>();
+        foreach (var item in allItems)
+        {
+            if (await RoleUi.HasAccessAsync(item.Key, user))
+            {
+                list.Add(item);
+            }
+        }
+        menuItems = list;
+    }
+
+    private async Task SimulateRole(ChangeEventArgs e)
+    {
+        simulationRole = e.Value?.ToString();
+        RoleUi.SetSimulationRole(simulationRole);
+        await OnInitializedAsync();
+        StateHasChanged();
     }
 }

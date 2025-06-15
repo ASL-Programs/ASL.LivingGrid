@@ -12,15 +12,27 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 2. **Tema Dəstəyi:** `ThemeService` vasitəsilə light/dark rejimi seçilir və istifadəçinin brauzerində yadda saxlanılır.
 3. **Brendinq:** Rəng və loqo kimi parametrlər gələcəkdə `IUICustomizationService` üzərindən genişlənə bilər.
 4. **Əlçatanlıq:** `UIAudit` səhifəsi sadə skriptlə şəkil alt mətnləri və label uyğunsuzluqlarını yoxlayır.
-5. **Dinamik Navigasiya:** `NavigationService` menyu elementlərini `menuitems.json` faylından oxuyur və `NavMenu` komponentində dinamik şəkildə göstərir. Bu, tenant və ya istifadəçi səviyyəsində fərqli menyu qurmağa imkan verir.
+5. **Dinamik Navigasiya:** `NavigationService` menyu elementlərini `menuitems.json` faylından oxuyur və `NavMenu` komponentində dinamik şəkildə göstərir. Faylı dəyişdirməklə menyu yenilənir və istənilən tenant üçün fərdi struktur qurmaq mümkündür.
 6. **Mikro İnteraksiyalar:** `toast.js` vasitəsilə istifadəçi ilk dəfə ana səhifəyə daxil olduqda xoş gəlmisiniz bildirişi göstərilir.
-7. **Dashboard Dizaynı:** `DashboardDesigner` səhifəsi drag-and-drop prinsipi ilə işləyir və `dashboardDesigner.js` vasitəsilə real vaxt önizləmə imkanı verir.
-8. **Tərcümə İş Axını:** `TranslationWorkflowService` istifadəçilərin tərcümə təkliflərini göndərməsi və moderatorun təsdiq etməsi üçün REST API təqdim edir. Bütün əməliyyatlar `AuditService` ilə qeyd olunur.
 
 ## İstifadə Qaydası
 - `ThemeToggle` komponenti vasitəsilə istifadəçi istənilən vaxt temanı dəyişə bilər.
-- `Theme Marketplace` səhifəsində mövcud temalar siyahılanır, yeni tema faylı yüklənir və mövcud tema ixrac edilə bilir.
-- UI audit funksiyası menyuda "UI Audit" bölməsi altında yerləşir və nəticələri siyahı şəklində göstərir.
+- UI audit funksiyası menyuda **"UI Audit"** bölməsi altında yerləşir.
+  1. Səhifəni açdıqdan sonra **"Run Audit"** düyməsini sıxın.
+  2. Skript bütün `img` və `input` elementlərini yoxlayaraq alt mətn və label əlaqələrini analiz edəcək.
+  3. Tapılan uyğunsuzluqlar siyahıda göstəriləcək və heç bir problem yoxdursa "No issues found" mesajı görünəcək.
+  - "Tema Bazarı" səhifəsində mövcud şablonları siyahı şəklində görmək və bir düymə ilə tətbiq etmək mümkündür. Seçilən tema `/api/themes/import/{id}` endpointi vasitəsilə yüklənir və `ThemeService` ilə aktiv edilir.
+
+### Axtarış
+- Yuxarı paneldəki **SearchBox** komponentinə sorğu yazın.
+- Nəticələr konfiqurasiya açarları, istifadəçi adları, modullar və audit jurnalları üzrə qruplanır.
+- Sorğunu sildikdə açılan nəticə siyahısı gizlənəcək.
+
+### Dashboard Dizayner
+- Menyudan **"Dashboard Designer"** səhifəsinə daxil olun.
+- Soldakı siyahıdan mövcud vidjetləri sürükləyib kətan bölməsinə buraxın.
+- Vidjet əlavə olunduqdan sonra yerləşdirməni dəyişmək və ya silmək üçün sadə drag-and-drop funksiyası aktivdir.
+- Hazır düzən `dashboardDesigner.js` skripti vasitəsilə brauzer yaddaşında saxlanılır və növbəti açılışda bərpa olunur.
 
 ## Gələcək İnkişaf
 - Tam WCAG 2.1 uyğunluğunun avtomatik yoxlanılması üçün genişlənmiş audit modulu.
