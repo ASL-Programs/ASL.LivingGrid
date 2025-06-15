@@ -242,6 +242,14 @@ public class Program
             return Results.Ok();
         });
 
+        app.MapGet("/themes/download/{name}", (string name, IWebHostEnvironment env) =>
+        {
+            var path = Path.Combine(env.WebRootPath, "themes", name, "theme.css");
+            if (!File.Exists(path))
+                return Results.NotFound();
+            return Results.File(path, "text/css", $"{name}.css");
+        });
+
         var trGroup = app.MapGroup("/api/translationrequests");
         trGroup.MapGet("/pending", async (ITranslationWorkflowService svc) => Results.Ok(await svc.GetPendingRequestsAsync()));
         trGroup.MapGet("/status/{status}", async (TranslationRequestStatus status, ITranslationWorkflowService svc) =>
