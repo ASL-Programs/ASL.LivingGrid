@@ -127,11 +127,11 @@ public class Program
         services.AddScoped<IAdvancedRollbackService, AdvancedRollbackService>();
         services.AddScoped<IWireframePageBuilderService, WireframePageBuilderService>();
         services.AddScoped<IThemeService, ThemeService>();
+        services.AddScoped<IRoleBasedUiService, RoleBasedUiService>();
         services.AddScoped<INavigationService, NavigationService>();
         services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
         services.AddScoped<IThemeMarketplaceService, ThemeMarketplaceService>();
         services.AddScoped<ILayoutMarketplaceService, LayoutMarketplaceService>();
-        services.AddScoped<IRoleBasedUiService, RoleBasedUiService>();
         services.AddScoped<IModuleCustomizationService, ModuleCustomizationService>();
         services.AddScoped<IFeedbackService, FeedbackService>();
         services.AddScoped<ISessionPersistenceService, SessionPersistenceService>();

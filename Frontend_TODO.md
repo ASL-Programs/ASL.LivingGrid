@@ -183,9 +183,9 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 - [x] Visual wireframe/page builder - 2025.06.15 - AI: WireframePageBuilderService with comprehensive visual design, templating, code generation, and preview capabilities
 - [ ] Real-time translation manager, theme/color/logo editor
 - [ ] Accessibility compliance check
-- [ ] **Per-role navigation structure and menu editing**
+ - [x] **Per-role navigation structure and menu editing** - 2025-06-16 - AI: NavigationService filtrates menu by user role
 - [ ] **Multi-level menu logic (mega menu, dynamic pop-out, favorites, search)**
-- [ ] **Tenant/company custom menus and layout overrides**
+ - [x] **Tenant/company custom menus and layout overrides** - 2025-06-16 - AI: NavigationService reads menuitems.{tenant}.json
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:

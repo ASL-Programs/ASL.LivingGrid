@@ -1,10 +1,15 @@
 @page "/visual-editor"
 @inject IJSRuntime JS
 
-<h3>Realtime Visual Editor</h3>
+<h3>WYSIWYG Səhifə Redaktoru</h3>
 <div class="row">
     <div class="col-md-6">
-        <textarea class="form-control" style="height:300px" @bind="html" @bind:event="oninput"></textarea>
+        <div class="btn-group mb-2" role="group">
+            <button class="btn btn-sm btn-secondary" @onclick="() => Format('bold')">B</button>
+            <button class="btn btn-sm btn-secondary" @onclick="() => Format('italic')">I</button>
+            <button class="btn btn-sm btn-secondary" @onclick="() => Format('underline')">U</button>
+        </div>
+        <div id="editor" class="form-control" style="height:250px" contenteditable="true"></div>
     </div>
     <div class="col-md-6">
         <iframe id="preview" class="w-100" style="height:300px"></iframe>
@@ -12,12 +17,16 @@
 </div>
 
 @code {
-    private string html = "<h1>Hello</h1>";
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JS.InvokeVoidAsync("eval", $"document.getElementById('preview').contentDocument.body.innerHTML = `{EscapeHtml(html)}`;");
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("wysiwyg.init");
+        }
     }
 
-    private static string EscapeHtml(string input) => input.Replace("`", "\\`");
+    private async Task Format(string cmd)
+    {
+        await JS.InvokeVoidAsync("wysiwyg.command", cmd);
+    }
 }

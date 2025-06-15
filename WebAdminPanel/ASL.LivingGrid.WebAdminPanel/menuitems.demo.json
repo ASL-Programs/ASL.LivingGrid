@@ -1,0 +1,6 @@
+[
+  { "Key": "Navigation.Dashboard", "Url": "", "Icon": "oi oi-home" },
+  { "Key": "Navigation.Users", "Url": "users", "Icon": "oi oi-person" },
+  { "Key": "Navigation.Settings", "Url": "settings", "Icon": "oi oi-cog" },
+  { "Key": "Navigation.Feedback", "Url": "feedback", "Icon": "oi oi-comment-square" }
+]

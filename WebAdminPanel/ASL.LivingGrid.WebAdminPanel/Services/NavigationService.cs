@@ -1,5 +1,6 @@
 using System.Text.Json;
 using ASL.LivingGrid.WebAdminPanel.Models;
+using System.Security.Claims;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
 
@@ -7,33 +8,56 @@ public class NavigationService : INavigationService
 {
     private readonly ILogger<NavigationService> _logger;
     private readonly IWebHostEnvironment _env;
-
-    public NavigationService(ILogger<NavigationService> logger, IWebHostEnvironment env)
+    private readonly IRoleBasedUiService _roleUi;
+    public NavigationService(ILogger<NavigationService> logger, IWebHostEnvironment env, IRoleBasedUiService roleUi)
     {
         _logger = logger;
         _env = env;
+        _roleUi = roleUi;
     }
-
-    public async Task<IEnumerable<NavigationItem>> GetMenuItemsAsync()
+    public async Task<IEnumerable<NavigationItem>> GetMenuItemsAsync(ClaimsPrincipal? user = null, string? tenantId = null)
     {
-        var file = Path.Combine(_env.ContentRootPath, "menuitems.json");
+        var fileName = "menuitems.json";
+        if (!string.IsNullOrEmpty(tenantId))
+        {
+            var candidate = Path.Combine(_env.ContentRootPath, $"menuitems.{tenantId}.json");
+            if (File.Exists(candidate))
+                fileName = $"menuitems.{tenantId}.json";
+        }
+
+        var file = Path.Combine(_env.ContentRootPath, fileName);
+        IEnumerable<NavigationItem> items;
         if (!File.Exists(file))
         {
             _logger.LogWarning("Menu items file not found: {File}", file);
-            return GetDefaultMenuItems();
+            items = GetDefaultMenuItems();
+        }
+        else
+        {
+            try
+            {
+                var json = await File.ReadAllTextAsync(file);
+                var list = JsonSerializer.Deserialize<List<NavigationItem>>(json);
+                items = list ?? GetDefaultMenuItems();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error reading menu items from {File}", file);
+                items = GetDefaultMenuItems();
+            }
         }
 
-        try
+        if (user == null)
+            return items;
+
+        var filtered = new List<NavigationItem>();
+        foreach (var item in items)
         {
-            var json = await File.ReadAllTextAsync(file);
-            var items = JsonSerializer.Deserialize<List<NavigationItem>>(json);
-            return items ?? GetDefaultMenuItems();
+            if (await _roleUi.HasAccessAsync(item.Key, user))
+                filtered.Add(item);
         }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error reading menu items from {File}", file);
-            return GetDefaultMenuItems();
-        }
+
+        return filtered;
     }
 
     private static IEnumerable<NavigationItem> GetDefaultMenuItems() => new List<NavigationItem>
