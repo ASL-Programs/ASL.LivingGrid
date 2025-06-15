@@ -28,6 +28,7 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 ### Axtarış
 - Yuxarı paneldəki **SearchBox** komponentinə sorğu yazın.
 - Nəticələr konfiqurasiya açarları, istifadəçi adları, modullar və audit jurnalları üzrə qruplanır.
+- Axtarış sorğuları `SearchService` tərəfindən bu dörd kateqoriyaya uyğun indeksləndiyi üçün nəticələr tək sorğu ilə gəlir.
 - Sorğunu sildikdə açılan nəticə siyahısı gizlənəcək.
 
 ### Dashboard Dizayner
