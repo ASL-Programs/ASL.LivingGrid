@@ -3,6 +3,7 @@ using ASL.LivingGrid.WebAdminPanel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -106,7 +107,14 @@ public class TranslationWorkflowService : ITranslationWorkflowService
                 request.Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
 
                 using var response = await client.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == (System.Net.HttpStatusCode)429)
+                        _logger.LogWarning("Translation provider rate limited");
+                    else
+                        _logger.LogError("Translation provider error: {StatusCode}", response.StatusCode);
+                    return null;
+                }
                 var json = await response.Content.ReadAsStringAsync();
                 using var doc = JsonDocument.Parse(json);
                 var result = doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
@@ -125,11 +133,45 @@ public class TranslationWorkflowService : ITranslationWorkflowService
                 };
                 using var content = new FormUrlEncodedContent(query);
                 using var response = await client.PostAsync(endpoint, content);
-                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == (System.Net.HttpStatusCode)429)
+                        _logger.LogWarning("Translation provider rate limited");
+                    else
+                        _logger.LogError("Translation provider error: {StatusCode}", response.StatusCode);
+                    return null;
+                }
                 var json = await response.Content.ReadAsStringAsync();
                 using var doc = JsonDocument.Parse(json);
                 var result = doc.RootElement.GetProperty("translations")[0].GetProperty("text").GetString();
                 return result?.Trim();
+            }
+            else if (string.Equals(provider, "Google", StringComparison.OrdinalIgnoreCase))
+            {
+                var endpoint = _configuration.GetValue<string>("Translation:Endpoint") ?? "https://translation.googleapis.com/language/translate/v2";
+                var apiKey = _configuration.GetValue<string>("Translation:ApiKey");
+                var query = new Dictionary<string, string>
+                {
+                    ["q"] = text,
+                    ["source"] = sourceCulture,
+                    ["target"] = targetCulture,
+                    ["format"] = "text",
+                    ["key"] = apiKey ?? string.Empty
+                };
+                using var content = new FormUrlEncodedContent(query);
+                using var response = await client.PostAsync(endpoint, content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == (System.Net.HttpStatusCode)429)
+                        _logger.LogWarning("Translation provider rate limited");
+                    else
+                        _logger.LogError("Translation provider error: {StatusCode}", response.StatusCode);
+                    return null;
+                }
+                var json = await response.Content.ReadAsStringAsync();
+                using var doc = JsonDocument.Parse(json);
+                var result = doc.RootElement.GetProperty("data").GetProperty("translations")[0].GetProperty("translatedText").GetString();
+                return WebUtility.HtmlDecode(result ?? string.Empty).Trim();
             }
 
             _logger.LogWarning("Unknown translation provider: {Provider}", provider);
