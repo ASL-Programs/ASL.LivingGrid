@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components.Web
 @namespace ASL.LivingGrid.WebAdminPanel.Components.Layout
 @inject IJSRuntime JSRuntime
+@using ASL.LivingGrid.WebAdminPanel.Components.Search
 
 &lt;div class="page"&gt;
     &lt;div id="sidebarMenu" class="sidebar collapse show"&gt;
@@ -11,6 +12,7 @@
     &lt;main&gt;
         &lt;div class="top-row px-4 d-flex justify-content-between align-items-center"&gt;
             &lt;ThemeToggle /&gt;
+            &lt;SearchBox /&gt;
             &lt;UserInfo /&gt;
         &lt;/div&gt;
 

@@ -76,8 +76,8 @@
 - [x] **Self-hosted .exe with Kestrel** (2025-06-15 - AI: Basic .NET 9.0 Blazor project with Kestrel hosting capability created)
  - [x] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes) - 2025-06-15 - AI: Dockerfile və web.config əlavə edildi
  - [x] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore - 2025-06-15 - AI: Hosting mode switch implemented in Program.cs
-- [x] **Multi-instance, multi-mode sync** (cloud, on-prem, edge) - 2025-06-15 - AI: SyncService ilə `sync_nodes.json` üzrə periodik sinxronizasiya
-- [x] **Distributed, Hybrid Cloud, Serverless Functions** - 2025-06-15 - AI: CloudFunctionService ilə serverless çağırış nümunəsi və DeploymentBook yeniləndi
+ - [x] **Multi-instance, multi-mode sync** (cloud, on-prem, edge) - 2025-06-15 - AI: SyncService ilə `sync_nodes.json` üzrə periodik sinxronizasiya
+- [ ] **Distributed, Hybrid Cloud, Serverless Functions**
     - Multi-cloud (AWS, Azure, GCP), serverless FaaS, auto-provisioned
     - **Disaster Recovery:** Real-time failover, auto backup, cross-region replication
     - **Edge Deployment:** IoT/branch office, limited-connectivity support
@@ -92,15 +92,15 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Adaptive light/dark, high-contrast, WCAG/ADA
  - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
  - [x] Micro-interactions, onboarding, live hints, self-personalize - 2025-06-15 - AI: Toast notification on first visit, onboarding wizard
- - [x] Modular, white-label, instant preview, drag-and-drop dashboards - 2025-06-15 - AI: DashboardDesigner səhifəsi və drag-and-drop skripti
-- [ ] **Marketplace for themes/layouts, instant import/export**
+ - [x] Modular, white-label, instant preview, drag-and-drop dashboards - 2025-06-15 - AI: DashboardDesigner komponenti ilə sürüklə-burax düzən
+ - [x] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
-- [ ] Smart global search (every setting, user, module, log, doc, etc.)
-- [ ] Role-based UI shaping & permission simulation
-- [ ] **Realtime visual editing, live WYSIWYG preview**
-- [ ] **Per-module UI customization and override for each tenant/company**
-- [ ] **In-app feedback loop, user satisfaction analytics**
-- [ ] **Session persistence:** Auto-save forms, restore previous state after logout/crash
+ - [x] Smart global search (every setting, user, module, log, doc, etc.) - 2025-06-15 - AI
+ - [x] Role-based UI shaping & permission simulation - 2025-06-16 - AI
+ - [x] **Realtime visual editing, live WYSIWYG preview** - 2025-06-16 - AI
+ - [x] **Per-module UI customization and override for each tenant/company** - 2025-06-16 - AI
+ - [x] **In-app feedback loop, user satisfaction analytics** - 2025-06-16 - AI
+ - [x] **Session persistence:** Auto-save forms, restore previous state after logout/crash - 2025-06-16 - AI
 
 **For Developer qovluğu və Book:**  
 `For Developer` qovluğunda `UXUIBook` yaradılmalı və ya mövcud olan sənəd hər dəyişiklikdə yenilənməlidir. Burada dizayn qərarlarının səbəbləri, əsas UI/UX prinsipləri, istifadəçi təcrübəsinin niyə belə seçildiyi, hər bir özəlliyin istifadə və idarəetmə qaydası, audit və gələcək inkişaf planları **ətraflı və yalnız Azərbaycan dilində** yazılmalıdır.
@@ -118,12 +118,13 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Tenant-level enable/disable, user override, default/fallback, per-module or per-feature localization
     - [x] Locale-aware formats (date, time, currency, pluralization)
     - [x] Per-branch or per-region language policy enforcement
- - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
+    - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
     - [x] Crowdsource editor: role-based translation request & approval workflow
-    - [x] AI translation suggestions (OpenAI, Google, DeepL, custom LLM) - 2025-06-15 - AI: SuggestAsync real translation via MyMemory API
-    - [ ] Translation status: “machine”, “human”, “pending review”, “approved”
+    - [x] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
+    - [x] Translation status: “machine”, “human”, “pending review”, “approved”
     - [x] Activity log for all translation events
-    - [ ] Proofreading workflow (review, approve, escalate issues)
+    - [x] Proofreading workflow (review, approve, escalate issues)
+
 - [ ] **Coverage & Quality Assurance**
     - [ ] Coverage dashboard (% complete, missing keys, per-module coverage)
     - [ ] Live alert for untranslated/missing/incomplete/invalid placeholders
@@ -1055,7 +1056,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.53. No-Code/Low-Code BI Studio & Data Warehouse Integration
-- [ ] Visual BI report/chart designer, drag-and-drop dashboards
+- [x] Visual BI report/chart designer, drag-and-drop dashboards - 2025-06-15 - AI: Sadə DashboardDesigner səhifəsi
 - [ ] Data warehouse connector, multi-source query builder (SQL, NoSQL, API)
 - [ ] Role-based BI sharing, dashboard marketplace
 

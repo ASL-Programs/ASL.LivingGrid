@@ -9,7 +9,6 @@ using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.IO;
 using System.Security.Claims;
-using System.Text.Json;
 
 namespace ASL.LivingGrid.WebAdminPanel;
 
@@ -130,15 +129,21 @@ public class Program
         services.AddScoped<IThemeService, ThemeService>();
         services.AddScoped<INavigationService, NavigationService>();
         services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
-        services.AddScoped<ICloudFunctionService, CloudFunctionService>();
-
-        services.AddHostedService<SyncService>();
+        services.AddScoped<IThemeMarketplaceService, ThemeMarketplaceService>();
+        services.AddScoped<ILayoutMarketplaceService, LayoutMarketplaceService>();
+        services.AddScoped<IRoleBasedUiService, RoleBasedUiService>();
+        services.AddScoped<IModuleCustomizationService, ModuleCustomizationService>();
+        services.AddScoped<IFeedbackService, FeedbackService>();
+        services.AddScoped<ISessionPersistenceService, SessionPersistenceService>();
+        services.AddScoped<ISearchService, SearchService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
 
         // Add memory cache
         services.AddMemoryCache();
+
+        services.AddHttpContextAccessor();
 
         // Add session support
         services.AddSession(options =>
@@ -239,29 +244,70 @@ public class Program
 
         var trGroup = app.MapGroup("/api/translationrequests");
         trGroup.MapGet("/pending", async (ITranslationWorkflowService svc) => Results.Ok(await svc.GetPendingRequestsAsync()));
+        trGroup.MapGet("/status/{status}", async (TranslationRequestStatus status, ITranslationWorkflowService svc) =>
+            Results.Ok(await svc.GetRequestsByStatusAsync(status)));
         trGroup.MapPost("/submit", async (TranslationRequest req, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
             var created = await svc.SubmitRequestAsync(req.Key, req.Culture, req.ProposedValue ?? string.Empty, user.Identity?.Name ?? "anon");
             return Results.Ok(created);
+        });
+        trGroup.MapPost("/suggest", async (TranslationSuggestionRequest req, ITranslationWorkflowService svc) =>
+        {
+            var result = await svc.SuggestAsync(req.Text, req.SourceCulture, req.TargetCulture);
+            return Results.Ok(new { suggestion = result });
         });
         trGroup.MapPost("/approve/{id}", async (Guid id, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
             await svc.ApproveRequestAsync(id, user.Identity?.Name ?? "system", apply: true);
             return Results.Ok();
         });
-        trGroup.MapPost("/suggest", async (TranslationRequest req, ITranslationWorkflowService svc) =>
+        trGroup.MapPost("/review/{id}", async (Guid id, TranslationReviewRequest review, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
-            var result = await svc.SuggestAsync(req.ProposedValue ?? req.Key, req.Culture);
-            return result is null ? Results.NoContent() : Results.Text(result, "text/plain");
+            await svc.ReviewRequestAsync(id, review.Accept, user.Identity?.Name ?? "system", review.Comments, review.Escalate);
+            return Results.Ok();
+        });
+        trGroup.MapPost("/status/{id}", async (Guid id, TranslationRequestStatus status, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
+        {
+            await svc.UpdateStatusAsync(id, status, user.Identity?.Name ?? "system");
+            return Results.Ok();
         });
 
-        app.MapPost("/api/cloudfunction/{name}", async (string name, HttpRequest req, ICloudFunctionService svc) =>
+        var themeGroup = app.MapGroup("/api/themes");
+        themeGroup.MapGet("/", async (IThemeMarketplaceService svc) => Results.Ok(await svc.ListAvailableThemesAsync()));
+        themeGroup.MapPost("/import/{id}", async (string id, IThemeMarketplaceService svc) =>
         {
-            using var reader = new StreamReader(req.Body);
-            var payloadJson = await reader.ReadToEndAsync();
-            var payload = string.IsNullOrWhiteSpace(payloadJson) ? null : JsonSerializer.Deserialize<object>(payloadJson);
-            var result = await svc.InvokeAsync(name, payload);
-            return result is null ? Results.NotFound() : Results.Text(result, "application/json");
+            var theme = await svc.ImportThemeAsync(id);
+            return theme is not null ? Results.Ok(theme) : Results.NotFound();
+        });
+        themeGroup.MapGet("/export/{id}", async (string id, IThemeMarketplaceService svc) =>
+        {
+            var css = await svc.ExportThemeAsync(id);
+            return string.IsNullOrEmpty(css) ? Results.NotFound() : Results.Text(css, "text/css");
+        });
+
+        var layoutGroup = app.MapGroup("/api/layouts");
+        layoutGroup.MapGet("/", async (ILayoutMarketplaceService svc) => Results.Ok(await svc.ListAvailableLayoutsAsync()));
+        layoutGroup.MapPost("/import/{id}", async (string id, ILayoutMarketplaceService svc) =>
+        {
+            var layout = await svc.ImportLayoutAsync(id);
+            return layout is not null ? Results.Ok(layout) : Results.NotFound();
+        });
+        layoutGroup.MapGet("/export/{id}", async (string id, ILayoutMarketplaceService svc) =>
+        {
+            var json = await svc.ExportLayoutAsync(id);
+            return string.IsNullOrEmpty(json) ? Results.NotFound() : Results.Text(json, "application/json");
+        });
+
+        app.MapGet("/api/search", async (string q, ISearchService svc) =>
+        {
+            var result = await svc.SearchAsync(q);
+            return Results.Ok(result);
+        });
+
+        app.MapPost("/api/feedback", async (FeedbackItem item, IFeedbackService svc) =>
+        {
+            await svc.SubmitAsync(item.Page, item.Rating, item.Comments);
+            return Results.Ok();
         });
 
         app.MapPost("/api/sync/ping", () => Results.Ok(new { Status = "Ok" }));

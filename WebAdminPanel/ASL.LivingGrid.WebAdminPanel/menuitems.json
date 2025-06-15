@@ -8,5 +8,8 @@
   { "Key": "Navigation.UIAudit", "Url": "uiaudit", "Icon": "oi oi-eye" },
   { "Key": "Navigation.Notifications", "Url": "notifications", "Icon": "oi oi-bell" },
   { "Key": "Navigation.Plugins", "Url": "plugins", "Icon": "oi oi-puzzle-piece" },
-  { "Key": "Navigation.DashboardDesigner", "Url": "dashboard-designer", "Icon": "oi oi-wrench" }
+  { "Key": "Navigation.ThemeMarketplace", "Url": "theme-marketplace", "Icon": "oi oi-brush" },
+  { "Key": "Navigation.LayoutMarketplace", "Url": "layout-marketplace", "Icon": "oi oi-grid-three-up" },
+  { "Key": "Navigation.PendingReviews", "Url": "pendingreviews", "Icon": "oi oi-comment-square" },
+  { "Key": "Navigation.VisualEditor", "Url": "visual-editor", "Icon": "oi oi-pencil" }
 ]

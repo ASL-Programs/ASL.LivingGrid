@@ -8,7 +8,9 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 - JSON formatında import və export
 - REST API vasitəsilə dil paketlərinin idarəsi
 - AI tərcümə təklifləri üçün `TranslationWorkflowService.SuggestAsync` metodu
-  MyMemory public API vasitəsilə tərcümə sorğusu göndərərək nəticəni qaytarır.
+- Tərcümə sorğularının vəziyyətləri: **Machine**, **Human**, **PendingReview**, **Approved**
+- `TranslationRequest` modelinə `ReviewerComments` və `Escalate` sahələri əlavə olunub
+
 
 ## İstifadə Qaydası
 1. `/languagepacks` səhifəsinə keçid edərək mövcud dillərin siyahısını görün.
@@ -16,5 +18,16 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 3. Eyni formatda faylı seçib yükləyərək `Import` əməliyyatı aparın.
 4. API vasitəsilə `/api/localization` endpoint-lərindən də istifadə etmək mümkündür.
 5. Tərcümə təklifi üçün `/api/translationrequests/suggest` endpoint-i POST sorğusu göndərin.
+   Sorğu bədənində `text`, `sourceCulture` və `targetCulture` sahələrini göndərin.
+6. Moderator təsdiqi üçün `/api/translationrequests/review/{id}` endpoint-inə POST sorğusu göndərin.
+   Bədənin nümunəsi:
+   `{ "accept": true, "comments": "ok", "escalate": false }`
+7. `appsettings.json` faylında `Translation` bölməsində API açarını (`ApiKey`),
+   provayderi (`Provider`) və digər parametrləri (`Endpoint`, `Model`, `Region`)
+   təyin edin. Artıq OpenAI, DeepL, Google Translate, Azure Translator və
+   `Custom` provayderləri mövcuddur. Seçilən provayderə uyğun olaraq endpoint,
+   model və region dəyərlərini doldurmağı unutmayın. `Custom` rejimində endpoint
+   sizin daxili servisinizə yönəldilir və lazım olduqda `ApiKey` başlıqda `Bearer`
+   kimi ötürülür.
 
 Bu sənəd daim yenilənəcək.

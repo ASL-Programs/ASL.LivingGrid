@@ -1,4 +1,4 @@
-# Frontend_TODO.md
+# Backend_TODO.md
 
 ---
 
@@ -6,17 +6,17 @@
 
 | Language | Contact Info |
 |:--|:--|
-| **EN** | **ASL.LivingGrid** frontend modules authored and maintained by: Vusal Azer oglu Mastaliyev.<br> Phone: +994513331383 <br> Email: mr.lasuv@gmail.com <br> Role: Lead Developer, Enterprise Architect, UI/UX Owner, Solution Lead. |
+| **EN** | **ASL.LivingGrid** backend services authored and maintained by: Vusal Azer oglu Mastaliyev.<br> Phone: +994513331383 <br> Email: mr.lasuv@gmail.com <br> Role: Lead Developer, Enterprise Architect, API Owner, Solution Lead. |
 
 ---
 
-## ENTERPRISE FRONTEND RULES
+## ENTERPRISE BACKEND RULES
 
 - Every module (WebAdmin, Manager, SmartCustomer, ReportingDesktop, ReportingMobile) is a 100% independent Visual Studio solution.
 - All configs, endpoints, settings, language, notifications, and database options are managed via UI—nothing hardcoded.
 - Multi-language UI, all data and interface elements, notifications, and documentation must support: AZ, EN, TR, RU.
 - All backend API, SignalR/gRPC, database installation, reporting, plugin, workflow, and AI endpoints must be consumed via configurable UI.
-- Every frontend must enable dynamic integration with multiple backend database types (SQL Server, PostgreSQL, SQLite) via API and allow installation/setup from UI.
+- The backend must enable dynamic integration with multiple database types (SQL Server, PostgreSQL, SQLite) via API and allow installation/setup from the UI.
 - Real-time and background events, notifications, and reporting must be fully interactive and visual.
 - Every step completed must be checked `[x]`; only continue from the first unchecked `[ ]` step; nothing skipped or repeated.
 
@@ -32,7 +32,7 @@
 
 ---
 
-## FRONTEND TODO – DETAILED CHECKLIST
+## BACKEND TODO – DETAILED CHECKLIST
 
 ---
 
