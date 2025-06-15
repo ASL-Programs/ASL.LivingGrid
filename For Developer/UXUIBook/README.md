@@ -19,6 +19,7 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 ## İstifadə Qaydası
 - `ThemeToggle` komponenti vasitəsilə istifadəçi istənilən vaxt temanı dəyişə bilər.
 - UI audit funksiyası menyuda "UI Audit" bölməsi altında yerləşir və nəticələri siyahı şəklində göstərir.
+- "Tema Bazarı" səhifəsində mövcud şablonları siyahı şəklində görmək və bir düymə ilə tətbiq etmək mümkündür. Seçilən tema `/api/themes/import/{id}` endpointi vasitəsilə yüklənir və `ThemeService` ilə aktiv edilir.
 
 ## Gələcək İnkişaf
 - Tam WCAG 2.1 uyğunluğunun avtomatik yoxlanılması üçün genişlənmiş audit modulu.

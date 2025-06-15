@@ -93,7 +93,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
  - [x] Micro-interactions, onboarding, live hints, self-personalize - 2025-06-15 - AI: Toast notification on first visit, onboarding wizard
 - [ ] Modular, white-label, instant preview, drag-and-drop dashboards
-- [ ] **Marketplace for themes/layouts, instant import/export**
+ - [x] **Marketplace for themes/layouts, instant import/export**
  - [x] **Live UI “audit”, accessibility scanner, design error finder**
 - [ ] Smart global search (every setting, user, module, log, doc, etc.)
 - [ ] Role-based UI shaping & permission simulation
