@@ -36,6 +36,16 @@ Bu sənəd WebAdminPanel modulunun istifadəçi təcrübəsi və dizayn prinsipl
 - Vidjet əlavə olunduqdan sonra yerləşdirməni dəyişmək və ya silmək üçün sadə drag-and-drop funksiyası aktivdir.
 - Hazır düzən `dashboardDesigner.js` skripti vasitəsilə brauzer yaddaşında saxlanılır və növbəti açılışda bərpa olunur.
 
+### NavigationService ilə Rol və Tenant Menyusu
+- `NavigationService` artıq `RoleBasedUiService` vasitəsilə istifadəçi rollarına uyğun menyu elementlərini qaytarır.
+- Tenant üçün `menuitems.{tenant}.json` faylı tapılarsa, əsas menyunu həmin fayl əvəz edir.
+- `NavMenu` komponenti bu servisdən `GetMenuItemsAsync(user, tenantId)` çağırışı ilə siyahını alır.
+
+### WYSIWYG Redaktor
+- `VisualEditor` səhifəsi `contenteditable` əsaslı sadə redaktorla yenilənib.
+- `wysiwyg.js` skripti daxilində yazılan mətnləri dərhal ifrəmədə göstərir.
+- **B**, **I**, **U** düymələri `execCommand` ilə mətni formatlayır.
+
 ## Gələcək İnkişaf
 - Tam WCAG 2.1 uyğunluğunun avtomatik yoxlanılması üçün genişlənmiş audit modulu.
 - Fərdi şirkətlər üçün rəng palitrası və loqo yükləmə imkanları.

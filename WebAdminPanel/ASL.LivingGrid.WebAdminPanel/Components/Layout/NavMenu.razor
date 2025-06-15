@@ -64,18 +64,9 @@
             localizedStrings["Navigation.LocalizationCoverage"] = "Tərcümə Örtüyü";
         }
 
-        var allItems = await NavService.GetMenuItemsAsync();
         var authState = await AuthProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        var list = new List<NavigationItem>();
-        foreach (var item in allItems)
-        {
-            if (await RoleUi.HasAccessAsync(item.Key, user))
-            {
-                list.Add(item);
-            }
-        }
-        menuItems = list;
+        menuItems = await NavService.GetMenuItemsAsync(user);
     }
 
     private async Task SimulateRole(ChangeEventArgs e)
