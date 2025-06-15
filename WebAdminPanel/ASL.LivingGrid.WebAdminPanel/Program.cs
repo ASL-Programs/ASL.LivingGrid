@@ -248,7 +248,7 @@ public class Program
             Results.Ok(await svc.GetRequestsByStatusAsync(status)));
         trGroup.MapPost("/submit", async (TranslationRequest req, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
-            var created = await svc.SubmitRequestAsync(req.Key, req.Culture, req.ProposedValue ?? string.Empty, user.Identity?.Name ?? "anon");
+            var created = await svc.SubmitRequestAsync(req.Key, req.Culture, req.ProposedValue ?? string.Empty, user.Identity?.Name ?? "anon", req.Status);
             return Results.Ok(created);
         });
         trGroup.MapPost("/suggest", async (TranslationSuggestionRequest req, ITranslationWorkflowService svc) =>
@@ -264,6 +264,11 @@ public class Program
         trGroup.MapPost("/review/{id}", async (Guid id, TranslationReviewRequest review, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
         {
             await svc.ReviewRequestAsync(id, review.Accept, user.Identity?.Name ?? "system", review.Comments, review.Escalate);
+            return Results.Ok();
+        });
+        trGroup.MapPost("/reject/{id}", async (Guid id, TranslationReviewRequest review, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
+        {
+            await svc.RejectRequestAsync(id, user.Identity?.Name ?? "system", review.Comments, review.Escalate);
             return Results.Ok();
         });
         trGroup.MapPost("/status/{id}", async (Guid id, TranslationRequestStatus status, ITranslationWorkflowService svc, ClaimsPrincipal user) =>
