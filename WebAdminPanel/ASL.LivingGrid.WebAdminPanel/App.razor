@@ -1,24 +1,24 @@
-&lt;CascadingAuthenticationState&gt;
-    &lt;Router AppAssembly="@typeof(App).Assembly"&gt;
-        &lt;Found Context="routeData"&gt;
-            &lt;AuthorizeView&gt;
-                &lt;Authorized&gt;
-                    &lt;RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" /&gt;
-                    &lt;FocusOnNavigate RouteData="@routeData" Selector="h1" /&gt;
-                &lt;/Authorized&gt;
-                &lt;NotAuthorized&gt;
-                    &lt;PageTitle&gt;Login - ASL LivingGrid&lt;/PageTitle&gt;
-                    &lt;LayoutView Layout="@typeof(LoginLayout)"&gt;
-                        &lt;Login /&gt;
-                    &lt;/LayoutView&gt;
-                &lt;/NotAuthorized&gt;
-            &lt;/AuthorizeView&gt;
-        &lt;/Found&gt;
-        &lt;NotFound&gt;
-            &lt;PageTitle&gt;Not found&lt;/PageTitle&gt;
-            &lt;LayoutView Layout="@typeof(MainLayout)"&gt;
-                &lt;p role="alert"&gt;Sorry, there's nothing at this address.&lt;/p&gt;
-            &lt;/LayoutView&gt;
-        &lt;/NotFound&gt;
-    &lt;/Router&gt;
-&lt;/CascadingAuthenticationState&gt;
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeView>
+                <Authorized>
+                    <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                    <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+                </Authorized>
+                <NotAuthorized>
+                    <PageTitle>Login - ASL LivingGrid</PageTitle>
+                    <LayoutView Layout="@typeof(LoginLayout)">
+                        <Login />
+                    </LayoutView>
+                </NotAuthorized>
+            </AuthorizeView>
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p role="alert">Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

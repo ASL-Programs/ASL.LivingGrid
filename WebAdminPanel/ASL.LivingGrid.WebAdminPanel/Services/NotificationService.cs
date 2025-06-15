@@ -8,15 +8,15 @@ namespace ASL.LivingGrid.WebAdminPanel.Services;
 public class NotificationService : INotificationService
 {
     private readonly ApplicationDbContext _context;
-    private readonly ILogger&lt;NotificationService&gt; _logger;
+    private readonly ILogger<NotificationService> _logger;
 
-    public NotificationService(ApplicationDbContext context, ILogger&lt;NotificationService&gt; logger)
+    public NotificationService(ApplicationDbContext context, ILogger<NotificationService> logger)
     {
         _context = context;
         _logger = logger;
     }
 
-    public async Task&lt;Notification&gt; CreateAsync(string title, string message, string type = "Info", 
+    public async Task<Notification> CreateAsync(string title, string message, string type = "Info", 
         string priority = "Normal", string? recipients = null, DateTime? scheduledAt = null,
         Guid? companyId = null, Guid? tenantId = null, string? userId = null, object? data = null)
     {
@@ -57,19 +57,19 @@ public class NotificationService : INotificationService
         }
     }
 
-    public async Task&lt;IEnumerable&lt;Notification&gt;&gt; GetUserNotificationsAsync(string userId, 
+    public async Task<IEnumerable<Notification>> GetUserNotificationsAsync(string userId, 
         bool includeRead = true, int skip = 0, int take = 50)
     {
         try
         {
             var query = _context.Notifications
-                .Where(n =&gt; n.UserId == userId || n.UserId == null); // User-specific or broadcast
+                .Where(n => n.UserId == userId || n.UserId == null); // User-specific or broadcast
 
             if (!includeRead)
-                query = query.Where(n =&gt; !n.IsRead);
+                query = query.Where(n => !n.IsRead);
 
             return await query
-                .OrderByDescending(n =&gt; n.CreatedAt)
+                .OrderByDescending(n => n.CreatedAt)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
@@ -77,18 +77,18 @@ public class NotificationService : INotificationService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting user notifications for user: {UserId}", userId);
-            return Enumerable.Empty&lt;Notification&gt;();
+            return Enumerable.Empty<Notification>();
         }
     }
 
-    public async Task&lt;IEnumerable&lt;Notification&gt;&gt; GetCompanyNotificationsAsync(Guid companyId, 
+    public async Task<IEnumerable<Notification>> GetCompanyNotificationsAsync(Guid companyId, 
         int skip = 0, int take = 50)
     {
         try
         {
             return await _context.Notifications
-                .Where(n =&gt; n.CompanyId == companyId)
-                .OrderByDescending(n =&gt; n.CreatedAt)
+                .Where(n => n.CompanyId == companyId)
+                .OrderByDescending(n => n.CreatedAt)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
@@ -96,16 +96,16 @@ public class NotificationService : INotificationService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting company notifications for company: {CompanyId}", companyId);
-            return Enumerable.Empty&lt;Notification&gt;();
+            return Enumerable.Empty<Notification>();
         }
     }
 
-    public async Task&lt;int&gt; GetUnreadCountAsync(string userId)
+    public async Task<int> GetUnreadCountAsync(string userId)
     {
         try
         {
             return await _context.Notifications
-                .Where(n =&gt; (n.UserId == userId || n.UserId == null) &amp;&amp; !n.IsRead)
+                .Where(n => (n.UserId == userId || n.UserId == null) && !n.IsRead)
                 .CountAsync();
         }
         catch (Exception ex)
@@ -120,7 +120,7 @@ public class NotificationService : INotificationService
         try
         {
             var notification = await _context.Notifications
-                .Where(n =&gt; n.Id == notificationId &amp;&amp; (n.UserId == userId || n.UserId == null))
+                .Where(n => n.Id == notificationId && (n.UserId == userId || n.UserId == null))
                 .FirstOrDefaultAsync();
 
             if (notification != null)
@@ -145,7 +145,7 @@ public class NotificationService : INotificationService
         try
         {
             var notifications = await _context.Notifications
-                .Where(n =&gt; (n.UserId == userId || n.UserId == null) &amp;&amp; !n.IsRead)
+                .Where(n => (n.UserId == userId || n.UserId == null) && !n.IsRead)
                 .ToListAsync();
 
             if (notifications.Any())
@@ -172,7 +172,7 @@ public class NotificationService : INotificationService
         try
         {
             var notification = await _context.Notifications.FindAsync(notificationId);
-            if (notification != null &amp;&amp; !notification.SentAt.HasValue)
+            if (notification != null && !notification.SentAt.HasValue)
             {
                 notification.SentAt = DateTime.UtcNow;
                 notification.UpdatedAt = DateTime.UtcNow;
@@ -210,18 +210,18 @@ public class NotificationService : INotificationService
         }
     }
 
-    public async Task&lt;IEnumerable&lt;Notification&gt;&gt; GetPendingNotificationsAsync()
+    public async Task<IEnumerable<Notification>> GetPendingNotificationsAsync()
     {
         try
         {
             return await _context.Notifications
-                .Where(n =&gt; n.ScheduledAt.HasValue &amp;&amp; n.ScheduledAt &lt;= DateTime.UtcNow &amp;&amp; !n.SentAt.HasValue)
+                .Where(n => n.ScheduledAt.HasValue && n.ScheduledAt <= DateTime.UtcNow && !n.SentAt.HasValue)
                 .ToListAsync();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting pending notifications");
-            return Enumerable.Empty&lt;Notification&gt;();
+            return Enumerable.Empty<Notification>();
         }
     }
 

@@ -35,7 +35,7 @@ public class TranslationWorkflowService : ITranslationWorkflowService
         _logger = logger;
     }
 
-    public async Task<TranslationRequest> SubmitRequestAsync(string key, string culture, string proposedValue, string requestedBy)
+    public async Task<TranslationRequest> SubmitRequestAsync(string key, string culture, string proposedValue, string requestedBy, TranslationRequestStatus status = TranslationRequestStatus.PendingReview)
     {
         var req = new TranslationRequest
         {
@@ -43,7 +43,7 @@ public class TranslationWorkflowService : ITranslationWorkflowService
             Culture = culture,
             ProposedValue = proposedValue,
             RequestedBy = requestedBy,
-            Status = TranslationRequestStatus.PendingReview,
+            Status = status,
             CreatedAt = DateTime.UtcNow
         };
         _context.TranslationRequests.Add(req);
@@ -108,6 +108,11 @@ public class TranslationWorkflowService : ITranslationWorkflowService
 
         await _context.SaveChangesAsync();
         await _audit.LogAsync("Review", nameof(TranslationRequest), id.ToString(), reviewer, reviewer, null, req);
+    }
+
+    public async Task RejectRequestAsync(Guid id, string reviewer, string? comments, bool escalate)
+    {
+        await ReviewRequestAsync(id, accept: false, reviewer, comments, escalate);
     }
 
     public async Task<string?> SuggestAsync(string text, string sourceCulture, string targetCulture)

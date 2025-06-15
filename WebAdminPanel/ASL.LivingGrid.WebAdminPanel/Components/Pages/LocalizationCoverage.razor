@@ -1,0 +1,64 @@
+@page "/coverage"
+@inject ILocalizationService LocalizationService
+
+<PageTitle>Localization Coverage</PageTitle>
+
+<h3>Localization Coverage</h3>
+
+<select @bind="selectedCulture" class="form-select w-auto mb-3" @onchange="Load">
+    @foreach (var c in cultures)
+    {
+        <option value="@c">@c</option>
+    }
+</select>
+
+@if (coverage != null)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Module</th>
+                <th class="w-50">Coverage</th>
+                <th class="text-end">%</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in coverage)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width:@item.Value.ToString("F0")%">
+                                @item.Value.ToString("F0")%
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-end">@item.Value.ToString("F0")%</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string selectedCulture = "az";
+    private List<string> cultures = new();
+    private Dictionary<string, double>? coverage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cultures = (await LocalizationService.GetSupportedCulturesAsync()).ToList();
+        if (cultures.Any())
+            selectedCulture = cultures.First();
+        await Load();
+    }
+
+    private async Task Load()
+    {
+        coverage = (await LocalizationService.GetCoverageByCategoryAsync(selectedCulture))
+            .OrderBy(kv => kv.Key)
+            .ToDictionary(kv => kv.Key, kv => kv.Value);
+        StateHasChanged();
+    }
+}

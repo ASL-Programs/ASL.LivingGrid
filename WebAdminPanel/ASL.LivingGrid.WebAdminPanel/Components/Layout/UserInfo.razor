@@ -2,29 +2,29 @@
 @using Microsoft.AspNetCore.Identity
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager Navigation
-@inject SignInManager&lt;IdentityUser&gt; SignInManager
+@inject SignInManager<IdentityUser> SignInManager
 
-&lt;div class="user-info"&gt;
-    &lt;AuthorizeView&gt;
-        &lt;Authorized&gt;
-            &lt;div class="dropdown"&gt;
-                &lt;button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"&gt;
-                    &lt;span class="oi oi-person"&gt;&lt;/span&gt; @context.User.Identity?.Name
-                &lt;/button&gt;
-                &lt;ul class="dropdown-menu"&gt;
-                    &lt;li&gt;&lt;a class="dropdown-item" href="/Account/Manage"&gt;Profile&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;hr class="dropdown-divider"&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;button class="dropdown-item" @onclick="LogoutAsync"&gt;Logout&lt;/button&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        &lt;/Authorized&gt;
-        &lt;NotAuthorized&gt;
-            &lt;a href="/Account/Login" class="btn btn-outline-light"&gt;
-                &lt;span class="oi oi-account-login"&gt;&lt;/span&gt; Login
-            &lt;/a&gt;
-        &lt;/NotAuthorized&gt;
-    &lt;/AuthorizeView&gt;
-&lt;/div&gt;
+<div class="user-info">
+    <AuthorizeView>
+        <Authorized>
+            <div class="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <span class="oi oi-person"></span> @context.User.Identity?.Name
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/Account/Manage">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><button class="dropdown-item" @onclick="LogoutAsync">Logout</button></li>
+                </ul>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <a href="/Account/Login" class="btn btn-outline-light">
+                <span class="oi oi-account-login"></span> Login
+            </a>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
 
 @code {
     private async Task LogoutAsync()
@@ -34,11 +34,11 @@
     }
 }
 
-&lt;style&gt;
+<style>
     .user-info {
         display: flex;
         align-items: center;
         justify-content: flex-end;
         padding: 0.5rem 0;
     }
-&lt;/style&gt;
+</style>

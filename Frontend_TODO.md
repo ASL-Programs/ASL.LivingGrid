@@ -76,8 +76,8 @@
 - [x] **Self-hosted .exe with Kestrel** (2025-06-15 - AI: Basic .NET 9.0 Blazor project with Kestrel hosting capability created)
  - [x] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes) - 2025-06-15 - AI: Dockerfile və web.config əlavə edildi
  - [x] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore - 2025-06-15 - AI: Hosting mode switch implemented in Program.cs
- - [x] **Marketplace for themes/layouts, instant import/export** - 2025-06-15 - AI: ThemeMarketplace page and ThemeService import/export added
-- [ ] **Distributed, Hybrid Cloud, Serverless Functions**
+ - [x] **Multi-instance, multi-mode sync** (cloud, on-prem, edge) - 2025-06-15 - AI: SyncService ilə `sync_nodes.json` üzrə periodik sinxronizasiya
+ - [ ] **Distributed, Hybrid Cloud, Serverless Functions**
     - Multi-cloud (AWS, Azure, GCP), serverless FaaS, auto-provisioned
     - **Disaster Recovery:** Real-time failover, auto backup, cross-region replication
     - **Edge Deployment:** IoT/branch office, limited-connectivity support
@@ -126,8 +126,8 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
     - [x] Proofreading workflow (review, approve, escalate issues)
 
 - [ ] **Coverage & Quality Assurance**
-    - [ ] Coverage dashboard (% complete, missing keys, per-module coverage)
-    - [ ] Live alert for untranslated/missing/incomplete/invalid placeholders
+    - [x] Coverage dashboard (% complete, missing keys, per-module coverage)
+    - [x] Live alert for untranslated/missing/incomplete/invalid placeholders
     - [ ] Context preview: see translation in UI before publish
     - [ ] Consistency checker: identical terms across modules, placeholder validation
     - [ ] Length/overflow check (UI fit)
@@ -144,18 +144,18 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
 - [ ] **Integration & API**
     - [ ] REST API for CRUD, version fetch, 3rd-party translation provider integration (Google, Azure, DeepL)
     - [ ] Webhook for translation update events
-- [ ] **Localization Coverage Dashboard**
-    - [ ] Per-module, per-tenant, per-user, real-time coverage stats, history, and quality metrics
+- [x] **Localization Coverage Dashboard**
+    - [x] Per-module, per-tenant, per-user, real-time coverage stats, history, and quality metrics
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Niyə yaradılıb?
+- [x] Nəyə xidmət edir?
+- [x] İstifadə qaydası və idarəetmə prinsipləri
+- [x] Texniki və biznes üstünlükləri
+- [x] Gələcək inkişaf yolları və risklər
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
 ## 1.2. Solution & Setup

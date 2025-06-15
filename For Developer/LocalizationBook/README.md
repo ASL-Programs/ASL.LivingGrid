@@ -9,6 +9,12 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 - REST API vasitəsilə dil paketlərinin idarəsi
 - AI tərcümə təklifləri üçün `TranslationWorkflowService.SuggestAsync` metodu
 - Tərcümə sorğularının vəziyyətləri: **Machine**, **Human**, **PendingReview**, **Approved**
+
+## Statusların mənası
+- **Machine** – maşın tərcüməsi, ilkin dəyər kimi əlavə edilir və yoxlamaya göndərilir.
+- **Human** – insan tərəfindən daxil edilən tərcümə, moderasiya tələb edir.
+- **PendingReview** – tərcümə redaktorun təsdiqini gözləyir.
+- **Approved** – təsdiqlənmiş tərcümə və dil paketində aktivdir.
 - `TranslationRequest` modelinə `ReviewerComments` və `Escalate` sahələri əlavə olunub
 
 
@@ -19,10 +25,12 @@ Bu kitab WebAdminPanel modulunda tərcümə idarəçiliyi və dil paketlərinin 
 4. API vasitəsilə `/api/localization` endpoint-lərindən də istifadə etmək mümkündür.
 5. Tərcümə təklifi üçün `/api/translationrequests/suggest` endpoint-i POST sorğusu göndərin.
    Sorğu bədənində `text`, `sourceCulture` və `targetCulture` sahələrini göndərin.
-6. Moderator təsdiqi üçün `/api/translationrequests/review/{id}` endpoint-inə POST sorğusu göndərin.
+6. Moderator təsdiqi və ya rədd üçün `/api/translationrequests/review/{id}` endpoint-inə POST sorğusu göndərin.
    Bədənin nümunəsi:
    `{ "accept": true, "comments": "ok", "escalate": false }`
-7. `appsettings.json` faylında `Translation` bölməsində API açarını (`ApiKey`),
+7. Birbaşa təsdiqləmə üçün `/api/translationrequests/approve/{id}` endpointindən istifadə edin.
+8. Rədd etmək və səbəb bildirmək üçün `/api/translationrequests/reject/{id}` endpointinə POST sorğusu göndərin.
+9. `appsettings.json` faylında `Translation` bölməsində API açarını (`ApiKey`),
    provayderi (`Provider`) və digər parametrləri (`Endpoint`, `Model`, `Region`)
    təyin edin. Artıq OpenAI, DeepL, Google Translate, Azure Translator və
    `Custom` provayderləri mövcuddur. Seçilən provayderə uyğun olaraq endpoint,
