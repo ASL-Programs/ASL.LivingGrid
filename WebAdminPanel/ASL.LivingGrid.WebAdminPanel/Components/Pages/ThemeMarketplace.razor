@@ -1,0 +1,45 @@
+@page "/theme-marketplace"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IThemeService ThemeService
+
+<h3>Theme Marketplace</h3>
+
+@if (themes == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var theme in themes)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <img class="card-img-top" src="@theme.PreviewImage" alt="@theme.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@theme.Name</h5>
+                        <p class="card-text">@theme.Description</p>
+                        <button class="btn btn-primary" @onclick="() => ApplyTheme(theme.Id)">Apply</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<MarketplaceTheme>? themes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        themes = await Http.GetFromJsonAsync<List<MarketplaceTheme>>("/api/themes");
+    }
+
+    private async Task ApplyTheme(string id)
+    {
+        await Http.PostAsync($"/api/themes/import/{id}", null);
+        await ThemeService.SetThemeAsync(id);
+    }
+}

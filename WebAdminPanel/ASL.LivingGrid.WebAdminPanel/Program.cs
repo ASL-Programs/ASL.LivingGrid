@@ -130,6 +130,7 @@ public class Program
         services.AddScoped<IThemeService, ThemeService>();
         services.AddScoped<INavigationService, NavigationService>();
         services.AddScoped<ITranslationWorkflowService, TranslationWorkflowService>();
+        services.AddScoped<IThemeMarketplaceService, ThemeMarketplaceService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
@@ -257,6 +258,19 @@ public class Program
         {
             await svc.UpdateStatusAsync(id, status, user.Identity?.Name ?? "system");
             return Results.Ok();
+        });
+
+        var themeGroup = app.MapGroup("/api/themes");
+        themeGroup.MapGet("/", async (IThemeMarketplaceService svc) => Results.Ok(await svc.ListAvailableThemesAsync()));
+        themeGroup.MapPost("/import/{id}", async (string id, IThemeMarketplaceService svc) =>
+        {
+            var theme = await svc.ImportThemeAsync(id);
+            return theme is not null ? Results.Ok(theme) : Results.NotFound();
+        });
+        themeGroup.MapGet("/export/{id}", async (string id, IThemeMarketplaceService svc) =>
+        {
+            var css = await svc.ExportThemeAsync(id);
+            return string.IsNullOrEmpty(css) ? Results.NotFound() : Results.Text(css, "text/css");
         });
 
         app.MapPost("/api/sync/ping", () => Results.Ok(new { Status = "Ok" }));
