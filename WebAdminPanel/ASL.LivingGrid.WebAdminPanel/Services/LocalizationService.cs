@@ -2,6 +2,7 @@ using ASL.LivingGrid.WebAdminPanel.Data;
 using ASL.LivingGrid.WebAdminPanel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using System.Linq;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
 
@@ -11,6 +12,9 @@ public class LocalizationService : ILocalizationService
     private readonly ILogger<LocalizationService> _logger;
     private readonly IMemoryCache _cache;
     private readonly TimeSpan _cacheExpiration = TimeSpan.FromMinutes(30);
+
+    /// <inheritdoc />
+    public event Action<string, string>? MissingTranslation;
 
     public LocalizationService(
         ApplicationDbContext context, 
@@ -27,14 +31,23 @@ public class LocalizationService : ILocalizationService
         try
         {
             var cacheKey = $"localization_{key}_{culture}_{companyId}_{tenantId}";
-            
+
             if (_cache.TryGetValue(cacheKey, out string? cachedValue) && !string.IsNullOrEmpty(cachedValue))
             {
                 return cachedValue;
             }
 
             var resource = await GetLocalizationResourceAsync(key, culture, companyId, tenantId);
-            var value = resource?.Value ?? key; // Return key if translation not found
+            string value;
+            if (resource == null)
+            {
+                value = key; // Return key if translation not found
+                MissingTranslation?.Invoke(key, culture);
+            }
+            else
+            {
+                value = resource.Value;
+            }
 
             _cache.Set(cacheKey, value, _cacheExpiration);
             return value;
@@ -212,6 +225,50 @@ public class LocalizationService : ILocalizationService
             _logger.LogError(ex, "Error getting all strings for culture: {Culture}", culture);
             return new Dictionary<string, string>();
         }
+    }
+
+    public async Task<Dictionary<string, double>> GetCoverageByCategoryAsync(string culture)
+    {
+        const string defaultCulture = "az";
+
+        var total = await _context.LocalizationResources
+            .Where(r => r.Culture == defaultCulture)
+            .GroupBy(r => r.Category)
+            .Select(g => new { Category = g.Key, Count = g.Count() })
+            .ToListAsync();
+
+        var translated = await _context.LocalizationResources
+            .Where(r => r.Culture == culture)
+            .GroupBy(r => r.Category)
+            .Select(g => new { Category = g.Key, Count = g.Count() })
+            .ToDictionaryAsync(g => g.Category, g => g.Count);
+
+        var result = new Dictionary<string, double>();
+        foreach (var cat in total)
+        {
+            translated.TryGetValue(cat.Category, out var c);
+            var pct = cat.Count == 0 ? 100 : (double)c * 100 / cat.Count;
+            result[cat.Category] = Math.Round(pct, 2);
+        }
+
+        return result;
+    }
+
+    public async Task<IEnumerable<string>> GetMissingKeysAsync(string culture)
+    {
+        const string defaultCulture = "az";
+
+        var defaultKeys = await _context.LocalizationResources
+            .Where(r => r.Culture == defaultCulture)
+            .Select(r => r.Key)
+            .ToListAsync();
+
+        var targetKeys = await _context.LocalizationResources
+            .Where(r => r.Culture == culture)
+            .Select(r => r.Key)
+            .ToListAsync();
+
+        return defaultKeys.Except(targetKeys);
     }
 
     public async Task BulkSetAsync(IEnumerable<LocalizationResource> resources)
