@@ -1,97 +1,54 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using ASL.LivingGrid.WebAdminPanel.Services
+@using ASL.LivingGrid.WebAdminPanel.Models
 @inject ILocalizationService LocalizationService
+@inject INavigationService NavService
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 
-&lt;div class="top-row ps-3 navbar navbar-dark"&gt;
-    &lt;div class="container-fluid"&gt;
-        &lt;a class="navbar-brand" href="/"&gt;ASL LivingGrid&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">ASL LivingGrid</a>
+    </div>
+</div>
 
-&lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"&gt;
-    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
-&lt;/button&gt;
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
 
-&lt;div id="sidebarMenuContent" class="nav-scrollable collapse show"&gt;
-    &lt;nav class="flex-column"&gt;
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="" Match="NavLinkMatch.All"&gt;
-                &lt;span class="oi oi-home" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Dashboard"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-        
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="companies"&gt;
-                &lt;span class="oi oi-people" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Companies"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-        
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="users"&gt;
-                &lt;span class="oi oi-person" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Users"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-        
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="roles"&gt;
-                &lt;span class="oi oi-key" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Roles"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-        
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="settings"&gt;
-                &lt;span class="oi oi-cog" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Settings"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-        
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="audit"&gt;
-                &lt;span class="oi oi-clipboard" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Audit"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="uiaudit"&gt;
-                &lt;span class="oi oi-eye" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.UIAudit"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-        
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="notifications"&gt;
-                &lt;span class="oi oi-bell" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Notifications"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-        
-        &lt;div class="nav-item px-3"&gt;
-            &lt;NavLink class="nav-link" href="plugins"&gt;
-                &lt;span class="oi oi-puzzle-piece" aria-hidden="true"&gt;&lt;/span&gt; @localizedStrings["Navigation.Plugins"]
-            &lt;/NavLink&gt;
-        &lt;/div&gt;
-    &lt;/nav&gt;
-&lt;/div&gt;
+<div id="sidebarMenuContent" class="nav-scrollable collapse show">
+    <nav class="flex-column">
+        @foreach (var item in menuItems)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="@item.Url" Match="NavLinkMatch.Prefix">
+                    <span class="@item.Icon" aria-hidden="true"></span> @localizedStrings[item.Key]
+                </NavLink>
+            </div>
+        }
+    </nav>
+</div>
 
 @code {
-    private Dictionary&lt;string, string&gt; localizedStrings = new();
+    private Dictionary<string, string> localizedStrings = new();
+    private IEnumerable<NavigationItem> menuItems = Enumerable.Empty<NavigationItem>();
 
     protected override async Task OnInitializedAsync()
     {
-        // Load localized strings
         localizedStrings = await LocalizationService.GetAllStringsAsync("az"); // Default to Azerbaijani
-        
-        // Add default navigation strings if not exists
         if (!localizedStrings.ContainsKey("Navigation.Dashboard"))
         {
-            localizedStrings.Add("Navigation.Dashboard", "İdarə paneli");
-            localizedStrings.Add("Navigation.Companies", "Şirkətlər");
-            localizedStrings.Add("Navigation.Users", "İstifadəçilər");
-            localizedStrings.Add("Navigation.Roles", "Rollar");
-            localizedStrings.Add("Navigation.Settings", "Ayarlar");
-            localizedStrings.Add("Navigation.Audit", "Audit");
-            localizedStrings.Add("Navigation.Notifications", "Bildirişlər");
-            localizedStrings.Add("Navigation.Plugins", "Pluginlər");
-            localizedStrings.Add("Navigation.UIAudit", "UI Audit");
+            localizedStrings["Navigation.Dashboard"] = "İdarə paneli";
+            localizedStrings["Navigation.Companies"] = "Şirkətlər";
+            localizedStrings["Navigation.Users"] = "İstifadəçilər";
+            localizedStrings["Navigation.Roles"] = "Rollar";
+            localizedStrings["Navigation.Settings"] = "Ayarlar";
+            localizedStrings["Navigation.Audit"] = "Audit";
+            localizedStrings["Navigation.Notifications"] = "Bildirişlər";
+            localizedStrings["Navigation.Plugins"] = "Pluginlər";
+            localizedStrings["Navigation.UIAudit"] = "UI Audit";
         }
+
+        menuItems = await NavService.GetMenuItemsAsync();
     }
 }

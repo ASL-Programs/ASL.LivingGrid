@@ -74,7 +74,7 @@
 
 ## 1.0. Deployment & Architecture Options
 - [x] **Self-hosted .exe with Kestrel** (2025-06-15 - AI: Basic .NET 9.0 Blazor project with Kestrel hosting capability created)
-- [ ] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes)
+ - [x] **Classic Web Hosting** (IIS, Apache, Nginx, VM, Docker, Kubernetes) - 2025-06-15 - AI: Dockerfile və web.config əlavə edildi
 - [ ] **Switchable Mode:** .exe <-> Hosting, instant migration, backup/restore
 - [ ] **Multi-instance, multi-mode sync** (cloud, on-prem, edge)
 - [ ] **Distributed, Hybrid Cloud, Serverless Functions**
@@ -90,7 +90,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] Fully responsive layout (desktop/tablet/mobile/ultra-wide)
  - [x] Modern, minimal, per-tenant branding & theming
  - [x] Adaptive light/dark, high-contrast, WCAG/ADA
-- [ ] Dynamic navigation (sidebar/topbar/hamburger/quick search)
+ - [x] Dynamic navigation (sidebar/topbar/hamburger/quick search) - 2025-06-15 - AI: NavigationService və menuitems.json ilə dinamik menyu
 - [ ] Micro-interactions, onboarding, live hints, self-personalize
 - [ ] Modular, white-label, instant preview, drag-and-drop dashboards
 - [ ] **Marketplace for themes/layouts, instant import/export**

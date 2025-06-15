@@ -125,6 +125,7 @@ public class Program
         services.AddScoped<IAdvancedRollbackService, AdvancedRollbackService>();
         services.AddScoped<IWireframePageBuilderService, WireframePageBuilderService>();
         services.AddScoped<IThemeService, ThemeService>();
+        services.AddScoped<INavigationService, NavigationService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
