@@ -122,7 +122,7 @@ Hər dəfə deployment və arxitektura ilə bağlı dəyişiklik və ya yeni bir
  - [x] **Collaborative & AI-Assisted Translation** - 2025-06-15 - AI: TranslationWorkflowService əlavə edildi
     - [x] Crowdsource editor: role-based translation request & approval workflow
 
-    - [ ] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
+    - [x] AI translation suggestions (OpenAI, Google, DeepL, custom LLM)
     - [ ] Translation status: “machine”, “human”, “pending review”, “approved”
     - [x] Activity log for all translation events
     - [ ] Proofreading workflow (review, approve, escalate issues)
