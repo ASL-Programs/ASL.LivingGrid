@@ -4,6 +4,7 @@ obj/
 out/
 *.user
 *.suo
+.vs/
 *.cache
 *.docstates
 _ReSharper*/
