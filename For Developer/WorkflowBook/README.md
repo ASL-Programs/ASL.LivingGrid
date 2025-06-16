@@ -22,6 +22,9 @@ Bu sənəd WebAdminPanel modulunda vizual workflow designer və form builder sis
 3. **Təsdiq addımı:** `AddApprovalStepAsync` ilə mərhələləri ardıcıllıqla qeyd etmək olur.
 4. **Validasiya qaydaları:** `AddValidationRuleAsync` form sahəsinə regex və xəta mesajı təyin edir.
 5. **Skript triggeri:** `TriggerScriptAsync` workflow hadisəsi baş verdikdə seçilmiş dil üzrə skriptin işə düşməsini təmin edir.
+6. **Şablon ixracı/idxalı:** `ExportWorkflowAsync` workflow-u JSON kimi çıxarır, `ImportWorkflowAsync` isə həmin JSON-u sistemə əlavə edir.
+7. **Şablon paylaşımı:** `ShareWorkflowAsync` metodundan istifadə etməklə şablon `workflow_templates` qovluğunda saxlanılır və yolu qaytarılır.
+8. **Avtomatlaşdırma idarəsi:** `EnableAutomationAsync` ilə workflow skriptlərinin işləməsini aktiv və ya deaktiv etmək mümkündür.
 
 ## Texniki və biznes üstünlükləri
 - **Esneklik:** İstənilən biznes prosesini kod dəyişmədən qurmağa imkan verir.

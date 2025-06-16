@@ -1,5 +1,8 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
+using System.Text.Json;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
@@ -7,11 +10,15 @@ namespace ASL.LivingGrid.WebAdminPanel.Services;
 public class WorkflowDesignerService : IWorkflowDesignerService
 {
     private readonly ILogger<WorkflowDesignerService> _logger;
+    private readonly IWebHostEnvironment _env;
+    private readonly string _templatesDir;
     private readonly ConcurrentDictionary<string, Workflow> _workflows = new();
-
-    public WorkflowDesignerService(ILogger<WorkflowDesignerService> logger)
+    public WorkflowDesignerService(ILogger<WorkflowDesignerService> logger, IWebHostEnvironment env)
     {
         _logger = logger;
+        _env = env;
+        _templatesDir = Path.Combine(_env.ContentRootPath, "workflow_templates");
+        Directory.CreateDirectory(_templatesDir);
     }
 
     public Task<Workflow> CreateWorkflowAsync(string name, string description)
@@ -94,5 +101,45 @@ public class WorkflowDesignerService : IWorkflowDesignerService
     {
         _workflows.TryGetValue(workflowId, out var wf);
         return Task.FromResult(wf);
+    }
+
+    public Task<string> ExportWorkflowAsync(string workflowId)
+    {
+        if (_workflows.TryGetValue(workflowId, out var wf))
+        {
+            return Task.FromResult(JsonSerializer.Serialize(wf));
+        }
+        return Task.FromResult(string.Empty);
+    }
+
+    public Task<Workflow?> ImportWorkflowAsync(string json)
+    {
+        var wf = JsonSerializer.Deserialize<Workflow>(json);
+        if (wf != null)
+        {
+            _workflows[wf.Id] = wf;
+        }
+        return Task.FromResult(wf);
+    }
+
+    public async Task<string> ShareWorkflowAsync(string workflowId)
+    {
+        var json = await ExportWorkflowAsync(workflowId);
+        if (string.IsNullOrEmpty(json))
+            return string.Empty;
+        var file = Path.Combine(_templatesDir, $"{workflowId}.json");
+        await File.WriteAllTextAsync(file, json);
+        return file;
+    }
+
+    public Task EnableAutomationAsync(string workflowId, bool enabled)
+    {
+        if (_workflows.TryGetValue(workflowId, out var wf))
+        {
+            wf.AutomationEnabled = enabled;
+            _logger.LogInformation("Automation {State} for workflow {Id}", enabled ? "enabled" : "disabled", workflowId);
+            return Task.CompletedTask;
+        }
+        throw new KeyNotFoundException($"Workflow {workflowId} not found");
     }
 }

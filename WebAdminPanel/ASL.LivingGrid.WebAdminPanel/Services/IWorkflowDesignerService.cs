@@ -11,6 +11,10 @@ public interface IWorkflowDesignerService
     Task<IEnumerable<string>> ValidateAsync(string workflowId, Dictionary<string, object> formData);
     Task TriggerScriptAsync(string workflowId, WorkflowEvent @event, ScriptLanguage language, string code);
     Task<Workflow?> GetWorkflowAsync(string workflowId);
+    Task<string> ExportWorkflowAsync(string workflowId);
+    Task<Workflow?> ImportWorkflowAsync(string json);
+    Task<string> ShareWorkflowAsync(string workflowId);
+    Task EnableAutomationAsync(string workflowId, bool enabled);
 }
 
 public class Workflow
@@ -21,6 +25,7 @@ public class Workflow
     public List<FormField> Fields { get; set; } = new();
     public List<ApprovalStep> Approval { get; set; } = new();
     public Dictionary<WorkflowEvent, Script> Scripts { get; set; } = new();
+    public bool AutomationEnabled { get; set; } = true;
 }
 
 public class FormField
