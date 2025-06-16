@@ -17,7 +17,7 @@
 ### Unit Test Tasks
 
 - [x] Write tests for core business logic
-- [ ] Mock API/services for isolated tests
+- [x] Mock API/services for isolated tests
 - [x] Test edge cases and failure scenarios
 - [x] Automated test run in CI pipeline
 
