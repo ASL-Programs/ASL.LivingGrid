@@ -15,6 +15,9 @@ Hazırki versiyada dörd yerləşdirmə rejimi sınanmış və istifadəyə haz�
 ### Konfiqurasiya
 `appsettings.json` faylında `Hosting:Mode` dəyərini dəyişərək rejim seçilir.
 Əlavə olaraq `BackupBeforeSwitch` və `AutoMigrate` parametrləri mövcuddur.
+HTTPS yönləndirməsini məcburi etmək üçün `Security:RequireHttps` açarını `true`
+edə bilərsiniz. Köhnə `ForceHttps` açarı hələ də tanınır, lakin gələcək
+versiyalarda çıxarılacaq.
 Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməklə rejim dərhal dəyişdirilə bilər.
 
 ### Rejim dəyişdikdə

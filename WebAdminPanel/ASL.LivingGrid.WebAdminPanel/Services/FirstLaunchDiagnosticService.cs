@@ -889,9 +889,10 @@ public class FirstLaunchDiagnosticService : IFirstLaunchDiagnosticService
             catch { }
         }
 
-        // Check HTTPS configuration
-        var httpsEnabled = _configuration.GetValue<bool>("ForceHttps", false);
-        if (httpsEnabled)
+        // Check HTTPS configuration (new key with legacy fallback)
+        var requireHttps = _configuration.GetValue<bool?>("Security:RequireHttps");
+        var oldForceHttps = _configuration.GetValue<bool>("ForceHttps", false);
+        if (requireHttps.GetValueOrDefault(oldForceHttps))
         {
             securityFeatures.Add("HTTPS enabled");
             securityScore++;

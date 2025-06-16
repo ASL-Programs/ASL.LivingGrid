@@ -87,6 +87,13 @@ dotnet build ASL.LivingGrid.sln
 
 Each module can be run independently from its own solution.
 
+### 6. Configuration
+
+To enforce HTTPS redirection when hosting the WebAdminPanel, set the
+`Security:RequireHttps` key in `appsettings.json` (or as an environment
+variable). The previous `ForceHttps` key is still accepted for backwards
+compatibility but will be removed in future versions.
+
 ## Development Workflow
 
 Please read `Read before you start working.md` before beginning any development work. The project follows strict Core Rules and workflow guidelines with progress tracking through TODO.md files. Continuous integration runs via GitHub Actions using `.github/workflows/dotnet.yml`.
