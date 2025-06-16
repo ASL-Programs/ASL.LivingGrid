@@ -1,0 +1,56 @@
+@page "/db-wizard"
+@inject IMultiDbWizardService DbService
+
+<h3>Multi-Database Wizard</h3>
+
+@if (options == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="model" OnValidSubmit="Save" class="mb-3">
+        <div class="mb-3">
+            <label class="form-label">Database Type</label>
+            <InputSelect class="form-select" @bind-Value="model.Type">
+                @foreach (var t in options)
+                {
+                    <option value="@t">@t</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Connection String</label>
+            <InputText class="form-control" @bind-Value="model.ConnectionString" />
+        </div>
+        <button class="btn btn-primary" type="submit">Apply</button>
+    </EditForm>
+    @if (!string.IsNullOrEmpty(status))
+    {
+        <div class="alert alert-info">@status</div>
+    }
+}
+
+@code {
+    private IEnumerable<string>? options;
+    private DbModel model = new();
+    private string? status;
+
+    protected override async Task OnInitializedAsync()
+    {
+        options = await DbService.GetSupportedTypesAsync();
+        model.Type = options.FirstOrDefault() ?? "SQLServer";
+    }
+
+    private async Task Save()
+    {
+        var ok = await DbService.ApplyConfigurationAsync(model.Type, model.ConnectionString ?? string.Empty);
+        status = ok ? "Saved" : "Failed";
+    }
+
+    private class DbModel
+    {
+        public string Type { get; set; } = "SQLServer";
+        public string? ConnectionString { get; set; }
+    }
+}

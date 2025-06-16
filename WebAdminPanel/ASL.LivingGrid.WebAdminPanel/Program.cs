@@ -190,6 +190,9 @@ public class Program
         services.AddScoped<INotificationChannel, SlackNotificationChannel>();
         services.AddScoped<IPluginService, PluginService>();
         services.AddScoped<IPluginMarketplaceService, PluginMarketplaceService>();
+        services.AddScoped<IMultiDbWizardService, MultiDbWizardService>();
+        services.AddScoped<IEnvironmentConfigManager, EnvironmentConfigManager>();
+        services.AddScoped<IProcessMonitorService, ProcessMonitorService>();
         services.AddScoped<ITranslationProviderService, TranslationProviderService>();
         services.AddScoped<ILocalizationCustomizationService, LocalizationCustomizationService>();
         services.AddScoped<IReportingService, ReportingService>();

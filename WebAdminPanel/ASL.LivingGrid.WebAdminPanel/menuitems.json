@@ -125,5 +125,20 @@
     "Key": "Navigation.TestAutomation",
     "Url": "test-automation",
     "Icon": "oi oi-media-play"
+  },
+  {
+    "Key": "Navigation.MultiDbWizard",
+    "Url": "db-wizard",
+    "Icon": "oi oi-database"
+  },
+  {
+    "Key": "Navigation.EnvironmentConfig",
+    "Url": "env-config",
+    "Icon": "oi oi-wrench"
+  },
+  {
+    "Key": "Navigation.ProcessMonitor",
+    "Url": "process-monitor",
+    "Icon": "oi oi-graph"
   }
 ]

@@ -1,0 +1,58 @@
+@page "/process-monitor"
+@inject IProcessMonitorService ProcessService
+
+<h3>Live Process Monitor</h3>
+
+@if (processes == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>CPU %</th>
+                <th>Memory MB</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in processes)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Name</td>
+                    <td>@p.CpuUsage.ToString("F1")</td>
+                    <td>@p.MemoryMb.ToString("F1")</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" @onclick="() => Kill(p.Id)">Kill</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (!string.IsNullOrEmpty(status))
+    {
+        <div class="alert alert-info">@status</div>
+    }
+}
+
+@code {
+    private IEnumerable<ProcessInfo>? processes;
+    private string? status;
+
+    protected override async Task OnInitializedAsync()
+    {
+        processes = await ProcessService.ListAsync();
+    }
+
+    private async Task Kill(int id)
+    {
+        var ok = await ProcessService.KillAsync(id);
+        status = ok ? $"Killed {id}" : "Failed";
+        processes = await ProcessService.ListAsync();
+    }
+}

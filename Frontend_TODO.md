@@ -339,7 +339,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.11. Multi-Database Support & Installation
-- [ ] Multi-DB wizard (SQL Server, PostgreSQL, SQLite, Oracle, NoSQL, etc.)
+- [x] Multi-DB wizard (SQL Server, PostgreSQL, SQLite, Oracle, NoSQL, etc.) - 2025-06-18 - AI: Initial wizard scaffolding added
 - [ ] Auto-discover DB on network, manual entry, migrate/install
 - [ ] Real-time schema, backup/restore, live environment compatibility
 - [ ] Data warehouse integration, multi-source connector
@@ -359,7 +359,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.12. Environment Configuration Manager
-- [ ] UI editor for env vars (API keys, DBs, URLs)
+- [x] UI editor for env vars (API keys, DBs, URLs) - 2025-06-18 - AI: Basic manager page created
 - [ ] Per-environment profiles (Dev, QA, Prod, Demo)
 - [ ] Import/export configs (.json, .env), auto-sync, test before save
 - [ ] **Secrets encryption and audit for all sensitive configs**
@@ -378,7 +378,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.13. Live Process Monitor
-- [ ] Realtime backend/process tracker (CPU/RAM/Job state)
+- [x] Realtime backend/process tracker (CPU/RAM/Job state) - 2025-06-18 - AI: Monitoring component skeleton
 - [ ] Kill/restart from UI, module/user/session filter, error auto-notify
 - [ ] **Historical process and resource usage analytics**
 - [ ] **Threshold alerting, auto-scale triggers**

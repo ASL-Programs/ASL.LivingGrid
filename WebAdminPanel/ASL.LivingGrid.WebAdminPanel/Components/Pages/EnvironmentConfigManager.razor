@@ -1,0 +1,42 @@
+@page "/env-config"
+@inject IEnvironmentConfigManager EnvService
+
+<h3>Environment Configuration</h3>
+
+@if (items == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="items" OnValidSubmit="Save">
+        @foreach (var key in items.Keys)
+        {
+            <div class="mb-3">
+                <label class="form-label">@key</label>
+                <InputText class="form-control" @bind-Value="items[key]" />
+            </div>
+        }
+        <button class="btn btn-primary" type="submit">Save</button>
+    </EditForm>
+    @if (!string.IsNullOrEmpty(status))
+    {
+        <div class="alert alert-info">@status</div>
+    }
+}
+
+@code {
+    private Dictionary<string, string?>? items;
+    private string? status;
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = (await EnvService.LoadAsync()).ToDictionary(kv => kv.Key, kv => kv.Value);
+    }
+
+    private async Task Save()
+    {
+        await EnvService.SaveAsync(items!);
+        status = "Saved";
+    }
+}
