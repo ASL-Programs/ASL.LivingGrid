@@ -3,6 +3,7 @@ using ASL.LivingGrid.WebAdminPanel.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
@@ -14,6 +15,7 @@ public class WireframePageBuilderService : IWireframePageBuilderService
     private readonly string _projectsPath;
     private readonly string _templatesPath;
     private readonly string _previewsPath;
+    private readonly string _previewSecret;
     private Task _initTemplatesTask = Task.CompletedTask;
 
     public WireframePageBuilderService(
@@ -27,6 +29,7 @@ public class WireframePageBuilderService : IWireframePageBuilderService
         _projectsPath = Path.Combine(basePath, "Wireframes", "Projects");
         _templatesPath = Path.Combine(basePath, "Wireframes", "Templates");
         _previewsPath = Path.Combine(basePath, "Wireframes", "Previews");
+        _previewSecret = _configService.GetValueAsync("Security:PreviewSecret").GetAwaiter().GetResult() ?? "ChangeThisSecret";
         
         try
         {
@@ -779,7 +782,8 @@ public class WireframePageBuilderService : IWireframePageBuilderService
             var htmlPath = Path.Combine(previewDir, "preview.html");
             await File.WriteAllTextAsync(htmlPath, GenerateFullHTMLPreview(preview));
 
-            preview.PreviewUrl = $"/wireframes/preview/{pageId}/preview.html";
+            var token = GetPreviewToken(pageId);
+            preview.PreviewUrl = $"/wireframes/preview/{pageId}/preview.html?token={token}";
             preview.GenerationTime = DateTime.UtcNow - startTime;
 
             _logger.LogInformation("Preview generated for page: {PageId}", pageId);
@@ -1420,15 +1424,15 @@ public class WireframePageBuilderService : IWireframePageBuilderService
 
     private string AddPasswordProtection(string htmlContent, string password)
     {
-        // Simple password protection (in real implementation, use proper authentication)
-        var protection = $@"
-<script>
-var enteredPassword = prompt('Enter password to view this page:');
-if (enteredPassword !== '{password}') {{
-    document.body.innerHTML = '<h1>Access Denied</h1>';
-}}
-</script>";
+        // Password prompts removed; preview access is controlled server-side
+        return htmlContent;
+    }
 
-        return htmlContent.Replace("<body>", $"<body>{protection}");
+    public string GetPreviewToken(string pageId, string? password = null)
+    {
+        var input = string.IsNullOrEmpty(password) ? pageId : $"{pageId}:{password}";
+        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_previewSecret));
+        var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(input));
+        return Convert.ToHexString(hash);
     }
 }

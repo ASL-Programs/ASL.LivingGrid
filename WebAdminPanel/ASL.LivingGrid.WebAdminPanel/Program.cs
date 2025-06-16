@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using System.IO;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace ASL.LivingGrid.WebAdminPanel;
 
@@ -234,6 +235,27 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseSession();
+
+        app.MapGet("/wireframes/preview/{pageId}/{file}", async (string pageId, string file, HttpContext ctx, IWireframePageBuilderService svc) =>
+        {
+            var token = ctx.Request.Query["token"].ToString();
+            if (!(ctx.User?.Identity?.IsAuthenticated ?? false))
+            {
+                if (token != svc.GetPreviewToken(pageId))
+                    return Results.Unauthorized();
+            }
+
+            var dir = Path.Combine(AppContext.BaseDirectory, "Wireframes", "Previews", pageId);
+            var path = Path.Combine(dir, file);
+            if (!File.Exists(path))
+                return Results.NotFound();
+
+            var provider = new FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(path, out var ct))
+                ct = "application/octet-stream";
+
+            return Results.File(path, ct);
+        }).AllowAnonymous();
 
         app.MapRazorPages();
         app.MapBlazorHub();
