@@ -3,6 +3,7 @@ using ASL.LivingGrid.WebAdminPanel.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
 
@@ -13,6 +14,7 @@ public class WireframePageBuilderService : IWireframePageBuilderService
     private readonly string _projectsPath;
     private readonly string _templatesPath;
     private readonly string _previewsPath;
+    private Task _initTemplatesTask = Task.CompletedTask;
 
     public WireframePageBuilderService(
         ILogger<WireframePageBuilderService> logger,
@@ -26,13 +28,24 @@ public class WireframePageBuilderService : IWireframePageBuilderService
         _templatesPath = Path.Combine(basePath, "Wireframes", "Templates");
         _previewsPath = Path.Combine(basePath, "Wireframes", "Previews");
         
-        // Ensure directories exist
-        Directory.CreateDirectory(_projectsPath);
-        Directory.CreateDirectory(_templatesPath);
-        Directory.CreateDirectory(_previewsPath);
-        
-        // Initialize default templates
-        _ = Task.Run(InitializeDefaultTemplatesAsync);
+        try
+        {
+            // Ensure directories exist
+            Directory.CreateDirectory(_projectsPath);
+            Directory.CreateDirectory(_templatesPath);
+            Directory.CreateDirectory(_previewsPath);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error creating wireframe directories");
+            throw;
+        }
+
+        // Initialize default templates in background
+        _initTemplatesTask = Task.Run(InitializeDefaultTemplatesAsync);
+        _initTemplatesTask.ContinueWith(
+            t => _logger.LogError(t.Exception, "Error initializing wireframe templates"),
+            TaskContinuationOptions.OnlyOnFaulted);
     }
 
     public async Task<WireframeProject> CreateProjectAsync(string name, string description)
