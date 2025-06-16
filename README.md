@@ -142,9 +142,10 @@ Slack integration can be enabled by setting
 `Notifications:EnableSlackNotifications` to `true` and specifying the
 `Notifications:SlackWebhookUrl` in `appsettings.json`.
 
-Wireframe previews are protected with a secret token. Set
-`Security__PreviewSecret` via environment variable or the
-`dotnet user-secrets` tool before launch. **Do not place the value in
+Wireframe previews are protected with a secret token. The default
+`appsettings.json` leaves `Security:PreviewSecret` blank, so you must
+provide `Security__PreviewSecret` via an environment variable or the
+`dotnet user-secrets` tool before launch. **Do not store the value in
 `appsettings.json`.** Without this secret the application refuses to
 start.
 
