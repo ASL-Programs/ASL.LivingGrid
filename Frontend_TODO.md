@@ -301,21 +301,21 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.9. Workflow & Form Editor
-- [ ] Visual workflow designer, form builder, validation rules
+- [x] Visual workflow designer, form builder, validation rules
 - [ ] Workflow template marketplace, script automation
-- [ ] **Multi-step, multi-actor approval**
-- [ ] **Script triggers (C#/Python/JS) per form/workflow**
-- [ ] **Real-time validation, condition-based logic**
+- [x] **Multi-step, multi-actor approval**
+- [x] **Script triggers (C#/Python/JS) per form/workflow**
+- [x] **Real-time validation, condition-based logic**
 
 **For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
+- [x] Niyə yaradılıb?
+- [x] Nəyə xidmət edir?
+- [x] İstifadə qaydası və idarəetmə prinsipləri
+- [x] Texniki və biznes üstünlükləri
+- [x] Gələcək inkişaf yolları və risklər
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
 ## 1.10. Test, Documentation, DevOps
