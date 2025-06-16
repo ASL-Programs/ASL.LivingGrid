@@ -110,5 +110,10 @@
     "Key": "Navigation.PermissionMatrix",
     "Url": "permission-matrix",
     "Icon": "oi oi-lock-locked"
+  },
+  {
+    "Key": "Navigation.Reports",
+    "Url": "reports",
+    "Icon": "oi oi-bar-chart"
   }
 ]

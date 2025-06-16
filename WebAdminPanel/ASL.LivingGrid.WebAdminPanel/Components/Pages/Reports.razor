@@ -1,0 +1,106 @@
+@page "/reports"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject IReportingService ReportingService
+@inject AuthenticationStateProvider Auth
+
+<PageTitle>Reports</PageTitle>
+
+<h3>Reports</h3>
+
+@if (selectedReport is null)
+{
+    <ul class="list-group">
+        @foreach (var r in reports)
+        {
+            <li class="list-group-item list-group-item-action" @onclick="() => SelectReport(r)">@r.Name</li>
+        }
+    </ul>
+}
+else
+{
+    <div class="mb-3">
+        <button class="btn btn-secondary" @onclick="() => selectedReport = null">Back</button>
+    </div>
+    <EditForm Model="filter" OnValidSubmit="RunReportAsync">
+        <div class="row g-2 mb-3">
+            <div class="col">
+                <InputText class="form-control" @bind-Value="filter.Keyword" placeholder="Keyword" />
+            </div>
+            <div class="col">
+                <InputDate class="form-control" @bind-Value="filter.FromDate" />
+            </div>
+            <div class="col">
+                <InputDate class="form-control" @bind-Value="filter.ToDate" />
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Run</button>
+            </div>
+        </div>
+    </EditForm>
+
+    @if (data.Any())
+    {
+        <div class="mb-2">
+            <button class="btn btn-sm btn-outline-primary me-1" @onclick="() => ExportAsync("pdf")">PDF</button>
+            <button class="btn btn-sm btn-outline-primary me-1" @onclick="() => ExportAsync("excel")">Excel</button>
+            <button class="btn btn-sm btn-outline-primary me-1" @onclick="() => ExportAsync("csv")">CSV</button>
+            <button class="btn btn-sm btn-outline-primary me-1" @onclick="() => ExportAsync("json")">JSON</button>
+            <button class="btn btn-sm btn-outline-primary" @onclick="() => ExportAsync("parquet")">Parquet</button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    @foreach (var key in data.First().Keys)
+                    {
+                        <th>@key</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in data)
+                {
+                    <tr>
+                        @foreach (var key in row.Keys)
+                        {
+                            <td>@row[key]</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    private List<Report> reports = new();
+    private Report? selectedReport;
+    private ReportFilter filter = new();
+    private List<Dictionary<string, object>> data = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await Auth.GetAuthenticationStateAsync();
+        reports = (await ReportingService.GetAccessibleReportsAsync(authState.User)).ToList();
+    }
+
+    private void SelectReport(Report r)
+    {
+        selectedReport = r;
+        filter = new();
+        data.Clear();
+    }
+
+    private async Task RunReportAsync()
+    {
+        if (selectedReport is null) return;
+        var authState = await Auth.GetAuthenticationStateAsync();
+        data = (await ReportingService.RunReportAsync(selectedReport.Id, filter, authState.User)).ToList();
+    }
+
+    private async Task ExportAsync(string format)
+    {
+        if (selectedReport is null) return;
+        var authState = await Auth.GetAuthenticationStateAsync();
+        await ReportingService.ExportReportAsync(selectedReport.Id, filter, format, authState.User);
+    }
+}
