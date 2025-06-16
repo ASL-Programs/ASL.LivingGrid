@@ -1,0 +1,62 @@
+@page "/settings/security"
+@inject IConfigurationService ConfigService
+
+<h3>Security Settings</h3>
+
+@if (model == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="model" OnValidSubmit="Save">
+        <div class="mb-3">
+            <label class="form-label">Enable Two Factor</label>
+            <InputCheckbox @bind-Value="model.EnableTwoFactor" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Enable Google SSO</label>
+            <InputCheckbox @bind-Value="model.GoogleEnabled" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Google Client ID</label>
+            <InputText class="form-control" @bind-Value="model.GoogleClientId" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Google Client Secret</label>
+            <InputText class="form-control" @bind-Value="model.GoogleClientSecret" />
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </EditForm>
+}
+
+@code {
+    private SecuritySettingsModel? model;
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = new SecuritySettingsModel
+        {
+            EnableTwoFactor = await ConfigService.GetValueAsync<bool>("Security:EnableTwoFactorAuth"),
+            GoogleEnabled = await ConfigService.GetValueAsync<bool>("Security:Google:Enabled"),
+            GoogleClientId = await ConfigService.GetValueAsync<string>("Security:Google:ClientId") ?? string.Empty,
+            GoogleClientSecret = await ConfigService.GetValueAsync<string>("Security:Google:ClientSecret") ?? string.Empty
+        };
+    }
+
+    private async Task Save()
+    {
+        await ConfigService.SetValueAsync("Security:EnableTwoFactorAuth", model!.EnableTwoFactor.ToString());
+        await ConfigService.SetValueAsync("Security:Google:Enabled", model.GoogleEnabled.ToString());
+        await ConfigService.SetValueAsync("Security:Google:ClientId", model.GoogleClientId);
+        await ConfigService.SetValueAsync("Security:Google:ClientSecret", model.GoogleClientSecret, isSecret: true);
+    }
+
+    private class SecuritySettingsModel
+    {
+        public bool EnableTwoFactor { get; set; }
+        public bool GoogleEnabled { get; set; }
+        public string GoogleClientId { get; set; } = string.Empty;
+        public string GoogleClientSecret { get; set; } = string.Empty;
+    }
+}

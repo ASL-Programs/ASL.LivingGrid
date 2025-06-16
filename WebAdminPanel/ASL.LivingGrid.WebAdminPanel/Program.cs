@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting.WindowsServices;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.IO;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace ASL.LivingGrid.WebAdminPanel;
 
@@ -102,13 +103,24 @@ public class Program
         services.AddDatabaseDeveloperPageExceptionFilter();
 
         // Add Identity
-        services.AddDefaultIdentity<IdentityUser>(options => 
+        services.AddDefaultIdentity<IdentityUser>(options =>
         {
             options.SignIn.RequireConfirmedAccount = false;
             options.Password.RequireDigit = true;
             options.Password.RequiredLength = 6;
+            options.Tokens.AuthenticatorIssuer = "ASL.LivingGrid";
         })
         .AddEntityFrameworkStores<ApplicationDbContext>();
+
+        services.AddAuthentication()
+            .AddGoogle("Google", googleOptions =>
+            {
+                googleOptions.ClientId = configuration["Security:Google:ClientId"] ?? string.Empty;
+                googleOptions.ClientSecret = configuration["Security:Google:ClientSecret"] ?? string.Empty;
+            });
+
+        services.AddDataProtection();
+        services.AddSingleton<ISecretStorageService, TpmHsmSecretStorageService>();
 
         // Add Blazor Server
         services.AddRazorPages();

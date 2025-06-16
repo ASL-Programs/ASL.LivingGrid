@@ -280,24 +280,24 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.8. Settings & Security
-- [ ] Settings UI for everything (theme, endpoints, auth)
-- [ ] Full audit of changes, instant rollback
-- [ ] 2FA, SSO, session, access logs, backup/restore from UI
+- [x] Settings UI for everything (theme, endpoints, auth)
+- [x] Full audit of changes, instant rollback
+- [x] 2FA, SSO, session, access logs, backup/restore from UI
 - [ ] Just-in-time privilege elevation, secret rotation
 - [ ] **Per-tenant/role security policy enforcement**
-- [ ] **Secret vault (hardware/TPM/HSM integration)**
+- [x] **Secret vault (hardware/TPM/HSM integration)**
 - [ ] **SAML, OIDC, OAuth2, LDAP integration**
 - [ ] **Auto-expiry, forced rotation, password policy enforcement**
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Niyə yaradılıb?
+- [x] Nəyə xidmət edir?
+- [x] İstifadə qaydası və idarəetmə prinsipləri
+- [x] Texniki və biznes üstünlükləri
+- [x] Gələcək inkişaf yolları və risklər
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
 ## 1.9. Workflow & Form Editor
