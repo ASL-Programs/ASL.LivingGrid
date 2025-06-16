@@ -18,10 +18,12 @@
   { "Key": "Navigation.Plugins", "Url": "plugins", "Icon": "oi oi-puzzle-piece" },
   { "Key": "Navigation.ThemeMarketplace", "Url": "theme-marketplace", "Icon": "oi oi-brush" },
   { "Key": "Navigation.LayoutMarketplace", "Url": "layout-marketplace", "Icon": "oi oi-grid-three-up" },
+  { "Key": "Navigation.DashboardDesigner", "Url": "dashboard-designer", "Icon": "oi oi-dashboard" },
   { "Key": "Navigation.LanguagePackMarketplace", "Url": "marketplace/languagepacks", "Icon": "oi oi-book" },
   { "Key": "Navigation.PendingReviews", "Url": "pendingreviews", "Icon": "oi oi-comment-square" },
   { "Key": "Navigation.VisualEditor", "Url": "visual-editor", "Icon": "oi oi-pencil" },
   { "Key": "Navigation.LocalizationCoverage", "Url": "coverage", "Icon": "oi oi-spreadsheet" },
   { "Key": "Navigation.TemplateOverrides", "Url": "template-overrides", "Icon": "oi oi-file" },
-  { "Key": "Navigation.TerminologyOverrides", "Url": "terminology-overrides", "Icon": "oi oi-list" }
+  { "Key": "Navigation.TerminologyOverrides", "Url": "terminology-overrides", "Icon": "oi oi-list" },
+  { "Key": "Navigation.WidgetMarketplace", "Url": "widget-marketplace", "Icon": "oi oi-cube" }
 ]

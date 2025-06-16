@@ -1,0 +1,16 @@
+[
+  {
+    "Id": "counter",
+    "Name": "Counter",
+    "Description": "Simple counter widget",
+    "DownloadUrl": "https://example.com/widgets/counter.json",
+    "PreviewImage": "https://via.placeholder.com/150x100.png?text=Counter"
+  },
+  {
+    "Id": "time",
+    "Name": "Time",
+    "Description": "Current time widget",
+    "DownloadUrl": "https://example.com/widgets/time.json",
+    "PreviewImage": "https://via.placeholder.com/150x100.png?text=Time"
+  }
+]

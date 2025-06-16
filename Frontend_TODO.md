@@ -202,12 +202,12 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.4. Dashboard & Widgets
-- [ ] Dynamic widget marketplace (add, remove, drag, drop)
+- [x] Dynamic widget marketplace (add, remove, drag, drop)
 - [ ] Realtime alerts, stats, plugin widget support
-- [ ] Custom dashboards per user/company/role
-- [ ] **Widget permission system (per module, per tenant, per user)**
+- [x] Custom dashboards per user/company/role
+- [x] **Widget permission system (per module, per tenant, per user)**
 - [ ] **Widget dependency map and live error/highlight feedback**
-- [ ] **In-app widget store with usage analytics**
+- [x] **In-app widget store with usage analytics**
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
