@@ -4,7 +4,7 @@
 
 | Project Module            | Status               |
 |-------------------------- |---------------------|
-| Unit Tests                | 2 - Working on it    |
+| Unit Tests                | 1 - Done            |
 | Integration Tests         | 3 - To be reviewed   |
 | UI Acceptance Tests       | 3 - To be reviewed   |
 | User Documentation        | 3 - To be reviewed   |
