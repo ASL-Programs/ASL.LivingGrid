@@ -66,6 +66,10 @@ Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməkl
 5. Dəyişiklik etdikdən sonra tətbiqi yenidən başladaraq funksiyaların yenilənməsinə əmin olun.
 6. Multi-cloud dəstəyi: AWS Lambda, Azure Functions və GCP Cloud Functions kimi istənilən HTTP triggered endpointlər işləyir.
 
+### Default admin hesabının yaradılması
+`DEFAULT_ADMIN_EMAIL` və `DEFAULT_ADMIN_PASSWORD` mühit dəyişənlərini daxil etsəniz, WebAdminPanel ilk başladıqda həmin məlumatlarla admin istifadəçi avtomatik yaradılacaq.
+Dəyişənlər boş buraxılarsa, heç bir admin hesabı yaradılmır.
+
 
 ### Gələcək inkişaf
 - Avtomatik multi-instance sinxronizasiya

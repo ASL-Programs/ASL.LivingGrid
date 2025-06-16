@@ -37,3 +37,7 @@ Sistemin təhlükəsizliyini mərkəzləşdirilmiş şəkildə tənzimləmək v�
 6. **Wireframe önizləmə tokeni** – `Security:PreviewSecret` məcburi dəyərdir. Bu secret ilə imzalanmış `token` parametri olmadan `/wireframes/preview/{id}` ünvanına giriş verilmir.
 7. **Gizli açarın təyin olunması** – `Security__PreviewSecret` mütləq mühit dəyişəni və ya `dotnet user-secrets` vasitəsilə təyin edilməlidir; boş və ya `${PREVIEW_SECRET}` kimi placeholder dəyərlər qəbul olunmur. Açarı `appsettings.json`-da saxlamaq təhlükəsizlik riskidir. TPM/HSM əsaslı `TpmHsmSecretStorageService` ilə qorumağı unutmayın.
 
+### Default admin hesabının yaradılması
+`DEFAULT_ADMIN_EMAIL` və `DEFAULT_ADMIN_PASSWORD` dəyişənlərini təyin etdikdə, WebAdminPanel ilk başladıqda həmin məlumatlarla admin istifadəçi avtomatik yaradılır.
+Dəyərlər göstərilməzsə, heç bir admin hesabı yaranmayacaq.
+
