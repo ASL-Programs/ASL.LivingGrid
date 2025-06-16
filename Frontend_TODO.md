@@ -183,8 +183,8 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 
 ## 1.3. UI/UX & Navigation
 - [x] Visual wireframe/page builder - 2025.06.15 - AI: WireframePageBuilderService with comprehensive visual design, templating, code generation, and preview capabilities
-- [ ] Real-time translation manager, theme/color/logo editor
-- [ ] Accessibility compliance check
+- [x] Real-time translation manager, theme/color/logo editor
+- [x] Accessibility compliance check
  - [x] **Per-role navigation structure and menu editing** - 2025-06-16 - AI: NavigationService filtrates menu by user role
 - [ ] **Multi-level menu logic (mega menu, dynamic pop-out, favorites, search)**
 - [x] Quick search field in NavMenu with live suggestions - 2025-06-17 - AI
@@ -192,13 +192,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Niyə yaradılıb?
+- [x] Nəyə xidmət edir?
+- [x] İstifadə qaydası və idarəetmə prinsipləri
+- [x] Texniki və biznes üstünlükləri
+- [x] Gələcək inkişaf yolları və risklər
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
 ## 1.4. Dashboard & Widgets
