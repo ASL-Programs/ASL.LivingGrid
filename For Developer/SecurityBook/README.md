@@ -34,4 +34,5 @@ Sistemin təhlükəsizliyini mərkəzləşdirilmiş şəkildə tənzimləmək v�
 3. **Tenant üzrə siyasət** – `Security:EnforcePerTenantPolicy` açarı aktiv olduqda hər tenant üçün `Security:Policy:{tenantId}` konfiqurasiyası tətbiq edilir.
 4. **Xarici identifikasiya provayderləri** – `Security:Oidc:*`, `Security:OAuth2:*`, `Security:Saml:*` və `Security:Ldap:*` parametrlərini dolduraraq qoşun.
 5. **Parol vaxtı və rotasiyası** – `Security:PasswordExpiryDays` dəyəri bitdikdə istifadəçi kilidlənir, yeni parol tələb olunur.
+6. **Wireframe önizləmə tokeni** – `Security:PreviewSecret` dəyəri ilə imzalanmış `token` parametri olmadan `/wireframes/preview/{id}` ünvanına giriş verilmir.
 
