@@ -52,6 +52,11 @@
     "Icon": "oi oi-bell"
   },
   {
+    "Key": "Navigation.NotificationsCenter",
+    "Url": "notifications-center",
+    "Icon": "oi oi-bell"
+  },
+  {
     "Key": "Navigation.Plugins",
     "Url": "plugins",
     "Icon": "oi oi-puzzle-piece"
