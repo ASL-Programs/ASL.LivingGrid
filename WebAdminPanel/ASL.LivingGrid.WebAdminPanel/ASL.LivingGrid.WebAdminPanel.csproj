@@ -14,7 +14,7 @@
     <AssemblyTitle>ASL LivingGrid - Web Admin Panel</AssemblyTitle>
     <Product>ASL.LivingGrid</Product>
     <Company>ASL, Məstaliyev Vüsal Azer oğlu</Company>
-    <Copyright>© 2025 ASL, Məstaliyev Vüsal Azer oğlu. All rights reserved.</Copyright>
+    <Copyright>Copyright (c) 2025 Vusal Azer oglu Mastaliyev</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <UseWindowsForms Condition="$([MSBuild]::IsOSPlatform('windows'))">true</UseWindowsForms>
