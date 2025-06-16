@@ -63,7 +63,13 @@ public class PluginService : IPluginService
     public async Task RemovePluginAsync(string id)
     {
         await LoadAsync();
-        var p = _installed.FirstOrDefault(x => x.Id == Guid.Parse(id));
+        if (!Guid.TryParse(id, out var pluginId))
+        {
+            _logger.LogError("Invalid plugin id: {Id}", id);
+            return;
+        }
+
+        var p = _installed.FirstOrDefault(x => x.Id == pluginId);
         if (p != null)
         {
             _installed.Remove(p);
