@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ASL.LivingGrid.WebAdminPanel.Data;
 using ASL.LivingGrid.WebAdminPanel.Services;
 using ASL.LivingGrid.WebAdminPanel.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System.Reflection;
 using Microsoft.Extensions.Hosting.WindowsServices;
@@ -112,15 +113,17 @@ public class Program
         })
         .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        services.AddAuthentication()
-            .AddGoogle("Google", googleOptions =>
-            {
-                googleOptions.ClientId = configuration["Security:Google:ClientId"] ?? string.Empty;
-                googleOptions.ClientSecret = configuration["Security:Google:ClientSecret"] ?? string.Empty;
-            });
+        var authBuilder = services.AddAuthentication();
+        authBuilder.AddGoogle("Google", googleOptions =>
+        {
+            googleOptions.ClientId = configuration["Security:Google:ClientId"] ?? string.Empty;
+            googleOptions.ClientSecret = configuration["Security:Google:ClientSecret"] ?? string.Empty;
+        });
+        authBuilder.AddExternalIdentityProviders(configuration);
 
         services.AddDataProtection();
         services.AddSingleton<ISecretStorageService, TpmHsmSecretStorageService>();
+        services.AddScoped<ISecurityService, SecurityService>();
 
         // Add Blazor Server
         services.AddRazorPages();
@@ -234,6 +237,12 @@ public class Program
         app.MapRazorPages();
         app.MapBlazorHub();
         app.MapFallbackToPage("/_Host");
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var sec = scope.ServiceProvider.GetRequiredService<ISecurityService>();
+            sec.EnforcePasswordPoliciesAsync().GetAwaiter().GetResult();
+        }
 
         // Health check endpoint
         app.MapGet("/health", () => Results.Ok(new

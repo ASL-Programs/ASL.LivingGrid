@@ -86,6 +86,10 @@ public class SecuritySettings
     public bool EnableAuditLogging { get; set; } = true;
     public int PasswordMinLength { get; set; } = 8;
     public bool RequirePasswordComplexity { get; set; } = true;
+    public int PasswordExpiryDays { get; set; } = 90;
+    public int SecretRotationDays { get; set; } = 30;
+    public bool EnableJitPrivilegeElevation { get; set; } = false;
+    public bool EnforcePerTenantPolicy { get; set; } = false;
 }
 
 public class LanguageSettings

@@ -283,11 +283,11 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 - [x] Settings UI for everything (theme, endpoints, auth)
 - [x] Full audit of changes, instant rollback
 - [x] 2FA, SSO, session, access logs, backup/restore from UI
-- [ ] Just-in-time privilege elevation, secret rotation
-- [ ] **Per-tenant/role security policy enforcement**
+- [x] Just-in-time privilege elevation, secret rotation
+- [x] **Per-tenant/role security policy enforcement**
 - [x] **Secret vault (hardware/TPM/HSM integration)**
-- [ ] **SAML, OIDC, OAuth2, LDAP integration**
-- [ ] **Auto-expiry, forced rotation, password policy enforcement**
+- [x] **SAML, OIDC, OAuth2, LDAP integration**
+- [x] **Auto-expiry, forced rotation, password policy enforcement**
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
