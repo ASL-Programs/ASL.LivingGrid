@@ -13,6 +13,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using System.Diagnostics;
 using Microsoft.AspNetCore.StaticFiles;
+using System.Collections.Generic;
 
 namespace ASL.LivingGrid.WebAdminPanel;
 
@@ -77,9 +78,23 @@ public class Program
             if (isStandaloneExe)
             {
                 Log.Information("Running in standalone mode");
-                // Configure Kestrel for standalone mode
-                app.Urls.Add("http://localhost:5000");
-                app.Urls.Add("https://localhost:5001");
+
+                var urls = new List<string>();
+                var httpUrl = app.Configuration["Kestrel:Endpoints:Http:Url"];
+                if (!string.IsNullOrWhiteSpace(httpUrl))
+                {
+                    app.Urls.Add(httpUrl);
+                    urls.Add(httpUrl);
+                }
+
+                var httpsUrl = app.Configuration["Kestrel:Endpoints:Https:Url"];
+                if (!string.IsNullOrWhiteSpace(httpsUrl))
+                {
+                    app.Urls.Add(httpsUrl);
+                    urls.Add(httpsUrl);
+                }
+
+                Log.Information("Listening on {Urls}", string.Join(", ", urls));
             }
 
             await app.RunAsync();
