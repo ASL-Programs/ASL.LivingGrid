@@ -902,21 +902,21 @@ public class EnvironmentProvisioningService : IEnvironmentProvisioningService
 
     private async Task CopyDirectoryAsync(string sourcePath, string targetPath)
     {
-        await Task.Run(() =>
+        if (!Directory.Exists(sourcePath))
+            return;
+
+        Directory.CreateDirectory(targetPath);
+
+        foreach (var file in Directory.GetFiles(sourcePath))
         {
-            Directory.CreateDirectory(targetPath);
+            var targetFile = Path.Combine(targetPath, Path.GetFileName(file));
+            File.Copy(file, targetFile, true);
+        }
 
-            foreach (var file in Directory.GetFiles(sourcePath))
-            {
-                var targetFile = Path.Combine(targetPath, Path.GetFileName(file));
-                File.Copy(file, targetFile, true);
-            }
-
-            foreach (var dir in Directory.GetDirectories(sourcePath))
-            {
-                var targetDir = Path.Combine(targetPath, Path.GetFileName(dir));
-                CopyDirectoryAsync(dir, targetDir).Wait();
-            }
-        });
+        foreach (var dir in Directory.GetDirectories(sourcePath))
+        {
+            var targetDir = Path.Combine(targetPath, Path.GetFileName(dir));
+            await CopyDirectoryAsync(dir, targetDir);
+        }
     }
 }
