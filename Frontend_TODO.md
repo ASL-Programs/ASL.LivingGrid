@@ -302,7 +302,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 
 ## 1.9. Workflow & Form Editor
 - [x] Visual workflow designer, form builder, validation rules
-- [ ] Workflow template marketplace, script automation
+- [x] Workflow template marketplace, script automation - 2025-06-20 - AI: import/export, sharing və avtomatlaşdırma idarəsi əlavə edildi
 - [x] **Multi-step, multi-actor approval**
 - [x] **Script triggers (C#/Python/JS) per form/workflow**
 - [x] **Real-time validation, condition-based logic**
