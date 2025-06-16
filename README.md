@@ -77,15 +77,35 @@ export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$PATH:$DOTNET_ROOT"
 ```
 
-### 4. Build
+### 4. Build & Test
+
+Use the provided PowerShell script to restore packages, build the solution and
+run all tests:
+
+```powershell
+pwsh ./Scripts/build.ps1
+```
+
+You can also execute the commands manually:
 
 ```bash
 dotnet build ASL.LivingGrid.sln
+dotnet test ASL.LivingGrid.sln --no-build
 ```
 
 ### 5. Run
 
-Each module can be run independently from its own solution.
+Each module can be run independently from its own solution using `dotnet run`.
+
+### 6. Deployment
+
+Publish release binaries with the deploy script:
+
+```bash
+bash ./Scripts/deploy.sh [Release|Debug]
+```
+
+Artifacts are placed in the `publish/` directory.
 
 ## Development Workflow
 
