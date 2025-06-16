@@ -11,6 +11,7 @@ public class WidgetService : IWidgetService
     private readonly IJSRuntime _js;
     private readonly ILogger<WidgetService> _logger;
     private readonly List<WidgetDefinition> _installed = new();
+    private readonly HashSet<string> _loadedPlugins = new();
     private bool _loaded;
     private const string FileName = "widgets.json";
 
@@ -99,4 +100,43 @@ public class WidgetService : IWidgetService
 
     public Task<int> GetUsageAsync(string widgetId)
         => _js.InvokeAsync<int>("aslWidgets.getUsage", widgetId).AsTask();
+
+    public async Task LoadPluginWidgetsAsync(string pluginFolder)
+    {
+        if (string.IsNullOrWhiteSpace(pluginFolder) || !Directory.Exists(pluginFolder))
+            return;
+        if (!_loaded)
+            await LoadAsync();
+        if (_loadedPlugins.Contains(pluginFolder))
+            return;
+        var file = Path.Combine(pluginFolder, "widgets.json");
+        if (!File.Exists(file)) return;
+        try
+        {
+            var json = await File.ReadAllTextAsync(file);
+            var defs = JsonSerializer.Deserialize<List<WidgetDefinition>>(json);
+            if (defs != null)
+            {
+                foreach (var d in defs)
+                {
+                    if (_installed.All(w => w.Id != d.Id))
+                        _installed.Add(d);
+                }
+                await SaveAsync();
+            }
+            _loadedPlugins.Add(pluginFolder);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error loading plugin widgets from {Folder}", pluginFolder);
+        }
+    }
+
+    public async Task<IEnumerable<string>> GetMissingDependenciesAsync(string widgetId)
+    {
+        await LoadAsync();
+        var widget = _installed.FirstOrDefault(w => w.Id == widgetId);
+        if (widget == null) return Enumerable.Empty<string>();
+        return widget.Dependencies.Where(d => _installed.All(w => w.Id != d));
+    }
 }

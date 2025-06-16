@@ -1,0 +1,47 @@
+<div class="p-2">
+    <h5>Alert Widget</h5>
+    @if (alerts.Count == 0)
+    {
+        <em>No alerts</em>
+    }
+    else
+    {
+        <ul class="list-unstyled mb-0">
+            @foreach (var a in alerts)
+            {
+                <li class="mb-1"><strong>@a.Title:</strong> @a.Message</li>
+            }
+        </ul>
+    }
+</div>
+
+@code {
+    [Inject] private INotificationService NotificationService { get; set; } = default!;
+    [CascadingParameter] private Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
+
+    private List<Notification> alerts = new();
+    private Timer? timer;
+    private string userId = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthenticationStateTask;
+        userId = state.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
+        await LoadAsync();
+        timer = new Timer(async _ =>
+        {
+            await LoadAsync();
+            await InvokeAsync(StateHasChanged);
+        }, null, 5000, 5000);
+    }
+
+    private async Task LoadAsync()
+    {
+        alerts = (await NotificationService.GetUserNotificationsAsync(userId, false, 0, 5)).ToList();
+    }
+
+    public void Dispose()
+    {
+        timer?.Dispose();
+    }
+}

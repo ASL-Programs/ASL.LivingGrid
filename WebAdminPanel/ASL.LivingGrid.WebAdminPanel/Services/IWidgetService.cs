@@ -11,4 +11,6 @@ public interface IWidgetService
     Task SaveUserWidgetsAsync(string companyId, string userId, IList<string> widgets);
     Task IncrementUsageAsync(string widgetId);
     Task<int> GetUsageAsync(string widgetId);
+    Task LoadPluginWidgetsAsync(string pluginFolder);
+    Task<IEnumerable<string>> GetMissingDependenciesAsync(string widgetId);
 }

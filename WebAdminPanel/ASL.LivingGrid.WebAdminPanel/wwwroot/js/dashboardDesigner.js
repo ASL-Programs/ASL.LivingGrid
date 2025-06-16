@@ -15,5 +15,18 @@ window.dashboardDesigner = {
             div.textContent = text;
             canvas.appendChild(div);
         });
+    },
+    setWidgetError: function(id, msg){
+        const el = document.querySelector(`[data-widget-id="${id}"] #err-${id}`);
+        if(el){
+            el.textContent = 'Missing: ' + msg;
+            el.classList.add('text-danger');
+        }
+    },
+    setWidgetUsage: function(id, count){
+        const badge = document.querySelector(`[data-widget-id="${id}"] .badge`);
+        if(badge){
+            badge.textContent = count;
+        }
     }
 };
