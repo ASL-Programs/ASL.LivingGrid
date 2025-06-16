@@ -35,5 +35,5 @@ Sistemin təhlükəsizliyini mərkəzləşdirilmiş şəkildə tənzimləmək v�
 4. **Xarici identifikasiya provayderləri** – `Security:Oidc:*`, `Security:OAuth2:*`, `Security:Saml:*` və `Security:Ldap:*` parametrlərini dolduraraq qoşun.
 5. **Parol vaxtı və rotasiyası** – `Security:PasswordExpiryDays` dəyəri bitdikdə istifadəçi kilidlənir, yeni parol tələb olunur.
 6. **Wireframe önizləmə tokeni** – `Security:PreviewSecret` məcburi dəyərdir. Bu secret ilə imzalanmış `token` parametri olmadan `/wireframes/preview/{id}` ünvanına giriş verilmir.
-7. **Gizli açarın təyin olunması** – `Security:PreviewSecret` dəyərini `appsettings.json`-da saxlamayın. Açarı `Security__PreviewSecret` mühit dəyişəni və ya `dotnet user-secrets` vasitəsilə təyin edin. TPM/HSM əsaslı `TpmHsmSecretStorageService` ilə qorumağı unutmayın.
+7. **Gizli açarın təyin olunması** – `Security__PreviewSecret` mütləq mühit dəyişəni və ya `dotnet user-secrets` vasitəsilə təyin edilməlidir; boş və ya `${PREVIEW_SECRET}` kimi placeholder dəyərlər qəbul olunmur. Açarı `appsettings.json`-da saxlamaq təhlükəsizlik riskidir. TPM/HSM əsaslı `TpmHsmSecretStorageService` ilə qorumağı unutmayın.
 

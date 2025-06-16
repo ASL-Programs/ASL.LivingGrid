@@ -41,7 +41,10 @@ public class Program
             var isStandaloneExe = string.Equals(cfgMode, "Standalone", StringComparison.OrdinalIgnoreCase);
 
             var previewSecret = builder.Configuration["Security:PreviewSecret"];
-            if (string.IsNullOrWhiteSpace(previewSecret))
+            var hasPlaceholder = !string.IsNullOrWhiteSpace(previewSecret) &&
+                                 previewSecret.Trim().StartsWith("${") &&
+                                 previewSecret.Trim().EndsWith("}");
+            if (string.IsNullOrWhiteSpace(previewSecret) || hasPlaceholder)
                 throw new InvalidOperationException(
                     "Security__PreviewSecret environment variable or user secret must be provided for wireframe previews.");
             
