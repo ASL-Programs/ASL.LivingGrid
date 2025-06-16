@@ -1,5 +1,6 @@
 using ASL.LivingGrid.WebAdminPanel.Data;
 using ASL.LivingGrid.WebAdminPanel.Models;
+using ASL.LivingGrid.WebAdminPanel.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
@@ -9,11 +10,19 @@ public class ConfigurationService : IConfigurationService
 {
     private readonly ApplicationDbContext _context;
     private readonly ILogger<ConfigurationService> _logger;
+    private readonly IAuditService _audit;
+    private readonly ISecretStorageService _secret;
 
-    public ConfigurationService(ApplicationDbContext context, ILogger<ConfigurationService> logger)
+    public ConfigurationService(
+        ApplicationDbContext context,
+        ILogger<ConfigurationService> logger,
+        IAuditService audit,
+        ISecretStorageService secret)
     {
         _context = context;
         _logger = logger;
+        _audit = audit;
+        _secret = secret;
     }
 
     public async Task<string?> GetValueAsync(string key, Guid? companyId = null, Guid? tenantId = null)
@@ -21,7 +30,15 @@ public class ConfigurationService : IConfigurationService
         try
         {
             var config = await GetConfigurationAsync(key, companyId, tenantId);
-            return config?.Value;
+            if (config == null)
+                return null;
+
+            var val = config.Value;
+            if (config.IsEncrypted && val != null)
+            {
+                val = await _secret.DecryptAsync(val);
+            }
+            return val;
         }
         catch (Exception ex)
         {
@@ -60,7 +77,7 @@ public class ConfigurationService : IConfigurationService
         }
     }
 
-    public async Task SetValueAsync(string key, string? value, Guid? companyId = null, Guid? tenantId = null)
+    public async Task SetValueAsync(string key, string? value, Guid? companyId = null, Guid? tenantId = null, bool isSecret = false)
     {
         try
         {
@@ -76,15 +93,33 @@ public class ConfigurationService : IConfigurationService
                     TenantId = tenantId,
                     CreatedAt = DateTime.UtcNow
                 };
+                config.IsEncrypted = isSecret;
                 _context.Configurations.Add(config);
+                await _context.SaveChangesAsync();
+                await _audit.LogAsync("Create", nameof(Configuration), config.Id.ToString(), null, null, null, new { Value = value });
             }
             else
             {
-                config.Value = value;
+                var old = config.Value;
+                if (config.IsEncrypted)
+                {
+                    old = string.IsNullOrEmpty(old) ? null : await _secret.DecryptAsync(old);
+                }
+
+                if (config.IsEncrypted || isSecret)
+                {
+                    config.IsEncrypted = true;
+                    config.Value = await _secret.EncryptAsync(value ?? string.Empty);
+                }
+                else
+                {
+                    config.Value = value;
+                }
                 config.UpdatedAt = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+                await _audit.LogAsync("Update", nameof(Configuration), config.Id.ToString(), null, null, new { Value = old }, new { Value = value });
             }
 
-            await _context.SaveChangesAsync();
             _logger.LogInformation("Configuration updated: {Key} = {Value}", key, value);
         }
         catch (Exception ex)
@@ -173,6 +208,44 @@ public class ConfigurationService : IConfigurationService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error checking if configuration exists: {Key}", key);
+            return false;
+        }
+    }
+
+    public async Task<bool> RollbackValueAsync(string key, Guid? companyId = null, Guid? tenantId = null)
+    {
+        var config = await GetConfigurationAsync(key, companyId, tenantId);
+        if (config == null)
+            return false;
+
+        var lastAudit = await _context.AuditLogs
+            .Where(a => a.EntityType == nameof(Configuration) && a.EntityId == config.Id.ToString())
+            .OrderByDescending(a => a.Timestamp)
+            .FirstOrDefaultAsync();
+
+        if (lastAudit == null || string.IsNullOrEmpty(lastAudit.OldValues))
+            return false;
+
+        try
+        {
+            var dict = JsonSerializer.Deserialize<Dictionary<string, string>>(lastAudit.OldValues!);
+            if (dict == null || !dict.TryGetValue("Value", out var oldValue))
+                return false;
+
+            if (config.IsEncrypted)
+                config.Value = await _secret.EncryptAsync(oldValue);
+            else
+                config.Value = oldValue;
+
+            config.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            await _audit.LogAsync("Rollback", nameof(Configuration), config.Id.ToString(), null, null, null, new { Value = oldValue });
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error rolling back configuration: {Key}", key);
             return false;
         }
     }

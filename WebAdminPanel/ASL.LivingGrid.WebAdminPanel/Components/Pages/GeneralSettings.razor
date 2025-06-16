@@ -1,0 +1,55 @@
+@page "/settings/general"
+@inject IConfigurationService ConfigService
+
+<h3>General Settings</h3>
+
+@if (model == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="model" OnValidSubmit="Save">
+        <div class="mb-3">
+            <label class="form-label">Theme</label>
+            <InputText class="form-control" @bind-Value="model.Theme" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">API Endpoint</label>
+            <InputText class="form-control" @bind-Value="model.ApiEndpoint" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Auth Endpoint</label>
+            <InputText class="form-control" @bind-Value="model.AuthEndpoint" />
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </EditForm>
+}
+
+@code {
+    private GeneralSettingsModel? model;
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = new GeneralSettingsModel
+        {
+            Theme = await ConfigService.GetValueAsync<string>("UI:Theme") ?? "light",
+            ApiEndpoint = await ConfigService.GetValueAsync<string>("Endpoints:Api") ?? string.Empty,
+            AuthEndpoint = await ConfigService.GetValueAsync<string>("Endpoints:Auth") ?? string.Empty
+        };
+    }
+
+    private async Task Save()
+    {
+        await ConfigService.SetValueAsync("UI:Theme", model!.Theme);
+        await ConfigService.SetValueAsync("Endpoints:Api", model.ApiEndpoint);
+        await ConfigService.SetValueAsync("Endpoints:Auth", model.AuthEndpoint);
+    }
+
+    private class GeneralSettingsModel
+    {
+        public string Theme { get; set; } = "light";
+        public string ApiEndpoint { get; set; } = string.Empty;
+        public string AuthEndpoint { get; set; } = string.Empty;
+    }
+}
