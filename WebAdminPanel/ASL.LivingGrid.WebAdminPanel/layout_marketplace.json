@@ -3,14 +3,14 @@
     "Id": "standard",
     "Name": "Standard",
     "Description": "Default layout with sidebar",
-    "DownloadUrl": "https://example.com/layouts/standard.json",
+    "DownloadUrl": "../../Docs/samples/layouts/standard.json",
     "PreviewImage": "images/layout_standard.svg"
   },
   {
     "Id": "minimal",
     "Name": "Minimal",
     "Description": "Minimal top-navigation layout",
-    "DownloadUrl": "https://example.com/layouts/minimal.json",
+    "DownloadUrl": "../../Docs/samples/layouts/minimal.json",
     "PreviewImage": "images/layout_minimal.svg"
   }
 ]

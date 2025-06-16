@@ -3,14 +3,14 @@
     "Id": "light",
     "Name": "Light",
     "Description": "Default light theme",
-    "DownloadUrl": "https://example.com/themes/light.css",
+    "DownloadUrl": "../../Docs/samples/themes/light.css",
     "PreviewImage": "images/theme_light.svg"
   },
   {
     "Id": "dark",
     "Name": "Dark",
     "Description": "Default dark theme",
-    "DownloadUrl": "https://example.com/themes/dark.css",
+    "DownloadUrl": "../../Docs/samples/themes/dark.css",
     "PreviewImage": "images/theme_dark.svg"
   }
 ]

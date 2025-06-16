@@ -60,7 +60,7 @@ Komanda sətrindən `--standalone` və ya `--hosted` parametrini əlavə etməkl
 ### Serverless Mühit üçün Cloud Functions
 `CloudFunctionService` serverless ssenariləri üçün `cloudFunctions.json` faylından URL-ləri oxuyur. Konfiqurasiya etmək üçün:
 1. WebAdminPanel kök qovluğunda `cloudFunctions.json` yaradın.
-2. Faylda hər funksiyanın adını və HTTP endpoint ünvanını `{"FunctionName": "https://example.com/api"}` formatında göstərin.
+2. Faylda hər funksiyanın adını və HTTP endpoint ünvanını `{"FunctionName": "https://your-function-url"}` formatında göstərin. Nümunə üçün `Docs/samples/cloud/README.md` qovluğuna baxın.
 3. Müxtəlif mühitlər (dev/stage/prod) üçün ayrıca fayl saxlamaq və yerləşdirmə zamanı uyğun nüsxəni kopyalamaq tövsiyə olunur.
 4. Tətbiq işə düşərkən `CloudFunctionService` bu faylı oxuyur və `InvokeAsync` metodu ilə URL-ə JSON sorğu göndərir.
 5. Dəyişiklik etdikdən sonra tətbiqi yenidən başladaraq funksiyaların yenilənməsinə əmin olun.

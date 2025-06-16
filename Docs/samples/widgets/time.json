@@ -1,0 +1,6 @@
+{
+  "Id": "time",
+  "Name": "Time",
+  "Description": "Current time widget",
+  "Component": "time"
+}

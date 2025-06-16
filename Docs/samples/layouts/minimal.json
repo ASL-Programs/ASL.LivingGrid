@@ -1,0 +1,6 @@
+{
+  "Id": "minimal",
+  "Name": "Minimal",
+  "Description": "Minimal top-navigation layout",
+  "Regions": ["Header", "Content"]
+}

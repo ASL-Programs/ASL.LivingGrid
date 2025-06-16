@@ -19,7 +19,7 @@ public class WidgetMarketplaceServiceTests
     {
         using var tempDir = new TemporaryDirectory();
         var jsonFile = Path.Combine(tempDir.Path, "widget_marketplace.json");
-        var json = "[{\"Id\":\"w1\",\"Name\":\"Widget\",\"Description\":\"Desc\",\"DownloadUrl\":\"http://example.com/widget.json\",\"PreviewImage\":\"img\"}]";
+        var json = "[{\"Id\":\"w1\",\"Name\":\"Widget\",\"Description\":\"Desc\",\"DownloadUrl\":\"../../Docs/samples/widgets/counter.json\",\"PreviewImage\":\"img\"}]";
         await File.WriteAllTextAsync(jsonFile, json);
 
         var envMock = new Mock<IWebHostEnvironment>();
@@ -43,7 +43,7 @@ public class WidgetMarketplaceServiceTests
             .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
             .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent("[{\\"Id\\":\\"w1\\",\\"Name\\":\\"Widget\\",\\"Description\\":\\"Desc\\",\\"DownloadUrl\\":\\"http://example.com/widget.json\\",\\"PreviewImage\\":\\"img\\"}]")
+                Content = new StringContent("[{\\"Id\\":\\"w1\\",\\"Name\\":\\"Widget\\",\\"Description\\":\\"Desc\\",\\"DownloadUrl\\":\\"../../Docs/samples/widgets/counter.json\\",\\"PreviewImage\\":\\"img\\"}]")
             });
         var httpClient = new HttpClient(handlerMock.Object);
         var factoryMock = new Mock<IHttpClientFactory>();
@@ -56,7 +56,7 @@ public class WidgetMarketplaceServiceTests
         var loggerMock = new Mock<ILogger<WidgetMarketplaceService>>();
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
         {
-            ["WidgetMarketplace:Source"] = "http://example.com/marketplace.json"
+            ["WidgetMarketplace:Source"] = "../../Docs/samples/widgets/marketplace.json"
         }).Build();
         var service = new WidgetMarketplaceService(envMock.Object, factoryMock.Object, loggerMock.Object, configuration);
 
@@ -71,7 +71,7 @@ public class WidgetMarketplaceServiceTests
         using var tempDir = new TemporaryDirectory();
         Directory.CreateDirectory(Path.Combine(tempDir.Path, "www", "widgets"));
         var jsonFile = Path.Combine(tempDir.Path, "widget_marketplace.json");
-        var marketplaceJson = "[{\"Id\":\"w1\",\"Name\":\"Widget\",\"Description\":\"Desc\",\"DownloadUrl\":\"http://example.com/widget.json\",\"PreviewImage\":\"img\"}]";
+        var marketplaceJson = "[{\"Id\":\"w1\",\"Name\":\"Widget\",\"Description\":\"Desc\",\"DownloadUrl\":\"../../Docs/samples/widgets/counter.json\",\"PreviewImage\":\"img\"}]";
         await File.WriteAllTextAsync(jsonFile, marketplaceJson);
 
         var widgetJson = "{\"Id\":\"w1\"}";
