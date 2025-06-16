@@ -1,6 +1,19 @@
 {
-  "Navigation.Roles": ["Admin"],
-  "Navigation.Users": ["Admin","Manager"],
-  "Navigation.LayoutMarketplace": ["Admin"],
-  "Navigation.ThemeMarketplace": ["Admin","Designer"]
+  "Navigation.Roles": [
+    "Admin"
+  ],
+  "Navigation.Users": [
+    "Admin",
+    "Manager"
+  ],
+  "Navigation.LayoutMarketplace": [
+    "Admin"
+  ],
+  "Navigation.ThemeMarketplace": [
+    "Admin",
+    "Designer"
+  ],
+  "Navigation.PermissionMatrix": [
+    "Admin"
+  ]
 }
