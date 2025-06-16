@@ -19,7 +19,7 @@
 - [x] Write tests for core business logic
 - [ ] Mock API/services for isolated tests
 - [x] Test edge cases and failure scenarios
-- [ ] Automated test run in CI pipeline
+- [x] Automated test run in CI pipeline
 
 ### Other Modules (activate when status is 2):
 
@@ -49,3 +49,4 @@
 ### Completed tasks
 
 - [x] Test edge cases and failure scenarios
+- [x] Automated test run in CI pipeline

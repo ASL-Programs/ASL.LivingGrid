@@ -89,7 +89,7 @@ Each module can be run independently from its own solution.
 
 ## Development Workflow
 
-Please read `Read before you start working.md` before beginning any development work. The project follows strict Core Rules and workflow guidelines with progress tracking through TODO.md files.
+Please read `Read before you start working.md` before beginning any development work. The project follows strict Core Rules and workflow guidelines with progress tracking through TODO.md files. Continuous integration runs via GitHub Actions using `.github/workflows/dotnet.yml`.
 
 ## Contact
 
