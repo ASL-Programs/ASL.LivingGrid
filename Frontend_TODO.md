@@ -245,7 +245,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 - [x] Advanced filters, custom BI reporting
 - [x] Export (PDF, Excel, CSV, JSON, Parquet)
 - [x] Visual audit timeline, full audit event export (SIEM/Splunk/Syslog)
-- [ ] Built-in notification center, alert templates, integrations (Email, Telegram, Slack)
+ - [x] Built-in notification center, alert templates, integrations (Email, Telegram, Slack)
 - [x] **Audit log export/import, external SIEM/Syslog integration**
 - [ ] **Custom report designer, query builder, scheduled report delivery**
 - [x] **Per-role/tenant reporting permissions**

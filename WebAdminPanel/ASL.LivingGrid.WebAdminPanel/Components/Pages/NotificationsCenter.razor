@@ -1,0 +1,75 @@
+@page "/notifications-center"
+@using System.Security.Claims
+@attribute [Authorize]
+@inject INotificationService NotificationService
+@inject AuthenticationStateProvider Auth
+
+<h3>Notifications Center</h3>
+
+@if (items is null)
+{
+    <p>Loading...</p>
+}
+else if (!items.Any())
+{
+    <p>No notifications.</p>
+}
+else
+{
+    <button class="btn btn-sm btn-secondary mb-2" @onclick="MarkAllRead">Mark All Read</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var n in items)
+            {
+                <tr class="@(n.IsRead ? string.Empty : "table-warning")">
+                    <td>@n.Title</td>
+                    <td>@n.Message</td>
+                    <td>@n.CreatedAt.ToLocalTime().ToString("g")</td>
+                    <td>
+                        @if (!n.IsRead)
+                        {
+                            <button class="btn btn-sm btn-primary" @onclick="() => MarkRead(n.Id)">Read</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Notification>? items;
+    private string userId = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await Auth.GetAuthenticationStateAsync();
+        userId = state.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        items = (await NotificationService.GetUserNotificationsAsync(userId, true, 0, 100)).ToList();
+    }
+
+    private async Task MarkRead(Guid id)
+    {
+        await NotificationService.MarkAsReadAsync(id, userId);
+        await LoadAsync();
+    }
+
+    private async Task MarkAllRead()
+    {
+        await NotificationService.MarkAllAsReadAsync(userId);
+        await LoadAsync();
+    }
+}

@@ -145,6 +145,7 @@ public class Program
         services.AddScoped<INotificationChannel, SmsNotificationChannel>();
         services.AddScoped<INotificationChannel, TelegramNotificationChannel>();
         services.AddScoped<INotificationChannel, WebhookNotificationChannel>();
+        services.AddScoped<INotificationChannel, SlackNotificationChannel>();
         services.AddScoped<IPluginService, PluginService>();
         services.AddScoped<IPluginMarketplaceService, PluginMarketplaceService>();
         services.AddScoped<ITranslationProviderService, TranslationProviderService>();
