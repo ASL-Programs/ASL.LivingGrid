@@ -2,6 +2,7 @@
 @using ASL.LivingGrid.WebAdminPanel.Services
 @using ASL.LivingGrid.WebAdminPanel.Models
 @using ASL.LivingGrid.WebAdminPanel.Components.Search
+@using System.Globalization
 @inject ILocalizationService LocalizationService
 @inject INavigationService NavService
 @inject NavigationManager Navigation
@@ -62,7 +63,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        localizedStrings = await LocalizationService.GetAllStringsAsync("az"); // Default to Azerbaijani
+        var culture = CultureInfo.CurrentUICulture?.Name;
+        if (string.IsNullOrWhiteSpace(culture))
+            culture = "az";
+
+        localizedStrings = await LocalizationService.GetAllStringsAsync(culture);
         if (!localizedStrings.ContainsKey("Navigation.Dashboard"))
         {
             localizedStrings["Navigation.Dashboard"] = "İdarə paneli";

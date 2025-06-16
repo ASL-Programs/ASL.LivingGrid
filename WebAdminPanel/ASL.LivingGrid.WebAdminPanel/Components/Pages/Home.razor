@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Authorization
 @using ASL.LivingGrid.WebAdminPanel.Services
 @using ASL.LivingGrid.WebAdminPanel
+@using System.Globalization
 @attribute [Authorize]
 @inject IConfigurationService ConfigurationService
 @inject ILocalizationService LocalizationService
@@ -146,8 +147,13 @@
 
     protected override async Task OnInitializedAsync()
     {
+        // Determine culture from browser or user preferences
+        var culture = CultureInfo.CurrentUICulture?.Name;
+        if (string.IsNullOrWhiteSpace(culture))
+            culture = "az";
+
         // Load localized strings
-        localizedStrings = await LocalizationService.GetAllStringsAsync("az");
+        localizedStrings = await LocalizationService.GetAllStringsAsync(culture);
         
         // Add default strings if not exists
         if (!localizedStrings.ContainsKey("Common.Welcome"))
