@@ -57,12 +57,20 @@ public class WireframePageBuilderService : IWireframePageBuilderService
     {
         try
         {
-            return await _configService.GetValueAsync("Security:PreviewSecret") ?? "ChangeThisSecret";
+            var envSecret = Environment.GetEnvironmentVariable("Security__PreviewSecret");
+            if (!string.IsNullOrWhiteSpace(envSecret))
+                return envSecret;
+
+            var secret = await _configService.GetValueAsync("Security:PreviewSecret");
+            if (string.IsNullOrWhiteSpace(secret))
+                throw new InvalidOperationException("Security:PreviewSecret must be configured via appsettings or environment variable.");
+
+            return secret;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error loading preview secret");
-            return "ChangeThisSecret";
+            _logger.LogCritical(ex, "Failed to load preview secret");
+            throw;
         }
     }
 
