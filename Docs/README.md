@@ -1,2 +1,19 @@
 # Docs
-Project documentation and guides.
+
+This directory stores project-level documentation for **ASL.LivingGrid**. Below is an overview of the main guides available in the repository.
+
+## Available guides
+
+- **Project overview:** [README.md](../README.md) in the repository root.
+- **Developer books:** located under the [For Developer](../For%20Developer) directory.
+  - [LocalizationBook](../For%20Developer/LocalizationBook/README.md)
+  - [SolutionSetupBook](../For%20Developer/SolutionSetupBook/README.md)
+
+Other books in that folder cover deployment and UX/UI topics.
+
+## Adding new documentation
+
+- General guides should go under this `Docs` folder.
+- Module-specific or advanced topics belong under `For Developer` as a separate book.
+
+Keep documentation focused and update the relevant book whenever features change.
