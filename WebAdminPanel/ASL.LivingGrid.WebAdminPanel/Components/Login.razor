@@ -5,6 +5,7 @@
 @inject UserManager<IdentityUser> UserManager
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
+@inject IConfiguration Configuration
 
 <div class="login-form">
     <EditForm Model="loginModel" OnValidSubmit="HandleLoginAsync" FormName="login">
@@ -13,7 +14,7 @@
         
         <div class="form-group mb-3">
             <label for="email" class="form-label">Email</label>
-            <InputText @bind-Value="loginModel.Email" class="form-control" id="email" autocomplete="username" placeholder="admin@asl.az" />
+            <InputText @bind-Value="loginModel.Email" class="form-control" id="email" autocomplete="username" placeholder="Enter your email" />
             <ValidationMessage For="() => loginModel.Email" class="text-danger" />
         </div>
         
@@ -49,16 +50,10 @@
     </EditForm>
     
     <hr class="my-4" />
-    
-    <div class="text-center">
-        <small class="text-muted">
-            Default admin: admin@asl.az / admin123
-        </small>
-    </div>
 </div>
 
 @code {
-    private LoginModel loginModel = new() { Email = "admin@asl.az" };
+    private LoginModel loginModel = new();
     private string? errorMessage;
     private bool isLoggingIn = false;
 
@@ -104,17 +99,23 @@
     {
         try
         {
-            var adminUser = await UserManager.FindByEmailAsync("admin@asl.az");
+            var email = Environment.GetEnvironmentVariable("DEFAULT_ADMIN_EMAIL") ?? Configuration["DefaultAdmin:Email"];
+            var password = Environment.GetEnvironmentVariable("DEFAULT_ADMIN_PASSWORD") ?? Configuration["DefaultAdmin:Password"];
+
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+                return;
+
+            var adminUser = await UserManager.FindByEmailAsync(email);
             if (adminUser == null)
             {
                 adminUser = new IdentityUser
                 {
-                    UserName = "admin@asl.az",
-                    Email = "admin@asl.az",
+                    UserName = email,
+                    Email = email,
                     EmailConfirmed = true
                 };
 
-                var result = await UserManager.CreateAsync(adminUser, "admin123");
+                var result = await UserManager.CreateAsync(adminUser, password);
                 if (!result.Succeeded)
                 {
                     // Log errors if needed
