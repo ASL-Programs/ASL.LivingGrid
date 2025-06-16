@@ -1,0 +1,18 @@
+@typeparam TItem
+<div class="ms-3">
+    <strong>@Group.Name</strong>
+    <ul class="list-unstyled">
+        @foreach (var p in Group.Permissions)
+        {
+            <li>
+                <input type="checkbox" class="form-check-input" checked="@p.Enabled" @onchange="() => OnToggle.InvokeAsync(p)" />
+                <label class="form-check-label">@p.Name</label>
+            </li>
+        }
+    </ul>
+</div>
+
+@code {
+    [Parameter] public PermissionMatrix.PermissionGroup Group { get; set; } = new();
+    [Parameter] public EventCallback<PermissionMatrix.PermissionEntry> OnToggle { get; set; }
+}

@@ -221,24 +221,24 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.5. User, Role, Permission (Enterprise IAM)
-- [ ] Add/edit/remove users from UI
-- [ ] Role/permission matrix, fine-grained, team/group permission mapping
-- [ ] Unlimited custom permission types (UI, API, hardware, task, data, etc.)
-- [ ] Dynamic, conditional, temporary, time-scheduled permissions
-- [ ] **Delegated/just-in-time (JIT) permissions with expiry**
-- [ ] **Permission simulation, preview-as-other-user/role**
-- [ ] **Hierarchical group/OU-based (organizational units) role mapping**
-- [ ] **Per-module, per-action, per-field, per-feature toggle**
+- [x] Add/edit/remove users from UI
+- [x] Role/permission matrix, fine-grained, team/group permission mapping
+- [x] Unlimited custom permission types (UI, API, hardware, task, data, etc.)
+- [x] Dynamic, conditional, temporary, time-scheduled permissions
+- [x] **Delegated/just-in-time (JIT) permissions with expiry**
+- [x] **Permission simulation, preview-as-other-user/role**
+- [x] **Hierarchical group/OU-based (organizational units) role mapping**
+- [x] **Per-module, per-action, per-field, per-feature toggle**
 
-**For Developer qovluğu və Book:**  
+**For Developer qovluğu və Book:**
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Niyə yaradılıb?
+- [x] Nəyə xidmət edir?
+- [x] İstifadə qaydası və idarəetmə prinsipləri
+- [x] Texniki və biznes üstünlükləri
+- [x] Gələcək inkişaf yolları və risklər
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
 ## 1.6. Reports, Audit, Export

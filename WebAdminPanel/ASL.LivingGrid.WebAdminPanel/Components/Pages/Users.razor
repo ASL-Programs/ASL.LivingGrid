@@ -1,0 +1,119 @@
+@page "/users"
+@using ASL.LivingGrid.WebAdminPanel.Data
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject ApplicationDbContext Db
+@inject NavigationManager Nav
+
+<h3>Users</h3>
+
+@if (editUser is not null)
+{
+    <EditForm Model="editUser" OnValidSubmit="SaveUserAsync" class="mb-3">
+        <DataAnnotationsValidator />
+        <div class="row g-2">
+            <div class="col">
+                <InputText class="form-control" @bind-Value="editUser.FirstName" placeholder="First name" />
+            </div>
+            <div class="col">
+                <InputText class="form-control" @bind-Value="editUser.LastName" placeholder="Last name" />
+            </div>
+            <div class="col">
+                <InputText class="form-control" @bind-Value="editUser.Email" placeholder="Email" />
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <button class="btn btn-secondary ms-1" type="button" @onclick="CancelEdit">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
+}
+else
+{
+    <button class="btn btn-success mb-3" @onclick="CreateUser">New User</button>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First</th>
+            <th>Last</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in users)
+        {
+            <tr>
+                <td>@u.FirstName</td>
+                <td>@u.LastName</td>
+                <td>@u.Email</td>
+                <td>
+                    <button class="btn btn-sm btn-primary me-1" @onclick="() => Edit(u)">Edit</button>
+                    <button class="btn btn-sm btn-danger" @onclick="() => DeleteAsync(u)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<AppUser> users = new();
+    private AppUser? editUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await Db.AppUsers.OrderBy(u => u.FirstName).ToListAsync();
+    }
+
+    private void CreateUser()
+    {
+        editUser = new AppUser();
+    }
+
+    private void Edit(AppUser user)
+    {
+        editUser = new AppUser
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email
+        };
+    }
+
+    private async Task SaveUserAsync()
+    {
+        if (editUser is null) return;
+        if (editUser.Id == Guid.Empty)
+        {
+            editUser.Id = Guid.NewGuid();
+            Db.AppUsers.Add(editUser);
+        }
+        else
+        {
+            var existing = await Db.AppUsers.FindAsync(editUser.Id);
+            if (existing is not null)
+            {
+                existing.FirstName = editUser.FirstName;
+                existing.LastName = editUser.LastName;
+                existing.Email = editUser.Email;
+            }
+        }
+        await Db.SaveChangesAsync();
+        editUser = null;
+        users = await Db.AppUsers.OrderBy(u => u.FirstName).ToListAsync();
+    }
+
+    private void CancelEdit()
+    {
+        editUser = null;
+    }
+
+    private async Task DeleteAsync(AppUser user)
+    {
+        Db.AppUsers.Remove(user);
+        await Db.SaveChangesAsync();
+        users.Remove(user);
+    }
+}

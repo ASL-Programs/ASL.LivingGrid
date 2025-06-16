@@ -1,29 +1,114 @@
 [
-  { "Key": "Navigation.Dashboard", "Url": "", "Icon": "oi oi-home" },
-  { "Key": "Navigation.Companies", "Url": "companies", "Icon": "oi oi-people" },
-  { "Key": "Navigation.Users", "Url": "users", "Icon": "oi oi-person" },
-  { "Key": "Navigation.Roles", "Url": "roles", "Icon": "oi oi-key" },
+  {
+    "Key": "Navigation.Dashboard",
+    "Url": "",
+    "Icon": "oi oi-home"
+  },
+  {
+    "Key": "Navigation.Companies",
+    "Url": "companies",
+    "Icon": "oi oi-people"
+  },
+  {
+    "Key": "Navigation.Users",
+    "Url": "users",
+    "Icon": "oi oi-person"
+  },
+  {
+    "Key": "Navigation.Roles",
+    "Url": "roles",
+    "Icon": "oi oi-key"
+  },
   {
     "Key": "Navigation.Settings",
     "Url": "settings",
     "Icon": "oi oi-cog",
     "Children": [
-      { "Key": "Navigation.GeneralSettings", "Url": "settings/general", "Icon": "oi oi-cog" },
-      { "Key": "Navigation.SecuritySettings", "Url": "settings/security", "Icon": "oi oi-lock-locked" }
+      {
+        "Key": "Navigation.GeneralSettings",
+        "Url": "settings/general",
+        "Icon": "oi oi-cog"
+      },
+      {
+        "Key": "Navigation.SecuritySettings",
+        "Url": "settings/security",
+        "Icon": "oi oi-lock-locked"
+      }
     ]
   },
-  { "Key": "Navigation.Audit", "Url": "audit", "Icon": "oi oi-clipboard" },
-  { "Key": "Navigation.UIAudit", "Url": "uiaudit", "Icon": "oi oi-eye" },
-  { "Key": "Navigation.Notifications", "Url": "notifications", "Icon": "oi oi-bell" },
-  { "Key": "Navigation.Plugins", "Url": "plugins", "Icon": "oi oi-puzzle-piece" },
-  { "Key": "Navigation.ThemeMarketplace", "Url": "theme-marketplace", "Icon": "oi oi-brush" },
-  { "Key": "Navigation.LayoutMarketplace", "Url": "layout-marketplace", "Icon": "oi oi-grid-three-up" },
-  { "Key": "Navigation.DashboardDesigner", "Url": "dashboard-designer", "Icon": "oi oi-dashboard" },
-  { "Key": "Navigation.LanguagePackMarketplace", "Url": "marketplace/languagepacks", "Icon": "oi oi-book" },
-  { "Key": "Navigation.PendingReviews", "Url": "pendingreviews", "Icon": "oi oi-comment-square" },
-  { "Key": "Navigation.VisualEditor", "Url": "visual-editor", "Icon": "oi oi-pencil" },
-  { "Key": "Navigation.LocalizationCoverage", "Url": "coverage", "Icon": "oi oi-spreadsheet" },
-  { "Key": "Navigation.TemplateOverrides", "Url": "template-overrides", "Icon": "oi oi-file" },
-  { "Key": "Navigation.TerminologyOverrides", "Url": "terminology-overrides", "Icon": "oi oi-list" },
-  { "Key": "Navigation.WidgetMarketplace", "Url": "widget-marketplace", "Icon": "oi oi-cube" }
+  {
+    "Key": "Navigation.Audit",
+    "Url": "audit",
+    "Icon": "oi oi-clipboard"
+  },
+  {
+    "Key": "Navigation.UIAudit",
+    "Url": "uiaudit",
+    "Icon": "oi oi-eye"
+  },
+  {
+    "Key": "Navigation.Notifications",
+    "Url": "notifications",
+    "Icon": "oi oi-bell"
+  },
+  {
+    "Key": "Navigation.Plugins",
+    "Url": "plugins",
+    "Icon": "oi oi-puzzle-piece"
+  },
+  {
+    "Key": "Navigation.ThemeMarketplace",
+    "Url": "theme-marketplace",
+    "Icon": "oi oi-brush"
+  },
+  {
+    "Key": "Navigation.LayoutMarketplace",
+    "Url": "layout-marketplace",
+    "Icon": "oi oi-grid-three-up"
+  },
+  {
+    "Key": "Navigation.DashboardDesigner",
+    "Url": "dashboard-designer",
+    "Icon": "oi oi-dashboard"
+  },
+  {
+    "Key": "Navigation.LanguagePackMarketplace",
+    "Url": "marketplace/languagepacks",
+    "Icon": "oi oi-book"
+  },
+  {
+    "Key": "Navigation.PendingReviews",
+    "Url": "pendingreviews",
+    "Icon": "oi oi-comment-square"
+  },
+  {
+    "Key": "Navigation.VisualEditor",
+    "Url": "visual-editor",
+    "Icon": "oi oi-pencil"
+  },
+  {
+    "Key": "Navigation.LocalizationCoverage",
+    "Url": "coverage",
+    "Icon": "oi oi-spreadsheet"
+  },
+  {
+    "Key": "Navigation.TemplateOverrides",
+    "Url": "template-overrides",
+    "Icon": "oi oi-file"
+  },
+  {
+    "Key": "Navigation.TerminologyOverrides",
+    "Url": "terminology-overrides",
+    "Icon": "oi oi-list"
+  },
+  {
+    "Key": "Navigation.WidgetMarketplace",
+    "Url": "widget-marketplace",
+    "Icon": "oi oi-cube"
+  },
+  {
+    "Key": "Navigation.PermissionMatrix",
+    "Url": "permission-matrix",
+    "Icon": "oi oi-lock-locked"
+  }
 ]

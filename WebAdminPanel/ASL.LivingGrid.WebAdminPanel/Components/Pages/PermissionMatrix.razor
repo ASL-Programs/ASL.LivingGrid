@@ -1,0 +1,93 @@
+@page "/permission-matrix"
+@using ASL.LivingGrid.WebAdminPanel.Data
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject ApplicationDbContext Db
+
+<h3>Permission Matrix</h3>
+
+<select class="form-select mb-3" @bind="selectedRoleId" @onchange="LoadRolePermissionsAsync">
+    <option value="">-- select role --</option>
+    @foreach (var r in roles)
+    {
+        <option value="@r.Id">@r.Name</option>
+    }
+</select>
+
+@if (permissionGroups.Any())
+{
+    <ul class="list-unstyled">
+        @foreach (var g in permissionGroups)
+        {
+            <li>
+                <PermissionGroupView Group="g" OnToggle="TogglePermission" />
+            </li>
+        }
+    </ul>
+    <button class="btn btn-primary" @onclick="SavePermissionsAsync">Save Changes</button>
+}
+
+@code {
+    private List<Role> roles = new();
+    private string? selectedRoleId;
+    private List<PermissionGroup> permissionGroups = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        roles = await Db.Roles.OrderBy(r => r.Name).ToListAsync();
+    }
+
+    private async Task LoadRolePermissionsAsync(ChangeEventArgs _)
+    {
+        await LoadRolePermissionsAsync();
+    }
+
+    private async Task LoadRolePermissionsAsync()
+    {
+        permissionGroups.Clear();
+        if (Guid.TryParse(selectedRoleId, out var roleId))
+        {
+            var role = await Db.Roles.FindAsync(roleId);
+            var assigned = role?.Permissions?.Split(';', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+            var modules = await Db.Permissions.Select(p => p.Module).Distinct().ToListAsync();
+            foreach (var mod in modules)
+            {
+                var group = new PermissionGroup { Name = mod };
+                group.Permissions = await Db.Permissions.Where(p => p.Module == mod).Select(p => new PermissionEntry
+                {
+                    Code = p.Code,
+                    Name = p.Name,
+                    Enabled = assigned.Contains(p.Code)
+                }).ToListAsync();
+                permissionGroups.Add(group);
+            }
+        }
+    }
+
+    private void TogglePermission(PermissionEntry p)
+    {
+        p.Enabled = !p.Enabled;
+    }
+
+    private async Task SavePermissionsAsync()
+    {
+        if (!Guid.TryParse(selectedRoleId, out var roleId)) return;
+        var role = await Db.Roles.FindAsync(roleId);
+        if (role is null) return;
+        var codes = permissionGroups.SelectMany(g => g.Permissions.Where(p => p.Enabled).Select(p => p.Code));
+        role.Permissions = string.Join(';', codes);
+        await Db.SaveChangesAsync();
+    }
+
+    public class PermissionGroup
+    {
+        public string Name { get; set; } = string.Empty;
+        public List<PermissionEntry> Permissions { get; set; } = new();
+    }
+    public class PermissionEntry
+    {
+        public string Code { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public bool Enabled { get; set; }
+    }
+}
+

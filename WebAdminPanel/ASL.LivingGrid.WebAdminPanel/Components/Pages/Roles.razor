@@ -1,0 +1,113 @@
+@page "/roles"
+@using ASL.LivingGrid.WebAdminPanel.Data
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject ApplicationDbContext Db
+
+<h3>Roles</h3>
+
+@if (editRole is not null)
+{
+    <EditForm Model="editRole" OnValidSubmit="SaveRoleAsync" class="mb-3">
+        <DataAnnotationsValidator />
+        <div class="row g-2">
+            <div class="col">
+                <InputText class="form-control" @bind-Value="editRole.Name" placeholder="Name" />
+            </div>
+            <div class="col">
+                <InputText class="form-control" @bind-Value="editRole.Description" placeholder="Description" />
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <button class="btn btn-secondary ms-1" type="button" @onclick="CancelEdit">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
+}
+else
+{
+    <button class="btn btn-success mb-3" @onclick="CreateRole">New Role</button>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in roles)
+        {
+            <tr>
+                <td>@r.Name</td>
+                <td>@r.Description</td>
+                <td>
+                    <button class="btn btn-sm btn-primary me-1" @onclick="() => Edit(r)">Edit</button>
+                    <button class="btn btn-sm btn-danger" @onclick="() => DeleteAsync(r)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Role> roles = new();
+    private Role? editRole;
+
+    protected override async Task OnInitializedAsync()
+    {
+        roles = await Db.Roles.OrderBy(r => r.Name).ToListAsync();
+    }
+
+    private void CreateRole()
+    {
+        editRole = new Role();
+    }
+
+    private void Edit(Role role)
+    {
+        editRole = new Role
+        {
+            Id = role.Id,
+            Name = role.Name,
+            Description = role.Description,
+            Permissions = role.Permissions
+        };
+    }
+
+    private async Task SaveRoleAsync()
+    {
+        if (editRole is null) return;
+        if (editRole.Id == Guid.Empty)
+        {
+            editRole.Id = Guid.NewGuid();
+            Db.Roles.Add(editRole);
+        }
+        else
+        {
+            var existing = await Db.Roles.FindAsync(editRole.Id);
+            if (existing is not null)
+            {
+                existing.Name = editRole.Name;
+                existing.Description = editRole.Description;
+                existing.Permissions = editRole.Permissions;
+            }
+        }
+        await Db.SaveChangesAsync();
+        editRole = null;
+        roles = await Db.Roles.OrderBy(r => r.Name).ToListAsync();
+    }
+
+    private void CancelEdit()
+    {
+        editRole = null;
+    }
+
+    private async Task DeleteAsync(Role role)
+    {
+        Db.Roles.Remove(role);
+        await Db.SaveChangesAsync();
+        roles.Remove(role);
+    }
+}
