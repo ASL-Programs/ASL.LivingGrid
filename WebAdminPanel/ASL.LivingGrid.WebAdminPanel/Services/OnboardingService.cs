@@ -351,6 +351,10 @@ public class OnboardingService : IOnboardingService
         await _configService.SetValueAsync("Security:EnableAuditLogging", setup.EnableAuditLogging.ToString());
         await _configService.SetValueAsync("Security:PasswordMinLength", setup.PasswordMinLength.ToString());
         await _configService.SetValueAsync("Security:RequirePasswordComplexity", setup.RequirePasswordComplexity.ToString());
+        await _configService.SetValueAsync("Security:PasswordExpiryDays", setup.PasswordExpiryDays.ToString());
+        await _configService.SetValueAsync("Security:SecretRotationDays", setup.SecretRotationDays.ToString());
+        await _configService.SetValueAsync("Security:EnableJitPrivilegeElevation", setup.EnableJitPrivilegeElevation.ToString());
+        await _configService.SetValueAsync("Security:EnforcePerTenantPolicy", setup.EnforcePerTenantPolicy.ToString());
     }
 
     private async Task ProcessLanguageSettingsAsync(LanguageSettings? setup)

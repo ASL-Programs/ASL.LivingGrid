@@ -28,3 +28,10 @@ Sistemin təhlükəsizliyini mərkəzləşdirilmiş şəkildə tənzimləmək v�
 - SAML və digər identifikasiya protokollarının əlavə edilməsi.
 - Parol siyasətlərinin daha sərt tətbiqi və avtomatik rotasiya.
 
+## Yeni xüsusiyyətlər və konfiqurasiya
+1. **JIT səlahiyyət artırılması** – `Security:EnableJitPrivilegeElevation` açarını `true` edin və istifadəçi üçün müddət təyin edin.
+2. **Gizli açarların rotasiyası** – `Security:SecretRotationDays` dəyəri günlərlə rotasiya intervalını göstərir. `SecurityService.RotateSecretsAsync` fon xidməti ilə avtomatlaşdırılır.
+3. **Tenant üzrə siyasət** – `Security:EnforcePerTenantPolicy` açarı aktiv olduqda hər tenant üçün `Security:Policy:{tenantId}` konfiqurasiyası tətbiq edilir.
+4. **Xarici identifikasiya provayderləri** – `Security:Oidc:*`, `Security:OAuth2:*`, `Security:Saml:*` və `Security:Ldap:*` parametrlərini dolduraraq qoşun.
+5. **Parol vaxtı və rotasiyası** – `Security:PasswordExpiryDays` dəyəri bitdikdə istifadəçi kilidlənir, yeni parol tələb olunur.
+
