@@ -11,12 +11,14 @@ using Microsoft.AspNetCore.HttpOverrides;
 using System.IO;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using System.Diagnostics;
 using Microsoft.AspNetCore.StaticFiles;
 
 namespace ASL.LivingGrid.WebAdminPanel;
 
 public class Program
 {
+    public static readonly DateTime StartTime = Process.GetCurrentProcess().StartTime;
     public static async Task Main(string[] args)
     {
         // Configure Serilog
