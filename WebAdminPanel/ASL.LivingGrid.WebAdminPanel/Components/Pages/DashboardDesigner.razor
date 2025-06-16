@@ -4,11 +4,13 @@
 @using System.Reflection
 @using System.Security.Claims
 @using System.IO
+@using Microsoft.Extensions.Logging
 @inject IWidgetService WidgetService
 @inject IWidgetMarketplaceService Marketplace
 @inject IWidgetPermissionService PermissionService
 @inject AuthenticationStateProvider AuthProvider
 @inject IJSRuntime JS
+@inject ILogger<DashboardDesigner> Logger
 
 <h3>Dashboard Designer</h3>
 
@@ -78,7 +80,10 @@
                 if (type != null)
                     return type;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Error loading widget component for {WidgetId}", id);
+            }
         }
 
         return id switch
