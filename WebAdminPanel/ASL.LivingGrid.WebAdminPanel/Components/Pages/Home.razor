@@ -175,9 +175,9 @@
         // Load recent activities (this would come from AuditService in real implementation)
         recentActivities = new List<Models.AuditLog>
         {
-            new() { Action = "User Login", UserName = "admin@asl.az", EntityType = "User", Timestamp = DateTime.Now.AddMinutes(-5) },
-            new() { Action = "Configuration Updated", UserName = "admin@asl.az", EntityType = "Config", Timestamp = DateTime.Now.AddMinutes(-15) },
-            new() { Action = "Company Created", UserName = "admin@asl.az", EntityType = "Company", Timestamp = DateTime.Now.AddHours(-1) }
+            new() { Action = "User Login", UserName = "sample@demo", EntityType = "User", Timestamp = DateTime.Now.AddMinutes(-5) },
+            new() { Action = "Configuration Updated", UserName = "sample@demo", EntityType = "Config", Timestamp = DateTime.Now.AddMinutes(-15) },
+            new() { Action = "Company Created", UserName = "sample@demo", EntityType = "Company", Timestamp = DateTime.Now.AddHours(-1) }
         };
     }
 
