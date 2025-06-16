@@ -123,6 +123,11 @@ Localization update checks are controlled by
 `LocalizationUpdateService` looks for new language packs (default: 30
 minutes).
 
+To automatically create a default administrator account in the WebAdminPanel,
+set the `DEFAULT_ADMIN_EMAIL` and `DEFAULT_ADMIN_PASSWORD` environment variables
+before first launch. If these variables are not defined, no admin user is
+created.
+
 ## Development Workflow
 
 Please read `Read before you start working.md` before beginning any development work. The project follows strict Core Rules and workflow guidelines with progress tracking through TODO.md files. Continuous integration runs via GitHub Actions using `.github/workflows/dotnet.yml`.

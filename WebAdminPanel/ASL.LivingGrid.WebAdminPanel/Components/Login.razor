@@ -5,7 +5,6 @@
 @inject UserManager<IdentityUser> UserManager
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
-@inject IConfiguration Configuration
 
 <div class="login-form">
     <EditForm Model="loginModel" OnValidSubmit="HandleLoginAsync" FormName="login">
@@ -99,8 +98,8 @@
     {
         try
         {
-            var email = Environment.GetEnvironmentVariable("DEFAULT_ADMIN_EMAIL") ?? Configuration["DefaultAdmin:Email"];
-            var password = Environment.GetEnvironmentVariable("DEFAULT_ADMIN_PASSWORD") ?? Configuration["DefaultAdmin:Password"];
+            var email = Environment.GetEnvironmentVariable("DEFAULT_ADMIN_EMAIL");
+            var password = Environment.GetEnvironmentVariable("DEFAULT_ADMIN_PASSWORD");
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
                 return;
