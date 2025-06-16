@@ -138,6 +138,7 @@ public class Program
         services.AddScoped<IFirstLaunchDiagnosticService, FirstLaunchDiagnosticService>();
         services.AddScoped<IAdvancedRollbackService, AdvancedRollbackService>();
         services.AddScoped<IWireframePageBuilderService, WireframePageBuilderService>();
+        services.AddScoped<IWorkflowDesignerService, WorkflowDesignerService>();
         services.AddScoped<IThemeService, ThemeService>();
         services.AddScoped<IRoleBasedUiService, RoleBasedUiService>();
         services.AddScoped<INavigationService, NavigationService>();
