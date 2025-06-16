@@ -107,7 +107,7 @@ bash ./Scripts/deploy.sh [Release|Debug]
 
 Artifacts are placed in the `publish/` directory.
 
-### 6. Configuration
+### 7. Configuration
 
 To enforce HTTPS redirection when hosting the WebAdminPanel, set the
 `Security:RequireHttps` key in `appsettings.json` (or as an environment
