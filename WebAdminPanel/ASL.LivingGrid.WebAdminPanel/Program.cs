@@ -153,6 +153,7 @@ public class Program
         services.AddScoped<IReportingService, ReportingService>();
         services.AddHostedService<DisasterRecoveryService>();
         services.AddHostedService<LocalizationUpdateService>();
+        services.AddHostedService<ReportSchedulerService>();
 
         // Add HTTP Client for external API calls
         services.AddHttpClient();
@@ -441,6 +442,18 @@ public class Program
             return Results.Ok();
         });
 
+        var reportApi = app.MapGroup("/api/reports");
+        reportApi.MapPost("/", async (Report report, IReportingService svc, ClaimsPrincipal user) =>
+        {
+            var saved = await svc.SaveReportAsync(report, user);
+            return Results.Ok(saved);
+        });
+        reportApi.MapPost("/schedule/{id}", async (Guid id, ScheduleRequest req, IReportingService svc, ClaimsPrincipal user) =>
+        {
+            await svc.ScheduleReportAsync(id, req.Filter, req.ScheduledAt, req.Recipients, user);
+            return Results.Ok();
+        });
+
         app.MapGet("/api/search", async (string q, ISearchService svc) =>
         {
             var result = await svc.SearchAsync(q);
@@ -507,3 +520,5 @@ public class Program
         }
     }
 }
+
+public record ScheduleRequest(ReportFilter Filter, DateTime ScheduledAt, string? Recipients);

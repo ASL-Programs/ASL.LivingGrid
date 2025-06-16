@@ -28,3 +28,8 @@ Bu sənəd WebAdminPanel modulunda hesabat xidmətinin qurulma məqsədini, istf
 - Daha dərin təhlükəsizlik yoxlamaları və performans optimizasiyası
 - Filtr və sorğu dizaynerinin genişləndirilməsi
 
+## Yeni imkanlar
+1. **Hesabat şablonunun saxlanması:** `ReportDesigner` səhifəsində sorğunu `SaveReportAsync` metodu ilə yadda saxlayın.
+2. **Zamanlama:** Eyni səhifədə hesabatı gələcək tarixə planlaşdırmaq üçün `ScheduleReportAsync` metodundan istifadə edin.
+3. **Arxa plan xidməti:** `ReportSchedulerService` planlaşdırılmış hesabatları icra edir və nəticəni `NotificationService` vasitəsilə göndərir.
+

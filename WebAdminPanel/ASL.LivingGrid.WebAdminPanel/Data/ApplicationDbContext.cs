@@ -32,6 +32,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<TerminologyOverride> TerminologyOverrides { get; set; }
     public DbSet<Documentation> Documentations { get; set; }
     public DbSet<Report> Reports { get; set; }
+    public DbSet<ScheduledReport> ScheduledReports { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
