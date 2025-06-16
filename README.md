@@ -107,6 +107,12 @@ npm run storybook
 
 Each module can be run independently from its own solution using `dotnet run`.
 
+### Offline Assets
+
+Marketplace previews reference local SVG images stored under
+`WebAdminPanel/ASL.LivingGrid.WebAdminPanel/wwwroot/images/`. These lightweight
+placeholders load even without internet access.
+
 ### 7. Deployment
 
 Publish release binaries with the deploy script:
