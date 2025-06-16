@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Microsoft.Extensions.Hosting;
 using ASL.LivingGrid.WebAdminPanel.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
 
@@ -9,13 +10,17 @@ public class LocalizationUpdateService : BackgroundService
     private readonly ILogger<LocalizationUpdateService> _logger;
     private readonly IServiceProvider _provider;
     private readonly IWebHostEnvironment _env;
-    private readonly TimeSpan _interval = TimeSpan.FromMinutes(30);
+    private readonly TimeSpan _interval;
+    private readonly IConfiguration _configuration;
 
-    public LocalizationUpdateService(ILogger<LocalizationUpdateService> logger, IServiceProvider provider, IWebHostEnvironment env)
+    public LocalizationUpdateService(ILogger<LocalizationUpdateService> logger, IServiceProvider provider, IWebHostEnvironment env, IConfiguration configuration)
     {
         _logger = logger;
         _provider = provider;
         _env = env;
+        _configuration = configuration;
+        var minutes = _configuration.GetValue<int>("Localization:UpdateIntervalMinutes", 30);
+        _interval = TimeSpan.FromMinutes(minutes);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)

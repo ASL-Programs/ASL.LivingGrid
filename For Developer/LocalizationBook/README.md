@@ -109,6 +109,8 @@ POST /api/languagepacks/rate/{id}
 
 ## Yeniləmələr və Rollback
 `LocalizationUpdateService` fon xidməti `pending_languagepack_updates.json` faylını oxuyaraq yeni dil paketlərini mərhələli şəkildə tətbiq edir. Hər yeniləmə `AuditService` vasitəsilə jurnal olunur və `NotificationService` istifadəçilərə bildiriş göndərir. Faylda `Applied` sahəsi yenilənməmiş qeydləri işarələməyə imkan verir.
+Yeniləmə yoxlamalarının tezliyi `Localization:UpdateIntervalMinutes` parametrində
+dəqiqə olaraq təyin edilir və göstərilmədikdə 30 dəqiqə qəbul olunur.
 
 Rollback üçün əvvəlki dil paketlərini `Export` əməliyyatı ilə saxlayıb istənilən vaxt `Import` edə bilərsiniz.
 
