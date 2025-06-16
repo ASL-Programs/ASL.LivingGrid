@@ -1,6 +1,14 @@
 [
   { "Key": "Navigation.Dashboard", "Url": "", "Icon": "oi oi-home" },
   { "Key": "Navigation.Users", "Url": "users", "Icon": "oi oi-person" },
-  { "Key": "Navigation.Settings", "Url": "settings", "Icon": "oi oi-cog" },
+  {
+    "Key": "Navigation.Settings",
+    "Url": "settings",
+    "Icon": "oi oi-cog",
+    "Children": [
+      { "Key": "Navigation.GeneralSettings", "Url": "settings/general", "Icon": "oi oi-cog" },
+      { "Key": "Navigation.SecuritySettings", "Url": "settings/security", "Icon": "oi oi-lock-locked" }
+    ]
+  },
   { "Key": "Navigation.Feedback", "Url": "feedback", "Icon": "oi oi-comment-square" }
 ]

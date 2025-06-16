@@ -21,6 +21,7 @@
 </div>
 
 @code {
+    [Parameter] public EventCallback<string> OnQueryChanged { get; set; }
     private string query = string.Empty;
     private Dictionary<string, List<SearchResultItem>> results = new();
     private CancellationTokenSource? cts;
@@ -43,6 +44,10 @@
             else
             {
                 results.Clear();
+            }
+            if (OnQueryChanged.HasDelegate)
+            {
+                await OnQueryChanged.InvokeAsync(query);
             }
         }
         catch (TaskCanceledException) { }

@@ -1,0 +1,43 @@
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject NavigationManager Navigation
+<div class="nav-item px-3">
+    <div class="d-flex align-items-center">
+        @if (Item.Children?.Any() == true)
+        {
+            <a href="#" class="nav-link flex-grow-1" @onclick="ToggleExpanded">
+                <span class="@Item.Icon" aria-hidden="true"></span> @L[Item.Key]
+            </a>
+        }
+        else
+        {
+            <NavLink class="nav-link flex-grow-1" href="@Item.Url" Match="NavLinkMatch.Prefix">
+                <span class="@Item.Icon" aria-hidden="true"></span> @L[Item.Key]
+            </NavLink>
+        }
+        <span class="ms-2" role="button" title="Favorite" @onclick="ToggleFavorite">@(IsFavorite ? "★" : "☆")</span>
+    </div>
+    @if (expanded && Item.Children?.Any() == true)
+    {
+        <div class="ms-3">
+            @foreach (var child in Item.Children)
+            {
+                <MenuItemView Item="child" L="L" Favorites="Favorites" OnFavoriteToggle="OnFavoriteToggle" />
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public NavigationItem Item { get; set; } = new();
+    [Parameter] public Dictionary<string,string> L { get; set; } = new();
+    [Parameter] public HashSet<string> Favorites { get; set; } = new();
+    [Parameter] public EventCallback<string> OnFavoriteToggle { get; set; }
+    private bool expanded;
+    private bool IsFavorite => Favorites.Contains(Item.Key);
+    private async Task ToggleFavorite()
+    {
+        if (OnFavoriteToggle.HasDelegate)
+            await OnFavoriteToggle.InvokeAsync(Item.Key);
+    }
+    private void ToggleExpanded() => expanded = !expanded;
+}

@@ -5,7 +5,8 @@
 @inject ILocalizationService LocalizationService
 @inject INavigationService NavService
 @inject NavigationManager Navigation
-@inject IJSRuntime JSRuntime
+@inject IFavoritesService FavService
+@inject IRoleBasedUiService RoleUi
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -21,15 +22,24 @@
 <div id="sidebarMenuContent" class="nav-scrollable collapse show">
     <nav class="flex-column">
         <div class="nav-item p-3">
-            <SearchBox />
+            <SearchBox OnQueryChanged="OnSearch" />
         </div>
-        @foreach (var item in menuItems)
+        @if (favoriteKeys.Count > 0)
         {
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="@item.Url" Match="NavLinkMatch.Prefix">
-                    <span class="@item.Icon" aria-hidden="true"></span> @localizedStrings[item.Key]
-                </NavLink>
-            </div>
+            <div class="nav-item px-3 text-muted">Favorites</div>
+            @foreach (var fav in favoriteKeys)
+            {
+                var favItem = FindItem(menuItems, fav);
+                if (favItem != null)
+                {
+                    <MenuItemView Item="favItem" L="localizedStrings" Favorites="favoriteKeys" OnFavoriteToggle="ToggleFavorite" />
+                }
+            }
+            <hr />
+        }
+        @foreach (var item in filteredMenu)
+        {
+            <MenuItemView Item="item" L="localizedStrings" Favorites="favoriteKeys" OnFavoriteToggle="ToggleFavorite" />
         }
         <div class="nav-item p-3">
             <select class="form-select" @onchange="SimulateRole">
@@ -45,6 +55,9 @@
 @code {
     private Dictionary<string, string> localizedStrings = new();
     private IEnumerable<NavigationItem> menuItems = Enumerable.Empty<NavigationItem>();
+    private IEnumerable<NavigationItem> filteredMenu = Enumerable.Empty<NavigationItem>();
+    private HashSet<string> favoriteKeys = new();
+    private string searchQuery = string.Empty;
     private string? simulationRole;
 
     protected override async Task OnInitializedAsync()
@@ -74,6 +87,9 @@
         var authState = await AuthProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         menuItems = await NavService.GetMenuItemsAsync(user);
+        filteredMenu = menuItems;
+        var favs = await FavService.GetFavoritesAsync();
+        favoriteKeys = new HashSet<string>(favs);
     }
 
     private async Task SimulateRole(ChangeEventArgs e)
@@ -82,5 +98,62 @@
         RoleUi.SetSimulationRole(simulationRole);
         await OnInitializedAsync();
         StateHasChanged();
+    }
+
+    private async Task ToggleFavorite(string key)
+    {
+        if (favoriteKeys.Contains(key))
+        {
+            favoriteKeys.Remove(key);
+            await FavService.RemoveFavoriteAsync(key);
+        }
+        else
+        {
+            favoriteKeys.Add(key);
+            await FavService.AddFavoriteAsync(key);
+        }
+    }
+
+    private void OnSearch(string query)
+    {
+        searchQuery = query;
+        filteredMenu = Filter(menuItems, searchQuery);
+    }
+
+    private IEnumerable<NavigationItem> Filter(IEnumerable<NavigationItem> items, string query)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+            return items;
+        var result = new List<NavigationItem>();
+        foreach (var item in items)
+        {
+            var text = localizedStrings.GetValueOrDefault(item.Key, item.Key);
+            var childFiltered = item.Children is null ? null : Filter(item.Children, query).ToList();
+            if (text.Contains(query, StringComparison.OrdinalIgnoreCase) || (childFiltered?.Any() ?? false))
+            {
+                result.Add(new NavigationItem
+                {
+                    Key = item.Key,
+                    Url = item.Url,
+                    Icon = item.Icon,
+                    Children = childFiltered?.ToList()
+                });
+            }
+        }
+        return result;
+    }
+
+    private NavigationItem? FindItem(IEnumerable<NavigationItem> items, string key)
+    {
+        foreach (var item in items)
+        {
+            if (item.Key == key) return item;
+            if (item.Children is not null)
+            {
+                var found = FindItem(item.Children, key);
+                if (found != null) return found;
+            }
+        }
+        return null;
     }
 }

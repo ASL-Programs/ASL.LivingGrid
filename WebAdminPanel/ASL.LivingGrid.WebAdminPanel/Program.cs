@@ -137,6 +137,7 @@ public class Program
         services.AddScoped<IFeedbackService, FeedbackService>();
         services.AddScoped<ISessionPersistenceService, SessionPersistenceService>();
         services.AddScoped<ISearchService, SearchService>();
+        services.AddScoped<IFavoritesService, FavoritesService>();
         services.AddScoped<ITranslationProviderService, TranslationProviderService>();
         services.AddScoped<ILocalizationCustomizationService, LocalizationCustomizationService>();
         services.AddHostedService<DisasterRecoveryService>();

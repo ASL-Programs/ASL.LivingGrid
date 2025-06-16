@@ -186,7 +186,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 - [x] Real-time translation manager, theme/color/logo editor
 - [x] Accessibility compliance check
  - [x] **Per-role navigation structure and menu editing** - 2025-06-16 - AI: NavigationService filtrates menu by user role
-- [ ] **Multi-level menu logic (mega menu, dynamic pop-out, favorites, search)**
+ - [x] **Multi-level menu logic (mega menu, dynamic pop-out, favorites, search)** - 2025-06-20 - AI
 - [x] Quick search field in NavMenu with live suggestions - 2025-06-17 - AI
  - [x] **Tenant/company custom menus and layout overrides** - 2025-06-16 - AI: NavigationService reads menuitems.{tenant}.json
 
