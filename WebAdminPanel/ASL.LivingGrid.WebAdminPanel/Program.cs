@@ -193,6 +193,7 @@ public class Program
         services.AddScoped<ITranslationProviderService, TranslationProviderService>();
         services.AddScoped<ILocalizationCustomizationService, LocalizationCustomizationService>();
         services.AddScoped<IReportingService, ReportingService>();
+        services.AddScoped<ITestAutomationService, TestAutomationService>();
         services.AddHostedService<DisasterRecoveryService>();
         services.AddHostedService<LocalizationUpdateService>();
         services.AddHostedService<ReportSchedulerService>();
