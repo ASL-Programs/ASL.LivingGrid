@@ -34,8 +34,14 @@ Sistemin təhlükəsizliyini mərkəzləşdirilmiş şəkildə tənzimləmək v�
 3. **Tenant üzrə siyasət** – `Security:EnforcePerTenantPolicy` açarı aktiv olduqda hər tenant üçün `Security:Policy:{tenantId}` konfiqurasiyası tətbiq edilir.
 4. **Xarici identifikasiya provayderləri** – `Security:Oidc:*`, `Security:OAuth2:*`, `Security:Saml:*` və `Security:Ldap:*` parametrlərini dolduraraq qoşun.
 5. **Parol vaxtı və rotasiyası** – `Security:PasswordExpiryDays` dəyəri bitdikdə istifadəçi kilidlənir, yeni parol tələb olunur.
-6. **Wireframe önizləmə tokeni** – `Security:PreviewSecret` məcburi dəyərdir. Bu secret ilə imzalanmış `token` parametri olmadan `/wireframes/preview/{id}` ünvanına giriş verilmir.
-7. **Gizli açarın təyin olunması** – `Security__PreviewSecret` mütləq mühit dəyişəni və ya `dotnet user-secrets` vasitəsilə təyin edilməlidir; boş və ya `${PREVIEW_SECRET}` kimi placeholder dəyərlər qəbul olunmur. Açarı `appsettings.json`-da saxlamaq təhlükəsizlik riskidir. TPM/HSM əsaslı `TpmHsmSecretStorageService` ilə qorumağı unutmayın.
+6. **Wireframe önizləmə tokeni** – `Security:PreviewSecret` məcburi dəyərdir. Bu
+   secret ilə imzalanmış `token` parametri olmadan `/wireframes/preview/{id}`
+   ünvanına giriş verilmir.
+7. **Gizli açarın təyin olunması** – `Security__PreviewSecret` mütləq mühit
+   dəyişəni və ya `dotnet user-secrets` vasitəsilə təyin edilməlidir. Dəyəri
+   `appsettings.json`-da saxlamayın; əks halda proqram başlamayacaq. Boş və ya
+   `${PREVIEW_SECRET}` kimi placeholder dəyərlər qəbul olunmur. Secret-i
+   TPM/HSM əsaslı `TpmHsmSecretStorageService` ilə qorumağı unutmayın.
 
 ### Default admin hesabının yaradılması
 `DEFAULT_ADMIN_EMAIL` və `DEFAULT_ADMIN_PASSWORD` dəyişənlərini təyin etdikdə, WebAdminPanel ilk başladıqda həmin məlumatlarla admin istifadəçi avtomatik yaradılır.
