@@ -39,6 +39,11 @@ public class Program
             if (Environment.GetCommandLineArgs().Contains("--hosted"))
                 cfgMode = "WebServer";
             var isStandaloneExe = string.Equals(cfgMode, "Standalone", StringComparison.OrdinalIgnoreCase);
+
+            var previewSecret = builder.Configuration["Security:PreviewSecret"];
+            if (string.IsNullOrWhiteSpace(previewSecret))
+                throw new InvalidOperationException(
+                    "Security__PreviewSecret environment variable or user secret must be provided for wireframe previews.");
             
             // Configure logging
             builder.Host.UseSerilog();

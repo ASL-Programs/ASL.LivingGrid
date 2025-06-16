@@ -118,6 +118,10 @@ Slack integration can be enabled by setting
 `Notifications:EnableSlackNotifications` to `true` and specifying the
 `Notifications:SlackWebhookUrl` in `appsettings.json`.
 
+Wireframe previews are protected with a secret token. Set `Security__PreviewSecret`
+as an environment variable or user secret before launch; otherwise the
+application will fail to start.
+
 Localization update checks are controlled by
 `Localization:UpdateIntervalMinutes`. This sets how often the
 `LocalizationUpdateService` looks for new language packs (default: 30
