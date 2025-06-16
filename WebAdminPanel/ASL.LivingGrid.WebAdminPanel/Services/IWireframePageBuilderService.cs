@@ -35,7 +35,7 @@ public interface IWireframePageBuilderService
     
     Task<WireframePreview> GeneratePreviewAsync(string pageId, PreviewMode mode);
     Task<bool> PublishPageAsync(string pageId, PublishOptions options);
-    string GetPreviewToken(string pageId, string? password = null);
+    Task<string> GetPreviewTokenAsync(string pageId, string? password = null);
 }
 
 public class WireframeProject
