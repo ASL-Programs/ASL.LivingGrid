@@ -49,7 +49,7 @@ public class Program
                                  previewSecret.Trim().EndsWith("}");
             if (string.IsNullOrWhiteSpace(previewSecret) || hasPlaceholder)
                 throw new InvalidOperationException(
-                    "Security__PreviewSecret environment variable or user secret must be provided for wireframe previews.");
+                    "Security__PreviewSecret must be supplied via environment variable or dotnet user-secrets. Do not store it in appsettings.json.");
             
             // Configure logging
             builder.Host.UseSerilog();
