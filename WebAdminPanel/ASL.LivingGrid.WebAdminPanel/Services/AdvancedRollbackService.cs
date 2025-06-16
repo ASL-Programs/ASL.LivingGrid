@@ -1519,25 +1519,22 @@ public class AdvancedRollbackService : IAdvancedRollbackService
 
     private async Task CopyDirectoryAsync(string sourceDir, string targetDir)
     {
-        await Task.Run(() =>
+        if (!Directory.Exists(sourceDir))
+            return;
+
+        Directory.CreateDirectory(targetDir);
+
+        foreach (var file in Directory.GetFiles(sourceDir))
         {
-            if (!Directory.Exists(sourceDir))
-                return;
+            var targetFile = Path.Combine(targetDir, Path.GetFileName(file));
+            File.Copy(file, targetFile, true);
+        }
 
-            Directory.CreateDirectory(targetDir);
-
-            foreach (var file in Directory.GetFiles(sourceDir))
-            {
-                var targetFile = Path.Combine(targetDir, Path.GetFileName(file));
-                File.Copy(file, targetFile, true);
-            }
-
-            foreach (var dir in Directory.GetDirectories(sourceDir))
-            {
-                var targetSubDir = Path.Combine(targetDir, Path.GetFileName(dir));
-                CopyDirectoryAsync(dir, targetSubDir).Wait();
-            }
-        });
+        foreach (var dir in Directory.GetDirectories(sourceDir))
+        {
+            var targetSubDir = Path.Combine(targetDir, Path.GetFileName(dir));
+            await CopyDirectoryAsync(dir, targetSubDir);
+        }
     }
 
     private long GetDirectorySize(string dirPath)
