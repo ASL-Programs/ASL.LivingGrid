@@ -247,7 +247,7 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 - [x] Visual audit timeline, full audit event export (SIEM/Splunk/Syslog)
  - [x] Built-in notification center, alert templates, integrations (Email, Telegram, Slack)
 - [x] **Audit log export/import, external SIEM/Syslog integration**
-- [ ] **Custom report designer, query builder, scheduled report delivery**
+- [x] **Custom report designer, query builder, scheduled report delivery** - 2025-06-21 - AI
 - [x] **Per-role/tenant reporting permissions**
 
 **For Developer qovluğu və Book:**  

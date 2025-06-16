@@ -1,0 +1,57 @@
+@page "/reportdesigner"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject IReportingService ReportingService
+@inject AuthenticationStateProvider Auth
+
+<PageTitle>Report Designer</PageTitle>
+
+<h3>Report Designer</h3>
+
+<EditForm Model="template" OnValidSubmit="SaveAsync">
+    <div class="mb-2">
+        <InputText class="form-control" @bind-Value="template.Name" placeholder="Name" />
+    </div>
+    <div class="mb-2">
+        <InputTextArea class="form-control" @bind-Value="template.Query" rows="5" placeholder="Query"></InputTextArea>
+    </div>
+    <div class="mb-2">
+        <InputText class="form-control" @bind-Value="template.AllowedRoles" placeholder="Allowed Roles" />
+    </div>
+    <button class="btn btn-primary" type="submit">Save Template</button>
+</EditForm>
+
+<h4 class="mt-4">Schedule Execution</h4>
+<EditForm Model="schedule" OnValidSubmit="ScheduleAsync">
+    <div class="mb-2">
+        <InputDate class="form-control" @bind-Value="schedule.ScheduledAt" />
+    </div>
+    <div class="mb-2">
+        <InputText class="form-control" @bind-Value="schedule.Recipients" placeholder="Recipients" />
+    </div>
+    <button class="btn btn-secondary" type="submit">Schedule</button>
+</EditForm>
+
+@code {
+    private Report template = new();
+    private ScheduleModel schedule = new() { ScheduledAt = DateTime.UtcNow };
+
+    private async Task SaveAsync()
+    {
+        var auth = await Auth.GetAuthenticationStateAsync();
+        var saved = await ReportingService.SaveReportAsync(template, auth.User);
+        template = saved;
+    }
+
+    private async Task ScheduleAsync()
+    {
+        var auth = await Auth.GetAuthenticationStateAsync();
+        await ReportingService.ScheduleReportAsync(template.Id, new ReportFilter(), schedule.ScheduledAt, schedule.Recipients, auth.User);
+        schedule = new() { ScheduledAt = DateTime.UtcNow };
+    }
+
+    private class ScheduleModel
+    {
+        public DateTime ScheduledAt { get; set; }
+        public string? Recipients { get; set; }
+    }
+}
