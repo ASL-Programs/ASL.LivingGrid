@@ -6,6 +6,7 @@ using System.IO.Compression;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
 
@@ -18,6 +19,7 @@ public class AdvancedRollbackService : IAdvancedRollbackService
     private readonly string _backupPath;
     private readonly string _snapshotPath;
     private static UpgradeMonitoringResult? _activeMonitoring;
+    private Task? _monitoringTask;
 
     public AdvancedRollbackService(
         IConfiguration configuration,
@@ -33,10 +35,18 @@ public class AdvancedRollbackService : IAdvancedRollbackService
         var basePath = AppDomain.CurrentDomain.BaseDirectory;
         _backupPath = Path.Combine(basePath, "Backups");
         _snapshotPath = Path.Combine(basePath, "Snapshots");
-        
-        // Ensure directories exist
-        Directory.CreateDirectory(_backupPath);
-        Directory.CreateDirectory(_snapshotPath);
+
+        try
+        {
+            // Ensure directories exist
+            Directory.CreateDirectory(_backupPath);
+            Directory.CreateDirectory(_snapshotPath);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error creating backup directories");
+            throw;
+        }
     }
 
     public async Task<BackupPoint> CreateBackupPointAsync(string description, BackupType type = BackupType.Manual)
@@ -500,7 +510,10 @@ public class AdvancedRollbackService : IAdvancedRollbackService
             };
 
             // Start monitoring task (simplified)
-            _ = Task.Run(async () => await MonitorUpgradeAsync(_activeMonitoring));
+            _monitoringTask = Task.Run(async () => await MonitorUpgradeAsync(_activeMonitoring!));
+            _monitoringTask.ContinueWith(
+                t => _logger.LogError(t.Exception, "Error during upgrade monitoring task"),
+                TaskContinuationOptions.OnlyOnFaulted);
 
             return _activeMonitoring;
         }
