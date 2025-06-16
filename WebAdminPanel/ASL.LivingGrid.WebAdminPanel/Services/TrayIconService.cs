@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
 
@@ -10,13 +11,17 @@ public class TrayIconService : IHostedService, IDisposable
 {
     private readonly ILogger<TrayIconService> _logger;
     private readonly IHostApplicationLifetime _appLifetime;
+    private readonly IConfiguration _configuration;
     private NotifyIcon? _notifyIcon;
     private readonly string _appName = "ASL LivingGrid Web Admin Panel";
 
-    public TrayIconService(ILogger<TrayIconService> logger, IHostApplicationLifetime appLifetime)
+    public TrayIconService(ILogger<TrayIconService> logger,
+        IHostApplicationLifetime appLifetime,
+        IConfiguration configuration)
     {
         _logger = logger;
         _appLifetime = appLifetime;
+        _configuration = configuration;
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
@@ -104,12 +109,20 @@ public class TrayIconService : IHostedService, IDisposable
     {
         try
         {
-            var url = "http://localhost:5000";
+            var url =
+                _configuration["Application:BaseUrl"] ??
+                _configuration["Kestrel:Endpoints:Https:Url"] ??
+                _configuration["Kestrel:Endpoints:Http:Url"] ??
+                "http://localhost:5000";
+
+            _logger.LogInformation("Opening admin panel at {Url}", url);
+
             Process.Start(new ProcessStartInfo
             {
                 FileName = url,
                 UseShellExecute = true
             });
+
             _logger.LogInformation("Opened admin panel in browser");
         }
         catch (Exception ex)
