@@ -242,13 +242,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.6. Reports, Audit, Export
-- [ ] Advanced filters, custom BI reporting
-- [ ] Export (PDF, Excel, CSV, JSON, Parquet)
-- [ ] Visual audit timeline, full audit event export (SIEM/Splunk/Syslog)
+- [x] Advanced filters, custom BI reporting
+- [x] Export (PDF, Excel, CSV, JSON, Parquet)
+- [x] Visual audit timeline, full audit event export (SIEM/Splunk/Syslog)
 - [ ] Built-in notification center, alert templates, integrations (Email, Telegram, Slack)
-- [ ] **Audit log export/import, external SIEM/Syslog integration**
+- [x] **Audit log export/import, external SIEM/Syslog integration**
 - [ ] **Custom report designer, query builder, scheduled report delivery**
-- [ ] **Per-role/tenant reporting permissions**
+- [x] **Per-role/tenant reporting permissions**
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:

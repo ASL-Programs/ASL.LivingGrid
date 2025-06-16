@@ -143,6 +143,7 @@ public class Program
         services.AddScoped<IWidgetPermissionService, WidgetPermissionService>();
         services.AddScoped<ITranslationProviderService, TranslationProviderService>();
         services.AddScoped<ILocalizationCustomizationService, LocalizationCustomizationService>();
+        services.AddScoped<IReportingService, ReportingService>();
         services.AddHostedService<DisasterRecoveryService>();
         services.AddHostedService<LocalizationUpdateService>();
 
