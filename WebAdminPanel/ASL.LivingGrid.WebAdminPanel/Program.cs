@@ -54,7 +54,7 @@ public class Program
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            ConfigurePipeline(app, isStandaloneExe);
+            await ConfigurePipeline(app, isStandaloneExe);
 
             // Handle hosting mode switch
             await HandleHostingModeSwitchAsync(app, cfgMode);
@@ -204,7 +204,7 @@ public class Program
         }
     }
 
-    private static void ConfigurePipeline(WebApplication app, bool isStandaloneExe)
+    private static async Task ConfigurePipeline(WebApplication app, bool isStandaloneExe)
     {
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -242,7 +242,7 @@ public class Program
         using (var scope = app.Services.CreateScope())
         {
             var sec = scope.ServiceProvider.GetRequiredService<ISecurityService>();
-            sec.EnforcePasswordPoliciesAsync().GetAwaiter().GetResult();
+            await sec.EnforcePasswordPoliciesAsync();
         }
 
         // Health check endpoint
