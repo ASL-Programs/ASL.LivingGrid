@@ -1,22 +1,69 @@
 @page "/dashboard-designer"
-@inject IJSRuntime JS
+@using ASL.LivingGrid.WebAdminPanel.Models
+@using Microsoft.AspNetCore.Components.Authorization
+@inject IWidgetService WidgetService
+@inject IWidgetMarketplaceService Marketplace
+@inject IWidgetPermissionService PermissionService
+@inject AuthenticationStateProvider AuthProvider
 
 <h3>Dashboard Designer</h3>
-<div id="widget-list" class="row">
-    <div class="col-3" draggable="true">Widget A</div>
-    <div class="col-3" draggable="true">Widget B</div>
-    <div class="col-3" draggable="true">Widget C</div>
+
+<div class="mb-3">
+    @foreach (var w in availableWidgets)
+    {
+        if (PermissionService.HasAccess(w.Id, user))
+        {
+            <button class="btn btn-sm btn-outline-primary me-2" @onclick="() => AddWidget(w.Id)">@w.Name</button>
+        }
+    }
 </div>
+
 <div id="canvas" class="border mt-3 p-3" style="min-height:200px;">
-    Drop widgets here
+    @foreach (var id in selectedWidgets)
+    {
+        <div class="border p-2 mb-2">
+            <button class="btn-close float-end" @onclick="() => RemoveWidget(id)"></button>
+            <DynamicComponent Type="GetComponent(id)" />
+        </div>
+    }
 </div>
 
 @code {
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private List<MarketplaceWidget> availableWidgets = new();
+    private List<string> selectedWidgets = new();
+    private ClaimsPrincipal user = new(new ClaimsIdentity());
+    private string companyId = "default";
+    private string userId = "anon";
+
+    protected override async Task OnInitializedAsync()
     {
-        if (firstRender)
+        var state = await AuthProvider.GetAuthenticationStateAsync();
+        user = state.User;
+        userId = user.FindFirstValue(ClaimTypes.NameIdentifier) ?? "anon";
+        availableWidgets = (await Marketplace.ListAsync()).ToList();
+        selectedWidgets = (await WidgetService.GetUserWidgetsAsync(companyId, userId)).ToList();
+    }
+
+    private Type GetComponent(string id) => id switch
+    {
+        "counter" => typeof(Components.Widgets.CounterWidget),
+        "time" => typeof(Components.Widgets.TimeWidget),
+        _ => typeof(Components.Widgets.CounterWidget)
+    };
+
+    private async Task AddWidget(string id)
+    {
+        if (!selectedWidgets.Contains(id))
         {
-            await JS.InvokeVoidAsync("dashboardDesigner.init");
+            selectedWidgets.Add(id);
+            await WidgetService.SaveUserWidgetsAsync(companyId, userId, selectedWidgets);
+            await WidgetService.IncrementUsageAsync(id);
         }
+    }
+
+    private async Task RemoveWidget(string id)
+    {
+        selectedWidgets.Remove(id);
+        await WidgetService.SaveUserWidgetsAsync(companyId, userId, selectedWidgets);
     }
 }

@@ -138,6 +138,9 @@ public class Program
         services.AddScoped<ISessionPersistenceService, SessionPersistenceService>();
         services.AddScoped<ISearchService, SearchService>();
         services.AddScoped<IFavoritesService, FavoritesService>();
+        services.AddScoped<IWidgetService, WidgetService>();
+        services.AddScoped<IWidgetMarketplaceService, WidgetMarketplaceService>();
+        services.AddScoped<IWidgetPermissionService, WidgetPermissionService>();
         services.AddScoped<ITranslationProviderService, TranslationProviderService>();
         services.AddScoped<ILocalizationCustomizationService, LocalizationCustomizationService>();
         services.AddHostedService<DisasterRecoveryService>();
@@ -365,6 +368,19 @@ public class Program
         layoutGroup.MapGet("/export/{id}", async (string id, ILayoutMarketplaceService svc) =>
         {
             var json = await svc.ExportLayoutAsync(id);
+            return string.IsNullOrEmpty(json) ? Results.NotFound() : Results.Text(json, "application/json");
+        });
+
+        var widgetGroup = app.MapGroup("/api/widgets");
+        widgetGroup.MapGet("/", async (IWidgetMarketplaceService svc) => Results.Ok(await svc.ListAsync()));
+        widgetGroup.MapPost("/import/{id}", async (string id, IWidgetMarketplaceService svc) =>
+        {
+            var w = await svc.ImportAsync(id);
+            return w is not null ? Results.Ok(w) : Results.NotFound();
+        });
+        widgetGroup.MapGet("/export/{id}", async (string id, IWidgetMarketplaceService svc) =>
+        {
+            var json = await svc.ExportAsync(id);
             return string.IsNullOrEmpty(json) ? Results.NotFound() : Results.Text(json, "application/json");
         });
 

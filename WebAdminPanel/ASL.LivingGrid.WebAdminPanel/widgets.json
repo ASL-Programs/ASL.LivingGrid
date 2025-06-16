@@ -1,0 +1,14 @@
+[
+  {
+    "Id": "counter",
+    "Name": "Counter",
+    "Description": "Simple counter widget",
+    "Component": "counter"
+  },
+  {
+    "Id": "time",
+    "Name": "Time",
+    "Description": "Current time widget",
+    "Component": "time"
+  }
+]

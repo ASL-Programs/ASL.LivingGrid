@@ -1,0 +1,13 @@
+<div class="p-2">
+    <h5>Counter Widget</h5>
+    <p>Current count: @count</p>
+    <button class="btn btn-sm btn-primary" @onclick="Increment">Increment</button>
+</div>
+
+@code {
+    private int count;
+    private void Increment()
+    {
+        count++;
+    }
+}

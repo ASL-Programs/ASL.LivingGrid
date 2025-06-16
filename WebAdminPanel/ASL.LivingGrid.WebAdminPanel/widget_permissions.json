@@ -1,0 +1,12 @@
+{
+  "counter": {
+    "Modules": ["Dashboard"],
+    "Tenants": [],
+    "Users": []
+  },
+  "time": {
+    "Modules": ["Dashboard"],
+    "Tenants": [],
+    "Users": []
+  }
+}
