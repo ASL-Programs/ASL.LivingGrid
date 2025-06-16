@@ -1,0 +1,11 @@
+{
+  "name": "webadminpanel-storybook",
+  "private": true,
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/server": "^7.2.0"
+  }
+}

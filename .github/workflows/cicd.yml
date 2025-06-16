@@ -1,0 +1,23 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Build
+        run: dotnet build ASL.LivingGrid.sln
+      - name: Test
+        run: dotnet test ASL.LivingGrid.sln --no-build
+      - name: Deploy
+        run: bash ./Scripts/deploy.sh Release
+      - name: Rollback on failure
+        if: failure()
+        run: bash ./Scripts/rollback.sh
