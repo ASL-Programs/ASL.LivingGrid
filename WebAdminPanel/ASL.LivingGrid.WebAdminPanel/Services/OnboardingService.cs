@@ -373,5 +373,13 @@ public class OnboardingService : IOnboardingService
         await _configService.SetValueAsync("Notifications:SmtpUsername", setup.SmtpUsername);
         await _configService.SetValueAsync("Notifications:SmtpPassword", setup.SmtpPassword);
         await _configService.SetValueAsync("Notifications:SmtpUseSsl", setup.SmtpUseSsl.ToString());
+        await _configService.SetValueAsync("Notifications:EnableSmsNotifications", setup.EnableSmsNotifications.ToString());
+        await _configService.SetValueAsync("Notifications:SmsApiUrl", setup.SmsApiUrl);
+        await _configService.SetValueAsync("Notifications:SmsApiKey", setup.SmsApiKey);
+        await _configService.SetValueAsync("Notifications:EnableTelegramNotifications", setup.EnableTelegramNotifications.ToString());
+        await _configService.SetValueAsync("Notifications:TelegramBotToken", setup.TelegramBotToken);
+        await _configService.SetValueAsync("Notifications:TelegramChatId", setup.TelegramChatId);
+        await _configService.SetValueAsync("Notifications:EnableWebhookNotifications", setup.EnableWebhookNotifications.ToString());
+        await _configService.SetValueAsync("Notifications:WebhookUrl", setup.WebhookUrl);
     }
 }

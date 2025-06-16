@@ -1,0 +1,60 @@
+@page "/plugins"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject IPluginMarketplaceService Marketplace
+@inject IPluginService PluginService
+@inject IJSRuntime JS
+
+<h3>Plugin Marketplace</h3>
+
+@if (plugins == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var p in plugins)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(p.PreviewImage))
+                    {
+                        <img class="card-img-top" src="@p.PreviewImage" alt="@p.Name" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@p.Name (@p.Version)</h5>
+                        <p class="card-text">@p.Description</p>
+                        <button class="btn btn-primary" @onclick="() => Install(p.Id)">Install</button>
+                        <button class="btn btn-secondary ms-2" @onclick="() => Export(p.Id)">Export</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<MarketplacePlugin>? plugins;
+
+    protected override async Task OnInitializedAsync()
+    {
+        plugins = (await Marketplace.ListAsync()).ToList();
+    }
+
+    private async Task Install(string id)
+    {
+        var plugin = await Marketplace.ImportAsync(id);
+        if (plugin != null)
+        {
+            await PluginService.InstallPluginAsync(plugin);
+        }
+    }
+
+    private async Task Export(string id)
+    {
+        var json = await Marketplace.ExportAsync(id);
+        if (string.IsNullOrEmpty(json)) return;
+        var base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(json));
+        await JS.InvokeVoidAsync("blazorDownloadFile", $"{id}.json", "application/json", base64);
+    }
+}

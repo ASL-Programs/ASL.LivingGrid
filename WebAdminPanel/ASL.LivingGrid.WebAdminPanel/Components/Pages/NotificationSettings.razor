@@ -1,0 +1,69 @@
+@page "/notifications"
+@using ASL.LivingGrid.WebAdminPanel.Models
+@inject IConfigurationService ConfigService
+@inject HttpClient Http
+
+<h3>Notification Settings</h3>
+
+@if (model == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="model" OnValidSubmit="Save">
+        <div class="mb-3">
+            <label class="form-label">Enable Email</label>
+            <InputCheckbox @bind-Value="model.EnableEmailNotifications" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">SMTP Server</label>
+            <InputText class="form-control" @bind-Value="model.SmtpServer" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">SMTP Port</label>
+            <InputNumber class="form-control" @bind-Value="model.SmtpPort" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">SMS API Url</label>
+            <InputText class="form-control" @bind-Value="model.SmsApiUrl" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Telegram Bot Token</label>
+            <InputText class="form-control" @bind-Value="model.TelegramBotToken" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Webhook Url</label>
+            <InputText class="form-control" @bind-Value="model.WebhookUrl" />
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </EditForm>
+}
+
+@code {
+    private NotificationSettings? model;
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = new NotificationSettings
+        {
+            EnableEmailNotifications = await ConfigService.GetValueAsync<bool>("Notifications:EnableEmailNotifications"),
+            SmtpServer = await ConfigService.GetValueAsync<string>("Notifications:SmtpServer") ?? string.Empty,
+            SmtpPort = await ConfigService.GetValueAsync<int>("Notifications:SmtpPort"),
+            SmsApiUrl = await ConfigService.GetValueAsync<string>("Notifications:SmsApiUrl") ?? string.Empty,
+            TelegramBotToken = await ConfigService.GetValueAsync<string>("Notifications:TelegramBotToken") ?? string.Empty,
+            WebhookUrl = await ConfigService.GetValueAsync<string>("Notifications:WebhookUrl") ?? string.Empty
+        };
+    }
+
+    private async Task Save()
+    {
+        if (model == null) return;
+        await ConfigService.SetValueAsync("Notifications:EnableEmailNotifications", model.EnableEmailNotifications.ToString());
+        await ConfigService.SetValueAsync("Notifications:SmtpServer", model.SmtpServer);
+        await ConfigService.SetValueAsync("Notifications:SmtpPort", model.SmtpPort.ToString());
+        await ConfigService.SetValueAsync("Notifications:SmsApiUrl", model.SmsApiUrl);
+        await ConfigService.SetValueAsync("Notifications:TelegramBotToken", model.TelegramBotToken);
+        await ConfigService.SetValueAsync("Notifications:WebhookUrl", model.WebhookUrl);
+    }
+}

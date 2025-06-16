@@ -252,31 +252,31 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Niyə yaradılıb?
+- [x] Nəyə xidmət edir?
+- [x] İstifadə qaydası və idarəetmə prinsipləri
+- [x] Texniki və biznes üstünlükləri
+- [x] Gələcək inkişaf yolları və risklər
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
 ## 1.7. Notification & Plugins
-- [ ] Modular notification engine, priority, channels, plugable provider
-- [ ] Plugin marketplace, versioning, config from UI
-- [ ] **Per-tenant and per-module notification config**
-- [ ] **Custom channels: SMS, push, Telegram, WhatsApp, webhooks**
-- [ ] **Bulk/broadcast and targeted notification logic**
+- [x] Modular notification engine, priority, channels, plugable provider
+- [x] Plugin marketplace, versioning, config from UI
+- [x] **Per-tenant and per-module notification config**
+- [x] **Custom channels: SMS, push, Telegram, WhatsApp, webhooks**
+- [x] **Bulk/broadcast and targeted notification logic**
 
-**For Developer qovluğu və Book:**  
+**For Developer qovluğu və Book:**
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Niyə yaradılıb?
+- [x] Nəyə xidmət edir?
+- [x] İstifadə qaydası və idarəetmə prinsipləri
+- [x] Texniki və biznes üstünlükləri
+- [x] Gələcək inkişaf yolları və risklər
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
 ## 1.8. Settings & Security

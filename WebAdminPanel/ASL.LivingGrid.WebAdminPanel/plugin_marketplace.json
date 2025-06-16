@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "sample-plugin",
+    "Name": "Sample Plugin",
+    "Version": "1.0.0",
+    "Description": "Example plugin from marketplace",
+    "DownloadUrl": "plugins/sample-plugin.json",
+    "PreviewImage": "img/plugin.png"
+  }
+]
