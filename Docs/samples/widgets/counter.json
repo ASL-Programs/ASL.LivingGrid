@@ -1,0 +1,6 @@
+{
+  "Id": "counter",
+  "Name": "Counter",
+  "Description": "Simple counter widget",
+  "Component": "counter"
+}

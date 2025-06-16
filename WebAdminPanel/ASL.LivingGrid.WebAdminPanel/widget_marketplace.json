@@ -3,14 +3,14 @@
     "Id": "counter",
     "Name": "Counter",
     "Description": "Simple counter widget",
-    "DownloadUrl": "https://example.com/widgets/counter.json",
+    "DownloadUrl": "../../Docs/samples/widgets/counter.json",
     "PreviewImage": "images/widget_counter.svg"
   },
   {
     "Id": "time",
     "Name": "Time",
     "Description": "Current time widget",
-    "DownloadUrl": "https://example.com/widgets/time.json",
+    "DownloadUrl": "../../Docs/samples/widgets/time.json",
     "PreviewImage": "images/widget_time.svg"
   }
 ]

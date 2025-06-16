@@ -113,6 +113,14 @@ Marketplace previews reference local SVG images stored under
 `WebAdminPanel/ASL.LivingGrid.WebAdminPanel/wwwroot/images/`. These lightweight
 placeholders load even without internet access.
 
+### Marketplace Samples
+
+Theme, widget, layout and plugin marketplaces read from JSON manifests. Sample
+manifests in this repo point to files under `Docs/samples/`. To host real
+packages, publish your own manifest on an HTTP server and set the appropriate
+`*Marketplace:Source` configuration key to its URL. The WebAdminPanel import
+buttons also accept these local sample files for offline development.
+
 ### 7. Deployment
 
 Publish release binaries with the deploy script:

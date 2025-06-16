@@ -18,7 +18,7 @@ public class ThemeMarketplaceServiceTests
     {
         using var tempDir = new TemporaryDirectory();
         var jsonFile = Path.Combine(tempDir.Path, "theme_marketplace.json");
-        var json = "[{"Id":"dark","Name":"Dark","Description":"Desc","DownloadUrl":"http://example.com/dark.css","PreviewImage":"img"}]";
+        var json = "[{"Id":"dark","Name":"Dark","Description":"Desc","DownloadUrl":"../../Docs/samples/themes/dark.css","PreviewImage":"img"}]";
         await File.WriteAllTextAsync(jsonFile, json);
 
         var envMock = new Mock<IWebHostEnvironment>();
@@ -43,7 +43,7 @@ public class ThemeMarketplaceServiceTests
         using var tempDir = new TemporaryDirectory();
         Directory.CreateDirectory(Path.Combine(tempDir.Path, "css", "themes"));
         var jsonFile = Path.Combine(tempDir.Path, "theme_marketplace.json");
-        var json = "[{\"Id\":\"dark\",\"Name\":\"Dark\",\"Description\":\"Desc\",\"DownloadUrl\":\"http://example.com/dark.css\",\"PreviewImage\":\"img\"}]";
+        var json = "[{\"Id\":\"dark\",\"Name\":\"Dark\",\"Description\":\"Desc\",\"DownloadUrl\":\"../../Docs/samples/themes/dark.css\",\"PreviewImage\":\"img\"}]";
         await File.WriteAllTextAsync(jsonFile, json);
 
         var handlerMock = new Mock<HttpMessageHandler>();

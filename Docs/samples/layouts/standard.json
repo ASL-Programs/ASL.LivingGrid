@@ -1,0 +1,6 @@
+{
+  "Id": "standard",
+  "Name": "Standard",
+  "Description": "Default layout with sidebar",
+  "Regions": ["Sidebar", "Main"]
+}
