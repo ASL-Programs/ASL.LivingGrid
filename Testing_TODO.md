@@ -16,9 +16,9 @@
 
 ### Unit Test Tasks
 
- - [x] Write tests for core business logic
+- [x] Write tests for core business logic
 - [ ] Mock API/services for isolated tests
-- [ ] Test edge cases and failure scenarios
+- [x] Test edge cases and failure scenarios
 - [ ] Automated test run in CI pipeline
 
 ### Other Modules (activate when status is 2):
@@ -48,4 +48,4 @@
 
 ### Completed tasks
 
-- [ ] — (none yet)
+- [x] Test edge cases and failure scenarios
