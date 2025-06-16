@@ -15,7 +15,7 @@ public class LocalizationService : ILocalizationService
     private readonly TimeSpan _cacheExpiration = TimeSpan.FromMinutes(30);
 
     /// <inheritdoc />
-    public event Action<string, string>? MissingTranslation;
+    public event Func<string, string, Task>? MissingTranslation;
 
     public LocalizationService(
         ApplicationDbContext context, 
@@ -43,7 +43,12 @@ public class LocalizationService : ILocalizationService
             if (resource == null)
             {
                 value = key; // Return key if translation not found
-                MissingTranslation?.Invoke(key, culture);
+                if (MissingTranslation is not null)
+                {
+                    var delegates = MissingTranslation.GetInvocationList()
+                        .Cast<Func<string, string, Task>>();
+                    await Task.WhenAll(delegates.Select(d => d(key, culture)));
+                }
             }
             else
             {

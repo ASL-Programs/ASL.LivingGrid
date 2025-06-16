@@ -31,7 +31,7 @@ public interface ILocalizationService
     /// <summary>
     /// Event raised when a translation is missing for the requested culture.
     /// </summary>
-    event Action<string, string>? MissingTranslation;
+    event Func<string, string, Task>? MissingTranslation;
 
     /// <summary>
     /// Returns coverage percentage per category/module for the specified culture.

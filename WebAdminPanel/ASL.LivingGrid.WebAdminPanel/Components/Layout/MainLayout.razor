@@ -42,7 +42,7 @@
         LocalizationService.MissingTranslation += OnMissingTranslation;
     }
 
-    private async void OnMissingTranslation(string key, string culture)
+    private async Task OnMissingTranslation(string key, string culture)
     {
         await JSRuntime.InvokeVoidAsync("toast.show", $"Missing translation: {key} ({culture})");
     }
