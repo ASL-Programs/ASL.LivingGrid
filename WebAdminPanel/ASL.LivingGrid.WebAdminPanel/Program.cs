@@ -141,6 +141,12 @@ public class Program
         services.AddScoped<IWidgetService, WidgetService>();
         services.AddScoped<IWidgetMarketplaceService, WidgetMarketplaceService>();
         services.AddScoped<IWidgetPermissionService, WidgetPermissionService>();
+        services.AddScoped<INotificationChannel, EmailNotificationChannel>();
+        services.AddScoped<INotificationChannel, SmsNotificationChannel>();
+        services.AddScoped<INotificationChannel, TelegramNotificationChannel>();
+        services.AddScoped<INotificationChannel, WebhookNotificationChannel>();
+        services.AddScoped<IPluginService, PluginService>();
+        services.AddScoped<IPluginMarketplaceService, PluginMarketplaceService>();
         services.AddScoped<ITranslationProviderService, TranslationProviderService>();
         services.AddScoped<ILocalizationCustomizationService, LocalizationCustomizationService>();
         services.AddScoped<IReportingService, ReportingService>();
@@ -380,6 +386,19 @@ public class Program
             return w is not null ? Results.Ok(w) : Results.NotFound();
         });
         widgetGroup.MapGet("/export/{id}", async (string id, IWidgetMarketplaceService svc) =>
+        {
+            var json = await svc.ExportAsync(id);
+            return string.IsNullOrEmpty(json) ? Results.NotFound() : Results.Text(json, "application/json");
+        });
+
+        var pluginGroup = app.MapGroup("/api/plugins");
+        pluginGroup.MapGet("/", async (IPluginMarketplaceService svc) => Results.Ok(await svc.ListAsync()));
+        pluginGroup.MapPost("/import/{id}", async (string id, IPluginMarketplaceService svc) =>
+        {
+            var p = await svc.ImportAsync(id);
+            return p is not null ? Results.Ok(p) : Results.NotFound();
+        });
+        pluginGroup.MapGet("/export/{id}", async (string id, IPluginMarketplaceService svc) =>
         {
             var json = await svc.ExportAsync(id);
             return string.IsNullOrEmpty(json) ? Results.NotFound() : Results.Text(json, "application/json");

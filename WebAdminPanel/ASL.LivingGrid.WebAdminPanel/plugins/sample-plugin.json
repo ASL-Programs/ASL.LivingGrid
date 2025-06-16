@@ -1,0 +1,9 @@
+{
+  "Id": "sample-plugin",
+  "Name": "Sample Plugin",
+  "Version": "1.0.0",
+  "Description": "Sample plugin",
+  "FilePath": "plugins/sample-plugin.json",
+  "EntryPoint": "Sample.dll",
+  "IsEnabled": true
+}

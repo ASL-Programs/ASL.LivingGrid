@@ -9,11 +9,13 @@ public class NotificationService : INotificationService
 {
     private readonly ApplicationDbContext _context;
     private readonly ILogger<NotificationService> _logger;
-
-    public NotificationService(ApplicationDbContext context, ILogger<NotificationService> logger)
+    private readonly IEnumerable<INotificationChannel> _channels;
+    public NotificationService(ApplicationDbContext context, ILogger<NotificationService> logger,
+        IEnumerable<INotificationChannel> channels)
     {
         _context = context;
         _logger = logger;
+        _channels = channels;
     }
 
     public async Task<Notification> CreateAsync(string title, string message, string type = "Info", 
@@ -178,10 +180,19 @@ public class NotificationService : INotificationService
                 notification.UpdatedAt = DateTime.UtcNow;
                 await _context.SaveChangesAsync();
 
-                _logger.LogInformation("Notification sent: {NotificationId}", notificationId);
+                foreach (var channel in _channels)
+                {
+                    try
+                    {
+                        await channel.SendAsync(notification);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Channel send failed for {NotificationId}", notificationId);
+                    }
+                }
 
-                // Here you would integrate with actual notification providers
-                // (Email, SMS, Push notifications, etc.)
+                _logger.LogInformation("Notification sent: {NotificationId}", notificationId);
             }
         }
         catch (Exception ex)

@@ -104,4 +104,12 @@ public class NotificationSettings
     public string SmtpUsername { get; set; } = string.Empty;
     public string SmtpPassword { get; set; } = string.Empty;
     public bool SmtpUseSsl { get; set; } = true;
+    public bool EnableSmsNotifications { get; set; } = false;
+    public string SmsApiUrl { get; set; } = string.Empty;
+    public string SmsApiKey { get; set; } = string.Empty;
+    public bool EnableTelegramNotifications { get; set; } = false;
+    public string TelegramBotToken { get; set; } = string.Empty;
+    public string TelegramChatId { get; set; } = string.Empty;
+    public bool EnableWebhookNotifications { get; set; } = false;
+    public string WebhookUrl { get; set; } = string.Empty;
 }
