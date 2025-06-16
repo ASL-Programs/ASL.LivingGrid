@@ -1,0 +1,17 @@
+{
+  "metadata": [
+    {
+      "src": [{ "files": ["../WebAdminPanel/ASL.LivingGrid.WebAdminPanel/**/*.cs"] }],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      { "files": ["**/*.md", "../README.md"], "exclude": ["obj/**"] }
+    ],
+    "dest": "_site",
+    "globalMetadata": {
+      "_appTitle": "ASL.LivingGrid"
+    }
+  }
+}

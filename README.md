@@ -93,11 +93,21 @@ dotnet build ASL.LivingGrid.sln
 dotnet test ASL.LivingGrid.sln --no-build
 ```
 
-### 5. Run
+### 5. Storybook
+
+Component önizləmələri üçün Storybook konfiqurasiyası `WebAdminPanel` modulunda
+yer alır. Aşağıdakı əmrlə Storybook serverini işə sala bilərsiniz:
+
+```bash
+cd WebAdminPanel
+npm run storybook
+```
+
+### 6. Run
 
 Each module can be run independently from its own solution using `dotnet run`.
 
-### 6. Deployment
+### 7. Deployment
 
 Publish release binaries with the deploy script:
 
@@ -107,7 +117,21 @@ bash ./Scripts/deploy.sh [Release|Debug]
 
 Artifacts are placed in the `publish/` directory.
 
-### 7. Configuration
+### 8. Changelog & Documentation
+
+Change qeydlərini yaratmaq üçün:
+
+```bash
+bash ./Scripts/generate-changelog.sh
+```
+
+Sənədləşməni generasiya etmək üçün `docfx` istifadə olunur:
+
+```bash
+bash ./Scripts/generate-docs.sh
+```
+
+### 9. Configuration
 
 To enforce HTTPS redirection when hosting the WebAdminPanel, set the
 `Security:RequireHttps` key in `appsettings.json` (or as an environment
@@ -134,7 +158,7 @@ created.
 
 ## Development Workflow
 
-Please read `Read before you start working.md` before beginning any development work. The project follows strict Core Rules and workflow guidelines with progress tracking through TODO.md files. Continuous integration runs via GitHub Actions using `.github/workflows/dotnet.yml`.
+Please read `Read before you start working.md` before beginning any development work. The project follows strict Core Rules and workflow guidelines with progress tracking through TODO.md files. Continuous integration runs via GitHub Actions using `.github/workflows/dotnet.yml`. Deployment with automatic rollback is handled by '.github/workflows/cicd.yml'.
 
 ## Contact
 
