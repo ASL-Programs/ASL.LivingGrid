@@ -114,6 +114,10 @@ To enforce HTTPS redirection when hosting the WebAdminPanel, set the
 variable). The previous `ForceHttps` key is still accepted for backwards
 compatibility but will be removed in future versions.
 
+Slack integration can be enabled by setting
+`Notifications:EnableSlackNotifications` to `true` and specifying the
+`Notifications:SlackWebhookUrl` in `appsettings.json`.
+
 ## Development Workflow
 
 Please read `Read before you start working.md` before beginning any development work. The project follows strict Core Rules and workflow guidelines with progress tracking through TODO.md files. Continuous integration runs via GitHub Actions using `.github/workflows/dotnet.yml`.
