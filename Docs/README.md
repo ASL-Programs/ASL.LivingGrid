@@ -14,6 +14,8 @@ This directory stores project-level documentation for **ASL.LivingGrid**. Below 
   - [PluginBook](../For%20Developer/PluginBook/README.md)
   - [IAMBook](../For%20Developer/IAMBook/README.md)
   - [WorkflowBook](../For%20Developer/WorkflowBook/README.md)
+  - [TestAutomationBook](../For%20Developer/TestAutomationBook/README.md)
+- **Test checklist:** [TestingChecklist](TestingChecklist.md)
 
 Other books in that folder cover deployment and UX/UI topics.
 

@@ -11,4 +11,11 @@ fi
 cd "$REPO_ROOT"
 docfx Docs/docfx.json -o "$DOCS_DIR"
 
+# Copy to internal developer portal if directory exists
+PORTAL_DIR="$REPO_ROOT/InternalPortal/api-docs"
+if [ -d "$PORTAL_DIR" ]; then
+  rm -rf "$PORTAL_DIR"/*
+  cp -r "$DOCS_DIR"/* "$PORTAL_DIR"/
+fi
+
 echo "Documentation generated in $DOCS_DIR"

@@ -1,0 +1,65 @@
+@page "/test-automation"
+@inject ITestAutomationService TestSvc
+
+<PageTitle>Test Automation</PageTitle>
+
+<h3>Test Automation</h3>
+
+<div class="mb-3">
+    <button class="btn btn-primary me-2" @onclick="RunTests" disabled="@isRunning">Run All Tests</button>
+    <button class="btn btn-secondary" @onclick="CheckUpdates" disabled="@isRunning">Check Updates</button>
+</div>
+
+@if (isRunning)
+{
+    <p>Running tests...</p>
+}
+
+@if (history.Any())
+{
+    <div class="accordion" id="history">
+        @foreach (var result in history.OrderByDescending(h => h.Timestamp))
+        {
+            var id = result.Timestamp.Ticks;
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading@id">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@id">
+                        @result.Timestamp.ToString("u")
+                        @if (result.Success)
+                        {
+                            <span class="badge bg-success ms-2">Success</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger ms-2">Fail</span>
+                        }
+                    </button>
+                </h2>
+                <div id="collapse@id" class="accordion-collapse collapse" data-bs-parent="#history">
+                    <div class="accordion-body">
+                        <pre>@result.Log</pre>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private bool isRunning;
+    private IEnumerable<TestRunResult> history => TestSvc.GetHistory();
+
+    private async Task RunTests()
+    {
+        isRunning = true;
+        await TestSvc.RunTestsAsync();
+        isRunning = false;
+    }
+
+    private async Task CheckUpdates()
+    {
+        isRunning = true;
+        await TestSvc.CheckForUpdatesAsync();
+        isRunning = false;
+    }
+}

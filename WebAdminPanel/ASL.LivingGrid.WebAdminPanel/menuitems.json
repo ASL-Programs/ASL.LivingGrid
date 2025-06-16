@@ -120,5 +120,10 @@
     "Key": "Navigation.Reports",
     "Url": "reports",
     "Icon": "oi oi-bar-chart"
+  },
+  {
+    "Key": "Navigation.TestAutomation",
+    "Url": "test-automation",
+    "Icon": "oi oi-media-play"
   }
 ]

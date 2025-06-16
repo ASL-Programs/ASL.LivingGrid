@@ -321,21 +321,21 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ## 1.10. Test, Documentation, DevOps
 - [x] Storybook for components, dev/QA/Prod profiles - 2025-06-21 - AI: komponent önizləmələri üçün Storybook quruldu
 - [x] Changelog & documentation auto-generator, smart help - 2025-06-21 - AI: avtomatik changelog və sənədləşmə skriptləri əlavə edildi
-- [ ] Full test automation UI, auto-update handler
+- [x] Full test automation UI, auto-update handler - 2025-06-23 - AI: TestAutomationService və TestAutomation səhifəsi yaradıldı
 - [x] **CI/CD pipeline integration, auto rollback on failed deploy** - 2025-06-21 - AI: ilkin GitHub Actions workflow və rollback skripti yaradıldı
   - 2025-06-22 - AI: Node `npm ci` and Storybook build added to CI/CD, static site artifact published
-- [ ] **Unit, integration, e2e, manual test checklist and evidence**
-- [ ] **Developer portal and internal API docs auto-generation**
+- [x] **Unit, integration, e2e, manual test checklist and evidence** - 2025-06-23 - AI: Docs/TestingChecklist.md sənədi əlavə olundu
+- [x] **Developer portal and internal API docs auto-generation** - 2025-06-23 - AI: docfx ilə API sənədləri üçün generate-docs.sh skripti yeniləndi
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Niyə yaradılıb? - 2025-06-23
+- [x] Nəyə xidmət edir? - 2025-06-23
+- [x] İstifadə qaydası və idarəetmə prinsipləri - 2025-06-23
+- [x] Texniki və biznes üstünlükləri - 2025-06-23
+- [x] Gələcək inkişaf yolları və risklər - 2025-06-23
+- [x] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə) - 2025-06-23
+- [x] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır - 2025-06-23
 ---
 
 ## 1.11. Multi-Database Support & Installation
