@@ -66,7 +66,16 @@ public class NavigationService : INavigationService
         new NavigationItem { Key = "Navigation.Companies", Url = "companies", Icon = "oi oi-people" },
         new NavigationItem { Key = "Navigation.Users", Url = "users", Icon = "oi oi-person" },
         new NavigationItem { Key = "Navigation.Roles", Url = "roles", Icon = "oi oi-key" },
-        new NavigationItem { Key = "Navigation.Settings", Url = "settings", Icon = "oi oi-cog" },
+        new NavigationItem {
+            Key = "Navigation.Settings",
+            Url = "settings",
+            Icon = "oi oi-cog",
+            Children = new List<NavigationItem>
+            {
+                new NavigationItem { Key = "Navigation.GeneralSettings", Url = "settings/general", Icon = "oi oi-cog" },
+                new NavigationItem { Key = "Navigation.SecuritySettings", Url = "settings/security", Icon = "oi oi-lock-locked" }
+            }
+        },
         new NavigationItem { Key = "Navigation.Audit", Url = "audit", Icon = "oi oi-clipboard" },
         new NavigationItem { Key = "Navigation.UIAudit", Url = "uiaudit", Icon = "oi oi-eye" },
         new NavigationItem { Key = "Navigation.Notifications", Url = "notifications", Icon = "oi oi-bell" },

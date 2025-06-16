@@ -3,7 +3,15 @@
   { "Key": "Navigation.Companies", "Url": "companies", "Icon": "oi oi-people" },
   { "Key": "Navigation.Users", "Url": "users", "Icon": "oi oi-person" },
   { "Key": "Navigation.Roles", "Url": "roles", "Icon": "oi oi-key" },
-  { "Key": "Navigation.Settings", "Url": "settings", "Icon": "oi oi-cog" },
+  {
+    "Key": "Navigation.Settings",
+    "Url": "settings",
+    "Icon": "oi oi-cog",
+    "Children": [
+      { "Key": "Navigation.GeneralSettings", "Url": "settings/general", "Icon": "oi oi-cog" },
+      { "Key": "Navigation.SecuritySettings", "Url": "settings/security", "Icon": "oi oi-lock-locked" }
+    ]
+  },
   { "Key": "Navigation.Audit", "Url": "audit", "Icon": "oi oi-clipboard" },
   { "Key": "Navigation.UIAudit", "Url": "uiaudit", "Icon": "oi oi-eye" },
   { "Key": "Navigation.Notifications", "Url": "notifications", "Icon": "oi oi-bell" },
