@@ -4,13 +4,13 @@
     "Name": "Light",
     "Description": "Default light theme",
     "DownloadUrl": "https://example.com/themes/light.css",
-    "PreviewImage": "https://via.placeholder.com/150x100.png?text=Light"
+    "PreviewImage": "images/theme_light.svg"
   },
   {
     "Id": "dark",
     "Name": "Dark",
     "Description": "Default dark theme",
     "DownloadUrl": "https://example.com/themes/dark.css",
-    "PreviewImage": "https://via.placeholder.com/150x100.png?text=Dark"
+    "PreviewImage": "images/theme_dark.svg"
   }
 ]

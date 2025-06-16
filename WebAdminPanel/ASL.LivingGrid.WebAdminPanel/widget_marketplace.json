@@ -4,13 +4,13 @@
     "Name": "Counter",
     "Description": "Simple counter widget",
     "DownloadUrl": "https://example.com/widgets/counter.json",
-    "PreviewImage": "https://via.placeholder.com/150x100.png?text=Counter"
+    "PreviewImage": "images/widget_counter.svg"
   },
   {
     "Id": "time",
     "Name": "Time",
     "Description": "Current time widget",
     "DownloadUrl": "https://example.com/widgets/time.json",
-    "PreviewImage": "https://via.placeholder.com/150x100.png?text=Time"
+    "PreviewImage": "images/widget_time.svg"
   }
 ]
