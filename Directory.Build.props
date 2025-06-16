@@ -19,7 +19,7 @@
     <PackageProjectUrl>https://github.com/asl/livinggrid</PackageProjectUrl>
     <RepositoryUrl>https://github.com/asl/livinggrid</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseExpression>Proprietary</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup>

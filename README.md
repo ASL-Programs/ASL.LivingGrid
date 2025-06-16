@@ -100,4 +100,4 @@ Please read `Read before you start working.md` before beginning any development 
 
 ## License
 
-All rights reserved. Enterprise solution by ASL.
+This project is released under the [MIT License](LICENSE.txt).
