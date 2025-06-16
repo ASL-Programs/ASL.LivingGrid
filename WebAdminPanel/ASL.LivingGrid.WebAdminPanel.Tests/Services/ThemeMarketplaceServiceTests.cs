@@ -4,6 +4,7 @@ using ASL.LivingGrid.WebAdminPanel.Models;
 using ASL.LivingGrid.WebAdminPanel.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using ASL.LivingGrid.WebAdminPanel.Tests;
 using Moq;
 using Moq.Protected;
 using Xunit;
@@ -15,15 +16,14 @@ public class ThemeMarketplaceServiceTests
     [Fact]
     public async Task ListAvailableThemesAsync_ReadsFromLocalFile()
     {
-        var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        Directory.CreateDirectory(tempDir);
-        var jsonFile = Path.Combine(tempDir, "theme_marketplace.json");
+        using var tempDir = new TemporaryDirectory();
+        var jsonFile = Path.Combine(tempDir.Path, "theme_marketplace.json");
         var json = "[{"Id":"dark","Name":"Dark","Description":"Desc","DownloadUrl":"http://example.com/dark.css","PreviewImage":"img"}]";
         await File.WriteAllTextAsync(jsonFile, json);
 
         var envMock = new Mock<IWebHostEnvironment>();
-        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir);
-        envMock.SetupGet(e => e.WebRootPath).Returns(tempDir);
+        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir.Path);
+        envMock.SetupGet(e => e.WebRootPath).Returns(tempDir.Path);
 
         var clientFactoryMock = new Mock<IHttpClientFactory>();
         var loggerMock = new Mock<ILogger<ThemeMarketplaceService>>();
@@ -40,9 +40,9 @@ public class ThemeMarketplaceServiceTests
     [Fact]
     public async Task ImportThemeAsync_DownloadsCssAndSavesFile()
     {
-        var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        Directory.CreateDirectory(Path.Combine(tempDir, "css", "themes"));
-        var jsonFile = Path.Combine(tempDir, "theme_marketplace.json");
+        using var tempDir = new TemporaryDirectory();
+        Directory.CreateDirectory(Path.Combine(tempDir.Path, "css", "themes"));
+        var jsonFile = Path.Combine(tempDir.Path, "theme_marketplace.json");
         var json = "[{\"Id\":\"dark\",\"Name\":\"Dark\",\"Description\":\"Desc\",\"DownloadUrl\":\"http://example.com/dark.css\",\"PreviewImage\":\"img\"}]";
         await File.WriteAllTextAsync(jsonFile, json);
 
@@ -58,8 +58,8 @@ public class ThemeMarketplaceServiceTests
         httpFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Returns(httpClient);
 
         var envMock = new Mock<IWebHostEnvironment>();
-        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir);
-        envMock.SetupGet(e => e.WebRootPath).Returns(tempDir);
+        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir.Path);
+        envMock.SetupGet(e => e.WebRootPath).Returns(tempDir.Path);
 
         var loggerMock = new Mock<ILogger<ThemeMarketplaceService>>();
         var configuration = new ConfigurationBuilder().Build();
@@ -68,7 +68,7 @@ public class ThemeMarketplaceServiceTests
         var theme = await service.ImportThemeAsync("dark");
 
         Assert.NotNull(theme);
-        var expectedFile = Path.Combine(tempDir, "css", "themes", "dark.css");
+        var expectedFile = Path.Combine(tempDir.Path, "css", "themes", "dark.css");
         Assert.True(File.Exists(expectedFile));
         var css = await File.ReadAllTextAsync(expectedFile);
         Assert.Equal("body{}", css);
