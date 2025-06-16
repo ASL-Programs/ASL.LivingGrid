@@ -190,7 +190,10 @@ public class Program
         }
 
 
-        if (!isStandaloneExe || app.Configuration.GetValue<bool>("ForceHttps"))
+        var requireHttps = app.Configuration.GetValue<bool?>("Security:RequireHttps");
+        var oldForceHttps = app.Configuration.GetValue<bool>("ForceHttps");
+
+        if (!isStandaloneExe || requireHttps.GetValueOrDefault(oldForceHttps))
         {
             app.UseHttpsRedirection();
         }
