@@ -203,10 +203,10 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 
 ## 1.4. Dashboard & Widgets
 - [x] Dynamic widget marketplace (add, remove, drag, drop)
-- [ ] Realtime alerts, stats, plugin widget support
+- [x] Realtime alerts, stats, plugin widget support - 2025-06-17 - AI: AlertWidget və plugin yüklənməsi
 - [x] Custom dashboards per user/company/role
 - [x] **Widget permission system (per module, per tenant, per user)**
-- [ ] **Widget dependency map and live error/highlight feedback**
+- [x] **Widget dependency map and live error/highlight feedback** - 2025-06-17 - AI
 - [x] **In-app widget store with usage analytics**
 
 **For Developer qovluğu və Book:**  

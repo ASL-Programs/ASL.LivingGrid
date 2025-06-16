@@ -20,5 +20,21 @@ window.aslWidgets = {
     if(!raw) return 0;
     const stats = JSON.parse(raw);
     return stats[id] || 0;
+  },
+  setDependencies: function(id, deps){
+    const key = 'asl-widget-deps';
+    const raw = localStorage.getItem(key);
+    const data = raw ? JSON.parse(raw) : {};
+    data[id] = deps;
+    localStorage.setItem(key, JSON.stringify(data));
+  },
+  getMissingDeps: function(id){
+    const depKey = 'asl-widget-deps';
+    const raw = localStorage.getItem(depKey);
+    if(!raw) return [];
+    const data = JSON.parse(raw);
+    const deps = data[id] || [];
+    const installed = Object.keys(data);
+    return deps.filter(d => installed.indexOf(d) === -1);
   }
 };

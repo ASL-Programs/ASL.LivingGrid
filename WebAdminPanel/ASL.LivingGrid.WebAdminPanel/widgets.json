@@ -10,5 +10,12 @@
     "Name": "Time",
     "Description": "Current time widget",
     "Component": "time"
+  },
+  {
+    "Id": "alert",
+    "Name": "Alerts",
+    "Description": "Realtime alert viewer",
+    "Component": "alert",
+    "IsRealTime": true
   }
 ]

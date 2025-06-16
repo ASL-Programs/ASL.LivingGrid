@@ -1,10 +1,14 @@
 @page "/dashboard-designer"
 @using ASL.LivingGrid.WebAdminPanel.Models
 @using Microsoft.AspNetCore.Components.Authorization
+@using System.Reflection
+@using System.Security.Claims
+@using System.IO
 @inject IWidgetService WidgetService
 @inject IWidgetMarketplaceService Marketplace
 @inject IWidgetPermissionService PermissionService
 @inject AuthenticationStateProvider AuthProvider
+@inject IJSRuntime JS
 
 <h3>Dashboard Designer</h3>
 
@@ -21,9 +25,17 @@
 <div id="canvas" class="border mt-3 p-3" style="min-height:200px;">
     @foreach (var id in selectedWidgets)
     {
-        <div class="border p-2 mb-2">
+        <div class="border p-2 mb-2" data-widget-id="@id">
             <button class="btn-close float-end" @onclick="() => RemoveWidget(id)"></button>
             <DynamicComponent Type="GetComponent(id)" />
+            @if (usage.TryGetValue(id, out var count))
+            {
+                <span class="badge bg-secondary ms-2">@count</span>
+            }
+            @if (missingDeps.TryGetValue(id, out var deps) && deps.Count > 0)
+            {
+                <div class="text-danger small" id="err-@id">Missing: @string.Join(", ", deps)</div>
+            }
         </div>
     }
 </div>
@@ -34,6 +46,9 @@
     private ClaimsPrincipal user = new(new ClaimsIdentity());
     private string companyId = "default";
     private string userId = "anon";
+    private List<WidgetDefinition> installed = new();
+    private Dictionary<string, List<string>> missingDeps = new();
+    private Dictionary<string, int> usage = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,15 +56,39 @@
         user = state.User;
         userId = user.FindFirstValue(ClaimTypes.NameIdentifier) ?? "anon";
         availableWidgets = (await Marketplace.ListAsync()).ToList();
+        installed = (await WidgetService.GetInstalledWidgetsAsync()).ToList();
         selectedWidgets = (await WidgetService.GetUserWidgetsAsync(companyId, userId)).ToList();
+        foreach (var id in selectedWidgets)
+        {
+            missingDeps[id] = (await WidgetService.GetMissingDependenciesAsync(id)).ToList();
+            usage[id] = await WidgetService.GetUsageAsync(id);
+        }
     }
 
-    private Type GetComponent(string id) => id switch
+    private Type GetComponent(string id)
     {
-        "counter" => typeof(Components.Widgets.CounterWidget),
-        "time" => typeof(Components.Widgets.TimeWidget),
-        _ => typeof(Components.Widgets.CounterWidget)
-    };
+        var def = installed.FirstOrDefault(w => w.Id == id);
+        if (def != null && !string.IsNullOrEmpty(def.PluginAssembly))
+        {
+            try
+            {
+                var asmPath = Path.Combine(Environment.CurrentDirectory, "plugins", def.PluginAssembly);
+                var asm = Assembly.LoadFrom(asmPath);
+                var type = asm.GetType(def.Component);
+                if (type != null)
+                    return type;
+            }
+            catch { }
+        }
+
+        return id switch
+        {
+            "counter" => typeof(Components.Widgets.CounterWidget),
+            "time" => typeof(Components.Widgets.TimeWidget),
+            "alert" => typeof(Components.Widgets.AlertWidget),
+            _ => typeof(Components.Widgets.CounterWidget)
+        };
+    }
 
     private async Task AddWidget(string id)
     {
@@ -58,6 +97,11 @@
             selectedWidgets.Add(id);
             await WidgetService.SaveUserWidgetsAsync(companyId, userId, selectedWidgets);
             await WidgetService.IncrementUsageAsync(id);
+            missingDeps[id] = (await WidgetService.GetMissingDependenciesAsync(id)).ToList();
+            usage[id] = await WidgetService.GetUsageAsync(id);
+            await JS.InvokeVoidAsync("dashboardDesigner.setWidgetUsage", id, usage[id]);
+            if (missingDeps[id].Count > 0)
+                await JS.InvokeVoidAsync("dashboardDesigner.setWidgetError", id, string.Join(", ", missingDeps[id]));
         }
     }
 
@@ -65,5 +109,7 @@
     {
         selectedWidgets.Remove(id);
         await WidgetService.SaveUserWidgetsAsync(companyId, userId, selectedWidgets);
+        missingDeps.Remove(id);
+        usage.Remove(id);
     }
 }
