@@ -2,6 +2,7 @@ using System.Security.Claims;
 using ASL.LivingGrid.WebAdminPanel.Models;
 using ASL.LivingGrid.WebAdminPanel.Services;
 using Microsoft.Extensions.Logging;
+using ASL.LivingGrid.WebAdminPanel.Tests;
 using Moq;
 using Xunit;
 
@@ -12,13 +13,13 @@ public class NavigationServiceTests
     [Fact]
     public async Task GetMenuItemsAsync_FiltersByRoleService()
     {
-        var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        Directory.CreateDirectory(tempDir);
+        using var tempDir = new TemporaryDirectory();
+        var dir = tempDir.Path;
         var json = "[{\"Key\":\"Dashboard\",\"Url\":\"/\",\"Icon\":\"home\"},{\"Key\":\"Admin\",\"Url\":\"/admin\",\"Icon\":\"admin\"}]";
-        await File.WriteAllTextAsync(Path.Combine(tempDir, "menuitems.json"), json);
+        await File.WriteAllTextAsync(Path.Combine(dir, "menuitems.json"), json);
 
         var envMock = new Mock<IWebHostEnvironment>();
-        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir);
+        envMock.SetupGet(e => e.ContentRootPath).Returns(dir);
 
         var roleMock = new Mock<IRoleBasedUiService>();
         roleMock.Setup(r => r.HasAccessAsync("Dashboard", It.IsAny<ClaimsPrincipal>())).ReturnsAsync(true);

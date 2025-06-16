@@ -4,6 +4,7 @@ using ASL.LivingGrid.WebAdminPanel.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
+using ASL.LivingGrid.WebAdminPanel.Tests;
 using Moq;
 using Xunit;
 
@@ -14,10 +15,9 @@ public class WidgetServiceTests
     [Fact]
     public async Task InstallAndRemoveWidget_PersistsChanges()
     {
-        var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        Directory.CreateDirectory(tempDir);
+        using var tempDir = new TemporaryDirectory();
         var envMock = new Mock<IWebHostEnvironment>();
-        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir);
+        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir.Path);
         var jsMock = new Mock<IJSRuntime>();
         var loggerMock = new Mock<ILogger<WidgetService>>();
         var service = new WidgetService(envMock.Object, jsMock.Object, loggerMock.Object);

@@ -2,6 +2,7 @@ using ASL.LivingGrid.WebAdminPanel.Models;
 using ASL.LivingGrid.WebAdminPanel.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
+using ASL.LivingGrid.WebAdminPanel.Tests;
 using Moq;
 using Xunit;
 
@@ -12,10 +13,9 @@ public class PluginServiceTests
     [Fact]
     public async Task RemovePluginAsync_InvalidId_LogsError()
     {
-        var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        Directory.CreateDirectory(tempDir);
+        using var tempDir = new TemporaryDirectory();
         var envMock = new Mock<IWebHostEnvironment>();
-        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir);
+        envMock.SetupGet(e => e.ContentRootPath).Returns(tempDir.Path);
         var loggerMock = new Mock<ILogger<PluginService>>();
         var service = new PluginService(envMock.Object, loggerMock.Object);
 
