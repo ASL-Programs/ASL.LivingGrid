@@ -8,6 +8,12 @@ This directory stores project-level documentation for **ASL.LivingGrid**. Below 
 - **Developer books:** located under the [For Developer](../For%20Developer) directory.
   - [LocalizationBook](../For%20Developer/LocalizationBook/README.md)
   - [SolutionSetupBook](../For%20Developer/SolutionSetupBook/README.md)
+  - [DashboardWidgetsBook](../For%20Developer/DashboardWidgetsBook/README.md)
+  - [NotificationBook](../For%20Developer/NotificationBook/README.md)
+  - [SecurityBook](../For%20Developer/SecurityBook/README.md)
+  - [PluginBook](../For%20Developer/PluginBook/README.md)
+  - [IAMBook](../For%20Developer/IAMBook/README.md)
+  - [WorkflowBook](../For%20Developer/WorkflowBook/README.md)
 
 Other books in that folder cover deployment and UX/UI topics.
 
