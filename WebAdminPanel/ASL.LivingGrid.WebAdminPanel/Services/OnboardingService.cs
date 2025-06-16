@@ -2,6 +2,7 @@ using ASL.LivingGrid.WebAdminPanel.Data;
 using ASL.LivingGrid.WebAdminPanel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Text.Json;
 
 namespace ASL.LivingGrid.WebAdminPanel.Services;
@@ -328,6 +329,11 @@ public class OnboardingService : IOnboardingService
 
                 _context.AppUsers.Add(appUser);
                 await _context.SaveChangesAsync();
+            }
+            else
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                _logger.LogError("Failed to create admin user {Email}: {Errors}", setup.Email, errors);
             }
         }
     }

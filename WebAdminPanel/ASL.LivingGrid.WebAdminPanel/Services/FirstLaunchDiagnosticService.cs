@@ -886,7 +886,10 @@ public class FirstLaunchDiagnosticService : IFirstLaunchDiagnosticService
                     securityScore++;
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to check administrator privileges");
+            }
         }
 
         // Check HTTPS configuration (new key with legacy fallback)
