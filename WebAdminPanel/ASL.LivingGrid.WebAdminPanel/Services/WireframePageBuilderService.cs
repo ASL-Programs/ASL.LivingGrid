@@ -1,6 +1,7 @@
 using ASL.LivingGrid.WebAdminPanel.Data;
 using ASL.LivingGrid.WebAdminPanel.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Text.Json;
 using System.Text;
 using System.Security.Cryptography;
@@ -15,7 +16,7 @@ public class WireframePageBuilderService : IWireframePageBuilderService
     private readonly string _projectsPath;
     private readonly string _templatesPath;
     private readonly string _previewsPath;
-    private readonly string _previewSecret;
+    private readonly Lazy<Task<string>> _previewSecret;
     private Task _initTemplatesTask = Task.CompletedTask;
 
     public WireframePageBuilderService(
@@ -29,7 +30,8 @@ public class WireframePageBuilderService : IWireframePageBuilderService
         _projectsPath = Path.Combine(basePath, "Wireframes", "Projects");
         _templatesPath = Path.Combine(basePath, "Wireframes", "Templates");
         _previewsPath = Path.Combine(basePath, "Wireframes", "Previews");
-        _previewSecret = _configService.GetValueAsync("Security:PreviewSecret").GetAwaiter().GetResult() ?? "ChangeThisSecret";
+        _previewSecret = new Lazy<Task<string>>(LoadPreviewSecretAsync);
+        _ = _previewSecret.Value; // start loading in background
         
         try
         {
@@ -49,6 +51,19 @@ public class WireframePageBuilderService : IWireframePageBuilderService
         _initTemplatesTask.ContinueWith(
             t => _logger.LogError(t.Exception, "Error initializing wireframe templates"),
             TaskContinuationOptions.OnlyOnFaulted);
+    }
+
+    private async Task<string> LoadPreviewSecretAsync()
+    {
+        try
+        {
+            return await _configService.GetValueAsync("Security:PreviewSecret") ?? "ChangeThisSecret";
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error loading preview secret");
+            return "ChangeThisSecret";
+        }
     }
 
     public async Task<WireframeProject> CreateProjectAsync(string name, string description)
@@ -782,7 +797,7 @@ public class WireframePageBuilderService : IWireframePageBuilderService
             var htmlPath = Path.Combine(previewDir, "preview.html");
             await File.WriteAllTextAsync(htmlPath, GenerateFullHTMLPreview(preview));
 
-            var token = GetPreviewToken(pageId);
+            var token = await GetPreviewTokenAsync(pageId);
             preview.PreviewUrl = $"/wireframes/preview/{pageId}/preview.html?token={token}";
             preview.GenerationTime = DateTime.UtcNow - startTime;
 
@@ -1428,10 +1443,11 @@ public class WireframePageBuilderService : IWireframePageBuilderService
         return htmlContent;
     }
 
-    public string GetPreviewToken(string pageId, string? password = null)
+    public async Task<string> GetPreviewTokenAsync(string pageId, string? password = null)
     {
+        var secret = await _previewSecret.Value;
         var input = string.IsNullOrEmpty(password) ? pageId : $"{pageId}:{password}";
-        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_previewSecret));
+        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
         var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(input));
         return Convert.ToHexString(hash);
     }

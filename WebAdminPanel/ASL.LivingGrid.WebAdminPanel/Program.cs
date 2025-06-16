@@ -241,7 +241,7 @@ public class Program
             var token = ctx.Request.Query["token"].ToString();
             if (!(ctx.User?.Identity?.IsAuthenticated ?? false))
             {
-                if (token != svc.GetPreviewToken(pageId))
+                if (token != await svc.GetPreviewTokenAsync(pageId))
                     return Results.Unauthorized();
             }
 
