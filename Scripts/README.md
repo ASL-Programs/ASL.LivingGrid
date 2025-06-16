@@ -11,4 +11,5 @@ Utility scripts to build, test and deploy the solution.
   bash ./Scripts/deploy.sh [Release|Debug]
   ```
 
-Both scripts expect .NET 9 SDK to be installed and should be executed from the repository root or `Scripts` directory.
+Both scripts expect .NET 9 SDK to be installed. They automatically detect their
+own location, so you can run them from any directory.
