@@ -8,7 +8,7 @@
     <PackageReference Include="xunit" Version="2.5.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.0" />
     <PackageReference Include="Moq" Version="4.18.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0-preview.4.24267.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ASL.LivingGrid.WebAdminPanel\ASL.LivingGrid.WebAdminPanel.csproj" />
