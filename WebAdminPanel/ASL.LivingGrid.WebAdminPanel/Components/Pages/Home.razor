@@ -1,6 +1,7 @@
 @page "/"
 @using Microsoft.AspNetCore.Authorization
 @using ASL.LivingGrid.WebAdminPanel.Services
+@using ASL.LivingGrid.WebAdminPanel
 @attribute [Authorize]
 @inject IConfigurationService ConfigurationService
 @inject ILocalizationService LocalizationService
@@ -167,7 +168,7 @@
         systemInfo = new SystemInfo
         {
             Version = "1.0.0",
-            Uptime = DateTime.Now.ToString("dd days HH:mm"),
+            Uptime = GetUptimeString(),
             DatabaseType = "SQLite",
             Environment = "Development"
         };
@@ -187,6 +188,12 @@
         {
             await JS.InvokeVoidAsync("toast.show", localizedStrings["Common.Welcome"]);
         }
+    }
+
+    private string GetUptimeString()
+    {
+        var uptime = DateTime.Now - Program.StartTime;
+        return $"{uptime.Days}d {uptime.Hours}h {uptime.Minutes}m";
     }
 
     public class SystemStats
