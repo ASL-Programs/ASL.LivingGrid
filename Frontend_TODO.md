@@ -322,7 +322,8 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 - [x] Storybook for components, dev/QA/Prod profiles - 2025-06-21 - AI: komponent önizləmələri üçün Storybook quruldu
 - [x] Changelog & documentation auto-generator, smart help - 2025-06-21 - AI: avtomatik changelog və sənədləşmə skriptləri əlavə edildi
 - [ ] Full test automation UI, auto-update handler
-- [ ] **CI/CD pipeline integration, auto rollback on failed deploy** - 2025-06-21 - AI: ilkin GitHub Actions workflow və rollback skripti yaradıldı
+- [x] **CI/CD pipeline integration, auto rollback on failed deploy** - 2025-06-21 - AI: ilkin GitHub Actions workflow və rollback skripti yaradıldı
+  - 2025-06-22 - AI: Node `npm ci` and Storybook build added to CI/CD, static site artifact published
 - [ ] **Unit, integration, e2e, manual test checklist and evidence**
 - [ ] **Developer portal and internal API docs auto-generation**
 

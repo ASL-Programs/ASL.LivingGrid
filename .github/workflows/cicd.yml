@@ -12,10 +12,24 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Build
         run: dotnet build ASL.LivingGrid.sln
       - name: Test
         run: dotnet test ASL.LivingGrid.sln --no-build
+      - name: Install Node dependencies
+        working-directory: WebAdminPanel
+        run: npm ci
+      - name: Build Storybook
+        working-directory: WebAdminPanel
+        run: npm run build-storybook
+      - name: Upload Storybook Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: WebAdminPanel/storybook-static
       - name: Deploy
         run: bash ./Scripts/deploy.sh Release
       - name: Rollback on failure
