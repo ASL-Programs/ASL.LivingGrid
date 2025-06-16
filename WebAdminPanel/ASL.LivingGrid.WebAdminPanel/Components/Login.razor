@@ -1,10 +1,12 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Logging
 @using System.ComponentModel.DataAnnotations
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
+@inject ILogger<Login> Logger
 
 <div class="login-form">
     <EditForm Model="loginModel" OnValidSubmit="HandleLoginAsync" FormName="login">
@@ -86,6 +88,7 @@
         }
         catch (Exception ex)
         {
+            Logger.LogError(ex, "Login error for user {Email}", loginModel.Email);
             errorMessage = "An error occurred during login. Please try again.";
         }
         finally
@@ -117,13 +120,14 @@
                 var result = await UserManager.CreateAsync(adminUser, password);
                 if (!result.Succeeded)
                 {
-                    // Log errors if needed
+                    var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                    Logger.LogError("Failed to create default admin user {Email}: {Errors}", email, errors);
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // Silently handle errors during user creation
+            Logger.LogError(ex, "Error ensuring default admin user");
         }
     }
 
