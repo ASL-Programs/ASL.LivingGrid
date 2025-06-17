@@ -24,8 +24,8 @@ else
                     <div class="card-body">
                         <h5 class="card-title">@p.Name (@p.Version)</h5>
                         <p class="card-text">@p.Description</p>
-                        <button class="btn btn-primary" @onclick="() => Install(p.Id)">Install</button>
-                        <button class="btn btn-secondary ms-2" @onclick="() => Export(p.Id)">Export</button>
+                        <button class="btn btn-primary" @onclick="ShowComingSoon">Install</button>
+                        <button class="btn btn-secondary ms-2" @onclick="ShowComingSoon">Export</button>
                     </div>
                 </div>
             </div>
@@ -33,28 +33,22 @@ else
     </div>
 }
 
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+
 @code {
     private List<MarketplacePlugin>? plugins;
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
         plugins = (await Marketplace.ListAsync()).ToList();
     }
 
-    private async Task Install(string id)
+    private void ShowComingSoon()
     {
-        var plugin = await Marketplace.ImportAsync(id);
-        if (plugin != null)
-        {
-            await PluginService.InstallPluginAsync(plugin);
-        }
-    }
-
-    private async Task Export(string id)
-    {
-        var json = await Marketplace.ExportAsync(id);
-        if (string.IsNullOrEmpty(json)) return;
-        var base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(json));
-        await JS.InvokeVoidAsync("blazorDownloadFile", $"{id}.json", "application/json", base64);
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

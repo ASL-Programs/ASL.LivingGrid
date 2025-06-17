@@ -1,0 +1,17 @@
+@page "/smart-update/rollout"
+
+<div class="page-container">
+    <h2>Smart Update Manager: Per-Tenant Staged Rollout</h2>
+    <p>Per-tenant staged rollout və canary update logic üçün demo UI və mock data.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

@@ -1,0 +1,9 @@
+@page "/mobile-notification-center"
+<h3>Native Mobile App Control & Notification Center</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">Bildirim Gönder</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

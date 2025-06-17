@@ -6,15 +6,17 @@
 <h3>Test Automation</h3>
 
 <div class="mb-3">
-    <button class="btn btn-primary me-2" @onclick="RunTests" disabled="@isRunning">Run All Tests</button>
-    <button class="btn btn-secondary" @onclick="CheckUpdates" disabled="@isRunning">Check Updates</button>
+    <button class="btn btn-primary me-2" @onclick="ShowComingSoon">Run All Tests</button>
+    <button class="btn btn-secondary" @onclick="ShowComingSoon">Check Updates</button>
 </div>
-
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
 @if (isRunning)
 {
     <p>Running tests...</p>
 }
-
 @if (history.Any())
 {
     <div class="accordion" id="history">
@@ -44,22 +46,12 @@
         }
     </div>
 }
-
 @code {
     private bool isRunning;
+    private string? status;
     private IEnumerable<TestRunResult> history => TestSvc.GetHistory();
-
-    private async Task RunTests()
+    private void ShowComingSoon()
     {
-        isRunning = true;
-        await TestSvc.RunTestsAsync();
-        isRunning = false;
-    }
-
-    private async Task CheckUpdates()
-    {
-        isRunning = true;
-        await TestSvc.CheckForUpdatesAsync();
-        isRunning = false;
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

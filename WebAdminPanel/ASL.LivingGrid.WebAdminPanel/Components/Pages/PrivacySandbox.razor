@@ -1,0 +1,9 @@
+@page "/privacy-sandbox"
+<h3>Privacy Sandbox & Test Mode Everywhere</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">Test Modunu Aç</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

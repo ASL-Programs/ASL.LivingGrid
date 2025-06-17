@@ -1,0 +1,20 @@
+@page "/compliance-dashboard"
+
+<h3>Global Compliance & Data Residency Dashboard</h3>
+<p>Simple-data: Demo compliance və data residency preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>Region</th><th>Compliance</th><th>Status</th></tr></thead>
+    <tbody>
+        <tr><td>EU</td><td>GDPR</td><td><span class="badge bg-success">Compliant</span></td></tr>
+        <tr><td>US</td><td>CCPA</td><td><span class="badge bg-warning">Partial</span></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-info mt-3" @onclick="ShowComingSoon">Export Report</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

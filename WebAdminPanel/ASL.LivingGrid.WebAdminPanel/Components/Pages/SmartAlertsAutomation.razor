@@ -1,0 +1,20 @@
+@page "/smart-alerts"
+
+<h3>Smart Alerts & Dynamic Automations</h3>
+<p>Simple-data: Demo alert və automation preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>Alert</th><th>Type</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>High CPU</td><td>Email</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Disable</button></td></tr>
+        <tr><td>Nightly Backup</td><td>SMS</td><td><span class="badge bg-warning">Inactive</span></td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Enable</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Alert</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

@@ -1,0 +1,9 @@
+@page "/sla-designer"
+<h3>Dynamic SLA Management</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">Yeni SLA Oluştur</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

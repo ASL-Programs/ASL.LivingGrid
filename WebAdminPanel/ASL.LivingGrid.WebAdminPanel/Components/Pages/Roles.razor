@@ -17,15 +17,15 @@
                 <InputText class="form-control" @bind-Value="editRole.Description" placeholder="Description" />
             </div>
             <div class="col">
-                <button class="btn btn-primary" type="submit">Save</button>
-                <button class="btn btn-secondary ms-1" type="button" @onclick="CancelEdit">Cancel</button>
+                <button class="btn btn-primary" type="button" @onclick="ShowComingSoon">Save</button>
+                <button class="btn btn-secondary ms-1" type="button" @onclick="ShowComingSoon">Cancel</button>
             </div>
         </div>
     </EditForm>
 }
 else
 {
-    <button class="btn btn-success mb-3" @onclick="CreateRole">New Role</button>
+    <button class="btn btn-success mb-3" @onclick="ShowComingSoon">New Role</button>
 }
 
 <table class="table table-striped">
@@ -43,17 +43,23 @@ else
                 <td>@r.Name</td>
                 <td>@r.Description</td>
                 <td>
-                    <button class="btn btn-sm btn-primary me-1" @onclick="() => Edit(r)">Edit</button>
-                    <button class="btn btn-sm btn-danger" @onclick="() => DeleteAsync(r)">Delete</button>
+                    <button class="btn btn-sm btn-primary me-1" @onclick="ShowComingSoon">Edit</button>
+                    <button class="btn btn-sm btn-danger" @onclick="ShowComingSoon">Delete</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+
 @code {
     private List<Role> roles = new();
     private Role? editRole;
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -109,5 +115,10 @@ else
         Db.Roles.Remove(role);
         await Db.SaveChangesAsync();
         roles.Remove(role);
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

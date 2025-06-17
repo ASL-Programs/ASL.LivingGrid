@@ -1,0 +1,9 @@
+@page "/orchestration-marketplace"
+<h3>Orchestration, Workflow & Automation Marketplace</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">Workflow Ekle</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

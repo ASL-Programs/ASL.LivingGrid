@@ -1,0 +1,20 @@
+@page "/system-health"
+
+<h3>System Health, Security & Audit Dashboard</h3>
+<p>Simple-data: Demo health və audit preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>Component</th><th>Status</th><th>Last Scan</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>Backend</td><td><span class="badge bg-success">Healthy</span></td><td>2025-06-16</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Details</button></td></tr>
+        <tr><td>DB</td><td><span class="badge bg-warning">Warning</span></td><td>2025-06-15</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Remediate</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-info mt-3" @onclick="ShowComingSoon">Yeni Scan</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

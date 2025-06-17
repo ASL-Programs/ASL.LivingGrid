@@ -1,0 +1,20 @@
+@page "/multi-tenant"
+
+<h3>Multi-Tenant & SaaS Controls</h3>
+<p>Simple-data: Demo tenant və istifadəçi siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Tenant</th><th>Users</th><th>Plan</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>DemoTenant</td><td>5</td><td>Pro</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Edit</button></td></tr>
+        <tr><td>TestTenant</td><td>2</td><td>Starter</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Delete</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Tenant</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

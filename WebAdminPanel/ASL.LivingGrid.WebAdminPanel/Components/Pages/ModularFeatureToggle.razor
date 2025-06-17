@@ -1,0 +1,19 @@
+@page "/feature-toggle"
+
+<h3>Modular Feature Toggle & Licensing</h3>
+<p>Simple-data: Demo modul və lisenziya siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Module</th><th>Enabled</th><th>License</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>Reporting</td><td><input type="checkbox" checked disabled /></td><td>Pro</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Upgrade</button></td></tr>
+        <tr><td>AI Assistant</td><td><input type="checkbox" disabled /></td><td>Starter</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Enable</button></td></tr>
+    </tbody>
+</table>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

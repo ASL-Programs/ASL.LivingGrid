@@ -1,0 +1,18 @@
+@page "/multi-tenant/assign-users"
+
+<div class="page-container">
+    <h2>Multi-Tenant: Assign Users to Tenants</h2>
+    <p>Kullanıcıları tenantlara atamak üçün demo UI və mock data.</p>
+    <ul>
+        <li>Tenant: <b>Acme Corp</b> — <span class="soon-message">Hazırlanır / Çox yaxında!</span></li>
+        <li>Tenant: <b>Beta Ltd</b> — <span class="soon-message">Hazırlanır / Çox yaxında!</span></li>
+    </ul>
+    <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

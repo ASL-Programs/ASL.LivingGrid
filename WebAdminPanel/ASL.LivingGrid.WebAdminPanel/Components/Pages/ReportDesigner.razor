@@ -17,7 +17,7 @@
     <div class="mb-2">
         <InputText class="form-control" @bind-Value="template.AllowedRoles" placeholder="Allowed Roles" />
     </div>
-    <button class="btn btn-primary" type="submit">Save Template</button>
+    <button class="btn btn-primary" type="button" @onclick="ShowComingSoon">Save Template</button>
 </EditForm>
 
 <h4 class="mt-4">Schedule Execution</h4>
@@ -28,12 +28,18 @@
     <div class="mb-2">
         <InputText class="form-control" @bind-Value="schedule.Recipients" placeholder="Recipients" />
     </div>
-    <button class="btn btn-secondary" type="submit">Schedule</button>
+    <button class="btn btn-secondary" type="button" @onclick="ShowComingSoon">Schedule</button>
 </EditForm>
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
 
 @code {
     private Report template = new();
     private ScheduleModel schedule = new() { ScheduledAt = DateTime.UtcNow };
+    private string? status;
 
     private async Task SaveAsync()
     {
@@ -47,6 +53,11 @@
         var auth = await Auth.GetAuthenticationStateAsync();
         await ReportingService.ScheduleReportAsync(template.Id, new ReportFilter(), schedule.ScheduledAt, schedule.Recipients, auth.User);
         schedule = new() { ScheduledAt = DateTime.UtcNow };
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 
     private class ScheduleModel

@@ -1,0 +1,30 @@
+@page "/support-feedback"
+
+<h3>Support & Feedback</h3>
+<p>Simple-data: Demo ticket və feedback siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Type</th><th>Subject</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+        <tr>
+            <td>Ticket</td>
+            <td>Login problemi</td>
+            <td><span class="badge bg-warning">Open</span></td>
+            <td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">View</button></td>
+        </tr>
+        <tr>
+            <td>Feedback</td>
+            <td>UI çox rahatdır</td>
+            <td><span class="badge bg-success">Closed</span></td>
+            <td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Details</button></td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Ticket</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

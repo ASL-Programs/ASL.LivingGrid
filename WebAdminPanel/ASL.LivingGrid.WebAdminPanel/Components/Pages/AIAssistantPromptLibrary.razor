@@ -1,0 +1,17 @@
+@page "/ai-assistant/prompt-library"
+
+<div class="page-container">
+    <h2>AI Assistant & Model Integration: Prompt Library</h2>
+    <p>Prompt library, prompt versioning, role-based prompt publishing üçün demo UI və mock data.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

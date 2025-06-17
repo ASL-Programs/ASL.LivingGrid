@@ -1,0 +1,9 @@
+@page "/ultra-granular-ux"
+<h3>Ultra-Granular Controls & UX</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">Detaylı UX Ayarları</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

@@ -1,0 +1,20 @@
+@page "/dynamic-permission"
+
+<h3>Dynamic Permission Conditions</h3>
+<p>Simple-data: Demo permission və şərt siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Permission</th><th>Condition</th><th>Status</th></tr></thead>
+    <tbody>
+        <tr><td>Edit User</td><td>Work hours only</td><td><span class="badge bg-success">Active</span></td></tr>
+        <tr><td>Delete Report</td><td>Admin group</td><td><span class="badge bg-warning">Inactive</span></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-primary mt-3" @onclick="ShowComingSoon">Add Condition</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

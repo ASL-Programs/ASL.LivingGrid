@@ -1,0 +1,20 @@
+@page "/multi-db-support/live-schema"
+@using System
+
+<PageTitle>Multi-DB: Real-time Schema</PageTitle>
+<div class="page-container">
+    <h2>Çoxlu Veritabanı: Real-time Schema, Backup/Restore, Live Compatibility</h2>
+    <p>Bu modul real-time schema, backup/restore və canlı environment uyğunluğunu idarə etmək üçün hazırlanır.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        // Basit mock: Gerçek toast servisiyle entegre edilecek
+        Console.WriteLine(msg);
+    }
+}

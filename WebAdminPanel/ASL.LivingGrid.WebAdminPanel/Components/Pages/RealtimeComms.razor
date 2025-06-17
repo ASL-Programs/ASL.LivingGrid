@@ -1,0 +1,9 @@
+@page "/realtime-comms"
+<h3>Realtime Communication & Sharing</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">Mesaj Gönder</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

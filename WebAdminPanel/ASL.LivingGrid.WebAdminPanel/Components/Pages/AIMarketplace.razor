@@ -1,0 +1,9 @@
+@page "/ai-marketplace"
+<h3>Modular ML/AI Marketplace</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">AI Modeli Yükle</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

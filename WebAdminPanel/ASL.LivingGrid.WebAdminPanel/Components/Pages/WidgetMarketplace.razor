@@ -22,18 +22,22 @@ else
                         <h5 class="card-title">@w.Name</h5>
                         <p class="card-text">@w.Description</p>
                         <p class="small text-muted">Used @usage.GetValueOrDefault(w.Id) times</p>
-                        <button class="btn btn-primary" @onclick="() => Import(w.Id)">Import</button>
-                        <button class="btn btn-secondary ms-2" @onclick="() => Export(w.Id)">Export</button>
+                        <button class="btn btn-primary" @onclick="ShowComingSoon">Import</button>
+                        <button class="btn btn-secondary ms-2" @onclick="ShowComingSoon">Export</button>
                     </div>
                 </div>
             </div>
         }
     </div>
 }
-
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
 @code {
     private List<MarketplaceWidget>? widgets;
     private Dictionary<string, int> usage = new();
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -44,20 +48,8 @@ else
         }
     }
 
-    private async Task Import(string id)
+    private void ShowComingSoon()
     {
-        var def = await Marketplace.ImportAsync(id);
-        if (def != null)
-        {
-            await WidgetService.InstallWidgetAsync(def);
-        }
-    }
-
-    private async Task Export(string id)
-    {
-        var json = await Marketplace.ExportAsync(id);
-        if (string.IsNullOrEmpty(json)) return;
-        var base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(json));
-        await JS.InvokeVoidAsync("blazorDownloadFile", $"{id}.json", "application/json", base64);
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

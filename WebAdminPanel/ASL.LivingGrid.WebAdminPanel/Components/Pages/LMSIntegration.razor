@@ -1,0 +1,9 @@
+@page "/lms-integration"
+<h3>LMS & Education Sector Integration</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">LMS Bağlantısı</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

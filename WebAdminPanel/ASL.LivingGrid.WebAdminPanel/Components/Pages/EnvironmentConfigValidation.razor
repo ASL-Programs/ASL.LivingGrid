@@ -1,0 +1,18 @@
+@page "/environment-config/validation"
+
+<PageTitle>Environment Config: Validation</PageTitle>
+<div class="page-container">
+    <h2>Ətraf Mühit Konfiqurasiyası: Config Validation & Dry-Run</h2>
+    <p>Config validation və dry-run test before apply üçün demo UI və mock data.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

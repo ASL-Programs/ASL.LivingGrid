@@ -23,18 +23,154 @@ else
             <label class="form-label">Connection String</label>
             <InputText class="form-control" @bind-Value="model.ConnectionString" />
         </div>
-        <button class="btn btn-primary" type="submit">Apply</button>
+        <div class="mb-3">
+            <button class="btn btn-secondary me-2" type="button">Discover</button>
+            <button class="btn btn-info me-2" type="button">Test Connection</button>
+            <button class="btn btn-primary" type="submit">Apply</button>
+        </div>
     </EditForm>
-    @if (!string.IsNullOrEmpty(status))
-    {
-        <div class="alert alert-info">@status</div>
-    }
+    @* Status və discovered DB-lər *@
+    <div class="alert alert-info" style="display:none">Status mesajı (mockup)</div>
+    <div class="mt-3" style="display:none">
+        <h5>Discovered Databases</h5>
+        <ul>
+            <li><b>master</b> (localhost) <button class="btn btn-sm btn-link">Use</button></li>
+        </ul>
+    </div>
+    <hr />
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h5>Schema Preview <span class="badge bg-secondary">Mockup</span></h5>
+            <div class="card">
+                <div class="card-body">
+                    <ul>
+                        <li><b>Users</b>: Id, Name, Email, CreatedAt</li>
+                        <li><b>Roles</b>: Id, Name</li>
+                        <li><b>AuditLogs</b>: Id, UserId, Action, Timestamp</li>
+                    </ul>
+                </div>
+            </div>
+            <h5 class="mt-4">Data Warehouse Integration <span class="badge bg-secondary">Mockup</span></h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label>Warehouse Type</label>
+                        <select class="form-select" disabled>
+                            <option>Azure Synapse</option>
+                            <option>Amazon Redshift</option>
+                            <option>Google BigQuery</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label>Connection String</label>
+                        <input class="form-control" disabled placeholder="warehouse connection string" />
+                    </div>
+                    <button class="btn btn-outline-primary" @onclick="ShowComingSoon">Connect</button>
+                    <div class="mt-2 text-muted">Data warehouse və multi-source connector üçün backend funksiyası hazır deyil.</div>
+                </div>
+            </div>
+            <h5 class="mt-4">Per-Tenant/Per-Region DB Routing & Failover <span class="badge bg-secondary">Mockup</span></h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label>Tenant seçin</label>
+                        <select class="form-select" disabled>
+                            <option>Tenant A</option>
+                            <option>Tenant B</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label>Region seçin</label>
+                        <select class="form-select" disabled>
+                            <option>East Europe</option>
+                            <option>West Europe</option>
+                            <option>US East</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label>Failover Status</label>
+                        <input class="form-control" disabled value="Active (mockup)" />
+                    </div>
+                    <button class="btn btn-outline-danger me-2" @onclick="ShowComingSoon">Trigger Failover</button>
+                    <button class="btn btn-outline-secondary" @onclick="ShowComingSoon">Show Routing Map</button>
+                    <div class="mt-2 text-muted">Per-tenant/per-region routing və failover üçün backend funksiyası hazır deyil.</div>
+                </div>
+            </div>
+            <h5 class="mt-4">Automated DB Schema Upgrade, Diff & Rollback <span class="badge bg-secondary">Mockup</span></h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label>Current Schema Version</label>
+                        <input class="form-control" disabled value="v1.0.0 (mockup)" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Target Schema Version</label>
+                        <input class="form-control" disabled value="v1.1.0 (mockup)" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Schema Diff Preview</label>
+                        <textarea class="form-control" rows="3" disabled>+ Added table: AuditLogs
++ Modified column: Users.Email (nvarchar(100) → nvarchar(256))
+- Dropped table: OldLogs</textarea>
+                    </div>
+                    <button class="btn btn-outline-primary me-2" @onclick="ShowComingSoon">Upgrade</button>
+                    <button class="btn btn-outline-warning me-2" @onclick="ShowComingSoon">Rollback</button>
+                    <button class="btn btn-outline-info" @onclick="ShowComingSoon">Show Full Diff</button>
+                    <div class="mt-2 text-muted">Schema upgrade, diff və rollback üçün backend funksiyası hazır deyil.</div>
+                </div>
+            </div>
+            <h5 class="mt-4">Data Masking, DLP & Encryption-at-Rest <span class="badge bg-secondary">Mockup</span></h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label>Data Masking</label>
+                        <select class="form-select" disabled>
+                            <option>None</option>
+                            <option>Partial (e.g. Email: a***@mail.com)</option>
+                            <option>Full (all sensitive fields)</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label>DLP Policy</label>
+                        <select class="form-select" disabled>
+                            <option>Off</option>
+                            <option>Standard</option>
+                            <option>Strict</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label>Encryption-at-Rest</label>
+                        <input class="form-check-input" type="checkbox" disabled /> Aktiv et (mockup)
+                    </div>
+                    <button class="btn btn-outline-primary" @onclick="ShowComingSoon">Apply Security Settings</button>
+                    <div class="mt-2 text-muted">Data masking, DLP və encryption-at-rest üçün backend funksiyası hazır deyil.</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>Backup & Restore <span class="badge bg-secondary">Mockup</span></h5>
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn btn-outline-success me-2" disabled>Backup Now</button>
+                    <button class="btn btn-outline-warning" disabled>Restore</button>
+                    <div class="mt-2 text-muted">Backup və restore üçün backend funksiyası hazır deyil.</div>
+                </div>
+            </div>
+            <h5 class="mt-4">Environment Compatibility <span class="badge bg-secondary">Mockup</span></h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-success">Compatible: SQL Server 2019 (mockup)</div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 @code {
     private IEnumerable<string>? options;
     private DbModel model = new();
     private string? status;
+    private List<DiscoveredDbInfo>? discoveredDbs;
 
     protected override async Task OnInitializedAsync()
     {
@@ -48,9 +184,39 @@ else
         status = ok ? "Saved" : "Failed";
     }
 
+    private async Task Discover()
+    {
+        discoveredDbs = (await DbService.DiscoverDatabasesAsync(model.Type)).ToList();
+        status = discoveredDbs.Count > 0 ? $"{discoveredDbs.Count} database(s) found." : "No databases found.";
+    }
+
+    private async Task TestConnection()
+    {
+        var ok = await DbService.TestConnectionAsync(model.Type, model.ConnectionString ?? string.Empty);
+        status = ok ? "Connection successful." : "Connection failed.";
+    }
+
+    private void SelectDiscovered(DiscoveredDbInfo db)
+    {
+        model.ConnectionString = db.ConnectionString;
+        StateHasChanged();
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
+    }
+
     private class DbModel
     {
         public string Type { get; set; } = "SQLServer";
         public string? ConnectionString { get; set; }
+    }
+
+    public class DiscoveredDbInfo
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Server { get; set; } = string.Empty;
+        public string ConnectionString { get; set; } = string.Empty;
     }
 }

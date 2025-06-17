@@ -1,0 +1,18 @@
+@page "/multi-db-support/warehouse"
+
+<PageTitle>Multi-DB: Data Warehouse</PageTitle>
+<div class="page-container">
+    <h2>Çoxlu Veritabanı: Data Warehouse Integration</h2>
+    <p>Data warehouse və multi-source connector üçün mock veri ve demo UI.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

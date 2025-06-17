@@ -1,0 +1,20 @@
+@page "/realtime-collab"
+
+<h3>Realtime Collaboration & Audit Trail</h3>
+<p>Simple-data: Demo aktiv redaktə edən adminlər və dəyişiklik tarixi.</p>
+<table class="table table-striped">
+    <thead><tr><th>Page</th><th>Editing By</th><th>Last Change</th></tr></thead>
+    <tbody>
+        <tr><td>Settings</td><td>admin@asl</td><td>2025-06-16 10:12</td></tr>
+        <tr><td>Users</td><td>demo@asl</td><td>2025-06-16 09:55</td></tr>
+    </tbody>
+</table>
+<button class="btn btn-warning mt-3" @onclick="ShowComingSoon">Refresh</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

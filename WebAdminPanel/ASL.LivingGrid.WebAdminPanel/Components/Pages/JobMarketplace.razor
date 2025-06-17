@@ -1,0 +1,20 @@
+@page "/job-marketplace"
+
+<h3>Job Marketplace</h3>
+<p>Simple-data: Demo job template və paylaşım siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Job</th><th>Owner</th><th>Shared</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>Backup DB</td><td>admin@asl</td><td>Yes</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Import</button></td></tr>
+        <tr><td>Weekly Report</td><td>demo@asl</td><td>No</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Share</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Job</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

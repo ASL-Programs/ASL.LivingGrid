@@ -1,0 +1,20 @@
+@page "/future-proofing"
+
+<h3>Future-Proofing & Extensibility Tools</h3>
+<p>Simple-data: Demo migration və roadmap preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>Tool</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>Migration Advisor</td><td><span class="badge bg-success">Ready</span></td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Run</button></td></tr>
+        <tr><td>Roadmap Viewer</td><td><span class="badge bg-info">Beta</span></td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">View</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Tool</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

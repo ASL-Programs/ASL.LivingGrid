@@ -5,7 +5,7 @@
 
 <h3>Permission Matrix</h3>
 
-<select class="form-select mb-3" @bind="selectedRoleId" @onchange="LoadRolePermissionsAsync">
+<select class="form-select mb-3" @bind="selectedRoleId" @onchange="ShowComingSoon">
     <option value="">-- select role --</option>
     @foreach (var r in roles)
     {
@@ -23,13 +23,19 @@
             </li>
         }
     </ul>
-    <button class="btn btn-primary" @onclick="SavePermissionsAsync">Save Changes</button>
+    <button class="btn btn-primary" @onclick="ShowComingSoon">Save Changes</button>
+}
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
 }
 
 @code {
     private List<Role> roles = new();
     private string? selectedRoleId;
     private List<PermissionGroup> permissionGroups = new();
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -76,6 +82,11 @@
         var codes = permissionGroups.SelectMany(g => g.Permissions.Where(p => p.Enabled).Select(p => p.Code));
         role.Permissions = string.Join(';', codes);
         await Db.SaveChangesAsync();
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 
     public class PermissionGroup

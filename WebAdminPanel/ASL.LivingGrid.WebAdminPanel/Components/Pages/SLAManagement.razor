@@ -1,0 +1,20 @@
+@page "/sla-management"
+
+<h3>Dynamic SLA Management</h3>
+<p>Simple-data: Demo SLA və breach siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Service</th><th>Uptime</th><th>Breach</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>API</td><td>99.9%</td><td>No</td><td><button class="btn btn-sm btn-warning" @onclick="ShowComingSoon">Edit</button></td></tr>
+        <tr><td>DB</td><td>99.5%</td><td>Yes</td><td><button class="btn btn-sm btn-danger" @onclick="ShowComingSoon">Remediate</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni SLA</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

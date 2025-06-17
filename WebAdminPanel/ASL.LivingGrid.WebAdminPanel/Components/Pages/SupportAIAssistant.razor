@@ -1,0 +1,17 @@
+@page "/support/ai-assistant"
+
+<div class="page-container">
+    <h2>Support & Feedback: AI Assistant</h2>
+    <p>AI assistant for support ticket suggestions üçün demo UI və mock data.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

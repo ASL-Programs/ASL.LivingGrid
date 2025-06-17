@@ -1,0 +1,19 @@
+@page "/quota-manager"
+
+<h3>Quota Manager</h3>
+<p>Simple-data: Demo tenant quota və istifadə statistikası.</p>
+<table class="table table-striped">
+    <thead><tr><th>Tenant</th><th>Storage</th><th>Usage</th><th>Plan</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>DemoTenant</td><td>10 GB</td><td>2.5 GB</td><td>Pro</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Upgrade</button></td></tr>
+        <tr><td>TestTenant</td><td>5 GB</td><td>1.2 GB</td><td>Starter</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Edit</button></td></tr>
+    </tbody>
+</table>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

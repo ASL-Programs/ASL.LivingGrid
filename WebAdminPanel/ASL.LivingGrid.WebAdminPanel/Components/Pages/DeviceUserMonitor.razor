@@ -1,0 +1,20 @@
+@page "/device-user-monitor"
+
+<h3>Real-Time Device & User Monitor</h3>
+<p>Simple-data: Demo cihaz və istifadəçi siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Device</th><th>User</th><th>Status</th><th>IP</th></tr></thead>
+    <tbody>
+        <tr><td>PC-01</td><td>demo@asl</td><td><span class="badge bg-success">Online</span></td><td>192.168.1.10</td></tr>
+        <tr><td>Tablet-02</td><td>guest@asl</td><td><span class="badge bg-danger">Offline</span></td><td>192.168.1.22</td></tr>
+    </tbody>
+</table>
+<button class="btn btn-warning mt-3" @onclick="ShowComingSoon">Refresh</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

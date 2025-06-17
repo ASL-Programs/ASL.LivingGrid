@@ -1,0 +1,19 @@
+@page "/ai-assistant"
+
+<h3>AI Assistant & Model Hub</h3>
+<p>Simple-data: Demo AI model siyahısı və istifadə statistikası.</p>
+<table class="table table-striped">
+    <thead><tr><th>Model</th><th>Provider</th><th>Status</th><th>Usage</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>OpenAI GPT-4</td><td>OpenAI</td><td><span class="badge bg-success">Active</span></td><td>1200</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Audit</button></td></tr>
+        <tr><td>Google Gemini</td><td>Google</td><td><span class="badge bg-warning">Inactive</span></td><td>0</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Activate</button></td></tr>
+    </tbody>
+</table>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

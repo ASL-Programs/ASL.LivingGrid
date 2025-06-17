@@ -1,0 +1,44 @@
+@page "/background-jobs"
+
+<h3>Background Job Scheduler</h3>
+
+<p>Simple-data: Aşağıda demo job listəsi göstərilir. Bütün əməliyyatlar frontend prototipidir.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr><th>Job</th><th>Status</th><th>Last Run</th><th></th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nightly Backup</td>
+            <td><span class="badge bg-success">Enabled</span></td>
+            <td>2025-06-15 02:00</td>
+            <td>
+                <button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Run Now</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Disable</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Weekly Report</td>
+            <td><span class="badge bg-danger">Disabled</span></td>
+            <td>2025-06-09 04:00</td>
+            <td>
+                <button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Enable</button>
+                <button class="btn btn-sm btn-warning" @onclick="ShowComingSoon">Logs</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+
+@code {
+    private string? status;
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
+    }
+}

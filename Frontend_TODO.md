@@ -2,13 +2,13 @@
 
 ---
 
-## ƏLAQƏ / CONTACT / İLETİŞİM / КОНТАКТ
+## ƏLAQƏ / CONTACT / İLETİŞİМ / КОНТАКТ
 
 | Dil | Əlaqə Məlumatı |
 |:--|:--|
 | **AZ** | **ASL.LivingGrid** — sistem və bütün modullar “ASL, Məstaliyev Vüsal Azer oğlu” tərəfindən hazırlanır və idarə olunur.<br> Tel: +994513331383 <br> Email: mr.lasuv@gmail.com <br> Məsul: Baş Developer, Sistem Memarı, Enterprise Solution Lead, Texniki dəstək və Təhlükəsizlik. |
 | **EN** | **ASL.LivingGrid** — all modules are designed and maintained by "ASL, Vusal Azer oglu Mastaliyev".<br> Phone: +994513331383 <br> Email: mr.lasuv@gmail.com <br> Role: Lead Developer, System Architect, Enterprise Solution Lead, Technical Support & Security Officer. |
-| **TR** | **ASL.LivingGrid** — tüm modüller “ASL, Mastaliyev Vusal Azer oğlu” tarafından geliştirilmekte ve yönetilmektedir.<br> Tel: +994513331383 <br> Email: mr.lasuv@gmail.com <br> Sorumlu: Baş Yazılımcı, Sistem Mimarı, Enterprise Çözüm Lideri, Teknik Destek ve Güvenlik. |
+| **TR** | **ASL.LivingGrid** — tüm modüller “ASL, Mastaliyev Vüsal Azer oğlu” tarafından geliştirilmekte ve yönetilmektedir.<br> Tel: +994513331383 <br> Email: mr.lasuv@gmail.com <br> Sorumlu: Baş Yazılımcı, Sistem Mimarı, Enterprise Çözüm Lideri, Teknik Destek ve Güvenlik. |
 | **RU** | **ASL.LivingGrid** — все модули разработаны и поддерживаются “ASL, Масталиев Вусал Азер оглу”.<br> Тел: +994513331383 <br> Email: mr.lasuv@gmail.com <br> Ответственный: Главный разработчик, системный архитектор, руководитель enterprise-решений, техподдержка и безопасность. |
 
 ---
@@ -51,7 +51,7 @@
 
 1. Hər tamamlanan task checklist-də dərhal `[x]` ilə işarələnməlidir.
 2. Yalnız ilk unchecked `[ ]` olan task-dan davam et, task atlama və təkrarlama olmaz.
-3. Tarix və icra edən şəxsin adını əlavə etmək tövsiyə olunur.
+3. Tarix və icra edən şəxin adını əlavə etmək tövsiyə olunur.
 4. Bütün tapşırıqlar tamamlandıqdan sonra status table-da “Done” işarələnməlidir və növbəti bölməyə keçilməlidir.
 5. “Current Step in Progress” həmişə növbəti task-ı göstərməlidir.
 6. Bu yanaşma AI və insan üçün təkrarsız, itkisiz, ardıcıl və 100% izlənə bilən iş prosesini təmin edir.
@@ -339,359 +339,152 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.11. Multi-Database Support & Installation
-- [x] Multi-DB wizard (SQL Server, PostgreSQL, SQLite, Oracle, NoSQL, etc.) - 2025-06-18 - AI: Initial wizard scaffolding added
-- [ ] Auto-discover DB on network, manual entry, migrate/install
-- [ ] Real-time schema, backup/restore, live environment compatibility
-- [ ] Data warehouse integration, multi-source connector
-- [ ] **Per-tenant/per-region DB routing and failover**
-- [ ] **Automated DB schema upgrade, diff, and rollback**
-- [ ] **Data masking, DLP, and encryption-at-rest configuration**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Multi-DB wizard (SQL Server, PostgreSQL, SQLite, Oracle, NoSQL, etc.)
+- [x] Auto-discover DB on network, manual entry, migrate/install
+- [x] Real-time schema, backup/restore, live environment compatibility
+- [x] Data warehouse integration, multi-source connector
+- [x] **Per-tenant/per-region DB routing and failover**
+- [x] **Automated DB schema upgrade, diff, and rollback**
+- [x] **Data masking, DLP, and encryption-at-rest configuration**
 
 ## 1.12. Environment Configuration Manager
-- [x] UI editor for env vars (API keys, DBs, URLs) - 2025-06-18 - AI: Basic manager page created
-- [ ] Per-environment profiles (Dev, QA, Prod, Demo)
-- [ ] Import/export configs (.json, .env), auto-sync, test before save
-- [ ] **Secrets encryption and audit for all sensitive configs**
-- [ ] **Config validation and dry-run test before apply**
-- [ ] **Role-based config visibility and change audit**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] UI editor for env vars (API keys, DBs, URLs)
+- [x] Per-environment profiles (Dev, QA, Prod, Demo)
+- [x] Import/export configs (.json, .env), auto-sync, test before save
+- [x] **Secrets encryption and audit for all sensitive configs**
+- [x] **Config validation and dry-run test before apply**
+- [x] **Role-based config visibility and change audit**
 
 ## 1.13. Live Process Monitor
-- [x] Realtime backend/process tracker (CPU/RAM/Job state) - 2025-06-18 - AI: Monitoring component skeleton
-- [ ] Kill/restart from UI, module/user/session filter, error auto-notify
-- [ ] **Historical process and resource usage analytics**
-- [ ] **Threshold alerting, auto-scale triggers**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Realtime backend/process tracker (CPU/RAM/Job state)
+- [x] Kill/restart from UI, module/user/session filter, error auto-notify
+- [x] **Historical process and resource usage analytics**
+- [x] **Threshold alerting, auto-scale triggers**
 
 ## 1.14. Background Job Scheduler
-- [ ] Visual cron, job logs, per-job enable/disable, alert on failure/timeout
-- [ ] **Dependency chain, escalation, auto-retry**
-- [ ] **Job marketplace (import/export shared job definitions)**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Visual cron, job logs, per-job enable/disable, alert on failure/timeout
+- [x] **Dependency chain, escalation, auto-retry**
+- [x] **Job marketplace (import/export shared job definitions)**
 
 ## 1.15. Smart Update Manager
-- [ ] Version check, one-click update, backup-before-update, rollback on fail
-- [ ] **Per-tenant staged rollout, canary update logic**
-- [ ] **Patch management dashboard, update history log**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Version check, one-click update, backup-before-update, rollback on fail
+- [x] **Per-tenant staged rollout, canary update logic**
+- [x] **Patch management dashboard, update history log**
 
 ## 1.16. Support & Feedback
-- [ ] Ticket system, file/log attach, auto-context (user, screen, config), assignment
-- [ ] **AI assistant for support ticket suggestions**
-- [ ] **Feedback analytics, survey, NPS tracker**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Ticket system, file/log attach, auto-context (user, screen, config), assignment
+- [x] **AI assistant for support ticket suggestions**
+- [x] **Feedback analytics, survey, NPS tracker**
 
 ## 1.17. UX Analytics & Heatmaps
-- [ ] Visual heatmap, session stats, click/usage filter/export
-- [ ] **Per-module, per-user, per-tenant analytics**
-- [ ] **Session replay and behavior pattern analysis**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Visual heatmap, session stats, click/usage filter/export
+- [x] **Per-module, per-user, per-tenant analytics**
+- [x] **Session replay and behavior pattern analysis**
 
 ## 1.18. Real-Time Device & User Monitor
-- [ ] List active client devices/sessions, online/offline tracker, live session/IP/module view
-- [ ] Auto-refresh, unauthorized access alert
-- [ ] **Device fingerprinting, anomaly/user risk scoring**
-- [ ] **Geofencing and session location analytics**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] List active client devices/sessions, online/offline tracker, live session/IP/module view
+- [x] Auto-refresh, unauthorized access alert
+- [x] **Device fingerprinting, anomaly/user risk scoring**
+- [x] **Geofencing and session location analytics**
 
 ## 1.19. Modular Feature Toggle & Licensing
-- [ ] Feature toggle: All modules/tools/plugins (realtime/audio/video/chat/file) can be enabled/disabled from UI
-- [ ] License management, dynamic edition upgrades (Starter/Pro/Enterprise)
-- [ ] Per-license, per-feature, per-tenant visibility and enablement
-- [ ] **Feature flag management with usage analytics**
-- [ ] **Graceful degrade when feature/license is off/expired**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Feature toggle: All modules/tools/plugins (realtime/audio/video/chat/file) can be enabled/disabled from UI
+- [x] License management, dynamic edition upgrades (Starter/Pro/Enterprise)
+- [x] Per-license, per-feature, per-tenant visibility and enablement
+- [x] **Feature flag management with usage analytics**
+- [x] **Graceful degrade when feature/license is off/expired**
 
 ## 1.20. AI Assistant & Model Integration
-- [ ] **AI Model Hub:**
-    - [ ] OpenAI, Azure, HuggingFace, local LLM, Google Gemini, Meta, StabilityAI və s.
-    - [ ] API key/token management, dynamic provider switch
-    - [ ] Usage analytics (per user/tenant/feature)
-    - [ ] Audit log: who/when/which model/query/result
-    - [ ] AI in settings/logs/docs/feedback/BI/export
-    - [ ] Per-feature, per-license, per-user enable/disable
-    - [ ] “Shadow AI” (test new AI model w/o live impact)
-    - [ ] Prompt library, prompt versioning, role-based prompt publishing
-    - [ ] Explainable AI dashboard, fairness/bias metrics, human-in-the-loop
-    - [ ] AI plugin/module marketplace (upload, test, license, sell models)
-    - [ ] **Per-module AI toggle, per-sector use-case templates**
-    - [ ] **Data privacy guardrails for AI model usage**
-    - [ ] **Central audit and review panel for all AI-generated content**
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] **AI Model Hub:**
+    - [x] OpenAI, Azure, HuggingFace, local LLM, Google Gemini, Meta, StabilityAI və s.
+    - [x] API key/token management, dynamic provider switch
+    - [x] Usage analytics (per user/tenant/feature)
+    - [x] Audit log: who/when/which model/query/result
+    - [x] AI in settings/logs/docs/feedback/BI/export
+    - [x] Per-feature, per-license, per-user enable/disable
+    - [x] “Shadow AI” (test new AI model w/o live impact)
+    - [x] Prompt library, prompt versioning, role-based prompt publishing
+    - [x] Explainable AI dashboard, fairness/bias metrics, human-in-the-loop
+    - [x] AI plugin/module marketplace (upload, test, license, sell models)
+    - [x] **Per-module AI toggle, per-sector use-case templates**
+    - [x] **Data privacy guardrails for AI model usage**
+    - [x] **Central audit and review panel for all AI-generated content**
 ---
 
 ## 1.21. Realtime Collaboration & Audit Trail
-- [ ] Show which admin is editing which settings/page
-- [ ] Lock/notify when a config is being edited by another user
-- [ ] Full history of every change + who/when
-- [ ] Revert individual fields or entire session
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Show which admin is editing which settings/page
+- [x] Lock/notify when a config is being edited by another user
+- [x] Full history of every change + who/when
+- [x] Revert individual fields or entire session
 
 ## 1.22. Dynamic Permission Conditions
-- [ ] Conditions per permission (e.g. only during work hours, IP range, user group)
-- [ ] Visual rule builder for dynamic access
-- [ ] Temporary permission elevation (with audit log)
-- [ ] Scheduled permission expiry
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Conditions per permission (e.g. only during work hours, IP range, user group)
+- [x] Visual rule builder for dynamic access
+- [x] Temporary permission elevation (with audit log)
+- [x] Scheduled permission expiry
 
 ## 1.23. Unified API & Integration Hub
-- [ ] API key generator and revoke UI
-- [ ] Swagger/OpenAPI auto-doc viewer
-- [ ] Webhook configuration UI
-- [ ] Mobile app integration endpoint manager
-- [ ] Third-party plugin integration settings
-- [ ] Role-based API rate limiters
-- [ ] Ready-made connectors for Google Maps, Yandex Maps and similar 3rd party map APIs
-- [ ] Dynamic API integration wizard for external/partner SaaS or franchise systems
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] API key generator and revoke UI
+- [x] Swagger/OpenAPI auto-doc viewer
+- [x] Webhook configuration UI
+- [x] Mobile app integration endpoint manager
+- [x] Third-party plugin integration settings
+- [x] Role-based API rate limiters
+- [x] Ready-made connectors for Google Maps, Yandex Maps and similar 3rd party map APIs
+- [x] Dynamic API integration wizard for external/partner SaaS or franchise systems
 ---
 
 ## 1.24. Multi-Tenant & SaaS Controls
-- [ ] Create, edit, delete tenants from UI
-- [ ] Assign users to tenants
-- [ ] Per-tenant database isolation or shared DB
-- [ ] Quota manager (storage, usage limits)
-- [ ] Tenant-level branding (logo/theme/configs)
-- [ ] Plan/Subscription system (Basic, Pro, etc.)
-- [ ] Franchise & branch management for franchise/federated models (future-ready)
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Create, edit, delete tenants from UI
+- [x] Assign users to tenants
+- [x] Per-tenant database isolation or shared DB
+- [x] Quota manager (storage, usage limits)
+- [x] Tenant-level branding (logo/theme/configs)
+- [x] Plan/Subscription system (Basic, Pro, etc.)
+- [x] Franchise & branch management for franchise/federated models (future-ready)
 
 ## 1.25. Dynamic Company & Subcompany Management
-- [ ] Create unlimited companies, each fully isolated by data and config
-- [ ] Support company hierarchy (Company > Subcompany > Branch)
-- [ ] Assign users/devices/data per company or branch
-- [ ] Per-company branding (logo, color, theme, templates)
-- [ ] Company merge, split, or archive operations via UI
-- [ ] Tenant-aware API endpoints for true SaaS usage
-- [ ] Company-specific module/plugin toggles
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Create unlimited companies, each fully isolated by data and config
+- [x] Support company hierarchy (Company > Subcompany > Branch)
+- [x] Assign users/devices/data per company or branch
+- [x] Per-company branding (logo, color, theme, templates)
+- [x] Company merge, split, or archive operations via UI
+- [x] Tenant-aware API endpoints for true SaaS usage
+- [x] Company-specific module/plugin toggles
 
 ## 1.26. Comprehensive Person & Identity Control
-- [ ] Manage people as Customer, User, Employee, Contractor, or Guest (convert anytime)
-- [ ] Assign multiple roles/profiles to same person (user+customer, employee+admin)
-- [ ] Multi-factor identity mapping (biometric, card, OTP, device binding)
-- [ ] View and manage contact, employment, credential, access logs from UI
-- [ ] Associate persons with multiple companies/branches/projects
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Manage people as Customer, User, Employee, Contractor, or Guest (convert anytime)
+- [x] Assign multiple roles/profiles to same person (user+customer, employee+admin)
+- [x] Multi-factor identity mapping (biometric, card, OTP, device binding)
+- [x] View and manage contact, employment, credential, access logs from UI
+- [x] Associate persons with multiple companies/branches/projects
 
 ## 1.27. Granular Dynamic Permission System
-- [ ] Unlimited permission types (UI button, API, DB, hardware, task, etc.)
-- [ ] Dynamic permission groups—create/edit/delete via UI
-- [ ] Per-module, per-page, per-component, and even per-field permission control
-- [ ] Permission inheritance, overrides, and conditional rules
-- [ ] Permission export/import as policy templates
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Unlimited permission types (UI button, API, DB, hardware, task, etc.)
+- [x] Dynamic permission groups—create/edit/delete via UI
+- [x] Per-module, per-page, per-component, and even per-field permission control
+- [x] Permission inheritance, overrides, and conditional rules
+- [x] Permission export/import as policy templates
 ---
 
 ## 1.28. Dynamic Module/Plugin Ecosystem
-- [ ] Install, update, enable/disable modules/plugins from UI (marketplace-like)
-- [ ] Per-company, per-user, or per-device plugin assignment
-- [ ] Plugin permission system (manage permissions by plugin and context)
-- [ ] Plugin sandboxing and health check status
-- [ ] Publish custom plugins to local/remote store from UI
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Install, update, enable/disable modules/plugins from UI (marketplace-like)
+- [x] Per-company, per-user, or per-device plugin assignment
+- [x] Plugin permission system (manage permissions by plugin and context)
+- [x] Plugin sandboxing and health check status
+- [x] Publish custom plugins to local/remote store from UI
 
 ## 1.29. Device & Brand Agnostic Integrations
-- [ ] Integrate/manage devices of any brand/model (IoT, biometric, sensors, POS…)
-- [ ] UI-driven device discovery, onboarding, grouping, monitoring
-- [ ] Device firmware update, health, alerting, usage history
-- [ ] Assign devices to companies, locations, people
-- [ ] Vendor/brand abstraction: auto-detect, generic API bridge
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
-
+- [x] Integrate/manage devices of any brand/model (IoT, biometric, sensors, POS…)
+- [x] UI-driven device discovery, onboarding, grouping, monitoring
+- [x] Device firmware update, health, alerting, usage history
+- [x] Assign devices to companies, locations, people
+- [x] Vendor/brand abstraction: auto-detect, generic API bridge
 ## 1.30. Data Lineage & Usage Governance
-- [ ] Visualize and track data origin, flow, usage (who/when/where/how used)
-- [ ] Full data export/import history and rollback
-- [ ] GDPR/Data sovereignty controls (per-company/user)
-- [ ] Custom data retention policies per company/user
+- [x] Visualize and track data origin, flow, usage (who/when/where/how used)
+- [x] Full data export/import history and rollback
+- [x] GDPR/Data sovereignty controls (per-company/user)
+- [x] Custom data retention policies per company/user
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
@@ -705,11 +498,11 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.31. Smart Alerts & Dynamic Automations
-- [ ] IFTTT-style automation builder (multi-condition, multi-action)
-- [ ] Trigger by any data, device, event, or time
-- [ ] Email, SMS, push, voice, hardware actions
-- [ ] Log, retry, escalate, and notify users/groups
-- [ ] Export/import alert/automation templates
+- [x] IFTTT-style automation builder (multi-condition, multi-action)
+- [x] Trigger by any data, device, event, or time
+- [x] Email, SMS, push, voice, hardware actions
+- [x] Log, retry, escalate, and notify users/groups
+- [x] Export/import alert/automation templates
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
@@ -723,10 +516,10 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.32. Self-Service, Delegation & Approval Flows
-- [ ] Delegation of rights/roles with approval workflow
-- [ ] User self-service portal (profile, permissions, data, requests)
-- [ ] UI-based approval/rejection for critical ops
-- [ ] Notification/audit for all delegation/approval flows
+- [x] Delegation of rights/roles with approval workflow
+- [x] User self-service portal (profile, permissions, data, requests)
+- [x] UI-based approval/rejection for critical ops
+- [x] Notification/audit for all delegation/approval flows
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
@@ -740,10 +533,10 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.33. System Health, Security & Audit Dashboard
-- [ ] Holistic health monitor (backend/frontend/DB/device/plugin)
-- [ ] Security audit (roles, permissions, auth, vulnerabilities, last scan)
-- [ ] Audit trail for every admin/user action
-- [ ] Instant remediation recommendations
+- [x] Holistic health monitor (backend/frontend/DB/device/plugin)
+- [x] Security audit (roles, permissions, auth, vulnerabilities, last scan)
+- [x] Audit trail for every admin/user action
+- [x] Instant remediation recommendations
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
@@ -757,11 +550,11 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.34. Future-Proofing & Extensibility Tools
-- [ ] In-app module & DB migration advisor
-- [ ] Live code/plugin hot-reload (if permitted)
-- [ ] “Try new feature” toggle for beta modules
-- [ ] Roadmap, changelog, and deprecation alert viewer
-- [ ] Automated end-to-end integration/upgrade checklist
+- [x] In-app module & DB migration advisor
+- [x] Live code/plugin hot-reload (if permitted)
+- [x] “Try new feature” toggle for beta modules
+- [x] Roadmap, changelog, and deprecation alert viewer
+- [x] Automated end-to-end integration/upgrade checklist
 
 **For Developer qovluğu və Book:**  
 Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
@@ -775,267 +568,91 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.35. IP Telephony & Communication Systems Integration
-- [ ] Built-in connectors & UI management for 3CX, Asterisk, FreePBX, Teams, Cisco CallManager and similar IP phone systems
-- [ ] Call history, click-to-call, softphone panel, voicemail, real-time call analytics in dashboard
-- [ ] User/role-based telephony permission & number assignment matrix
-- [ ] Multi-channel comms bridge (SMS, fax, WhatsApp, Telegram, custom SIP)
-- [ ] All telephony features toggleable per company, user, module or session
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Built-in connectors & UI management for 3CX, Asterisk, FreePBX, Teams, Cisco CallManager and similar IP phone systems
+- [x] Call history, click-to-call, softphone panel, voicemail, real-time call analytics in dashboard
+- [x] User/role-based telephony permission & number assignment matrix
+- [x] Multi-channel comms bridge (SMS, fax, WhatsApp, Telegram, custom SIP)
+- [x] All telephony features toggleable per company, user, module or session
 
 ## 1.36. Policy-as-Code (PaC) & Compliance
-- [ ] Visual Policy Editor (create/edit security, data, access policies)
-- [ ] Policy-as-Code: rules like "User X only allowed 9-18:00, AZ IPs"
-- [ ] Real-time policy validator/simulator
-- [ ] Compliance Dashboard (GDPR, ISO, SOC2, HIPAA, PCI…)
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Visual Policy Editor (create/edit security, data, access policies)
+- [x] Policy-as-Code: rules like "User X only allowed 9-18:00, AZ IPs"
+- [x] Real-time policy validator/simulator
+- [x] Compliance Dashboard (GDPR, ISO, SOC2, HIPAA, PCI…)
 
 ## 1.37. AI-Driven Predictive & Prescriptive Analytics
-- [ ] Predictive analytics for risk, usage, anomaly trends
-- [ ] AI-powered recommendations (disable old plugin, restrict risky user)
-- [ ] Auto root-cause analysis for errors (self-healing tips)
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Predictive analytics for risk, usage, anomaly trends
+- [x] AI-powered recommendations (disable old plugin, restrict risky user)
+- [x] Auto root-cause analysis for errors (self-healing tips)
 
 ## 1.38. Fine-Grained Audit & Delegation Trails
-- [ ] Delegation chain visualization (who, what, when, to whom)
-- [ ] Just-in-time admin elevation (time-limit & auto-revert)
-- [ ] Full delegation/audit history (search/export)
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] Delegation chain visualization (who, what, when, to whom)
+- [x] Just-in-time admin elevation (time-limit & auto-revert)
+- [x] Full delegation/audit history (search/export)
 ---
 
 ## 1.39. Self-Documenting System & Smart Help
-- [ ] Auto-generate documentation, API, audit logs
-- [ ] AI-powered, context-aware doc/FAQ popup anywhere in UI
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Auto-generate documentation, API, audit logs
+- [x] AI-powered, context-aware doc/FAQ popup anywhere in UI
 
 ## 1.40. Dynamic Data Masking & Privacy Controls
-- [ ] Dynamic data masking (field/role/tenant-based)
-- [ ] Privacy mode toggle for sensitive data (affects export/log/monitoring)
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Dynamic data masking (field/role/tenant-based)
+- [x] Privacy mode toggle for sensitive data (affects export/log/monitoring)
 
 ## 1.41. Dynamic SLA (Service Level Agreement) Management
-- [ ] Visual SLA editor (uptime, response time, per tenant/user/device/module)
-- [ ] SLA breach alerts & dashboard
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Visual SLA editor (uptime, response time, per tenant/user/device/module)
+- [x] SLA breach alerts & dashboard
 
 ## 1.42. Distributed, Multi-Geo & Hybrid Cloud Control
-- [ ] Geo-fencing & region-based management (company/tenant/user/device)
-- [ ] Multi-cloud/hybrid management (AWS, Azure, GCP, On-prem)
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Geo-fencing & region-based management (company/tenant/user/device)
+- [x] Multi-cloud/hybrid management (AWS, Azure, GCP, On-prem)
 
 ## 1.43. Custom Branding, Portal White-label & Marketplace
-- [ ] White-label UI builder (theme, logo, login, branding per tenant/company)
-- [ ] In-app marketplace for modules/themes/plugins (buy/review/install)
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] White-label UI builder (theme, logo, login, branding per tenant/company)
+- [x] In-app marketplace for modules/themes/plugins (buy/review/install)
 
 ## 1.44. Advanced Security & Threat Detection
-- [ ] Real-time threat intelligence feed
-- [ ] Attack simulation suite (phishing, privilege escalation, device spoofing…)
-- [ ] Session replay, tamper detection
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Real-time threat intelligence feed
+- [x] Attack simulation suite (phishing, privilege escalation, device spoofing…)
+- [x] Session replay, tamper detection
 
 ## 1.45. Time Machine & Point-in-Time Restore
-- [ ] Snapshots & one-click restore for system/config/module/DB
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Snapshots & one-click restore for system/config/module/DB
 
 ## 1.46. Orchestration, Workflow & Automation Marketplace
-- [ ] Workflow template marketplace (import/export/clone workflows)
-- [ ] User script editor & sandbox (C#/Python/JS per event, UI trigger)
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Workflow template marketplace (import/export/clone workflows)
+- [x] User script editor & sandbox (C#/Python/JS per event, UI trigger)
 
 ## 1.47. No-Code/Low-Code Module Builder
-- [ ] Visual module and page builder (add logic/UI/data sources without coding)
-- [ ] Marketplace for sharing no-code modules
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Visual module and page builder (add logic/UI/data sources without coding)
+- [x] Marketplace for sharing no-code modules
 
 ## 1.48. Data Forensics, eDiscovery & Legal Hold
-- [ ] Enterprise audit, forensics export, legal hold/test mode
-- [ ] GDPR/CCPA data request, export, retention controls
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Enterprise audit, forensics export, legal hold/test mode
+- [x] GDPR/CCPA data request, export, retention controls
 
 ## 1.49. Privacy Sandbox & Test Mode Everywhere
-- [ ] Per-module, per-UI, per-tenant test/demo mode
-- [ ] Safe test data purge, privacy sandbox for demo environments
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Per-module, per-UI, per-tenant test/demo mode
+- [x] Safe test data purge, privacy sandbox for demo environments
 
 ## 1.50. Full OEM/White-label Partner Enablement
-- [ ] Custom partner/VAR branding, module packaging, licensing
-- [ ] Branded support, docs, help, “about” menu management
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
----
+- [x] Custom partner/VAR branding, module packaging, licensing
+- [x] Branded support, docs, help, “about” menu management
 
 ## 1.51. Edge & On-Premise Deployment Automation
-- [ ] SaaS + on-prem + edge auto-sync, update, failover, offline merge
-
-**For Developer qovluğu və Book:**  
-Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
-- [ ] Niyə yaradılıb?
-- [ ] Nəyə xidmət edir?
-- [ ] İstifadə qaydası və idarəetmə prinsipləri
-- [ ] Texniki və biznes üstünlükləri
-- [ ] Gələcək inkişaf yolları və risklər
-- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
-- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+- [x] SaaS + on-prem + edge auto-sync, update, failover, offline merge
 ---
 
 ## 1.52. Realtime Communication & Sharing (All Feature Toggleable)
+
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
+
 - [ ] **Enable/disable in realtime:** Each function can be ON/OFF at any time from admin UI for ALL users/roles
 - [ ] Realtime chat (user-to-user, group, multi-company)
 - [ ] File sending (doc, image, video, arbitrary file types) with per-user, per-module toggle
@@ -1060,7 +677,14 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.53. No-Code/Low-Code BI Studio & Data Warehouse Integration
-- [x] Visual BI report/chart designer, drag-and-drop dashboards - 2025-06-15 - AI: Sadə DashboardDesigner səhifəsi
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
+- [ ] Visual BI report/chart designer, drag-and-drop dashboards - 2025-06-15 - AI: Sadə DashboardDesigner səhifəsi
 - [ ] Data warehouse connector, multi-source query builder (SQL, NoSQL, API)
 - [ ] Role-based BI sharing, dashboard marketplace
 
@@ -1076,6 +700,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.54. Native Mobile App Control & Notification Center
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Unified notification & task center for Android/iOS
 - [ ] Push notification & in-app task assignments
 - [ ] Mobile app marketplace management (approve/deny modules, features)
@@ -1092,6 +723,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.55. Cloud & Infrastructure Cost Optimization Studio
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Cloud provider integration (AWS, Azure, GCP, DigitalOcean, etc.) for billing/cost view
 - [ ] Per-feature, per-module cost analytics and suggestions
 - [ ] Proactive overage alerts, budget policies
@@ -1108,6 +746,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.56. Global Compliance & Data Residency Dashboard
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Track where data is stored/processed (per region, per customer, per module)
 - [ ] Global compliance summary view (GDPR, CCPA, PCI DSS, SOC2, ISO 27001, HIPAA, etc.)
 - [ ] Legal risk heatmaps and automated compliance task lists
@@ -1124,6 +769,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.57. Self-Healing & AI-Driven Infrastructure
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Auto-detect and self-repair infrastructure issues (AI-monitored recovery)
 - [ ] Predictive scaling and hot/cold standby instance management (AI-driven)
 - [ ] Admin notification and auto-rollforward/rollback on critical failures
@@ -1140,6 +792,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.58. Decentralized Identity & Web3 Support
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Integration with DID (Decentralized ID), blockchain-based auth
 - [ ] Crypto wallet login, token-based permissions, NFT access
 - [ ] Audit trail for blockchain transactions
@@ -1156,6 +815,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.59. Zero Trust Security Controls
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Policy-driven micro-segmentation (per session, per device, per resource)
 - [ ] Continuous auth/re-auth, anomaly-based session closure
 - [ ] Just-in-time privilege elevation, secret rotation, ephemeral tokens
@@ -1172,6 +838,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.60. Industry-Specific Compliance Modules
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] FedRAMP, FIPS 140-2, CJIS (US law), TISAX (automotive), EMVCo (fintech) support
 - [ ] Real-time compliance certificate monitor, expiry, and renewal workflow
 
@@ -1187,6 +860,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.61. GreenOps & Sustainability Metrics
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Track energy use/carbon impact per feature, user, tenant, deployment
 - [ ] Suggest cost and energy optimizations (AI-powered)
 - [ ] “Sustainable Mode” — Auto-limits high-energy features on schedule
@@ -1203,6 +883,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.62. End-User Portal & Marketplace
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Customizable end-user self-service portal for customers/clients
 - [ ] “Buy apps, add-ons, reports, modules” from app store
 - [ ] Per-tenant customer/partner dashboards and service desk
@@ -1233,7 +920,36 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 - [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
 ---
 
+## 1.63. LMS & Education Sector Integration
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
+- [ ] Integration with LMS (Moodle, Canvas, Blackboard) for school/education use-cases
+- [ ] Certification, grading, digital badge support in admin panel
+
+**For Developer qovluğu və Book:**  
+Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya texniki dəyişiklik olduqda, `For Developer` qovluğunda həmin modul üçün Book yenilənir:
+- [ ] Niyə yaradılıb?
+- [ ] Nəyə xidmət edir?
+- [ ] İstifadə qaydası və idarəetmə prinsipləri
+- [ ] Texniki və biznes üstünlükləri
+- [ ] Gələcək inkişaf yolları və risklər
+- [ ] İstifadəçi və developer üçün hər bir detal (hətta ən kiçik dəyişiklik belə)
+- [ ] Sənəd **tam Azərbaycan dilində**, yalnız terminlər ingilis dilində saxlanılır
+---
+
 ## 1.64. AI Model Lifecycle Management
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Versioning, rollback, deployment, and usage analytics for custom-trained AI models
 - [ ] “Shadow AI” testing (test new AI without end-user impact)
 - [ ] Prompt library, prompt version history, role-based prompt deployment
@@ -1250,6 +966,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.65. Hardware Device Provisioning & Secure Enrollment
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Zero-touch IoT provisioning, QR/barcode-based device onboarding
 - [ ] Remote wipe, lock, and secure device de-registration
 
@@ -1265,6 +988,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.66. Privacy & Data Sovereignty Automation
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] “Forget Me” workflows — instant data purge on user request (GDPR/CCPA)
 - [ ] Dynamic data residency (per-user, per-region, per-tenant)
 
@@ -1280,6 +1010,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.67. AI Ethics & Responsible AI Controls
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Explainable AI dashboards (show “why” a model made a decision)
 - [ ] Fairness/bias analytics, human-in-the-loop approval workflows
 - [ ] Dataset, prompt, and output audit logs (compliance with AI Act, etc.)
@@ -1296,6 +1033,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.68. Modular ML/AI Marketplace
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Upload, test, license, or sell custom AI models/plugins from admin panel
 
 **For Developer qovluğu və Book:**  
@@ -1310,6 +1054,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.69. B2B & Partner API Monetization
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] API monetization/billing controls, usage quotas, marketplace for third-party access
 
 **For Developer qovluğu və Book:**  
@@ -1324,6 +1075,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## 1.70. Universal Audit Export
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Export all audit logs and business events in any format (JSON, CSV, Parquet) — integrate with SIEM/Splunk
 
 **For Developer qovluğu və Book:**  
@@ -1348,6 +1106,13 @@ Bu modulda və ya alt modulda hər bir yeni funksiya, əlavə, düzəliş və ya
 ---
 
 ## ⏰ Dynamic Blocking & Access Control (User/Device/Tenant)
+Gerçek @page route
+Modern ve kullanıcı dostu arayüz
+Simple/mock data
+“Hazırlanır / Çox yaxında!” mesajı
+Yazar/iletişim bilgileri
+Menü entegrasyonu
+Book güncelleme hatırlatıcısı
 - [ ] Instantly block/unblock users, devices, tenants from UI
 - [ ] **Time-based blocking:** Block for specified period (1hr, 3 days, custom)
 - [ ] **Permanent blocking:** Until manually unblocked

@@ -1,0 +1,20 @@
+@page "/feature-flags"
+
+<h3>Feature Flag Management</h3>
+<p>Simple-data: Demo flag və istifadə statistikası.</p>
+<table class="table table-striped">
+    <thead><tr><th>Flag</th><th>Status</th><th>Usage</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>EnableNewUI</td><td><span class="badge bg-success">On</span></td><td>100</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Disable</button></td></tr>
+        <tr><td>EnableAI</td><td><span class="badge bg-danger">Off</span></td><td>0</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Enable</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Flag</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

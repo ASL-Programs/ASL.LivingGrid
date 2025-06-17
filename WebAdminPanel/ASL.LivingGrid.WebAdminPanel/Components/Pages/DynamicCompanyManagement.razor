@@ -1,0 +1,20 @@
+@page "/company-management"
+
+<h3>Dynamic Company & Subcompany Management</h3>
+<p>Simple-data: Demo şirkət və filial siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Company</th><th>Subcompany</th><th>Branch</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>ASL Group</td><td>ASL Tech</td><td>Baku</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Edit</button></td></tr>
+        <tr><td>DemoCorp</td><td>DemoSub</td><td>Ganja</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Delete</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Şirkət</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

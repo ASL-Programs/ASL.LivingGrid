@@ -1,0 +1,20 @@
+@page "/ip-telephony"
+
+<h3>IP Telephony & Communication Systems Integration</h3>
+<p>Simple-data: Demo telephony və call preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>System</th><th>Status</th><th>Calls</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>3CX</td><td><span class="badge bg-success">Connected</span></td><td>12</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Panel</button></td></tr>
+        <tr><td>Teams</td><td><span class="badge bg-warning">Partial</span></td><td>3</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Retry</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-info mt-3" @onclick="ShowComingSoon">Yeni System</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

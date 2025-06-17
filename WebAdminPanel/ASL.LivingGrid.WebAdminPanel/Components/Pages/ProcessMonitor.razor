@@ -3,42 +3,73 @@
 
 <h3>Live Process Monitor</h3>
 
-@if (processes == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>CPU %</th>
-                <th>Memory MB</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var p in processes)
-            {
-                <tr>
-                    <td>@p.Id</td>
-                    <td>@p.Name</td>
-                    <td>@p.CpuUsage.ToString("F1")</td>
-                    <td>@p.MemoryMb.ToString("F1")</td>
-                    <td>
-                        <button class="btn btn-sm btn-danger" @onclick="() => Kill(p.Id)">Kill</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    @if (!string.IsNullOrEmpty(status))
-    {
-        <div class="alert alert-info">@status</div>
-    }
-}
+<div class="mb-3">
+    <label>Filter by Module/User/Session</label>
+    <input class="form-control" @onclick="ShowComingSoon" placeholder="module, user, session (mockup)" />
+</div>
+<div class="mb-3">
+    <button class="btn btn-outline-secondary me-2" @onclick="ShowComingSoon">Show Only Errors</button>
+    <button class="btn btn-outline-secondary me-2" @onclick="ShowComingSoon">Auto-Notify on Error</button>
+    <span class="text-muted ms-2">Filter və error notify üçün backend funksiyası hazır deyil.</span>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>CPU %</th>
+            <th>Memory MB</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>101</td>
+            <td>WorkerService</td>
+            <td>12.3</td>
+            <td>256.7</td>
+            <td>
+                <button class="btn btn-sm btn-danger" @onclick="ShowComingSoon">Kill</button>
+                <button class="btn btn-sm btn-warning ms-1" @onclick="ShowComingSoon">Restart</button>
+            </td>
+        </tr>
+        <tr>
+            <td>102</td>
+            <td>ReportJob</td>
+            <td>3.1</td>
+            <td>128.2</td>
+            <td>
+                <button class="btn btn-sm btn-danger" @onclick="ShowComingSoon">Kill</button>
+                <button class="btn btn-sm btn-warning ms-1" @onclick="ShowComingSoon">Restart</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="mt-4">
+    <h5>Historical Analytics <span class="badge bg-secondary">Mockup</span></h5>
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-2">CPU Usage (last 24h): <span class="text-muted">Chart (mockup)</span></div>
+            <div class="mb-2">Memory Usage (last 24h): <span class="text-muted">Chart (mockup)</span></div>
+        </div>
+    </div>
+    <h5 class="mt-4">Threshold Alerting & Auto-Scale <span class="badge bg-secondary">Mockup</span></h5>
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-2">
+                <label>CPU Threshold (%)</label>
+                <input class="form-control" disabled value="80" />
+            </div>
+            <div class="mb-2">
+                <label>RAM Threshold (MB)</label>
+                <input class="form-control" disabled value="1024" />
+            </div>
+            <button class="btn btn-outline-primary" @onclick="ShowComingSoon">Apply Thresholds</button>
+            <button class="btn btn-outline-success ms-2" @onclick="ShowComingSoon">Trigger Auto-Scale</button>
+            <div class="mt-2 text-muted">Threshold və auto-scale üçün backend funksiyası hazır deyil.</div>
+        </div>
+    </div>
+</div>
 
 @code {
     private IEnumerable<ProcessInfo>? processes;
@@ -54,5 +85,10 @@ else
         var ok = await ProcessService.KillAsync(id);
         status = ok ? $"Killed {id}" : "Failed";
         processes = await ProcessService.ListAsync();
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

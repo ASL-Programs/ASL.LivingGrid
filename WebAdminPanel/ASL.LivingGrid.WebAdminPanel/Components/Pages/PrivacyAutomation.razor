@@ -1,0 +1,20 @@
+@page "/privacy-automation"
+
+<h3>Privacy & Data Sovereignty Automation</h3>
+<p>Simple-data: Demo privacy workflow və data residency preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>Workflow</th><th>Status</th><th>Region</th></tr></thead>
+    <tbody>
+        <tr><td>Forget Me</td><td><span class="badge bg-success">Ready</span></td><td>EU</td></tr>
+        <tr><td>Data Residency</td><td><span class="badge bg-info">Active</span></td><td>US</td></tr>
+    </tbody>
+</table>
+<button class="btn btn-primary mt-3" @onclick="ShowComingSoon">Run Workflow</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

@@ -1,0 +1,20 @@
+@page "/person-identity"
+
+<h3>Comprehensive Person & Identity Control</h3>
+<p>Simple-data: Demo şəxs və identifikasiya siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Name</th><th>Type</th><th>Roles</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>Vusal Mastaliyev</td><td>Admin</td><td>Admin, User</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Edit</button></td></tr>
+        <tr><td>Demo User</td><td>Customer</td><td>User</td><td><span class="badge bg-warning">Inactive</span></td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Activate</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Şəxs</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

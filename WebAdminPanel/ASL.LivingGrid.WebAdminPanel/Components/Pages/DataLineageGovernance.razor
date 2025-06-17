@@ -1,0 +1,20 @@
+@page "/data-lineage"
+
+<h3>Data Lineage & Usage Governance</h3>
+<p>Simple-data: Demo data flow və usage preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>Data Source</th><th>Flow</th><th>Usage</th></tr></thead>
+    <tbody>
+        <tr><td>Users</td><td>DB → API → UI</td><td>Active</td></tr>
+        <tr><td>Orders</td><td>DB → Export</td><td>Archived</td></tr>
+    </tbody>
+</table>
+<button class="btn btn-primary mt-3" @onclick="ShowComingSoon">Export Lineage</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

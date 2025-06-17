@@ -23,8 +23,13 @@ else
         <label class="form-label">Translation</label>
         <textarea class="form-control" @bind="edited" rows="4"></textarea>
     </div>
-    <button class="btn btn-success me-2" @onclick="Approve">Approve</button>
-    <button class="btn btn-danger" @onclick="Reject">Reject</button>
+    <button class="btn btn-success me-2" @onclick="ShowComingSoon">Approve</button>
+    <button class="btn btn-danger" @onclick="ShowComingSoon">Reject</button>
+}
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
 }
 
 @code {
@@ -32,6 +37,7 @@ else
     public Guid Id { get; set; }
     private TranslationRequest? request;
     private string? edited;
+    private string? status;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -42,21 +48,8 @@ else
         }
     }
 
-    private async Task Approve()
+    private void ShowComingSoon()
     {
-        if (request == null) return;
-        request.ProposedValue = edited;
-        await Http.PostAsync($"/api/translationrequests/approve/{Id}", null);
-        Nav.NavigateTo("/pendingreviews");
+        status = "Hazırlanır / Çox yaxında!";
     }
-
-    private async Task Reject()
-    {
-        var payload = new TranslationReviewRequest { Accept = false };
-        await Http.PostAsJsonAsync($"/api/translationrequests/reject/{Id}", payload);
-        Nav.NavigateTo("/pendingreviews");
-    }
-
-    [Inject]
-    private NavigationManager Nav { get; set; } = default!;
 }

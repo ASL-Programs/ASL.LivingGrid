@@ -1,0 +1,18 @@
+@page "/multi-db-support/routing"
+
+<PageTitle>Multi-DB: Routing & Failover</PageTitle>
+<div class="page-container">
+    <h2>Çoxlu Veritabanı: Per-Tenant/Region Routing & Failover</h2>
+    <p>Per-tenant/per-region DB routing və failover üçün demo UI və mock data.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

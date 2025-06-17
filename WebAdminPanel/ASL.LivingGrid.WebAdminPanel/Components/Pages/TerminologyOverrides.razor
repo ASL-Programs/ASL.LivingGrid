@@ -27,7 +27,12 @@
     <label class="form-label">Value</label>
     <input class="form-control" @bind="value" />
 </div>
-<button class="btn btn-primary" @onclick="Save">Save</button>
+<button class="btn btn-primary" type="button" @onclick="ShowComingSoon">Save</button>
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
 
 @code {
     private string culture = "az";
@@ -35,6 +40,7 @@
     private string key = string.Empty;
     private string value = string.Empty;
     private List<string> cultures = new();
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,15 +48,8 @@
         if (cultures.Any()) culture = cultures.First();
     }
 
-    private async Task Save()
+    private void ShowComingSoon()
     {
-        var term = new TerminologyOverride
-        {
-            Culture = culture,
-            Module = module,
-            Key = key,
-            Value = value
-        };
-        await CustomService.SetTerminologyAsync(term);
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

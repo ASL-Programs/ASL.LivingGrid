@@ -1,0 +1,18 @@
+@page "/multi-db-support/dlp"
+
+<PageTitle>Multi-DB: Data Masking & DLP</PageTitle>
+<div class="page-container">
+    <h2>Çoxlu Veritabanı: Data Masking, DLP, Encryption-at-Rest</h2>
+    <p>Data masking, DLP və encryption-at-rest üçün demo UI və mock data.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

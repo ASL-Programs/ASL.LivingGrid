@@ -27,7 +27,11 @@
     <label class="form-label">Content</label>
     <textarea class="form-control" rows="5" @bind="content"></textarea>
 </div>
-<button class="btn btn-primary" @onclick="Save">Save</button>
+<button class="btn btn-primary" type="button" @onclick="ShowComingSoon">Save</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
 
 @code {
     private string culture = "az";
@@ -35,6 +39,7 @@
     private string key = "default";
     private string content = string.Empty;
     private List<string> cultures = new();
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,15 +47,8 @@
         if (cultures.Any()) culture = cultures.First();
     }
 
-    private async Task Save()
+    private void ShowComingSoon()
     {
-        var model = new TemplateOverride
-        {
-            Culture = culture,
-            Module = module,
-            TemplateKey = key,
-            TemplateContent = content
-        };
-        await CustomService.SetTemplateAsync(model);
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

@@ -26,8 +26,13 @@ else
             <label class="form-label">Google Client Secret</label>
             <InputText class="form-control" @bind-Value="model.GoogleClientSecret" />
         </div>
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="button" @onclick="ShowComingSoon">Save</button>
     </EditForm>
+}
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
 }
 
 @code {
@@ -58,5 +63,11 @@ else
         public bool GoogleEnabled { get; set; }
         public string GoogleClientId { get; set; } = string.Empty;
         public string GoogleClientSecret { get; set; } = string.Empty;
+    }
+
+    private string? status;
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

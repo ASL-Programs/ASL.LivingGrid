@@ -16,7 +16,7 @@ else if (!items.Any())
 }
 else
 {
-    <button class="btn btn-sm btn-secondary mb-2" @onclick="MarkAllRead">Mark All Read</button>
+    <button class="btn btn-sm btn-secondary mb-2" @onclick="ShowComingSoon">Mark All Read</button>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -36,7 +36,7 @@ else
                     <td>
                         @if (!n.IsRead)
                         {
-                            <button class="btn btn-sm btn-primary" @onclick="() => MarkRead(n.Id)">Read</button>
+                            <button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Read</button>
                         }
                     </td>
                 </tr>
@@ -45,9 +45,15 @@ else
     </table>
 }
 
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+
 @code {
     private List<Notification>? items;
     private string userId = string.Empty;
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -71,5 +77,10 @@ else
     {
         await NotificationService.MarkAllAsReadAsync(userId);
         await LoadAsync();
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

@@ -1,0 +1,9 @@
+@page "/dynamic-blocking"
+<h3>Dynamic Blocking & Access Control</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">Kullanıcıyı Engelle</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

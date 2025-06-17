@@ -9,6 +9,21 @@
 }
 else
 {
+    <div class="mb-3">
+        <label>Environment Profile</label>
+        <select class="form-select" @onchange="ShowComingSoon">
+            <option>Development</option>
+            <option>QA</option>
+            <option>Production</option>
+            <option>Demo</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-outline-secondary me-2" @onclick="ShowComingSoon">Import (.json/.env)</button>
+        <button class="btn btn-outline-secondary me-2" @onclick="ShowComingSoon">Export</button>
+        <button class="btn btn-outline-info" @onclick="ShowComingSoon">Auto-Sync</button>
+        <span class="text-muted ms-2">Import/export və auto-sync üçün backend funksiyası hazır deyil.</span>
+    </div>
     <EditForm Model="items" OnValidSubmit="Save">
         @foreach (var key in items.Keys)
         {
@@ -19,6 +34,40 @@ else
         }
         <button class="btn btn-primary" type="submit">Save</button>
     </EditForm>
+    <div class="mt-4">
+        <h5>Secrets Encryption & Audit <span class="badge bg-secondary">Mockup</span></h5>
+        <div class="card">
+            <div class="card-body">
+                <input class="form-check-input" type="checkbox" @onclick="ShowComingSoon" /> Aktiv et (mockup)
+                <span class="ms-2">Bütün həssas konfiqurasiya sahələri üçün şifrələmə və audit</span>
+            </div>
+        </div>
+        <h5 class="mt-4">Config Validation & Dry-Run <span class="badge bg-secondary">Mockup</span></h5>
+        <div class="card">
+            <div class="card-body">
+                <button class="btn btn-outline-success me-2" @onclick="ShowComingSoon">Validate</button>
+                <button class="btn btn-outline-warning" @onclick="ShowComingSoon">Dry-Run Test</button>
+                <span class="ms-2 text-muted">Validation və dry-run üçün backend funksiyası hazır deyil.</span>
+            </div>
+        </div>
+        <h5 class="mt-4">Role-Based Visibility & Change Audit <span class="badge bg-secondary">Mockup</span></h5>
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-2">
+                    <label>Role seçin</label>
+                    <select class="form-select" @onchange="ShowComingSoon">
+                        <option>Admin</option>
+                        <option>Developer</option>
+                        <option>Auditor</option>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label>Change Audit Log</label>
+                    <textarea class="form-control" rows="2" @onclick="ShowComingSoon">2025-06-16 12:00:01 - Admin - API_KEY dəyişdi (mockup)</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
     @if (!string.IsNullOrEmpty(status))
     {
         <div class="alert alert-info">@status</div>
@@ -38,5 +87,10 @@ else
     {
         await EnvService.SaveAsync(items!);
         status = "Saved";
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

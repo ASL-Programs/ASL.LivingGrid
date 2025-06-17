@@ -5,9 +5,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="btn-group mb-2" role="group">
-            <button class="btn btn-sm btn-secondary" @onclick="() => Format('bold')">B</button>
-            <button class="btn btn-sm btn-secondary" @onclick="() => Format('italic')">I</button>
-            <button class="btn btn-sm btn-secondary" @onclick="() => Format('underline')">U</button>
+            <button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">B</button>
+            <button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">I</button>
+            <button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">U</button>
         </div>
         <div id="editor" class="form-control" style="height:250px" contenteditable="true"></div>
     </div>
@@ -15,6 +15,11 @@
         <iframe id="preview" class="w-100" style="height:300px"></iframe>
     </div>
 </div>
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
 
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -28,5 +33,11 @@
     private async Task Format(string cmd)
     {
         await JS.InvokeVoidAsync("wysiwyg.command", cmd);
+    }
+
+    private string? status;
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

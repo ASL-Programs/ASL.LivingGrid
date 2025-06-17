@@ -1,0 +1,20 @@
+@page "/self-service"
+
+<h3>Self-Service, Delegation & Approval Flows</h3>
+<p>Simple-data: Demo self-service və approval preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>User</th><th>Request</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>demo@asl</td><td>Role Change</td><td><span class="badge bg-warning">Pending</span></td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Approve</button></td></tr>
+        <tr><td>user@asl</td><td>Data Export</td><td><span class="badge bg-success">Approved</span></td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Reject</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Request</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

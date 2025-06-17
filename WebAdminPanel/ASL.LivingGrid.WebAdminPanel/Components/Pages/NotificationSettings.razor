@@ -36,12 +36,18 @@ else
             <label class="form-label">Webhook Url</label>
             <InputText class="form-control" @bind-Value="model.WebhookUrl" />
         </div>
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="button" @onclick="ShowComingSoon">Save</button>
     </EditForm>
+}
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
 }
 
 @code {
     private NotificationSettings? model;
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -56,14 +62,8 @@ else
         };
     }
 
-    private async Task Save()
+    private void ShowComingSoon()
     {
-        if (model == null) return;
-        await ConfigService.SetValueAsync("Notifications:EnableEmailNotifications", model.EnableEmailNotifications.ToString());
-        await ConfigService.SetValueAsync("Notifications:SmtpServer", model.SmtpServer);
-        await ConfigService.SetValueAsync("Notifications:SmtpPort", model.SmtpPort.ToString());
-        await ConfigService.SetValueAsync("Notifications:SmsApiUrl", model.SmsApiUrl);
-        await ConfigService.SetValueAsync("Notifications:TelegramBotToken", model.TelegramBotToken);
-        await ConfigService.SetValueAsync("Notifications:WebhookUrl", model.WebhookUrl);
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

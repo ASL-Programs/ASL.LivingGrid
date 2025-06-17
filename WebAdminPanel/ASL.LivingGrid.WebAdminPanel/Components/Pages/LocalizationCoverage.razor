@@ -5,7 +5,7 @@
 
 <h3>Localization Coverage</h3>
 
-<select @bind="selectedCulture" class="form-select w-auto mb-3" @onchange="Load">
+<select @bind="selectedCulture" class="form-select w-auto mb-3" @onchange="ShowComingSoon">
     @foreach (var c in cultures)
     {
         <option value="@c">@c</option>
@@ -41,10 +41,16 @@
     </table>
 }
 
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+
 @code {
     private string selectedCulture = "az";
     private List<string> cultures = new();
     private Dictionary<string, double>? coverage;
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -60,5 +66,10 @@
             .OrderBy(kv => kv.Key)
             .ToDictionary(kv => kv.Key, kv => kv.Value);
         StateHasChanged();
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

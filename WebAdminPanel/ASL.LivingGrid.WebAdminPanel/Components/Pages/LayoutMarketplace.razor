@@ -20,7 +20,7 @@ else
                     <div class="card-body">
                         <h5 class="card-title">@layout.Name</h5>
                         <p class="card-text">@layout.Description</p>
-                        <button class="btn btn-primary" @onclick="() => ApplyLayout(layout.Id)">Apply</button>
+                        <button class="btn btn-primary" @onclick="ShowComingSoon">Apply</button>
                     </div>
                 </div>
             </div>
@@ -28,16 +28,22 @@ else
     </div>
 }
 
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+
 @code {
     private List<MarketplaceLayout>? layouts;
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
         layouts = await Http.GetFromJsonAsync<List<MarketplaceLayout>>("/api/layouts");
     }
 
-    private async Task ApplyLayout(string id)
+    private void ShowComingSoon()
     {
-        await Http.PostAsync($"/api/layouts/import/{id}", null);
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

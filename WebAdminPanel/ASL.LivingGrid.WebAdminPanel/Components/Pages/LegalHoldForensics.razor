@@ -1,0 +1,20 @@
+@page "/legal-hold"
+
+<h3>Data Forensics, eDiscovery & Legal Hold</h3>
+<p>Simple-data: Demo audit və legal hold preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>Case</th><th>Status</th><th>Export</th></tr></thead>
+    <tbody>
+        <tr><td>Case-001</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Export</button></td></tr>
+        <tr><td>Case-002</td><td><span class="badge bg-warning">On Hold</span></td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Export</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-info mt-3" @onclick="ShowComingSoon">Yeni Case</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

@@ -1,0 +1,18 @@
+@page "/environment-config/import-export"
+
+<PageTitle>Environment Config: Import/Export</PageTitle>
+<div class="page-container">
+    <h2>Ətraf Mühit Konfiqurasiyası: Import/Export, Auto-Sync, Test</h2>
+    <p>Config import/export (.json, .env), auto-sync və test before save üçün demo UI.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

@@ -1,0 +1,9 @@
+@page "/self-healing-infra"
+<h3>Self-Healing & AI-Driven Infrastructure</h3>
+<p>Hazırlanır / Çox yaxında!</p>
+<button @onclick="ShowComingSoon">Otomatik Onarım Başlat</button>
+
+@code {
+    void ShowComingSoon() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) { /* UI toast logic */ }
+}

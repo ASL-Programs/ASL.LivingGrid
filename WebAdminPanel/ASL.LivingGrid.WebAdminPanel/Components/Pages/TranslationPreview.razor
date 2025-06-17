@@ -12,13 +12,18 @@ else
 {
     <p><strong>Key:</strong> @Key</p>
     <p><strong>Culture:</strong> @Culture</p>
-    <div class="border rounded p-3 my-3">
+    <div class="border rounded p-3 my-3" @onclick="ShowComingSoon">
         @previewValue
     </div>
+}
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
 }
 
 @code {
     private string? previewValue;
+    private string? status;
     [Parameter] public string? Key { get; set; }
     [Parameter] public string Culture { get; set; } = "az";
     [Parameter] public string? ProposedValue { get; set; }
@@ -33,5 +38,10 @@ else
         {
             previewValue = await LocalizationService.GetStringAsync(Key!, Culture);
         }
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

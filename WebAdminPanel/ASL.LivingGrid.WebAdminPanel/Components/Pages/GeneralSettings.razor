@@ -22,8 +22,13 @@ else
             <label class="form-label">Auth Endpoint</label>
             <InputText class="form-control" @bind-Value="model.AuthEndpoint" />
         </div>
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="button" @onclick="ShowComingSoon">Save</button>
     </EditForm>
+}
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
 }
 
 @code {
@@ -51,5 +56,11 @@ else
         public string Theme { get; set; } = "light";
         public string ApiEndpoint { get; set; } = string.Empty;
         public string AuthEndpoint { get; set; } = string.Empty;
+    }
+
+    private string? status;
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 }

@@ -1,0 +1,17 @@
+@page "/ux-analytics/per-module"
+
+<div class="page-container">
+    <h2>UX Analytics: Per-Module, User, Tenant</h2>
+    <p>Per-module, per-user, per-tenant analytics üçün demo UI və mock data.</p>
+    <div class="coming-soon-box">
+        <span class="soon-message">Hazırlanır / Çox yaxında!</span>
+        <button class="btn btn-primary" @onclick="ShowFeedback">Test Et</button>
+    </div>
+</div>
+
+@code {
+    void ShowFeedback() => ShowToast("Hazırlanır / Çox yaxında!");
+    void ShowToast(string msg) {
+        Console.WriteLine(msg);
+    }
+}

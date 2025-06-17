@@ -1,0 +1,20 @@
+@page "/delegation-audit"
+
+<h3>Fine-Grained Audit & Delegation Trails</h3>
+<p>Simple-data: Demo delegation və audit siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>User</th><th>Delegated To</th><th>When</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td>admin@asl</td><td>demo@asl</td><td>2025-06-15 12:00</td><td>Approve</td></tr>
+        <tr><td>demo@asl</td><td>user@asl</td><td>2025-06-15 13:00</td><td>Review</td></tr>
+    </tbody>
+</table>
+<button class="btn btn-primary mt-3" @onclick="ShowComingSoon">Yeni Delegation</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

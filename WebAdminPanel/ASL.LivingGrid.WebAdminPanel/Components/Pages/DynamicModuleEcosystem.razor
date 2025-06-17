@@ -1,0 +1,20 @@
+@page "/module-ecosystem"
+
+<h3>Dynamic Module/Plugin Ecosystem</h3>
+<p>Simple-data: Demo modul/plugin siyahısı və status preview.</p>
+<table class="table table-striped">
+    <thead><tr><th>Module</th><th>Status</th><th>Assigned To</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>Reporting</td><td><span class="badge bg-success">Enabled</span></td><td>All</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Disable</button></td></tr>
+        <tr><td>AI Assistant</td><td><span class="badge bg-danger">Disabled</span></td><td>Admin</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Enable</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Modul</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

@@ -1,0 +1,20 @@
+@page "/api-hub"
+
+<h3>Unified API & Integration Hub</h3>
+<p>Simple-data: Demo API açarları və inteqrasiya siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>API Key</th><th>Status</th><th>Usage</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>api-123456</td><td><span class="badge bg-success">Active</span></td><td>120</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Revoke</button></td></tr>
+        <tr><td>api-654321</td><td><span class="badge bg-danger">Revoked</span></td><td>0</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Reactivate</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni API Key</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

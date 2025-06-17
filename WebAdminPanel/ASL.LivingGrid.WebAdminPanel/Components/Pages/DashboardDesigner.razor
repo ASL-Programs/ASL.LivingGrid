@@ -19,7 +19,7 @@
     {
         if (PermissionService.HasAccess(w.Id, user))
         {
-            <button class="btn btn-sm btn-outline-primary me-2" @onclick="() => AddWidget(w.Id)">@w.Name</button>
+            <button class="btn btn-sm btn-outline-primary me-2" @onclick="ShowComingSoon">Widget Əlavə Et</button>
         }
     }
 </div>
@@ -28,7 +28,7 @@
     @foreach (var id in selectedWidgets)
     {
         <div class="border p-2 mb-2" data-widget-id="@id">
-            <button class="btn-close float-end" @onclick="() => RemoveWidget(id)"></button>
+            <button class="btn-close float-end" @onclick="ShowComingSoon"></button>
             <DynamicComponent Type="GetComponent(id)" />
             @if (usage.TryGetValue(id, out var count))
             {
@@ -42,6 +42,11 @@
     }
 </div>
 
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+
 @code {
     private List<MarketplaceWidget> availableWidgets = new();
     private List<string> selectedWidgets = new();
@@ -51,6 +56,7 @@
     private List<WidgetDefinition> installed = new();
     private Dictionary<string, List<string>> missingDeps = new();
     private Dictionary<string, int> usage = new();
+    private string? status;
 
     protected override async Task OnInitializedAsync()
     {
@@ -93,6 +99,11 @@
             "alert" => typeof(Components.Widgets.AlertWidget),
             _ => typeof(Components.Widgets.CounterWidget)
         };
+    }
+
+    private void ShowComingSoon()
+    {
+        status = "Hazırlanır / Çox yaxında!";
     }
 
     private async Task AddWidget(string id)

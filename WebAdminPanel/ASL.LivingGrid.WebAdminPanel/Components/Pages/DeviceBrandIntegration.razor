@@ -1,0 +1,20 @@
+@page "/device-brand"
+
+<h3>Device & Brand Agnostic Integrations</h3>
+<p>Simple-data: Demo cihaz və marka siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Device</th><th>Brand</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>Sensor-01</td><td>Generic</td><td><span class="badge bg-success">Online</span></td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Details</button></td></tr>
+        <tr><td>POS-02</td><td>BrandX</td><td><span class="badge bg-danger">Offline</span></td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Retry</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-info mt-3" @onclick="ShowComingSoon">Yeni Cihaz</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

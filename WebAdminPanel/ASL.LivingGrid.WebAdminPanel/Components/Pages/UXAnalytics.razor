@@ -1,0 +1,23 @@
+@page "/ux-analytics"
+
+<h3>UX Analytics & Heatmaps</h3>
+<p>Simple-data: Demo analytics və heatmap preview.</p>
+<div class="mb-3">
+    <button class="btn btn-primary" @onclick="ShowComingSoon">Show Heatmap</button>
+    <button class="btn btn-secondary ms-2" @onclick="ShowComingSoon">Export Usage</button>
+</div>
+<table class="table table-striped">
+    <thead><tr><th>Page</th><th>Clicks</th><th>Avg. Time</th></tr></thead>
+    <tbody>
+        <tr><td>Dashboard</td><td>120</td><td>2m 10s</td></tr>
+        <tr><td>Users</td><td>80</td><td>1m 45s</td></tr>
+    </tbody>
+</table>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}

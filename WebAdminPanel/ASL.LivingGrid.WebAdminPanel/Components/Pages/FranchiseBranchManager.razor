@@ -1,0 +1,20 @@
+@page "/franchise-branch"
+
+<h3>Franchise & Branch Management</h3>
+<p>Simple-data: Demo franchise və filial siyahısı.</p>
+<table class="table table-striped">
+    <thead><tr><th>Franchise</th><th>Branch</th><th>Manager</th><th></th></tr></thead>
+    <tbody>
+        <tr><td>ASL Franchise</td><td>Baku</td><td>admin@asl</td><td><button class="btn btn-sm btn-primary" @onclick="ShowComingSoon">Edit</button></td></tr>
+        <tr><td>DemoFranchise</td><td>Ganja</td><td>demo@asl</td><td><button class="btn btn-sm btn-secondary" @onclick="ShowComingSoon">Delete</button></td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success mt-3" @onclick="ShowComingSoon">Yeni Franchise</button>
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="alert alert-info">@status</div>
+}
+@code {
+    private string? status;
+    private void ShowComingSoon() => status = "Hazırlanır / Çox yaxında!";
+}
